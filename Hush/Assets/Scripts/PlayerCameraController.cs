@@ -1,5 +1,5 @@
 using Cinemachine;
-using Enums;
+using Helpers;
 using MLAPI;
 using UnityEngine;
 
@@ -13,24 +13,19 @@ public class PlayerCameraController : NetworkBehaviour
         // Only bind the local player to the camera
         if (!networkObject.IsLocalPlayer)
             return;
-        
-        var cameras = GameObject.FindGameObjectsWithTag(Tags.FreeLookCamera);
-        
-        if (cameras.Length < 1)
-            return;
-        
-        foreach (var cam in cameras)
-        {
-            if (cam.TryGetComponent(typeof(CinemachineFreeLook), out Component component))
-            {
-                CinemachineFreeLook freeLookCamera = (CinemachineFreeLook)component;
-                freeLookCamera.Follow = transform;
-                freeLookCamera.LookAt = lookAtTarget.transform;
-            }
-        }
+
+        CinemachineFreeLook freeLookCamera = CameraHelper.FindFreeLookCamera();
+        freeLookCamera.Follow = transform;
+        freeLookCamera.LookAt = lookAtTarget.transform;
         
         // Disable the camera
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void Update()
+    {
+        // TODO Move the player in the direction the camera is pointing at
+        // use _camera.m_XAxis.Value to rotate the player in the right direction
     }
 }
