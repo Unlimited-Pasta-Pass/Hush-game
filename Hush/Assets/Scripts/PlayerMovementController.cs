@@ -1,92 +1,74 @@
 using Enums;
-using Helpers;
 using MLAPI;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Random = UnityEngine.Random;
 
-public class PlayerMovementController : NetworkBehaviour
+public class PlayerMovementController : MonoBehaviour
 {
     public float walkSpeed;
     public float runSpeed;
     public float accelerationSpeed;
     public float decelerationSpeed;
-    
     public Animator animator;
-    
+    public GameObject playerCamera;
+    public NetworkObject networkObject;
+
     private float _desiredForwardSpeed;
     private float _desiredLateralSpeed;
     private float _actualForwardSpeed;
     private float _actualLateralSpeed;
-
     private bool _sprinting;
-    
     private Vector2 _moveDirection;
-
-    private GameObject _camera;
-    
-    // TODO Fix this controller to use proper RPC calls
-    public override void NetworkStart()
-    {
-        SelectSpawnPosition();
-        
-        if (!CameraHelper.TryFindMainCamera(out var mainCamera))
-        {
-            throw new MissingComponentException("No virtual camera was found in the scene.");
-        }
-
-        _camera = mainCamera;
-    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        _moveDirection = context.ReadValue<Vector2>();
+        if (networkObject.IsLocalPlayer)
+        {
+            _moveDirection = context.ReadValue<Vector2>();
+        }
     }
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-        _sprinting = context.ReadValueAsButton();
-    }
-
-    private bool IsMoveInput
-    {
-        get { return !Mathf.Approximately(_moveDirection.sqrMagnitude, 0f); }
-    }
-    
-    private void SelectSpawnPosition()
-    {
-        // Select a random spawn point for the player
-        var spawns = GameObject.FindGameObjectsWithTag(Tags.Spawn);
-        if (spawns.Length < 1)
+        if (networkObject.IsLocalPlayer)
         {
-            Debug.LogError("A spawn point is required in the scene.");
-            return;
+            _sprinting = context.ReadValueAsButton();
         }
-
-        var spawnIndex = Random.Range(0, spawns.Length - 1);
-        transform.position = spawns[spawnIndex].transform.position;
-        transform.rotation = spawns[spawnIndex].transform.rotation;
     }
 
-    private void Move(Vector2 direction)
+    private bool IsMoveInput => !Mathf.Approximately(_moveDirection.sqrMagnitude, 0f);
+
+    private void Start()
     {
-        float characterSpeed = _sprinting ? runSpeed : walkSpeed;
-        float acceleration = IsMoveInput ? accelerationSpeed : decelerationSpeed;
-        
-        _desiredForwardSpeed = direction.y * characterSpeed;
-        _desiredLateralSpeed = direction.x * characterSpeed;
-
-        _actualForwardSpeed = Mathf.MoveTowards(_actualForwardSpeed, _desiredForwardSpeed, acceleration * Time.deltaTime);
-        _actualLateralSpeed = Mathf.MoveTowards(_actualLateralSpeed, _desiredLateralSpeed, acceleration * Time.deltaTime);
-
-        animator.SetFloat(PlayerAnimator.ForwardSpeed, _actualForwardSpeed);
-        animator.SetFloat(PlayerAnimator.LateralSpeed, _actualLateralSpeed);
-
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, _camera.transform.eulerAngles.y, transform.eulerAngles.z);
+        // Disable the mouse cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
     {
-        Move(_moveDirection);
+        if (networkObject.IsLocalPlayer)
+        {
+            Move();
+        }
+    }
+
+    private void Move()
+    {
+        float characterSpeed = _sprinting ? runSpeed : walkSpeed;
+        float acceleration = IsMoveInput ? accelerationSpeed : decelerationSpeed;
+        
+        _desiredForwardSpeed = _moveDirection.y * characterSpeed;
+        _desiredLateralSpeed = _moveDirection.x * characterSpeed;
+
+        _actualForwardSpeed = Mathf.MoveTowards(_actualForwardSpeed, _desiredForwardSpeed, acceleration * Time.deltaTime);
+        _actualLateralSpeed = Mathf.MoveTowards(_actualLateralSpeed, _desiredLateralSpeed, acceleration * Time.deltaTime);
+
+        // Animate the X/Y player position
+        animator.SetFloat(PlayerAnimator.ForwardSpeed, _actualForwardSpeed);
+        animator.SetFloat(PlayerAnimator.LateralSpeed, _actualLateralSpeed);
+        
+        // Rotate the player in the camera's orientation
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, playerCamera.transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }
