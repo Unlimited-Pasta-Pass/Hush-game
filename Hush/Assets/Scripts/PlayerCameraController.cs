@@ -2,17 +2,13 @@ using Cinemachine;
 using Helpers;
 using MLAPI;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerCameraController : NetworkBehaviour
 {
-    public float cameraSpeed;
-    
     public NetworkObject networkObject;
     public GameObject lookAtTarget;
 
-    private CinemachineFreeLook _freeLookCamera;
-    private Vector2 _lookDirection;
+    private CinemachineFreeLook _virtualCamera;
 
     public override void NetworkStart()
     {
@@ -20,27 +16,17 @@ public class PlayerCameraController : NetworkBehaviour
         if (!networkObject.IsLocalPlayer)
             return;
 
-        _freeLookCamera = CameraHelper.FindFreeLookCamera();
-        _freeLookCamera.Follow = transform;
-        _freeLookCamera.LookAt = lookAtTarget.transform;
+        if (!CameraHelper.TryFindVirtualCamera(out var virtualCamera))
+        {
+            throw new MissingComponentException("No virtual camera was found in the scene.");
+        }
+        
+        _virtualCamera = virtualCamera;
+        _virtualCamera.Follow = transform;
+        _virtualCamera.LookAt = lookAtTarget.transform;
         
         // Disable the camera
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        _lookDirection = context.ReadValue<Vector2>();
-    }
-
-    private void ChangePlayerOrientation(Vector2 direction)
-    {
-        transform.Rotate(new Vector3(0f, 1f, 0f), direction.x * cameraSpeed * Time.deltaTime);
-    }
-    
-    private void Update()
-    {
-        ChangePlayerOrientation(_lookDirection);
     }
 }

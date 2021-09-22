@@ -2515,6 +2515,8 @@ MonoBehaviour:
   runSpeed: 10
   accelerationSpeed: 20
   decelerationSpeed: 10
+  rotationSpeed: 1000
+  rotationThreshold: 0.01
   animator: {fileID: 1555958610585128224}
 --- !u!114 &1160788573786279178
 MonoBehaviour:
@@ -2528,7 +2530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c665426d19be06942b719dac6bed50ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 20
   networkObject: {fileID: 4421678116644822003}
   lookAtTarget: {fileID: 641777085456261083}
 --- !u!1 &8658739469228097957

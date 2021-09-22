@@ -6,19 +6,37 @@ namespace Helpers
 {
     public static class CameraHelper
     {
-        public static CinemachineFreeLook FindFreeLookCamera()
+        public static bool TryFindMainCamera(out GameObject mainCamera)
         {
-            var cameras = GameObject.FindGameObjectsWithTag(Tags.FreeLookCamera);
+            mainCamera = null;
+            var cameras = GameObject.FindGameObjectsWithTag(Tags.MainCamera);
             
-            foreach (var cam in cameras)
+            foreach (var c in cameras)
             {
-                if (cam.TryGetComponent(typeof(CinemachineFreeLook), out Component component))
+                if (c.TryGetComponent(typeof(Camera), out var component))
                 {
-                    return (CinemachineFreeLook)component;
+                    mainCamera = c;
+                    return true;
                 }
             }
             
-            return null;
+            return false;
+        }
+        public static bool TryFindVirtualCamera(out CinemachineFreeLook virtualCamera)
+        {
+            virtualCamera = null;
+            var cameras = GameObject.FindGameObjectsWithTag(Tags.VirtualCamera);
+            
+            foreach (var c in cameras)
+            {
+                if (c.TryGetComponent(typeof(CinemachineFreeLook), out var component))
+                {
+                    virtualCamera = (CinemachineFreeLook)component;
+                    return true;
+                }
+            }
+            
+            return false;
         }
     }
 }
