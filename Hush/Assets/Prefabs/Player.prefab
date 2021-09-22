@@ -2352,10 +2352,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.22998147
+  m_Radius: 0.2791914
   m_Height: 1.8021386
   m_Direction: 1
-  m_Center: {x: 0.0032016784, y: 0.8583938, z: 0.0074266195}
+  m_Center: {x: 0.0032016635, y: 0.8583938, z: 0.056636542}
 --- !u!114 &4421678116644822003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2513,10 +2513,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   runSpeed: 10
-  accelerationSpeed: 20
+  accelerationSpeed: 30
   decelerationSpeed: 10
-  rotationSpeed: 1000
-  rotationThreshold: 0.01
   animator: {fileID: 1555958610585128224}
 --- !u!114 &1160788573786279178
 MonoBehaviour:

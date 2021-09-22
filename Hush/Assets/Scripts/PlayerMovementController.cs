@@ -82,9 +82,7 @@ public class PlayerMovementController : NetworkBehaviour
         animator.SetFloat(PlayerAnimator.ForwardSpeed, _actualForwardSpeed);
         animator.SetFloat(PlayerAnimator.LateralSpeed, _actualLateralSpeed);
 
-        var angles = transform.eulerAngles;
-        angles = new Vector3(angles.x, _camera.transform.eulerAngles.y, angles.z);
-        transform.eulerAngles = angles;
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, _camera.transform.eulerAngles.y, transform.eulerAngles.z);
     }
 
     private void Update()
