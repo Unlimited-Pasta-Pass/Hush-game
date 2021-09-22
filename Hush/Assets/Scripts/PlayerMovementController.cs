@@ -60,15 +60,12 @@ public class PlayerMovementController : NetworkBehaviour
 
     private void Move(Vector2 direction)
     {
-        if (direction.sqrMagnitude > 1f)
-            direction.Normalize();
-
         float characterSpeed = _sprinting ? runSpeed : walkSpeed;
         float acceleration = IsMoveInput ? accelerationSpeed : decelerationSpeed;
         
         _desiredForwardSpeed = direction.y * characterSpeed;
         _desiredLateralSpeed = direction.x * characterSpeed;
-        
+
         _actualForwardSpeed = Mathf.MoveTowards(_actualForwardSpeed, _desiredForwardSpeed, acceleration * Time.deltaTime);
         _actualLateralSpeed = Mathf.MoveTowards(_actualLateralSpeed, _desiredLateralSpeed, acceleration * Time.deltaTime);
 
