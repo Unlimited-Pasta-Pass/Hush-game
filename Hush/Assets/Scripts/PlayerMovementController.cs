@@ -1,4 +1,3 @@
-using Cinemachine;
 using Enums;
 using Helpers;
 using MLAPI;
@@ -12,8 +11,6 @@ public class PlayerMovementController : NetworkBehaviour
     public float runSpeed;
     public float accelerationSpeed;
     public float decelerationSpeed;
-    public float rotationSpeed;
-    public float rotationThreshold;
     
     public Animator animator;
     
@@ -84,12 +81,10 @@ public class PlayerMovementController : NetworkBehaviour
 
         animator.SetFloat(PlayerAnimator.ForwardSpeed, _actualForwardSpeed);
         animator.SetFloat(PlayerAnimator.LateralSpeed, _actualLateralSpeed);
-        
-        if (Mathf.Abs(_camera.transform.rotation.y - transform.rotation.y) > rotationThreshold)
-        {
-            float desiredRotation = Mathf.MoveTowards(transform.rotation.y, _camera.transform.rotation.y, rotationSpeed * Time.deltaTime);
-            transform.Rotate(new Vector3(0f, 1f, 0f), desiredRotation);
-        }
+
+        var angles = transform.eulerAngles;
+        angles = new Vector3(angles.x, _camera.transform.eulerAngles.y, angles.z);
+        transform.eulerAngles = angles;
     }
 
     private void Update()
