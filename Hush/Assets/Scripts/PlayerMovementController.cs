@@ -15,6 +15,7 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject playerCamera;
     public NetworkObject networkObject;
     public CharacterController characterController;
+    public PlayerInput playerInput;
 
     private float _desiredForwardSpeed;
     private float _desiredLateralSpeed;
@@ -43,6 +44,9 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Start()
     {
+        // Set the right control scheme
+        playerInput.SwitchCurrentControlScheme(ControlSchemes.KeyboardAndMouse);
+        
         // Disable the mouse cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
