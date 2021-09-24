@@ -26,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606303676958024562}
-  m_LocalRotation: {x: 0.056699302, y: 0.3280523, z: -0.019729864, w: 0.94275004}
-  m_LocalPosition: {x: -2.4624984, y: 2.1092455, z: -3.109897}
+  m_LocalRotation: {x: -0.0392501, y: -0.117508695, z: -0.0046480894, w: 0.992285}
+  m_LocalPosition: {x: 0.8940249, y: 1.3576622, z: -3.7217946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2694598201337503891}
@@ -142,7 +142,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322564936749204800}
-  m_LocalRotation: {x: 0.07189586, y: 0.3276914, z: -0.02501787, w: 0.94171304}
+  m_LocalRotation: {x: -0.018454697, y: -0.11758029, z: -0.002185448, w: 0.9928895}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -216,7 +216,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915427014797667003}
-  m_LocalRotation: {x: 0.037640724, y: 0.32838392, z: -0.013097987, w: 0.9437032}
+  m_LocalRotation: {x: -0.05450918, y: -0.1174233, z: -0.006455104, w: 0.99156386}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -323,7 +323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3818126785007567115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4624984, y: 2.1092455, z: -3.109897}
+  m_LocalPosition: {x: 0.8940249, y: 1.3576622, z: -3.7217946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3486144444444655851}
@@ -368,7 +368,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.5566938
+    Value: 0.4239508
     m_SpeedMode: 1
     m_MaxSpeed: 0.001
     m_AccelTime: 0.25
@@ -502,7 +502,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4402460747747132344}
-  m_LocalRotation: {x: 0.054754686, y: 0.3280923, z: -0.019053195, w: 0.942865}
+  m_LocalRotation: {x: -0.036511794, y: -0.117521085, z: -0.004323812, w: 0.99238956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2.1092455, z: -3.9667816}
+  m_FollowOffset: {x: 0, y: 1.3576622, z: -3.8276672}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2.1092455, z: -3.9667816}
+  m_FollowOffset: {x: 0, y: 1.3576622, z: -3.8276672}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 2
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 2.1092455, z: -3.9667816}
+  m_FollowOffset: {x: 0, y: 1.3576622, z: -3.8276672}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1089,14 +1089,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6537c25d947219846a38975a64682d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 10
-  accelerationSpeed: 20
-  decelerationSpeed: 10
-  rotationSpeed: 100
+  walkSpeed: 1.5
+  runSpeed: 3.5
+  accelerationSpeed: 7
+  decelerationSpeed: 4
+  rotationSpeed: 200
+  movementRatio: 100
   animator: {fileID: 2835055014971824218}
   playerCamera: {fileID: 606303676958024562}
   networkObject: {fileID: 5265358240021305830}
+  characterController: {fileID: 1186354598794808024}
 --- !u!114 &8477834456311496507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1270,6 +1272,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 489c19ad616fc0649b07efe21d448475, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 484f4a5d9afdd9b4b9ea9cca32837ea3, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 484f4a5d9afdd9b4b9ea9cca32837ea3, type: 3}
 --- !u!95 &2835055014971824218 stripped

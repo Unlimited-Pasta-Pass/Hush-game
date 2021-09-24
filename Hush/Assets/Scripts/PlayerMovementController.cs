@@ -10,9 +10,11 @@ public class PlayerMovementController : MonoBehaviour
     public float accelerationSpeed;
     public float decelerationSpeed;
     public float rotationSpeed;
+    public float movementRatio;
     public Animator animator;
     public GameObject playerCamera;
     public NetworkObject networkObject;
+    public CharacterController characterController;
 
     private float _desiredForwardSpeed;
     private float _desiredLateralSpeed;
@@ -59,8 +61,8 @@ public class PlayerMovementController : MonoBehaviour
         float characterSpeed = _sprinting ? runSpeed : walkSpeed;
         float acceleration = IsMoveInput ? accelerationSpeed : decelerationSpeed;
         
-        _desiredForwardSpeed = _moveDirection.y * characterSpeed;
-        _desiredLateralSpeed = _moveDirection.x * characterSpeed;
+        _desiredForwardSpeed = _moveDirection.normalized.y * characterSpeed;
+        _desiredLateralSpeed = _moveDirection.normalized.x * characterSpeed;
 
         _actualForwardSpeed = Mathf.MoveTowards(_actualForwardSpeed, _desiredForwardSpeed, acceleration * Time.deltaTime);
         _actualLateralSpeed = Mathf.MoveTowards(_actualLateralSpeed, _desiredLateralSpeed, acceleration * Time.deltaTime);
@@ -75,6 +77,10 @@ public class PlayerMovementController : MonoBehaviour
             RotateTowards(transform.eulerAngles.y, playerCamera.transform.eulerAngles.y, rotationSpeed * Time.deltaTime), 
             transform.eulerAngles.z
         );
+        
+        // Translate the player at the proper speed
+        var movement =  transform.rotation * new Vector3(_actualLateralSpeed, 0f, _actualForwardSpeed);
+        characterController.Move(movement / movementRatio);
     }
     
     private float RotateTowards(float current, float target, float maxDelta)
