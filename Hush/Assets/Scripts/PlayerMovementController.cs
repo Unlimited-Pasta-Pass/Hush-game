@@ -9,6 +9,7 @@ public class PlayerMovementController : MonoBehaviour
     public float runSpeed;
     public float accelerationSpeed;
     public float decelerationSpeed;
+    public float rotationSpeed;
     public Animator animator;
     public GameObject playerCamera;
     public NetworkObject networkObject;
@@ -69,6 +70,21 @@ public class PlayerMovementController : MonoBehaviour
         animator.SetFloat(PlayerAnimator.LateralSpeed, _actualLateralSpeed);
         
         // Rotate the player in the camera's orientation
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, playerCamera.transform.eulerAngles.y, transform.eulerAngles.z);
+        transform.eulerAngles = new Vector3(
+            transform.eulerAngles.x, 
+            RotateTowards(transform.eulerAngles.y, playerCamera.transform.eulerAngles.y, rotationSpeed * Time.deltaTime), 
+            transform.eulerAngles.z
+        );
     }
+    
+    private float RotateTowards(float current, float target, float maxDelta)
+    {
+        float diff = target - current;
+        if (Mathf.Abs(diff) > 180)
+        {
+            current += diff > 0 ? 360 : -360;
+        }
+        return Mathf.MoveTowards(current, target, maxDelta);
+    }
+    
 }

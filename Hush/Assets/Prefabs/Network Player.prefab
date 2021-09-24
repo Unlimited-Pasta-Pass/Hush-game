@@ -1093,6 +1093,7 @@ MonoBehaviour:
   runSpeed: 10
   accelerationSpeed: 20
   decelerationSpeed: 10
+  rotationSpeed: 100
   animator: {fileID: 2835055014971824218}
   playerCamera: {fileID: 606303676958024562}
   networkObject: {fileID: 5265358240021305830}
