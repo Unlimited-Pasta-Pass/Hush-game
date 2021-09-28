@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606303676958024562}
-  m_LocalRotation: {x: 0.5333684, y: -0.2065974, z: 0.1362295, w: 0.8088741}
+  m_LocalRotation: {x: 0.5333685, y: -0.20659731, z: 0.13622947, w: 0.808874}
   m_LocalPosition: {x: 0.7193153, y: 5, z: -1.3162771}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -142,7 +142,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322564936749204800}
-  m_LocalRotation: {x: 0.5333684, y: -0.20659739, z: 0.13622952, w: 0.8088741}
+  m_LocalRotation: {x: 0.5333684, y: -0.20659733, z: 0.13622946, w: 0.8088741}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -216,7 +216,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915427014797667003}
-  m_LocalRotation: {x: 0.5036341, y: -0.21140954, z: 0.12863496, w: 0.8277148}
+  m_LocalRotation: {x: 0.5036341, y: -0.21140952, z: 0.12863496, w: 0.8277148}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SendRate: 0.1
   m_Animator: {fileID: 2835055014971824218}
-  m_TrackedParamFlags: 3
+  m_TrackedParamFlags: 12
 --- !u!114 &3054211180447889222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,6 +1095,7 @@ MonoBehaviour:
   decelerationSpeed: 4
   rotationSpeed: 200
   movementRatio: 100
+  networkLerpSpeed: 10
   animator: {fileID: 2835055014971824218}
   playerCamera: {fileID: 606303676958024562}
   networkObject: {fileID: 5265358240021305830}
