@@ -11,6 +11,7 @@ public class PlayerMovementController : MonoBehaviour
     public float decelerationSpeed;
     public float rotationSpeed;
     public float movementRatio;
+    public float networkLerpSpeed;
     public Animator animator;
     public GameObject playerCamera;
     public NetworkObject networkObject;
@@ -58,6 +59,10 @@ public class PlayerMovementController : MonoBehaviour
         {
             Move();
         }
+        else
+        {
+            SyncAnimations();
+        }
     }
 
     private void Move()
@@ -74,6 +79,8 @@ public class PlayerMovementController : MonoBehaviour
         // Animate the X/Y player position
         animator.SetFloat(PlayerAnimator.ForwardSpeed, _actualForwardSpeed);
         animator.SetFloat(PlayerAnimator.LateralSpeed, _actualLateralSpeed);
+        animator.SetFloat(PlayerAnimator.ForwardSpeedSync, _actualForwardSpeed);
+        animator.SetFloat(PlayerAnimator.LateralSpeedSync, _actualLateralSpeed);
         
         // Rotate the player in the camera's orientation
         transform.eulerAngles = new Vector3(
@@ -86,7 +93,13 @@ public class PlayerMovementController : MonoBehaviour
         var movement =  transform.rotation * new Vector3(_actualLateralSpeed, 0f, _actualForwardSpeed);
         characterController.Move(movement / movementRatio);
     }
-    
+
+    private void SyncAnimations()
+    {
+        animator.SetFloat(PlayerAnimator.ForwardSpeed, animator.GetFloat(PlayerAnimator.ForwardSpeedSync), 1.0f, Time.deltaTime * networkLerpSpeed);
+        animator.SetFloat(PlayerAnimator.LateralSpeed, animator.GetFloat(PlayerAnimator.LateralSpeedSync), 1.0f, Time.deltaTime * networkLerpSpeed);
+    }
+
     private float RotateTowards(float current, float target, float maxDelta)
     {
         float diff = target - current;
