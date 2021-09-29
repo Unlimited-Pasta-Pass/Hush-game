@@ -15,6 +15,7 @@ public class PlayerMovementController : MonoBehaviour
     public float accelerationSpeed;
     public float decelerationSpeed;
     public float slideDecelerationSpeed;
+    public float slideNormalizedCancelTime;
     public float movementRatio;
     
     // Network
@@ -34,7 +35,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         get {
             var animState = animator.GetCurrentAnimatorStateInfo(0);
-            return IsCharacterSprinting && (_state.Crouching || (animState.IsName(PlayerAnimator.State.Slide) && animState.normalizedTime < 0.75));
+            return IsCharacterSprinting && (_state.Crouching || (animState.IsName(PlayerAnimator.State.Slide) && animState.normalizedTime < slideNormalizedCancelTime));
         }
     }
 
@@ -91,6 +92,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
+        Debug.Log(IsCharacterSprinting);
         float speed = GetCharacterSpeed();
         float acceleration = GetCharacterAcceleration();
         
