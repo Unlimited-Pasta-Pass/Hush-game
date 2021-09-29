@@ -15,7 +15,7 @@ public class PlayerMovementController : MonoBehaviour
     public float accelerationSpeed;
     public float decelerationSpeed;
     public float slideDecelerationSpeed;
-    public float movementRatio;
+    public float movementToAnimationRatio;
     
     // Network
     public float networkLerpSpeed;
@@ -23,7 +23,7 @@ public class PlayerMovementController : MonoBehaviour
     // References
     public Animator animator;
     public NetworkObject networkObject;
-    public CharacterController characterController;
+    public Rigidbody body;
     public PlayerInput playerInput;
         
     // Computed getters
@@ -34,12 +34,12 @@ public class PlayerMovementController : MonoBehaviour
     {
         get {
             var animState = animator.GetCurrentAnimatorStateInfo(0);
-            return IsCharacterSprinting && (_state.Crouching || (animState.IsName(PlayerAnimator.State.Slide) && animState.normalizedTime < 0.75));
+            return IsCharacterSprinting && (_state.Crouching || (animState.IsName(PlayerStates.Slide) && animState.normalizedTime < 0.75));
         }
     }
 
     // Shared Player State
-    private CharacterState _state;
+    private PlayerState _state;
 
     // Called to update 2-axis movement input
     public void OnMove(InputAction.CallbackContext context)
@@ -74,10 +74,10 @@ public class PlayerMovementController : MonoBehaviour
         playerInput.SwitchCurrentControlScheme(ControlSchemes.KeyboardAndMouse);
         
         // Initialize the character state variable
-        _state = CharacterState.Instance;
+        _state = PlayerState.Instance;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (networkObject.IsLocalPlayer)
         {
@@ -97,9 +97,13 @@ public class PlayerMovementController : MonoBehaviour
         _state.DesiredForwardSpeed = _state.MoveDirection.normalized.y * speed;
         _state.DesiredLateralSpeed = _state.MoveDirection.normalized.x * speed;
 
-        _state.ActualForwardSpeed = Mathf.MoveTowards(_state.ActualForwardSpeed, _state.DesiredForwardSpeed, acceleration * Time.deltaTime);
-        _state.ActualLateralSpeed = Mathf.MoveTowards(_state.ActualLateralSpeed, _state.DesiredLateralSpeed, acceleration * Time.deltaTime);
-
+        _state.ActualForwardSpeed = Mathf.MoveTowards(_state.ActualForwardSpeed, _state.DesiredForwardSpeed, acceleration * Time.fixedDeltaTime);
+        _state.ActualLateralSpeed = Mathf.MoveTowards(_state.ActualLateralSpeed, _state.DesiredLateralSpeed, acceleration * Time.fixedDeltaTime);
+        
+        // Translate the player at the proper speed
+        var movement = new Vector3(_state.ActualLateralSpeed * movementToAnimationRatio, body.velocity.y + _state.ActualVerticalSpeed, _state.ActualForwardSpeed * movementToAnimationRatio);
+        body.velocity = transform.TransformDirection(movement);
+        
         // Animate the X/Y player position
         animator.SetFloat(PlayerAnimator.ForwardSpeed, _state.ActualForwardSpeed);
         animator.SetFloat(PlayerAnimator.LateralSpeed, _state.ActualLateralSpeed);
@@ -109,16 +113,12 @@ public class PlayerMovementController : MonoBehaviour
         // Sprint / Crouch
         animator.SetBool(PlayerAnimator.Sprinting, IsCharacterSprinting);
         animator.SetBool(PlayerAnimator.Crouching, _state.Crouching);
-        
-        // Translate the player at the proper speed
-        var movement = transform.rotation * new Vector3(_state.ActualLateralSpeed, 0f, _state.ActualForwardSpeed);
-        characterController.Move(movement / movementRatio);
     }
 
     private void SyncAnimations()
     {
-        animator.SetFloat(PlayerAnimator.ForwardSpeed, animator.GetFloat(PlayerAnimator.ForwardSpeedSync), 1.0f, Time.deltaTime * networkLerpSpeed);
-        animator.SetFloat(PlayerAnimator.LateralSpeed, animator.GetFloat(PlayerAnimator.LateralSpeedSync), 1.0f, Time.deltaTime * networkLerpSpeed);
+        animator.SetFloat(PlayerAnimator.ForwardSpeed, animator.GetFloat(PlayerAnimator.ForwardSpeedSync), 1.0f, Time.fixedDeltaTime * networkLerpSpeed);
+        animator.SetFloat(PlayerAnimator.LateralSpeed, animator.GetFloat(PlayerAnimator.LateralSpeedSync), 1.0f, Time.fixedDeltaTime * networkLerpSpeed);
     }
     
     private float GetCharacterSpeed()

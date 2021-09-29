@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Player.Helpers
 {
-    public sealed class CharacterState
+    public sealed class PlayerState
     {
-        private static readonly Lazy<CharacterState> LazyState = new Lazy<CharacterState>(() => new CharacterState());
+        private static readonly Lazy<PlayerState> LazyState = new Lazy<PlayerState>(() => new PlayerState());
 
-        private CharacterState() { }
+        private PlayerState() { }
         
-        public static CharacterState Instance => LazyState.Value;
+        public static PlayerState Instance => LazyState.Value;
 
         #region Multithreading Locks
         
@@ -18,8 +18,11 @@ namespace Player.Helpers
         private static readonly object DesiredLateralSpeedLock = new object();
         private static readonly object ActualForwardSpeedLock = new object();
         private static readonly object ActualLateralSpeedLock = new object();
+        private static readonly object ActualVerticalSpeedLock = new object();
+        
         private static readonly object SprintingLock = new object();
         private static readonly object CrouchingLock = new object();
+        private static readonly object JumpingLock = new object();
 
         #endregion
         
@@ -119,6 +122,25 @@ namespace Player.Helpers
                 }
             }
         }
+        
+        private float _actualVerticalSpeed;
+        public float ActualVerticalSpeed
+        {
+            get
+            {
+                lock (ActualVerticalSpeedLock)
+                {
+                    return _actualVerticalSpeed;
+                }
+            }
+            set
+            {
+                lock (ActualVerticalSpeedLock)
+                {
+                    _actualVerticalSpeed = value;
+                }
+            }
+        }
     
         #endregion
         
@@ -157,6 +179,24 @@ namespace Player.Helpers
                 lock (CrouchingLock)
                 {
                     _crouching = value;
+                }
+            }
+        }
+        
+        private bool _jumping;
+        public bool Jumping{
+            get
+            {
+                lock (JumpingLock)
+                {
+                    return _jumping;
+                }
+            }
+            set
+            {
+                lock (JumpingLock)
+                {
+                    _jumping = value;
                 }
             }
         }

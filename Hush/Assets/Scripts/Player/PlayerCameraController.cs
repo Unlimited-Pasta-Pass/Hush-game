@@ -17,7 +17,7 @@ public class PlayerCameraController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (networkObject.IsLocalPlayer)
         {
@@ -30,7 +30,7 @@ public class PlayerCameraController : MonoBehaviour
         // Rotate the player in the camera's orientation
         transform.eulerAngles = new Vector3(
             transform.eulerAngles.x, 
-            RotateTowards(transform.eulerAngles.y, TargetRotation, rotationSpeed * Time.deltaTime), 
+            RotateTowards(transform.eulerAngles.y, TargetRotation, rotationSpeed * Time.fixedDeltaTime), 
             transform.eulerAngles.z
         );
     }
