@@ -14,7 +14,6 @@ public class PlayerMovementController : MonoBehaviour
     public float accelerationSpeed;
     public float decelerationSpeed;
     public float slideDecelerationSpeed;
-    public float rotationSpeed;
     public float movementRatio;
     
     // Network
@@ -22,7 +21,6 @@ public class PlayerMovementController : MonoBehaviour
     
     // References
     public Animator animator;
-    public GameObject playerCamera;
     public NetworkObject networkObject;
     public CharacterController characterController;
     public PlayerInput playerInput;
@@ -70,16 +68,11 @@ public class PlayerMovementController : MonoBehaviour
     private bool IsSprinting => _actualForwardSpeed > 0 && MovementVelocity.magnitude > walkSpeed + (runSpeed - walkSpeed) / 4;
 
     private Vector3 MovementVelocity => new Vector3(_actualForwardSpeed, 0, _actualLateralSpeed);
-    private float TargetRotation => playerCamera.transform.eulerAngles.y;
 
     private void Start()
     {
         // Set the right control scheme
         playerInput.SwitchCurrentControlScheme(ControlSchemes.KeyboardAndMouse);
-        
-        // Disable the mouse cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void Update()
@@ -96,7 +89,6 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
-        Debug.Log(IsSliding());
         float speed = GetCharacterSpeed();
         float acceleration = GetCharacterAcceleration();
         
@@ -116,13 +108,6 @@ public class PlayerMovementController : MonoBehaviour
         animator.SetBool(PlayerAnimator.Sprinting, IsSprinting);
         animator.SetBool(PlayerAnimator.Crouching, _crouching);
         
-        // Rotate the player in the camera's orientation
-        transform.eulerAngles = new Vector3(
-            transform.eulerAngles.x, 
-            RotateTowards(transform.eulerAngles.y, TargetRotation, rotationSpeed * Time.deltaTime), 
-            transform.eulerAngles.z
-        );
-        
         // Translate the player at the proper speed
         var movement = transform.rotation * new Vector3(_actualLateralSpeed, 0f, _actualForwardSpeed);
         characterController.Move(movement / movementRatio);
@@ -132,16 +117,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         animator.SetFloat(PlayerAnimator.ForwardSpeed, animator.GetFloat(PlayerAnimator.ForwardSpeedSync), 1.0f, Time.deltaTime * networkLerpSpeed);
         animator.SetFloat(PlayerAnimator.LateralSpeed, animator.GetFloat(PlayerAnimator.LateralSpeedSync), 1.0f, Time.deltaTime * networkLerpSpeed);
-    }
-
-    private float RotateTowards(float current, float target, float maxDelta)
-    {
-        float diff = target - current;
-        if (Mathf.Abs(diff) > 180)
-        {
-            current += diff > 0 ? 360 : -360;
-        }
-        return Mathf.MoveTowards(current, target, maxDelta);
     }
 
     private float GetCharacterSpeed()
