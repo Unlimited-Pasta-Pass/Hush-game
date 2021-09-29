@@ -112,7 +112,6 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
-        Debug.Log(IsCharacterSprinting);
         float speed = GetCharacterSpeed();
         float acceleration = GetCharacterAcceleration();
         
