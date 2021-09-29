@@ -5,26 +5,40 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    public float walkSpeed;
+    // Movement Speeds
     public float runSpeed;
+    public float walkSpeed;
+    public float crouchWalkSpeed;
+    
+    // Acceleration / Rotation / Movement
     public float accelerationSpeed;
     public float decelerationSpeed;
+    public float slideDecelerationSpeed;
     public float rotationSpeed;
     public float movementRatio;
+    
+    // Network
     public float networkLerpSpeed;
+    
+    // References
     public Animator animator;
     public GameObject playerCamera;
     public NetworkObject networkObject;
     public CharacterController characterController;
     public PlayerInput playerInput;
-
+    
+    // Player Speed
+    private Vector2 _moveDirection;
     private float _desiredForwardSpeed;
     private float _desiredLateralSpeed;
     private float _actualForwardSpeed;
     private float _actualLateralSpeed;
+    
+    // Input States
     private bool _sprinting;
-    private Vector2 _moveDirection;
+    private bool _crouching;
 
+    // Called to update 2-axis movement input
     public void OnMove(InputAction.CallbackContext context)
     {
         if (networkObject.IsLocalPlayer)
@@ -33,6 +47,7 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    // Called to update sprinting state
     public void OnSprint(InputAction.CallbackContext context)
     {
         if (networkObject.IsLocalPlayer)
@@ -41,7 +56,21 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
+    // Called to update crouching state
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (networkObject.IsLocalPlayer)
+        {
+            _crouching = context.ReadValueAsButton();
+        }
+    }
+
+    // Computed getters
     private bool IsMoveInput => !Mathf.Approximately(_moveDirection.sqrMagnitude, 0f);
+    private bool IsSprinting => _actualForwardSpeed > 0 && MovementVelocity.magnitude > walkSpeed + (runSpeed - walkSpeed) / 4;
+
+    private Vector3 MovementVelocity => new Vector3(_actualForwardSpeed, 0, _actualLateralSpeed);
+    private float TargetRotation => playerCamera.transform.eulerAngles.y;
 
     private void Start()
     {
@@ -67,11 +96,12 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
-        float characterSpeed = _sprinting ? runSpeed : walkSpeed;
-        float acceleration = IsMoveInput ? accelerationSpeed : decelerationSpeed;
+        Debug.Log(IsSliding());
+        float speed = GetCharacterSpeed();
+        float acceleration = GetCharacterAcceleration();
         
-        _desiredForwardSpeed = _moveDirection.normalized.y * characterSpeed;
-        _desiredLateralSpeed = _moveDirection.normalized.x * characterSpeed;
+        _desiredForwardSpeed = _moveDirection.normalized.y * speed;
+        _desiredLateralSpeed = _moveDirection.normalized.x * speed;
 
         _actualForwardSpeed = Mathf.MoveTowards(_actualForwardSpeed, _desiredForwardSpeed, acceleration * Time.deltaTime);
         _actualLateralSpeed = Mathf.MoveTowards(_actualLateralSpeed, _desiredLateralSpeed, acceleration * Time.deltaTime);
@@ -82,15 +112,19 @@ public class PlayerMovementController : MonoBehaviour
         animator.SetFloat(PlayerAnimator.ForwardSpeedSync, _actualForwardSpeed);
         animator.SetFloat(PlayerAnimator.LateralSpeedSync, _actualLateralSpeed);
         
+        // Sprint / Crouch
+        animator.SetBool(PlayerAnimator.Sprinting, IsSprinting);
+        animator.SetBool(PlayerAnimator.Crouching, _crouching);
+        
         // Rotate the player in the camera's orientation
         transform.eulerAngles = new Vector3(
             transform.eulerAngles.x, 
-            RotateTowards(transform.eulerAngles.y, playerCamera.transform.eulerAngles.y, rotationSpeed * Time.deltaTime), 
+            RotateTowards(transform.eulerAngles.y, TargetRotation, rotationSpeed * Time.deltaTime), 
             transform.eulerAngles.z
         );
         
         // Translate the player at the proper speed
-        var movement =  transform.rotation * new Vector3(_actualLateralSpeed, 0f, _actualForwardSpeed);
+        var movement = transform.rotation * new Vector3(_actualLateralSpeed, 0f, _actualForwardSpeed);
         characterController.Move(movement / movementRatio);
     }
 
@@ -109,5 +143,31 @@ public class PlayerMovementController : MonoBehaviour
         }
         return Mathf.MoveTowards(current, target, maxDelta);
     }
+
+    private float GetCharacterSpeed()
+    {
+        if (IsSliding())
+            return 0;
+        if (_crouching)
+            return crouchWalkSpeed;
+        if (_sprinting)
+            return runSpeed;
+        return walkSpeed;
+    }
     
+    private float GetCharacterAcceleration()
+    {
+        if (IsSliding())
+            return slideDecelerationSpeed;
+        if (IsMoveInput)
+            return accelerationSpeed;
+        return decelerationSpeed;
+    }
+    
+    private bool IsSliding()
+    {
+        AnimatorStateInfo animState = animator.GetCurrentAnimatorStateInfo(0);
+        return IsSprinting && (_crouching || (animState.IsName(PlayerAnimator.State.Slide) && animState.normalizedTime < 0.75));
+    }
+
 }

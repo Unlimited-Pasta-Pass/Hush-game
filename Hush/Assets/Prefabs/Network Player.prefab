@@ -26,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606303676958024562}
-  m_LocalRotation: {x: 0.5333685, y: -0.20659731, z: 0.13622947, w: 0.808874}
-  m_LocalPosition: {x: 0.7193153, y: 5, z: -1.3162771}
+  m_LocalRotation: {x: 0.1910861, y: 0.80729353, z: -0.42224407, w: 0.3653399}
+  m_LocalPosition: {x: -9.907447, y: 4.552817, z: 15.234946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2694598201337503891}
@@ -142,8 +142,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322564936749204800}
-  m_LocalRotation: {x: 0.5333684, y: -0.20659733, z: 0.13622946, w: 0.8088741}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.16478004, y: 0.39786565, z: -0.07287905, w: 0.8995772}
+  m_LocalPosition: {x: -0.000002861023, y: 0, z: 0.0000030994415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1576125986493508016}
@@ -216,8 +216,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915427014797667003}
-  m_LocalRotation: {x: 0.5036341, y: -0.21140952, z: 0.12863496, w: 0.8277148}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.13199413, y: 0.4002508, z: -0.05837853, w: 0.904969}
+  m_LocalPosition: {x: -0.000005722046, y: 0, z: 0.000004529953}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3336234883407401185}
@@ -323,7 +323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3818126785007567115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7193153, y: 5, z: -1.3162771}
+  m_LocalPosition: {x: -2.6675928, y: 2.866786, z: -2.4258165}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3486144444444655851}
@@ -368,13 +368,13 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 1
+    Value: 0.660591
     m_SpeedMode: 1
     m_MaxSpeed: 0.001
     m_AccelTime: 0.25
     m_DecelTime: 0.25
     m_InputAxisName: Mouse Y
-    m_InputAxisValue: 0
+    m_InputAxisValue: 1
     m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
@@ -502,8 +502,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4402460747747132344}
-  m_LocalRotation: {x: 0.5185672, y: -0.20904113, z: 0.13244908, w: 0.8184419}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.14838994, y: 0.3991255, z: -0.065630026, w: 0.90242565}
+  m_LocalPosition: {x: -0.000002861023, y: 0, z: 0.0000030994415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2546273527716625434}
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5, z: -1.5}
+  m_FollowOffset: {x: 0, y: 2.866786, z: -3.6056376}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5, z: -1.5}
+  m_FollowOffset: {x: 0, y: 2.866786, z: -3.6056376}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 2
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 5, z: -1.5}
+  m_FollowOffset: {x: 0, y: 2.866786, z: -3.6056376}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1089,10 +1089,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6537c25d947219846a38975a64682d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 1.5
   runSpeed: 3.5
+  walkSpeed: 1.5
+  crouchWalkSpeed: 1
   accelerationSpeed: 7
   decelerationSpeed: 4
+  slideDecelerationSpeed: 3
   rotationSpeed: 200
   movementRatio: 100
   networkLerpSpeed: 10
@@ -1210,6 +1212,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e76e8c04-3151-4760-a4be-85f60be1bcb7
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3072978337952682170}
+        m_TargetAssemblyTypeName: PlayerMovementController, Assembly-CSharp
+        m_MethodName: OnCrouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5283f740-cb48-4550-bf54-683fbc3244aa
+    m_ActionName: Player/Crouch[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
