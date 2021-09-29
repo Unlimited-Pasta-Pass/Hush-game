@@ -1130,6 +1130,7 @@ MonoBehaviour:
   slideDecelerationSpeed: 2
   movementToAnimationRatio: 1.6
   networkLerpSpeed: 10
+  slideNormalizedCancelTime: 0.5
   animator: {fileID: 2835055014971824218}
   networkObject: {fileID: 5265358240021305830}
   body: {fileID: 8162764314096977253}

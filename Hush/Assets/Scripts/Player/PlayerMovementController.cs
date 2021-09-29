@@ -23,6 +23,8 @@ public class PlayerMovementController : MonoBehaviour
     public float decelerationSpeed;
     [Range(0.1f, 10f)]
     public float slideDecelerationSpeed;
+    [Range(0.1f, 10f)]
+    public float slideNormalizedCancelTime;
     
     [Header("Animations")]
     [Range(0.1f, 5f)]
@@ -46,7 +48,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         get {
             var animState = animator.GetCurrentAnimatorStateInfo(0);
-            return IsPlayerSprinting && (_state.Crouching || (animState.IsName(PlayerStates.Slide) && animState.normalizedTime < 0.75));
+            return IsPlayerSprinting && (_state.Crouching || (animState.IsName(PlayerStates.Slide) && animState.normalizedTime < slideNormalizedCancelTime));
         }
     }
     private bool IsPlayerLanding
@@ -110,6 +112,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
+        Debug.Log(IsCharacterSprinting);
         float speed = GetCharacterSpeed();
         float acceleration = GetCharacterAcceleration();
         
