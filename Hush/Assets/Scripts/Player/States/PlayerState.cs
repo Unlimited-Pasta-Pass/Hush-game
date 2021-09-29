@@ -18,7 +18,6 @@ namespace Player.Helpers
         private static readonly object DesiredLateralSpeedLock = new object();
         private static readonly object ActualForwardSpeedLock = new object();
         private static readonly object ActualLateralSpeedLock = new object();
-        private static readonly object ActualVerticalSpeedLock = new object();
         
         private static readonly object SprintingLock = new object();
         private static readonly object CrouchingLock = new object();
@@ -119,25 +118,6 @@ namespace Player.Helpers
                 lock (ActualLateralSpeedLock)
                 {
                     _actualLateralSpeed = value;
-                }
-            }
-        }
-        
-        private float _actualVerticalSpeed;
-        public float ActualVerticalSpeed
-        {
-            get
-            {
-                lock (ActualVerticalSpeedLock)
-                {
-                    return _actualVerticalSpeed;
-                }
-            }
-            set
-            {
-                lock (ActualVerticalSpeedLock)
-                {
-                    _actualVerticalSpeed = value;
                 }
             }
         }

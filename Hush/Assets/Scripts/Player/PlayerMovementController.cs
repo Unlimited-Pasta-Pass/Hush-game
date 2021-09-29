@@ -6,21 +6,33 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovementController : MonoBehaviour
 {
-    // Movement Speeds
+    [Header("Movement Speed")]
+    [Range(0.1f, 10f)]
     public float runSpeed;
+    [Range(0.1f, 10f)]
     public float walkSpeed;
+    [Range(0.1f, 10f)]
     public float crouchWalkSpeed;
+    [Range(0.0f, 10f)]
+    public float landMoveSpeed;
     
-    // Acceleration / Rotation / Movement
+    [Header("Acceleration")]
+    [Range(0.1f, 10f)]
     public float accelerationSpeed;
+    [Range(0.1f, 10f)]
     public float decelerationSpeed;
+    [Range(0.1f, 10f)]
     public float slideDecelerationSpeed;
+    
+    [Header("Animations")]
+    [Range(0.1f, 5f)]
     public float movementToAnimationRatio;
     
-    // Network
+    [Header("Network")]
+    [Range(1f, 30f)]
     public float networkLerpSpeed;
     
-    // References
+    [Header("References")]
     public Animator animator;
     public NetworkObject networkObject;
     public Rigidbody body;
@@ -29,12 +41,19 @@ public class PlayerMovementController : MonoBehaviour
     // Computed getters
     private Vector3 MovementVelocity => new Vector3(_state.ActualForwardSpeed, 0, _state.ActualLateralSpeed);
     private bool IsMoveInput => !Mathf.Approximately(_state.MoveDirection.sqrMagnitude, 0f);
-    private bool IsCharacterSprinting => _state.ActualForwardSpeed > 0 && MovementVelocity.magnitude > walkSpeed + (runSpeed - walkSpeed) / 4;
-    private bool IsCharacterSliding
+    private bool IsPlayerSprinting => _state.ActualForwardSpeed > 0 && MovementVelocity.magnitude > walkSpeed + (runSpeed - walkSpeed) / 4;
+    private bool IsPlayerSliding
     {
         get {
             var animState = animator.GetCurrentAnimatorStateInfo(0);
-            return IsCharacterSprinting && (_state.Crouching || (animState.IsName(PlayerStates.Slide) && animState.normalizedTime < 0.75));
+            return IsPlayerSprinting && (_state.Crouching || (animState.IsName(PlayerStates.Slide) && animState.normalizedTime < 0.75));
+        }
+    }
+    private bool IsPlayerLanding
+    {
+        get {
+            var animState = animator.GetCurrentAnimatorStateInfo(0);
+            return animState.IsName(PlayerStates.Land);
         }
     }
 
@@ -101,7 +120,7 @@ public class PlayerMovementController : MonoBehaviour
         _state.ActualLateralSpeed = Mathf.MoveTowards(_state.ActualLateralSpeed, _state.DesiredLateralSpeed, acceleration * Time.fixedDeltaTime);
         
         // Translate the player at the proper speed
-        var movement = new Vector3(_state.ActualLateralSpeed * movementToAnimationRatio, body.velocity.y + _state.ActualVerticalSpeed, _state.ActualForwardSpeed * movementToAnimationRatio);
+        var movement = new Vector3(_state.ActualLateralSpeed * movementToAnimationRatio, body.velocity.y, _state.ActualForwardSpeed * movementToAnimationRatio);
         body.velocity = transform.TransformDirection(movement);
         
         // Animate the X/Y player position
@@ -111,7 +130,7 @@ public class PlayerMovementController : MonoBehaviour
         animator.SetFloat(PlayerAnimator.LateralSpeedSync, _state.ActualLateralSpeed);
         
         // Sprint / Crouch
-        animator.SetBool(PlayerAnimator.Sprinting, IsCharacterSprinting);
+        animator.SetBool(PlayerAnimator.Sprinting, IsPlayerSprinting);
         animator.SetBool(PlayerAnimator.Crouching, _state.Crouching);
     }
 
@@ -123,8 +142,10 @@ public class PlayerMovementController : MonoBehaviour
     
     private float GetCharacterSpeed()
     {
-        if (IsCharacterSliding)
+        if (IsPlayerSliding)
             return 0;
+        if (IsPlayerLanding)
+            return landMoveSpeed;
         if (_state.Crouching)
             return crouchWalkSpeed;
         if (_state.Sprinting)
@@ -134,7 +155,7 @@ public class PlayerMovementController : MonoBehaviour
     
     private float GetCharacterAcceleration()
     {
-        if (IsCharacterSliding)
+        if (IsPlayerSliding)
             return slideDecelerationSpeed;
         if (IsMoveInput)
             return accelerationSpeed;

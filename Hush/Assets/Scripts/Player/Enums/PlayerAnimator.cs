@@ -10,10 +10,7 @@
         // floating point values and cannot be lerped
         public static string Sprinting => "Sprinting";
         public static string Crouching => "Crouching";
-        
-        // State trigger, no need to duplicate these since they aren't
-        // floating point values and cannot be lerped
-        public static string Jump => "Jump";
+        public static string Jumping => "Jumping";
         
         // These variables are synced over the network and not updated very frequently
         // We need to lerp these to get the real-time values

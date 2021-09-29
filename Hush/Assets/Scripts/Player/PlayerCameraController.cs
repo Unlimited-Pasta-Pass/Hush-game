@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class PlayerCameraController : MonoBehaviour
 {
+    [Header("Rotation Speed")]
+    [Range(1f, 720f)]
     public float rotationSpeed;
 
+    [Header("References")]
     public GameObject playerCamera;
     public NetworkObject networkObject;
     
