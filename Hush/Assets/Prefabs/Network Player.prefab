@@ -26,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606303676958024562}
-  m_LocalRotation: {x: 0.0058856476, y: -0.34692806, z: 0.002177161, w: 0.9378708}
-  m_LocalPosition: {x: 2.598077, y: 1.6981202, z: -3.031239}
+  m_LocalRotation: {x: 0.07758386, y: -0.31459296, z: 0.025808794, w: 0.9456987}
+  m_LocalPosition: {x: 2.3457885, y: 2.2704837, z: -3.1356692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2694598201337503891}
@@ -142,8 +142,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1322564936749204800}
-  m_LocalRotation: {x: 0.028562106, y: -0.4025499, z: 0.012567603, w: 0.91486603}
-  m_LocalPosition: {x: 0.35102844, y: 0.05188334, z: 0.3288734}
+  m_LocalRotation: {x: 0.092024505, y: -0.3141619, z: 0.03061257, w: 0.9444028}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1576125986493508016}
@@ -216,8 +216,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1915427014797667003}
-  m_LocalRotation: {x: -0.010823429, y: -0.34691176, z: -0.0040036975, w: 0.9378268}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.004604984, y: -0.43836537, z: -0.0022460022, w: 0.8987822}
+  m_LocalPosition: {x: 0.8062544, y: -0.52048373, z: 0.6730237}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3336234883407401185}
@@ -323,7 +323,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3818126785007567115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.598077, y: 1.6981202, z: -3.031239}
+  m_LocalPosition: {x: 2.3457885, y: 2.2704837, z: -3.1356692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3486144444444655851}
@@ -368,7 +368,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.49100065
+    Value: 0.5800005
     m_SpeedMode: 1
     m_MaxSpeed: 0.001
     m_AccelTime: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: -40.5999
+    Value: -36.800095
     m_SpeedMode: 1
     m_MaxSpeed: 0.1
     m_AccelTime: 0
@@ -502,7 +502,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4402460747747132344}
-  m_LocalRotation: {x: 0.0061918995, y: -0.3469273, z: 0.0022904472, w: 0.93786883}
+  m_LocalRotation: {x: 0.074831076, y: -0.31466672, z: 0.024893057, w: 0.94592047}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.6981202, z: -3.9922943}
+  m_FollowOffset: {x: 0, y: 2.2704837, z: -3.9160113}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: -40.5999
+    Value: -36.800095
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -787,7 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.6981202, z: -3.9922943}
+  m_FollowOffset: {x: 0, y: 2.2704837, z: -3.9160113}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 2
@@ -807,7 +807,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: -40.5999
+    Value: -36.800095
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 1.6981202, z: -3.9922943}
+  m_FollowOffset: {x: 0, y: 2.2704837, z: -3.9160113}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -933,7 +933,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: -40.5999
+    Value: -36.800095
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -981,24 +981,8 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!54 &8162764314096977253
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8859671165155170458}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!136 &6540980806558713057
-CapsuleCollider:
+--- !u!143 &2045477426244804950
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1007,10 +991,14 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.8
   m_Radius: 0.25
-  m_Height: 1.85
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.95, z: 0}
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &565891997932932622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,27 +1028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SendRate: 0.1
   m_Animator: {fileID: 2835055014971824218}
-  m_TrackedParamFlags: 124
---- !u!114 &2895019979785850125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8859671165155170458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb02b4b2b7ddf8743bb494c1d91afdcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 0.35
-  groundLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  networkObject: {fileID: 5265358240021305830}
-  body: {fileID: 8162764314096977253}
-  capsule: {fileID: 6540980806558713057}
-  animator: {fileID: 2835055014971824218}
+  m_TrackedParamFlags: 508
 --- !u!114 &3054211180447889222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,7 +1077,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3072978337952682170
+--- !u!114 &3377433212923407315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1118,22 +1086,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 8859671165155170458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6537c25d947219846a38975a64682d19, type: 3}
+  m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 4
-  walkSpeed: 1.5
-  crouchWalkSpeed: 0.75
-  landMoveSpeed: 0
-  accelerationSpeed: 7
-  decelerationSpeed: 3
-  slideDecelerationSpeed: 2
-  movementToAnimationRatio: 1.6
-  networkLerpSpeed: 10
-  slideNormalizedCancelTime: 0.5
+  moveSpeed: 2
+  sprintSpeed: 5.335
+  terminalVelocity: 53
+  speedChangeRate: 10
+  jumpHeight: 1.2
+  gravity: -15
+  jumpTimeout: 0.5
+  fallTimeout: 0.15
   animator: {fileID: 2835055014971824218}
+  controller: {fileID: 2045477426244804950}
+  input: {fileID: 3447328982146990525}
   networkObject: {fileID: 5265358240021305830}
-  body: {fileID: 8162764314096977253}
+--- !u!114 &3447328982146990525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859671165155170458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e087ecce43ebbff45a1b360637807d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorLocked: 1
+  move: {x: 0, y: 0}
+  look: {x: 0, y: 0}
+  jump: 0
+  sprint: 0
   playerInput: {fileID: 8477834456311496507}
 --- !u!114 &7195982418978419336
 MonoBehaviour:
@@ -1177,8 +1161,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3072978337952682170}
-        m_TargetAssemblyTypeName: PlayerMovementController, Assembly-CSharp
+      - m_Target: {fileID: 3447328982146990525}
+        m_TargetAssemblyTypeName: StarterAssets.PlayerInputController, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -1192,7 +1176,19 @@ MonoBehaviour:
     m_ActionId: 1ec548e5-1189-4e00-bfc1-0b505d9eaf25
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3447328982146990525}
+        m_TargetAssemblyTypeName: StarterAssets.PlayerInputController, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 7cd0668a-072c-4a45-af44-272636aa634b
     m_ActionName: Player/Look[/Mouse/delta,/Pen/delta]
   - m_PersistentCalls:
@@ -1201,8 +1197,8 @@ MonoBehaviour:
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3072978337952682170}
-        m_TargetAssemblyTypeName: PlayerMovementController, Assembly-CSharp
+      - m_Target: {fileID: 3447328982146990525}
+        m_TargetAssemblyTypeName: StarterAssets.PlayerInputController, Assembly-CSharp
         m_MethodName: OnSprint
         m_Mode: 0
         m_Arguments:
@@ -1217,8 +1213,8 @@ MonoBehaviour:
     m_ActionName: Player/Sprint[/Keyboard/shift]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2895019979785850125}
-        m_TargetAssemblyTypeName: PlayerJumpController, Assembly-CSharp
+      - m_Target: {fileID: 3447328982146990525}
+        m_TargetAssemblyTypeName: StarterAssets.PlayerInputController, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
@@ -1272,23 +1268,11 @@ MonoBehaviour:
     m_ActionId: e76e8c04-3151-4760-a4be-85f60be1bcb7
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3072978337952682170}
-        m_TargetAssemblyTypeName: PlayerMovementController, Assembly-CSharp
-        m_MethodName: OnCrouch
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 5283f740-cb48-4550-bf54-683fbc3244aa
     m_ActionName: Player/Crouch[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

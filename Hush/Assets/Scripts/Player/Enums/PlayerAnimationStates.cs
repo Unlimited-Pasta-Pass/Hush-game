@@ -1,6 +1,6 @@
 ﻿namespace Enums
 {
-    public static class PlayerStates
+    public static class PlayerAnimationStates
     {
         public static string Slide => "Slide";
         

@@ -13,13 +13,6 @@ public class PlayerCameraController : MonoBehaviour
     
     private float TargetRotation => playerCamera.transform.eulerAngles.y;
 
-    private void Start()
-    {
-        // Disable the mouse cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void FixedUpdate()
     {
         if (networkObject.IsLocalPlayer)

@@ -31,9 +31,9 @@
                 },
                 {
                     "name": "Sprint",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "ea6490c0-ae83-4e41-837b-bc1cb19e2a30",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
@@ -43,7 +43,7 @@
                     "id": "b58d4f71-e2ca-4d45-a7cd-c5b6536cfbe8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": ""
                 },
                 {
                     "name": "Crouch",

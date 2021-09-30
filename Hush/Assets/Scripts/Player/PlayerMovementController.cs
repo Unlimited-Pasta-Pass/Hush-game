@@ -1,166 +1,171 @@
-using Enums;
+﻿using Enums;
 using MLAPI;
-using Player.Helpers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovementController : MonoBehaviour
+namespace StarterAssets
 {
-    [Header("Movement Speed")]
-    [Range(0.1f, 10f)]
-    public float runSpeed;
-    [Range(0.1f, 10f)]
-    public float walkSpeed;
-    [Range(0.1f, 10f)]
-    public float crouchWalkSpeed;
-    [Range(0.0f, 10f)]
-    public float landMoveSpeed;
-    
-    [Header("Acceleration")]
-    [Range(0.1f, 10f)]
-    public float accelerationSpeed;
-    [Range(0.1f, 10f)]
-    public float decelerationSpeed;
-    [Range(0.1f, 10f)]
-    public float slideDecelerationSpeed;
-    [Range(0.1f, 10f)]
-    public float slideNormalizedCancelTime;
-    
-    [Header("Animations")]
-    [Range(0.1f, 5f)]
-    public float movementToAnimationRatio;
-    
-    [Header("Network")]
-    [Range(1f, 30f)]
-    public float networkLerpSpeed;
-    
-    [Header("References")]
-    public Animator animator;
-    public NetworkObject networkObject;
-    public Rigidbody body;
-    public PlayerInput playerInput;
-        
-    // Computed getters
-    private Vector3 MovementVelocity => new Vector3(_state.ActualForwardSpeed, 0, _state.ActualLateralSpeed);
-    private bool IsMoveInput => !Mathf.Approximately(_state.MoveDirection.sqrMagnitude, 0f);
-    private bool IsPlayerSprinting => _state.ActualForwardSpeed > 0 && MovementVelocity.magnitude > walkSpeed + (runSpeed - walkSpeed) / 4;
-    private bool IsPlayerSliding
-    {
-        get {
-            var animState = animator.GetCurrentAnimatorStateInfo(0);
-            return IsPlayerSprinting && (_state.Crouching || (animState.IsName(PlayerStates.Slide) && animState.normalizedTime < slideNormalizedCancelTime));
-        }
-    }
-    private bool IsPlayerLanding
-    {
-        get {
-            var animState = animator.GetCurrentAnimatorStateInfo(0);
-            return animState.IsName(PlayerStates.Land);
-        }
-    }
+	[RequireComponent(typeof(CharacterController))]
+	[RequireComponent(typeof(PlayerInput))]
+	public class PlayerMovementController : MonoBehaviour
+	{
+		#region Public Parameters 
+		
+		[Header("Player")]
+		[Tooltip("Move speed of the character in m/s")]
+		public float moveSpeed = 2.0f;
+		[Tooltip("Sprint speed of the character in m/s")]
+		public float sprintSpeed = 5.335f;
+		[Tooltip("Terminal velocity of the character in m/s")]
+		public float terminalVelocity = 53.0f;
+		[Tooltip("Acceleration and deceleration")]
+		public float speedChangeRate = 10.0f;
 
-    // Shared Player State
-    private PlayerState _state;
+		[Space(10)]
+		[Tooltip("The height the player can jump")]
+		public float jumpHeight = 1.2f;
+		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
+		public float gravity = -15.0f;
 
-    // Called to update 2-axis movement input
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        if (networkObject.IsLocalPlayer)
-        {
-            _state.MoveDirection = context.ReadValue<Vector2>();
-        }
-    }
+		[Space(10)]
+		[Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
+		public float jumpTimeout = 0.50f;
+		[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
+		public float fallTimeout = 0.15f;
 
-    // Called to update sprinting state
-    public void OnSprint(InputAction.CallbackContext context)
-    {
-        if (networkObject.IsLocalPlayer)
-        {
-            _state.Sprinting = context.ReadValueAsButton();
-        }
-    }
+		[Header("Component References")]
+		public Animator animator;
+		public CharacterController controller;
+		public PlayerInputController input;
+		public NetworkObject networkObject;
+		
+		#endregion
 
-    // Called to update crouching state
-    public void OnCrouch(InputAction.CallbackContext context)
-    {
-        if (networkObject.IsLocalPlayer)
-        {
-            _state.Crouching = context.ReadValueAsButton();
-        }
-    }
+		#region Private Variables
+		
+		// Player
+		private float _lateralSpeed;
+		private float _forwardSpeed;
+		private float _verticalVelocity;
 
-    private void Start()
-    {
-        // Set the right control scheme
-        playerInput.SwitchCurrentControlScheme(ControlSchemes.KeyboardAndMouse);
-        
-        // Initialize the character state variable
-        _state = PlayerState.Instance;
-    }
+		// Timeouts
+		private float _jumpTimeoutDelta;
+		private float _fallTimeoutDelta;
+		
+		#endregion
 
-    private void FixedUpdate()
-    {
-        if (networkObject.IsLocalPlayer)
-        {
-            Move();
-        }
-        else
-        {
-            SyncAnimations();
-        }
-    }
+		private void Start()
+		{
+			// Reset timeouts on start
+			_jumpTimeoutDelta = jumpTimeout;
+			_fallTimeoutDelta = fallTimeout;
+		}
 
-    private void Move()
-    {
-        float speed = GetCharacterSpeed();
-        float acceleration = GetCharacterAcceleration();
-        
-        _state.DesiredForwardSpeed = _state.MoveDirection.normalized.y * speed;
-        _state.DesiredLateralSpeed = _state.MoveDirection.normalized.x * speed;
+		private void Update()
+		{
+			if (networkObject.IsLocalPlayer)
+			{
+				JumpAndGravity();
+				MovePlayer();
+			}
+			else
+			{
+				SyncAnimations();
+			}
+		}
 
-        _state.ActualForwardSpeed = Mathf.MoveTowards(_state.ActualForwardSpeed, _state.DesiredForwardSpeed, acceleration * Time.fixedDeltaTime);
-        _state.ActualLateralSpeed = Mathf.MoveTowards(_state.ActualLateralSpeed, _state.DesiredLateralSpeed, acceleration * Time.fixedDeltaTime);
-        
-        // Translate the player at the proper speed
-        var movement = new Vector3(_state.ActualLateralSpeed * movementToAnimationRatio, body.velocity.y, _state.ActualForwardSpeed * movementToAnimationRatio);
-        body.velocity = transform.TransformDirection(movement);
-        
-        // Animate the X/Y player position
-        animator.SetFloat(PlayerAnimator.ForwardSpeed, _state.ActualForwardSpeed);
-        animator.SetFloat(PlayerAnimator.LateralSpeed, _state.ActualLateralSpeed);
-        animator.SetFloat(PlayerAnimator.ForwardSpeedSync, _state.ActualForwardSpeed);
-        animator.SetFloat(PlayerAnimator.LateralSpeedSync, _state.ActualLateralSpeed);
-        
-        // Sprint / Crouch
-        animator.SetBool(PlayerAnimator.Sprinting, IsPlayerSprinting);
-        animator.SetBool(PlayerAnimator.Crouching, _state.Crouching);
-    }
+		private void MovePlayer()
+		{
+			// Set target speed based on move speed, sprint speed and if sprint is pressed
+			Vector2 targetSpeed = input.move.normalized;
+			targetSpeed *= input.sprint ? sprintSpeed : moveSpeed;
 
-    private void SyncAnimations()
-    {
-        animator.SetFloat(PlayerAnimator.ForwardSpeed, animator.GetFloat(PlayerAnimator.ForwardSpeedSync), 1.0f, Time.fixedDeltaTime * networkLerpSpeed);
-        animator.SetFloat(PlayerAnimator.LateralSpeed, animator.GetFloat(PlayerAnimator.LateralSpeedSync), 1.0f, Time.fixedDeltaTime * networkLerpSpeed);
-    }
-    
-    private float GetCharacterSpeed()
-    {
-        if (IsPlayerSliding)
-            return 0;
-        if (IsPlayerLanding)
-            return landMoveSpeed;
-        if (_state.Crouching)
-            return crouchWalkSpeed;
-        if (_state.Sprinting)
-            return runSpeed;
-        return walkSpeed;
-    }
-    
-    private float GetCharacterAcceleration()
-    {
-        if (IsPlayerSliding)
-            return slideDecelerationSpeed;
-        if (IsMoveInput)
-            return accelerationSpeed;
-        return decelerationSpeed;
-    }
+			// Creates curved result rather than a linear one giving a more organic speed change
+			_forwardSpeed = Mathf.Lerp(_forwardSpeed, targetSpeed.y, speedChangeRate * Time.deltaTime );
+			_lateralSpeed = Mathf.Lerp(_lateralSpeed, targetSpeed.x, speedChangeRate * Time.deltaTime );
+
+			// Move the player
+			var forwardMotion = Vector3.forward * (_forwardSpeed * Time.deltaTime);
+			var lateralMotion = Vector3.right * (_lateralSpeed * Time.deltaTime);
+			var verticalMotion = new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime;
+			controller.Move(transform.TransformDirection(forwardMotion + lateralMotion + verticalMotion));
+
+			// Update animator
+			animator.SetFloat(PlayerAnimator.ForwardSpeed, _forwardSpeed);
+			animator.SetFloat(PlayerAnimator.LateralSpeed, _lateralSpeed);
+			
+			// Update animator Sync values
+			animator.SetFloat(PlayerAnimator.ForwardSpeedSync, _forwardSpeed);
+			animator.SetFloat(PlayerAnimator.LateralSpeedSync, _lateralSpeed);
+		}
+
+		private void JumpAndGravity()
+		{
+			animator.SetBool(PlayerAnimator.Grounded, controller.isGrounded);
+			
+			if (controller.isGrounded)
+			{
+				// Reset the fall timeout timer
+				_fallTimeoutDelta = fallTimeout;
+
+				// Update animator
+				animator.SetBool(PlayerAnimator.Jumping, false);
+				animator.SetBool(PlayerAnimator.Falling, false);
+
+				// Stop our velocity dropping infinitely when grounded
+				if (_verticalVelocity < 0.0f)
+				{
+					_verticalVelocity = -2f;
+				}
+
+				// Jump if necessary
+				if (input.jump && _jumpTimeoutDelta <= 0.0f)
+				{
+					// The square root of H * -2 * G = how much velocity needed to reach desired height
+					_verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+					// Update animator
+					animator.SetBool(PlayerAnimator.Jumping, true);
+				}
+
+				// Jump timeout
+				if (_jumpTimeoutDelta >= 0.0f)
+				{
+					_jumpTimeoutDelta -= Time.deltaTime;
+				}
+			}
+			else
+			{
+				// Reset the jump timeout timer
+				_jumpTimeoutDelta = jumpTimeout;
+
+				// Update fall timeout
+				if (_fallTimeoutDelta >= 0.0f)
+				{
+					_fallTimeoutDelta -= Time.deltaTime;
+				}
+				else
+				{
+					// Update animator if using character
+					animator.SetBool(PlayerAnimator.Falling, true);
+				}
+
+				// If we are not grounded, do not jump
+				input.jump = false;
+			}
+
+			// Apply gravity over time if under terminal
+			// NOTE: Multiply by delta time twice to linearly speed up over time
+			if (_verticalVelocity < terminalVelocity)
+			{
+				_verticalVelocity += gravity * Time.deltaTime;
+			}
+		}
+		
+		private void SyncAnimations()
+		{
+			animator.SetFloat(PlayerAnimator.ForwardSpeed, animator.GetFloat(PlayerAnimator.ForwardSpeedSync), 1.0f, speedChangeRate * Time.deltaTime);
+			animator.SetFloat(PlayerAnimator.LateralSpeed, animator.GetFloat(PlayerAnimator.LateralSpeedSync), 1.0f, speedChangeRate * Time.deltaTime);
+		}
+	}
 }
