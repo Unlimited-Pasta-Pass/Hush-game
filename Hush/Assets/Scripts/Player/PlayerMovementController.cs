@@ -12,14 +12,21 @@ namespace StarterAssets
 		#region Public Parameters 
 		
 		[Header("Player")]
+		[Tooltip("Crouch speed of the character in m/s")]
+		public float crouchSpeed = 1.5f;
 		[Tooltip("Move speed of the character in m/s")]
-		public float moveSpeed = 2.0f;
+		public float moveSpeed = 3.0f;
 		[Tooltip("Sprint speed of the character in m/s")]
-		public float sprintSpeed = 5.335f;
+		public float sprintSpeed = 6f;
 		[Tooltip("Terminal velocity of the character in m/s")]
 		public float terminalVelocity = 53.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float speedChangeRate = 10.0f;
+		[Tooltip("Deceleration during slide animation")]
+		public float slideSpeedChangeRate = 7.0f;
+		[Tooltip("Percentage of the sprint speed at which to trigger the slide")]
+		[Range(0.1f, 1f)]
+		public float slideSpeedPercentage = 0.5f;
 
 		[Space(10)]
 		[Tooltip("The height the player can jump")]
@@ -54,6 +61,20 @@ namespace StarterAssets
 		
 		#endregion
 
+		#region Computed Getters
+		
+		private bool IsPlayerSprinting => new Vector2(_forwardSpeed, _lateralSpeed).sqrMagnitude > Mathf.Pow(moveSpeed, 2);
+		
+		private bool IsPlayerSliding
+		{
+			get {
+				var animState = animator.GetCurrentAnimatorStateInfo(0);
+				return IsPlayerSprinting && (input.crouch || animState.IsName(PlayerAnimationStates.Slide) && animState.normalizedTime < slideSpeedPercentage);
+			}
+		}
+		
+		#endregion
+		
 		private void Start()
 		{
 			// Reset timeouts on start
@@ -77,12 +98,12 @@ namespace StarterAssets
 		private void MovePlayer()
 		{
 			// Set target speed based on move speed, sprint speed and if sprint is pressed
-			Vector2 targetSpeed = input.move.normalized;
-			targetSpeed *= input.sprint ? sprintSpeed : moveSpeed;
+			Vector2 targetSpeed = input.move.normalized * GetTargetSpeed();
 
 			// Creates curved result rather than a linear one giving a more organic speed change
-			_forwardSpeed = Mathf.Lerp(_forwardSpeed, targetSpeed.y, speedChangeRate * Time.deltaTime );
-			_lateralSpeed = Mathf.Lerp(_lateralSpeed, targetSpeed.x, speedChangeRate * Time.deltaTime );
+			var changeRate = IsPlayerSliding ? slideSpeedChangeRate : speedChangeRate;
+			_forwardSpeed = Mathf.Lerp(_forwardSpeed, targetSpeed.y, changeRate * Time.deltaTime );
+			_lateralSpeed = Mathf.Lerp(_lateralSpeed, targetSpeed.x, changeRate * Time.deltaTime );
 
 			// Move the player
 			var forwardMotion = Vector3.forward * (_forwardSpeed * Time.deltaTime);
@@ -91,6 +112,8 @@ namespace StarterAssets
 			controller.Move(transform.TransformDirection(forwardMotion + lateralMotion + verticalMotion));
 
 			// Update animator
+			animator.SetBool(PlayerAnimator.Sprinting, IsPlayerSprinting);
+			animator.SetBool(PlayerAnimator.Crouching, input.crouch);
 			animator.SetFloat(PlayerAnimator.ForwardSpeed, _forwardSpeed);
 			animator.SetFloat(PlayerAnimator.LateralSpeed, _lateralSpeed);
 			
@@ -166,6 +189,17 @@ namespace StarterAssets
 		{
 			animator.SetFloat(PlayerAnimator.ForwardSpeed, animator.GetFloat(PlayerAnimator.ForwardSpeedSync), 1.0f, speedChangeRate * Time.deltaTime);
 			animator.SetFloat(PlayerAnimator.LateralSpeed, animator.GetFloat(PlayerAnimator.LateralSpeedSync), 1.0f, speedChangeRate * Time.deltaTime);
+		}
+		
+		private float GetTargetSpeed()
+		{
+			if (IsPlayerSliding)
+				return 0.0f;
+			if (input.crouch) 
+				return crouchSpeed;
+			if (input.sprint)
+				return sprintSpeed;
+			return moveSpeed;
 		}
 	}
 }

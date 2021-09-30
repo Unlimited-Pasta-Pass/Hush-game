@@ -15,6 +15,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool crouch;
 
 		[Header("References")] 
 		public PlayerInput playerInput;
@@ -51,6 +52,11 @@ namespace StarterAssets
 		public void OnSprint(CallbackContext context)
 		{
 			sprint = context.ReadValueAsButton();
+		}
+
+		public void OnCrouch(CallbackContext context)
+		{
+			crouch = context.ReadValueAsButton();
 		}
 		
 		#endregion
