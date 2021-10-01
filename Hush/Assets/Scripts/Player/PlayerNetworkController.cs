@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class PlayerNetworkController : MonoBehaviour
 {
-    public GameObject playerCamera;
-    public GameObject virtualCamera;
-    public NetworkObject networkObject;
+    [SerializeField] private GameObject playerCamera;
+    [SerializeField] private GameObject virtualCamera;
+    [SerializeField] private NetworkObject networkObject;
     
     private void Start()
     {

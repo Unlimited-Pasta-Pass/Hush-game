@@ -5,11 +5,11 @@ public class PlayerCameraController : MonoBehaviour
 {
     [Header("Rotation Speed")]
     [Range(1f, 720f)]
-    public float rotationSpeed;
+    [SerializeField] private float rotationSpeed;
 
     [Header("References")]
-    public GameObject playerCamera;
-    public NetworkObject networkObject;
+    [SerializeField] private GameObject playerCamera;
+    [SerializeField] private NetworkObject networkObject;
     
     private float TargetRotation => playerCamera.transform.eulerAngles.y;
 
