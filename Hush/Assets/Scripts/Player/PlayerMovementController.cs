@@ -12,39 +12,54 @@ namespace StarterAssets
 		#region Public Parameters 
 		
 		[Header("Player")]
-		[Tooltip("Crouch speed of the character in m/s")]
-		public float crouchSpeed = 1.5f;
+        [SerializeField]
+        [Tooltip("Crouch speed of the character in m/s")]
+		private float crouchSpeed = 1.5f;
+        [SerializeField]
 		[Tooltip("Move speed of the character in m/s")]
-		public float moveSpeed = 3.0f;
+        private float moveSpeed = 3.0f;
+        [SerializeField]
 		[Tooltip("Sprint speed of the character in m/s")]
-		public float sprintSpeed = 6f;
+        private float sprintSpeed = 6f;
+        [SerializeField]
 		[Tooltip("Terminal velocity of the character in m/s")]
-		public float terminalVelocity = 53.0f;
+        private float terminalVelocity = 53.0f;
+        [SerializeField]
 		[Tooltip("Acceleration and deceleration")]
 		public float speedChangeRate = 10.0f;
+        [SerializeField]
 		[Tooltip("Deceleration during slide animation")]
-		public float slideSpeedChangeRate = 7.0f;
-		[Tooltip("Percentage of the sprint speed at which to trigger the slide")]
+		public float slideDeceleration = 7.0f;
+        [SerializeField]
+		[Tooltip("Normalized time at which the slide deceleration ends")]
 		[Range(0.1f, 1f)]
-		public float slideSpeedPercentage = 0.5f;
+		public float slideDecelerationEndTime = 0.9f;
 
-		[Space(10)]
+        [SerializeField]
+        [Space(10)]
 		[Tooltip("The height the player can jump")]
-		public float jumpHeight = 1.2f;
+        private float jumpHeight = 1.2f;
+        [SerializeField]
 		[Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-		public float gravity = -15.0f;
-
+        private float gravity = -15.0f;
+        
+        [SerializeField]
 		[Space(10)]
 		[Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-		public float jumpTimeout = 0.50f;
+        private float jumpTimeout = 0.50f;
+        [SerializeField]
 		[Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
-		public float fallTimeout = 0.15f;
+        private float fallTimeout = 0.15f;
 
 		[Header("Component References")]
-		public Animator animator;
-		public CharacterController controller;
-		public PlayerInputController input;
-		public NetworkObject networkObject;
+        [SerializeField]
+        private Animator animator;
+        [SerializeField]
+        private CharacterController controller;
+        [SerializeField]
+        private PlayerInputController input;
+        [SerializeField]
+        private NetworkObject networkObject;
 		
 		#endregion
 
@@ -58,18 +73,18 @@ namespace StarterAssets
 		// Timeouts
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
-		
+        
 		#endregion
 
 		#region Computed Getters
 		
-		private bool IsPlayerSprinting => new Vector2(_forwardSpeed, _lateralSpeed).sqrMagnitude > Mathf.Pow(moveSpeed, 2);
+		private bool IsPlayerSprinting => new Vector2(_forwardSpeed, _lateralSpeed).sqrMagnitude > moveSpeed + (sprintSpeed - moveSpeed) / 2;
 		
 		private bool IsPlayerSliding
 		{
 			get {
 				var animState = animator.GetCurrentAnimatorStateInfo(0);
-				return IsPlayerSprinting && (input.crouch || animState.IsName(PlayerAnimationStates.Slide) && animState.normalizedTime < slideSpeedPercentage);
+				return (IsPlayerSprinting && input.crouch) || (animState.IsName(PlayerAnimationStates.Slide) && animState.normalizedTime < slideDecelerationEndTime);
 			}
 		}
 		
@@ -101,11 +116,11 @@ namespace StarterAssets
 			Vector2 targetSpeed = input.move.normalized * GetTargetSpeed();
 
 			// Creates curved result rather than a linear one giving a more organic speed change
-			var changeRate = IsPlayerSliding ? slideSpeedChangeRate : speedChangeRate;
+			var changeRate = IsPlayerSliding ? slideDeceleration : speedChangeRate;
 			_forwardSpeed = Mathf.Lerp(_forwardSpeed, targetSpeed.y, changeRate * Time.deltaTime );
 			_lateralSpeed = Mathf.Lerp(_lateralSpeed, targetSpeed.x, changeRate * Time.deltaTime );
 
-			// Move the player
+            // Move the player
 			var forwardMotion = Vector3.forward * (_forwardSpeed * Time.deltaTime);
 			var lateralMotion = Vector3.right * (_lateralSpeed * Time.deltaTime);
 			var verticalMotion = new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime;
@@ -193,10 +208,8 @@ namespace StarterAssets
 		
 		private float GetTargetSpeed()
 		{
-			if (IsPlayerSliding)
-				return 0.0f;
-			if (input.crouch) 
-				return crouchSpeed;
+			if (IsPlayerSliding || input.crouch)
+                return crouchSpeed;
 			if (input.sprint)
 				return sprintSpeed;
 			return moveSpeed;
