@@ -8,7 +8,7 @@ namespace StarterAssets
 	public class PlayerInputController : MonoBehaviour
 	{
 		[Header("Mouse Cursor Settings")]
-		public bool cursorLocked = true;
+        [SerializeField] private bool cursorLocked = true;
 		
 		[Header("Character Input Values")]
 		public Vector2 move;
