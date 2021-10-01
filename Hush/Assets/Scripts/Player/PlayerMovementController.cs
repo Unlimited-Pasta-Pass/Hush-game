@@ -78,7 +78,7 @@ namespace StarterAssets
 
         #region Computed Getters
 
-        private bool IsPlayerSprinting => new Vector2(_forwardSpeed, _lateralSpeed).sqrMagnitude > moveSpeed + (sprintSpeed - moveSpeed) / 2;
+        private bool IsPlayerSprinting => new Vector2(_forwardSpeed, _lateralSpeed).sqrMagnitude > (moveSpeed + sprintSpeed) * (moveSpeed + sprintSpeed) / 4;
 
         private bool IsPlayerSliding
         {
