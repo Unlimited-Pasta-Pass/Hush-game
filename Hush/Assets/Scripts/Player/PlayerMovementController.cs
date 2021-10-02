@@ -158,8 +158,8 @@ namespace StarterAssets
                     _verticalVelocity = -2f;
                 }
 
-                // Jump if we can and are not sliding
-                if (input.jump && _jumpTimeoutDelta <= 0.0f && !IsPlayerSliding)
+                // Jump if we can
+                if (input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     // The square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
