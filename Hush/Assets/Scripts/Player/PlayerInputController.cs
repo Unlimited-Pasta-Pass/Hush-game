@@ -6,9 +6,9 @@ using static UnityEngine.InputSystem.InputAction;
 namespace StarterAssets
 {
 	public class PlayerInputController : MonoBehaviour
-	{
-		[Header("Mouse Cursor Settings")]
-        [SerializeField] private bool cursorLocked = true;
+	{ 
+		[Header("Mouse Cursor Settings")] 
+		[SerializeField] private bool cursorLocked = true;
 		
 		[Header("Character Input Values")]
 		public Vector2 move;
