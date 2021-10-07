@@ -1,4 +1,3 @@
-using Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -13,7 +12,6 @@ namespace StarterAssets
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
-		public bool jump;
 		public bool sprint;
 		public bool crouch;
 
@@ -22,8 +20,6 @@ namespace StarterAssets
 
 		private void Start()
 		{
-			playerInput.SwitchCurrentControlScheme(ControlSchemes.KeyboardAndMouse);
-			
 			if (cursorLocked)
 			{
 				// Disable the mouse cursor
@@ -42,11 +38,6 @@ namespace StarterAssets
 		public void OnLook(CallbackContext context)
 		{
 			look = context.ReadValue<Vector2>();
-		}
-
-		public void OnJump(CallbackContext context)
-		{
-			jump = context.ReadValueAsButton();
 		}
 
 		public void OnSprint(CallbackContext context)
