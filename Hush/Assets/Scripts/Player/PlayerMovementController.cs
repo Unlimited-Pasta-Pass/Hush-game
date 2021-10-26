@@ -11,14 +11,9 @@ namespace StarterAssets
     {
         #region Parameters
 
-        [Header("Player")] 
-        [SerializeField] 
-        [Tooltip("Crouch speed of the character in m/s")]
-        private float crouchSpeed = 1.5f;
-
         [SerializeField] 
         [Tooltip("Move speed of the character in m/s")]
-        private float moveSpeed = 3.0f;
+        private float walkSpeed = 2f;
 
         [SerializeField] 
         [Tooltip("Rotation speed of the character")]
@@ -32,33 +27,10 @@ namespace StarterAssets
         [Tooltip("Acceleration and deceleration")]
         public float speedChangeRate = 10.0f;
 
-        [SerializeField] 
-        [Tooltip("Deceleration during slide animation")]
-        public float slideDeceleration = 7.0f;
-
-        [SerializeField] 
-        [Tooltip("Normalized time at which the slide deceleration ends")] [Range(0.1f, 1f)]
-        public float slideDecelerationEndTime = 0.9f;
-
         [Header("Component References")] 
         [SerializeField] private Animator animator;
         [SerializeField] private CharacterController controller;
         [SerializeField] private PlayerInputController input;
-
-        #endregion
-
-        #region Computed Getters
-
-        private bool IsPlayerSprinting => _playerSpeed > (moveSpeed + sprintSpeed) / 2;
-
-        private bool IsPlayerSliding
-        {
-            get
-            {
-                var animState = animator.GetCurrentAnimatorStateInfo(0);
-                return (IsPlayerSprinting && input.crouch) || (animState.IsName(PlayerAnimationStates.Slide) && animState.normalizedTime < slideDecelerationEndTime);
-            }
-        }
 
         #endregion
 
@@ -79,18 +51,15 @@ namespace StarterAssets
         private void MovePlayer()
         {
             // Set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = input.move.normalized.magnitude * GetTargetSpeed();
+            float targetSpeed = input.move.normalized.magnitude * (input.walk ? walkSpeed : sprintSpeed);
             
             // Creates curved result rather than a linear one giving a more organic speed change
-            float changeRate = IsPlayerSliding ? slideDeceleration : speedChangeRate;
-            _playerSpeed = Mathf.Lerp(_playerSpeed, targetSpeed, changeRate * Time.deltaTime);
+            _playerSpeed = Mathf.Lerp(_playerSpeed, targetSpeed, speedChangeRate * Time.deltaTime);
             
             // Move the player
             controller.Move(transform.TransformDirection(Vector3.forward * (_playerSpeed * Time.deltaTime)));
 
             // Update animator
-            animator.SetBool(PlayerAnimator.Sprinting, IsPlayerSprinting);
-            animator.SetBool(PlayerAnimator.Crouching, input.crouch);
             animator.SetFloat(PlayerAnimator.Speed, _playerSpeed);
         }
 
@@ -108,15 +77,6 @@ namespace StarterAssets
                 // Rotate the player
                 transform.rotation = _playerRotation;
             }
-        }
-
-        private float GetTargetSpeed()
-        {
-            if (IsPlayerSliding || input.crouch)
-                return crouchSpeed;
-            if (input.sprint)
-                return sprintSpeed;
-            return moveSpeed;
         }
     }
 }

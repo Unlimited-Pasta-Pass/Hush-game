@@ -12,8 +12,11 @@ namespace StarterAssets
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
-		public bool sprint;
-		public bool crouch;
+		public bool lightAttack;
+		public bool heavyAttack;
+		public bool specialAttack;
+		public bool interact;
+		public bool walk;
 
 		[Header("References")] 
 		public PlayerInput playerInput;
@@ -40,14 +43,29 @@ namespace StarterAssets
 			look = context.ReadValue<Vector2>();
 		}
 
-		public void OnSprint(CallbackContext context)
+		public void OnLightAttack(CallbackContext context)
 		{
-			sprint = context.ReadValueAsButton();
+			lightAttack = context.ReadValueAsButton();
 		}
 
-		public void OnCrouch(CallbackContext context)
+		public void OnHeavyAttack(CallbackContext context)
 		{
-			crouch = context.ReadValueAsButton();
+			heavyAttack = context.ReadValueAsButton();
+		}
+
+		public void OnSpecialAttack(CallbackContext context)
+		{
+			specialAttack = context.ReadValueAsButton();
+		}
+
+		public void OnInteract(CallbackContext context)
+		{
+			interact = context.ReadValueAsButton();
+		}
+
+		public void OnWalk(CallbackContext context)
+		{
+			walk = context.ReadValueAsButton();
 		}
 		
 		#endregion
