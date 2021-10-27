@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 5600300516197474806}
   - component: {fileID: 1288701180965618592}
   - component: {fileID: 4040321500388322195}
+  - component: {fileID: 6332242596225501444}
   m_Layer: 0
   m_Name: Player Base
   m_TagString: Player
@@ -529,6 +530,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1a25a9aa-3dec-4e2f-a80e-9af02fcb0db4
     m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1288701180965618592}
+        m_TargetAssemblyTypeName: StarterAssets.PlayerInputManager, Assembly-CSharp
+        m_MethodName: OnReveal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0d2b18c4-626c-4c25-9aff-a0bb96004bd5
+    m_ActionName: Player/Reveal[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -554,6 +571,7 @@ MonoBehaviour:
   specialAttack: 0
   interact: 0
   walk: 0
+  reveal: 0
   playerInput: {fileID: 5600300516197474806}
 --- !u!114 &4040321500388322195
 MonoBehaviour:
@@ -574,6 +592,18 @@ MonoBehaviour:
   animator: {fileID: 8205350870087033752}
   controller: {fileID: 2680335586944316230}
   input: {fileID: 1288701180965618592}
+--- !u!114 &6332242596225501444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7363d992d0452b88fb9b6c7bf0d5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &8205350870087033752
 Animator:
   serializedVersion: 3

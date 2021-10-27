@@ -4,7 +4,7 @@ using static UnityEngine.InputSystem.InputAction;
 
 namespace StarterAssets
 {
-	public class PlayerInputController : MonoBehaviour
+	public class PlayerInputManager : MonoBehaviour
 	{ 
 		[Header("Mouse Cursor Settings")] 
 		[SerializeField] private bool cursorLocked = true;
@@ -17,6 +17,7 @@ namespace StarterAssets
 		public bool specialAttack;
 		public bool interact;
 		public bool walk;
+		public bool reveal;
 
 		[Header("References")] 
 		public PlayerInput playerInput;
@@ -66,6 +67,11 @@ namespace StarterAssets
 		public void OnWalk(CallbackContext context)
 		{
 			walk = context.ReadValueAsButton();
+		}
+
+		public void OnReveal(CallbackContext context)
+		{
+			reveal = context.ReadValueAsButton();
 		}
 		
 		#endregion

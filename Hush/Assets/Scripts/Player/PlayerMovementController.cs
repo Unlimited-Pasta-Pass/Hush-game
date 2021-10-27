@@ -30,7 +30,7 @@ namespace StarterAssets
         [Header("Component References")] 
         [SerializeField] private Animator animator;
         [SerializeField] private CharacterController controller;
-        [SerializeField] private PlayerInputController input;
+        [SerializeField] private PlayerInputManager input;
 
         #endregion
 
