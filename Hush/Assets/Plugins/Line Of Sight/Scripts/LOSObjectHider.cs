@@ -12,6 +12,9 @@ namespace LOS
         private LOSCuller m_Culler;
         private LOSVisibilityInfo m_VisibilityInfo;
 
+        private bool overrideCulling;
+        private bool isRevealed;
+
         private void OnEnable()
         {
             m_Culler = GetComponent<LOSCuller>();
@@ -33,7 +36,12 @@ namespace LOS
 
         private void LateUpdate()
         {
-            if (m_Culler.enabled)
+            // TODO Do a fancy reveal/hide animation w/ shaders here
+            if (overrideCulling)
+            {
+                GetComponent<Renderer>().enabled = isRevealed;
+            }
+            else if (m_Culler.enabled)
             {
                 GetComponent<Renderer>().enabled = m_Culler.Visibile;
             }
@@ -41,6 +49,18 @@ namespace LOS
             {
                 GetComponent<Renderer>().enabled = m_VisibilityInfo.Visibile;
             }
+        }
+
+        public void RevealObject()
+        {
+            overrideCulling = true;
+            isRevealed = true;
+        }
+
+        public void ResetObjectVisibility()
+        {
+            overrideCulling = false;
+            isRevealed = false;
         }
     }
 }

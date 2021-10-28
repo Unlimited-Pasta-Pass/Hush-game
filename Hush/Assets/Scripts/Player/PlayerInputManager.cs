@@ -20,7 +20,7 @@ namespace StarterAssets
 		public bool reveal;
 
 		[Header("References")] 
-		public PlayerInput playerInput;
+		public PlayerInput reference;
 
 		private void Start()
 		{

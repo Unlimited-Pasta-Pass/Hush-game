@@ -321,6 +321,7 @@ GameObject:
   - component: {fileID: 5600300516197474806}
   - component: {fileID: 1288701180965618592}
   - component: {fileID: 4040321500388322195}
+  - component: {fileID: 5076025907412216654}
   m_Layer: 0
   m_Name: Player Base
   m_TagString: Player
@@ -583,7 +584,7 @@ MonoBehaviour:
   interact: 0
   walk: 0
   reveal: 0
-  playerInput: {fileID: 5600300516197474806}
+  reference: {fileID: 5600300516197474806}
 --- !u!114 &4040321500388322195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,6 +603,22 @@ MonoBehaviour:
   speedChangeRate: 10
   animator: {fileID: 8205350870087033752}
   controller: {fileID: 2680335586944316230}
+  input: {fileID: 1288701180965618592}
+--- !u!114 &5076025907412216654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7363d992d0452b88fb9b6c7bf0d5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  revealDistance: 20
+  revealDuration: 5
+  revealDelay: 7
   input: {fileID: 1288701180965618592}
 --- !u!95 &8205350870087033752
 Animator:
@@ -902,7 +919,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100006, guid: 6070b1377c2920547be98efb1187179c, type: 3}
       propertyPath: m_Name
-      value: 360 LOS Source High Precision
+      value: Vision
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 6070b1377c2920547be98efb1187179c, type: 3}
       propertyPath: m_RootOrder
@@ -947,102 +964,6 @@ PrefabInstance:
     - target: {fileID: 400006, guid: 6070b1377c2920547be98efb1187179c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000000, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: far clip plane
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000000, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 384
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000002, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: far clip plane
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000002, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 384
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000004, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: far clip plane
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000004, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 384
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000006, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: far clip plane
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000006, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 384
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000008, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: far clip plane
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000008, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 384
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000010, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: far clip plane
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000010, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 384
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_MinVariance
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_DistanceFade
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_MinVariance
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400002, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_DistanceFade
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400004, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_MinVariance
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400004, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_DistanceFade
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400006, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_MinVariance
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400006, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_DistanceFade
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400008, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_MinVariance
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400008, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_DistanceFade
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_MinVariance
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: 6070b1377c2920547be98efb1187179c, type: 3}
-      propertyPath: m_DistanceFade
-      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6070b1377c2920547be98efb1187179c, type: 3}

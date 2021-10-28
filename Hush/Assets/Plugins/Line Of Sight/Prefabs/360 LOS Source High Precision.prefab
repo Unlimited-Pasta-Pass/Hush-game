@@ -56,14 +56,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 10
+  far clip plane: 20
   field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967293
+    m_Bits: 384
   m_RenderingPath: 0
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -92,11 +92,11 @@ MonoBehaviour:
   m_MaskInvert: 0
   m_RenderTargetWidth: 512
   m_RenderTargetHeight: 512
-  m_DistanceFade: 0.625
+  m_DistanceFade: 0.6
   m_EdgeFade: 0
   m_ExcludeBackfaces: 1
   m_BackfacesFade: 0.1
-  m_MinVariance: 0.1
+  m_MinVariance: 0.6
   m_OutOfBoundArea: 2
 --- !u!1 &100002
 GameObject:
@@ -154,14 +154,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 10
+  far clip plane: 20
   field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967293
+    m_Bits: 384
   m_RenderingPath: 0
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -190,11 +190,11 @@ MonoBehaviour:
   m_MaskInvert: 0
   m_RenderTargetWidth: 512
   m_RenderTargetHeight: 512
-  m_DistanceFade: 0.625
+  m_DistanceFade: 0.6
   m_EdgeFade: 0
   m_ExcludeBackfaces: 1
   m_BackfacesFade: 0.1
-  m_MinVariance: 0.1
+  m_MinVariance: 0.6
   m_OutOfBoundArea: 2
 --- !u!1 &100004
 GameObject:
@@ -252,14 +252,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 10
+  far clip plane: 20
   field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967293
+    m_Bits: 384
   m_RenderingPath: 0
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -288,11 +288,11 @@ MonoBehaviour:
   m_MaskInvert: 0
   m_RenderTargetWidth: 512
   m_RenderTargetHeight: 512
-  m_DistanceFade: 0.625
+  m_DistanceFade: 0.6
   m_EdgeFade: 0
   m_ExcludeBackfaces: 1
   m_BackfacesFade: 0.1
-  m_MinVariance: 0.1
+  m_MinVariance: 0.6
   m_OutOfBoundArea: 2
 --- !u!1 &100006
 GameObject:
@@ -386,14 +386,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 10
+  far clip plane: 20
   field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967293
+    m_Bits: 384
   m_RenderingPath: 0
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -422,11 +422,11 @@ MonoBehaviour:
   m_MaskInvert: 0
   m_RenderTargetWidth: 512
   m_RenderTargetHeight: 512
-  m_DistanceFade: 0.625
+  m_DistanceFade: 0.6
   m_EdgeFade: 0
   m_ExcludeBackfaces: 1
   m_BackfacesFade: 0.1
-  m_MinVariance: 0.1
+  m_MinVariance: 0.6
   m_OutOfBoundArea: 2
 --- !u!1 &100010
 GameObject:
@@ -484,14 +484,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 10
+  far clip plane: 20
   field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967293
+    m_Bits: 384
   m_RenderingPath: 0
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -520,11 +520,11 @@ MonoBehaviour:
   m_MaskInvert: 0
   m_RenderTargetWidth: 512
   m_RenderTargetHeight: 512
-  m_DistanceFade: 0.625
+  m_DistanceFade: 0.6
   m_EdgeFade: 0
   m_ExcludeBackfaces: 1
   m_BackfacesFade: 0.1
-  m_MinVariance: 0.1
+  m_MinVariance: 0.6
   m_OutOfBoundArea: 2
 --- !u!1 &100012
 GameObject:
@@ -582,14 +582,14 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 10
+  far clip plane: 20
   field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967293
+    m_Bits: 384
   m_RenderingPath: 0
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -618,9 +618,9 @@ MonoBehaviour:
   m_MaskInvert: 0
   m_RenderTargetWidth: 512
   m_RenderTargetHeight: 512
-  m_DistanceFade: 0.625
+  m_DistanceFade: 0.6
   m_EdgeFade: 0
   m_ExcludeBackfaces: 1
   m_BackfacesFade: 0.1
-  m_MinVariance: 0.1
+  m_MinVariance: 0.6
   m_OutOfBoundArea: 2
