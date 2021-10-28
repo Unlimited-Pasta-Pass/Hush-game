@@ -11,11 +11,6 @@ namespace Keys
         [Space(10)]
         [SerializeField] private DebugParameters debugParameters;
         
-        private void Start()
-        {
-            debugParameters = new DebugParameters();
-        }
-
         private void OnDrawGizmos()
         {
             Gizmos.color = debugParameters.gizmoColor;

@@ -1,5 +1,4 @@
-﻿using System;
-using Enums;
+﻿using Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,21 +10,17 @@ namespace StarterAssets
     {
         #region Parameters
 
-        [SerializeField] 
         [Tooltip("Move speed of the character in m/s")]
-        private float walkSpeed = 2f;
+        [SerializeField] private float walkSpeed = 2f;
 
-        [SerializeField] 
         [Tooltip("Rotation speed of the character")]
-        private float rotationSpeed = 15f;
+        [SerializeField] private float rotationSpeed = 15f;
 
-        [SerializeField] 
         [Tooltip("Sprint speed of the character in m/s")]
-        private float sprintSpeed = 6f;
+        [SerializeField] private float sprintSpeed = 6f;
 
-        [SerializeField] 
         [Tooltip("Acceleration and deceleration")]
-        public float speedChangeRate = 10.0f;
+        [SerializeField] public float speedChangeRate = 10.0f;
 
         [Header("Component References")] 
         [SerializeField] private Animator animator;
