@@ -1,4 +1,3 @@
-using Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -13,17 +12,17 @@ namespace StarterAssets
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
-		public bool jump;
-		public bool sprint;
-		public bool crouch;
+		public bool lightAttack;
+		public bool heavyAttack;
+		public bool specialAttack;
+		public bool interact;
+		public bool walk;
 
 		[Header("References")] 
 		public PlayerInput playerInput;
 
 		private void Start()
 		{
-			playerInput.SwitchCurrentControlScheme(ControlSchemes.KeyboardAndMouse);
-			
 			if (cursorLocked)
 			{
 				// Disable the mouse cursor
@@ -44,19 +43,29 @@ namespace StarterAssets
 			look = context.ReadValue<Vector2>();
 		}
 
-		public void OnJump(CallbackContext context)
+		public void OnLightAttack(CallbackContext context)
 		{
-			jump = context.ReadValueAsButton();
+			lightAttack = context.ReadValueAsButton();
 		}
 
-		public void OnSprint(CallbackContext context)
+		public void OnHeavyAttack(CallbackContext context)
 		{
-			sprint = context.ReadValueAsButton();
+			heavyAttack = context.ReadValueAsButton();
 		}
 
-		public void OnCrouch(CallbackContext context)
+		public void OnSpecialAttack(CallbackContext context)
 		{
-			crouch = context.ReadValueAsButton();
+			specialAttack = context.ReadValueAsButton();
+		}
+
+		public void OnInteract(CallbackContext context)
+		{
+			interact = context.ReadValueAsButton();
+		}
+
+		public void OnWalk(CallbackContext context)
+		{
+			walk = context.ReadValueAsButton();
 		}
 		
 		#endregion
