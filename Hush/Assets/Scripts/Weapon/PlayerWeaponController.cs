@@ -33,12 +33,12 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void PerformWeaponAttack(InputAction.CallbackContext callbackContext)
     {
-        animator.SetTrigger("Light Attack");
+        animator.SetTrigger(PlayerAnimator.LightAttack);
         equippedWeapon.PerformAttack(CalculateDamage());
     }
     public void PerformWeaponSpecialAttack(InputAction.CallbackContext callbackContext)
     {
-        animator.SetTrigger("Heavy Attack");
+        animator.SetTrigger(PlayerAnimator.HeavyAttack);
         equippedWeapon.PerformSpecialAttack();
     }
 
