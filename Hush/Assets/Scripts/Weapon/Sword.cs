@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour, IWeapon
 {
-    private Animator animator;
+    //private Animator animator;
     public List<BaseStat> Stats { get; set; }
     public CharacterStats CharacterStats { get; set; }
     public int CurrentDamage { get; set; }
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     public void PerformAttack(int damage)
     {
         CurrentDamage = damage;
-        animator.SetTrigger("Base_Attack");
+        //animator.SetTrigger("Sword_Attack");
     }
 
     public void PerformSpecialAttack()
     {
-        animator.SetTrigger("Special_Attack");
+        //animator.SetTrigger("Special_Attack");
     }
 
     void OnTriggerEnter(Collider col)

@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-namespace StarterAssets
-{
+
 	public class PlayerInputController : MonoBehaviour
 	{ 
 		[Header("Mouse Cursor Settings")] 
@@ -70,4 +69,3 @@ namespace StarterAssets
 		
 		#endregion
 	}
-}
