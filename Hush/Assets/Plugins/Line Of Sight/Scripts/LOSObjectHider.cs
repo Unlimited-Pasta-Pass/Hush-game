@@ -20,7 +20,7 @@ namespace LOS
             m_Culler = GetComponent<LOSCuller>();
 
             enabled &= Util.Verify(m_Culler != null, "LOS culler component missing.");
-            enabled &= Util.Verify(GetComponent<Renderer>() != null, "No renderer attached to this GameObject! LOS Culler component must be added to a GameObject containing a MeshRenderer or Skinned Mesh Renderer!");
+            enabled &= Util.Verify(GetComponent<Renderer>() != null || GetComponentsInChildren<Renderer>().Length > 0, "No renderer attached to this GameObject! LOS Culler component must be added to a GameObject containing a MeshRenderer or Skinned Mesh Renderer!");
         }
 
         private void Start()
@@ -39,15 +39,33 @@ namespace LOS
             // TODO Do a fancy reveal/hide animation w/ shaders here
             if (overrideCulling)
             {
-                GetComponent<Renderer>().enabled = isRevealed;
+                UpdateVisibility(isRevealed);
             }
             else if (m_Culler.enabled)
             {
-                GetComponent<Renderer>().enabled = m_Culler.Visibile;
+                UpdateVisibility(m_Culler.Visibile);
             }
             else if (m_VisibilityInfo != null && m_VisibilityInfo.isActiveAndEnabled)
             {
-                GetComponent<Renderer>().enabled = m_VisibilityInfo.Visibile;
+                 UpdateVisibility(m_VisibilityInfo.Visibile);
+            }
+        }
+
+        private void UpdateVisibility(bool visible)
+        {
+            var parentRenderer = GetComponent<Renderer>();
+            
+            if (parentRenderer != null)
+                parentRenderer.enabled = visible;
+
+            var childrenRender = GetComponentsInChildren<Renderer>();
+            
+            if (childrenRender != null && childrenRender.Length > 0)
+            {
+                foreach (var childRenderer in childrenRender)
+                {
+                    childRenderer.enabled = visible;
+                }
             }
         }
 
