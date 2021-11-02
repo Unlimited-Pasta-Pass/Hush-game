@@ -15,6 +15,7 @@ namespace StarterAssets
         [SerializeField] private float revealDelay = 7f;
 
         [Header("References")]
+        [SerializeField] private ParticleSystem effect;
         [SerializeField] private PlayerInputManager input;
         
         private List<LOSObjectHider> _hiddenObjectsInRange;
@@ -55,7 +56,7 @@ namespace StarterAssets
 
             _canReveal = false;
             
-            // TODO Add some kind of effect for the reveal
+            effect.Play();
             
             _hiddenObjectsInRange = new List<LOSObjectHider>();
             _hiddenObjectsInRange.AddRange(FindObjectsOfType<LOSObjectHider>().Where(o => Vector3.Distance(transform.position, o.transform.position) <= revealDistance));

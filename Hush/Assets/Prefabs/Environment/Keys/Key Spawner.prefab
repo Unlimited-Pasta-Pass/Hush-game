@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76314d7a978545869d6c45ec45c391eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyPrefab: {fileID: 0}
+  keyPrefab: {fileID: 624753145893013184, guid: e628f03fe26697b44be1147d3a1e37c7, type: 3}
   debugParameters:
     gizmoRadius: 0.5
     gizmoColor: {r: 1, g: 0, b: 0, a: 1}
