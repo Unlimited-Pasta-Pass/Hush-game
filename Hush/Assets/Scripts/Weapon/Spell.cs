@@ -7,7 +7,14 @@ public class Spell : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
     public int CurrentDamage { get; set; }
+    public int BonusDamage { get; set; }
+
     private const int SPECIAL_DAMAGE = 50;
+
+    void Awake()
+    {
+        BonusDamage = 5;
+    }
 
     public void PerformAttack(int damage)
     {

@@ -17,6 +17,9 @@ public class PlayerWeaponController : MonoBehaviour
     {
         equippedWeapon = sword;
         characterStats = new CharacterStats(10, 10);
+        characterStats.AddBonus( Stat.StatType.Strength , sword.BonusDamage);
+        characterStats.AddBonus( Stat.StatType.SpellPower , spell.BonusDamage);
+        
     }
 
     void OnEnable()
@@ -25,10 +28,6 @@ public class PlayerWeaponController : MonoBehaviour
         input.playerInput.actions["Light Attack"].performed += PerformWeaponAttack; 
         input.playerInput.actions["Heavy Attack"].performed += PerformWeaponSpecialAttack;
         input.playerInput.actions["SwitchWeapon"].performed += SwitchWeapon;
-    }
-
-    void Update()
-    {
     }
 
     private void SwitchWeapon(InputAction.CallbackContext callbackContext)
@@ -47,12 +46,11 @@ public class PlayerWeaponController : MonoBehaviour
 
     private int CalculateDamage()
     {
-        int damageToDeal = (characterStats.GetStat(BaseStat.BaseStatType.Power).GetCalculatedStatValue() * 2)
-            + Random.Range(2, 8);
+        Stat.StatType type = (equippedWeapon == sword) ? Stat.StatType.Strength : Stat.StatType.SpellPower;
+        int damageToDeal = (characterStats.GetStat(type).GetCalculatedStatValue() * 2);
         damageToDeal += CalculateCrit(damageToDeal);
         
         //TODO damage ui?
-        Debug.Log("Damage dealt: " + damageToDeal);
         
         return damageToDeal;
     }
