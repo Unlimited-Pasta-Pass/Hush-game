@@ -5645,7 +5645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bdd02eaa4730848a13d16293ee38de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 8205350870087033752}
 --- !u!114 &2115969719432915281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5658,7 +5658,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 8205350870087033752}
+  spellLifetime: 5
+  spellPrefab: {fileID: 5970551939131877703, guid: ec683b5abbedbc048b86596967466042, type: 3}
 --- !u!95 &8205350870087033752
 Animator:
   serializedVersion: 3
