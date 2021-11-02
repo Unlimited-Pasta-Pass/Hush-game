@@ -20,8 +20,8 @@ public class PlayerWeaponController : MonoBehaviour
         characterStats = new CharacterStats(10, 10);
         
         // add any bonuses related to specific weapons
-        characterStats.AddBonus( Stat.StatType.Strength , sword.BonusDamage);
-        characterStats.AddBonus( Stat.StatType.SpellPower , spell.BonusDamage);
+        characterStats.AddBonus( StatType.Strength , sword.BonusDamage);
+        characterStats.AddBonus( StatType.SpellPower , spell.BonusDamage);
     }
 
     void OnEnable()
@@ -48,7 +48,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private int CalculateDamage()
     {
-        Stat.StatType type = (equippedWeapon == sword) ? Stat.StatType.Strength : Stat.StatType.SpellPower;
+        StatType type = (equippedWeapon == sword) ? StatType.Strength : StatType.SpellPower;
         int damageToDeal = (characterStats.GetStat(type).GetCalculatedStatValue() * 2);
         damageToDeal += CalculateCrit(damageToDeal);
         

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Enums;
 
 public class Stat
 {
-    public enum StatType { Strength , SpellPower }
+    //public enum StatType { Strength , SpellPower }
     public StatType Type { get; set; }
-    public List<StatBonus> Bonuses = new List<StatBonus>();
+    public List<int> Bonuses = new List<int>();
     public int BaseValue { get; set; }
     public string StatName { get; set; }
     public string StatDescription { get; set; }
@@ -26,7 +27,7 @@ public class Stat
         this.StatName = statName;
     }
     
-    public void AddBonus(StatBonus statbonus)
+    public void AddBonus(int statbonus)
     {
         Bonuses.Add(statbonus);
     }
@@ -34,9 +35,9 @@ public class Stat
     public int GetCalculatedStatValue()
     {
         int totalBonuses = 0;
-        foreach(StatBonus bonus in Bonuses)
+        foreach(int bonus in Bonuses)
         {
-            totalBonuses = bonus.value;
+            totalBonuses += bonus;
         }
 
         return BaseValue + totalBonuses;

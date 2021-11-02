@@ -7,14 +7,16 @@ public class Sword : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
     public int CurrentDamage { get; set; }
-    public int BonusDamage { get; set; }
+    
+    [SerializeField] private int bonusDamage = 5;
+    public int BonusDamage 
+    {
+        get => bonusDamage; 
+        set => bonusDamage = value;
+    }
     
     private const int SPECIAL_DAMAGE = 100;
-
-    void Awake()
-    {
-        BonusDamage = 10;
-    }
+    
     public void PerformAttack(int damage)
     {
         animator.SetTrigger(PlayerAnimator.LightAttack);
