@@ -17,5 +17,6 @@
         public static string Walk => "Walk";
         
         public static string Reveal => "Reveal";
+        public static string SwitchWeapon => "SwitchWeapon";
     }
 }
