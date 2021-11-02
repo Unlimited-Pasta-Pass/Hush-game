@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Enums;
 
-public class Sword : MonoBehaviour, IWeapon
+public class Spell : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
     public int CurrentDamage { get; set; }
-    private const int SPECIAL_DAMAGE = 100;
-    
-    
+    private const int SPECIAL_DAMAGE = 50;
 
     public void PerformAttack(int damage)
     {
-        animator.SetTrigger(PlayerAnimator.LightAttack);
-        Debug.Log("LightAttack");
+        Debug.Log("Spell Attack");
+        animator.SetTrigger(PlayerAnimator.SpellAttack);
         CurrentDamage = damage;
     }
 
     public void PerformSpecialAttack()
     {
-        animator.SetTrigger(PlayerAnimator.HeavyAttack);
+        animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
         CurrentDamage = SPECIAL_DAMAGE;
     }
 

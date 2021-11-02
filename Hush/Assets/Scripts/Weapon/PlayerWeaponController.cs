@@ -6,18 +6,19 @@ using Enums;
 
 public class PlayerWeaponController : MonoBehaviour
 {
-    //public GameObject EquippedWeapon { get; set; }
     
-    [SerializeField] private Animator animator;
+    
     [SerializeField] private PlayerInputController input;
     
+    [SerializeField] private Sword sword;
+    [SerializeField] private Spell spell;
     [SerializeField] private CharacterStats characterStats;
     IWeapon equippedWeapon;
-    
 
     void Start()
     {
-        equippedWeapon = GetComponent<IWeapon>();
+        equippedWeapon = sword;
+        characterStats = new CharacterStats(10, 10);
     }
 
     void OnEnable()
@@ -25,26 +26,31 @@ public class PlayerWeaponController : MonoBehaviour
         // TODO update to use enum after merge
         input.playerInput.actions["Light Attack"].performed += PerformWeaponAttack; 
         input.playerInput.actions["Heavy Attack"].performed += PerformWeaponSpecialAttack;
+        input.playerInput.actions["SwitchWeapon"].performed += SwitchWeapon;
     }
 
     void Update()
     {
     }
 
+    private void SwitchWeapon(InputAction.CallbackContext callbackContext)
+    {
+        Debug.Log("Weapon switched");
+        equippedWeapon = (equippedWeapon == sword) ? (IWeapon) spell : sword;
+    }
+
     public void PerformWeaponAttack(InputAction.CallbackContext callbackContext)
     {
-        animator.SetTrigger(PlayerAnimator.LightAttack);
         equippedWeapon.PerformAttack(CalculateDamage());
     }
     public void PerformWeaponSpecialAttack(InputAction.CallbackContext callbackContext)
     {
-        animator.SetTrigger(PlayerAnimator.HeavyAttack);
         equippedWeapon.PerformSpecialAttack();
     }
 
     private int CalculateDamage()
     {
-        int damageToDeal = 10 // (characterStats.GetStat(BaseStat.BaseStatType.Power).GetCalculatedStatValue() * 2)
+        int damageToDeal = (characterStats.GetStat(BaseStat.BaseStatType.Power).GetCalculatedStatValue() * 2)
             + Random.Range(2, 8);
         damageToDeal += CalculateCrit(damageToDeal);
         
