@@ -6,13 +6,11 @@ using Enums;
 
 public class PlayerWeaponController : MonoBehaviour
 {
-    
-    
+    [SerializeField] private float critChance = 0.10f;
     [SerializeField] private PlayerInputController input;
-    
     [SerializeField] private Sword sword;
     [SerializeField] private Spell spell;
-    [SerializeField] private CharacterStats characterStats;
+    private CharacterStats characterStats;
     IWeapon equippedWeapon;
 
     void Start()
@@ -35,7 +33,6 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void SwitchWeapon(InputAction.CallbackContext callbackContext)
     {
-        Debug.Log("Weapon switched");
         equippedWeapon = (equippedWeapon == sword) ? (IWeapon) spell : sword;
     }
 
@@ -62,7 +59,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private int CalculateCrit(int damage)
     {
-        if (Random.value <= .10f)
+        if (Random.value <= critChance)
         {
             int critDamage = (int)(damage * Random.Range(.5f, .75f));
             return critDamage;

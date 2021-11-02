@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseStat : MonoBehaviour
+public class BaseStat
 {
     public enum BaseStatType { Power, AttackSpeed }
     public BaseStatType StatType { get; set; }

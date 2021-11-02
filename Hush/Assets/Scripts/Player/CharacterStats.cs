@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class CharacterStats : MonoBehaviour
+public class CharacterStats
 {
     public List<BaseStat> stats = new List<BaseStat>();
 

@@ -11,7 +11,6 @@ public class Spell : MonoBehaviour, IWeapon
 
     public void PerformAttack(int damage)
     {
-        Debug.Log("Spell Attack");
         animator.SetTrigger(PlayerAnimator.SpellAttack);
         CurrentDamage = damage;
     }

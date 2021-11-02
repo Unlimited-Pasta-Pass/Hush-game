@@ -14,7 +14,6 @@ public class Sword : MonoBehaviour, IWeapon
     public void PerformAttack(int damage)
     {
         animator.SetTrigger(PlayerAnimator.LightAttack);
-        Debug.Log("LightAttack");
         CurrentDamage = damage;
     }
 
