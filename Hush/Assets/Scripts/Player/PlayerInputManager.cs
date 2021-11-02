@@ -21,6 +21,9 @@ public class PlayerInputManager : MonoBehaviour
 	[Header("References")] 
 	public PlayerInput reference;
 
+	[Header("Door Interactions")]
+	public bool isInCombat;
+
 	private void Start()
 	{
 		if (cursorLocked)
@@ -46,26 +49,31 @@ public class PlayerInputManager : MonoBehaviour
 	public void OnLightAttack(CallbackContext context)
 	{
 		lightAttack = context.ReadValueAsButton();
+		isInCombat = context.ReadValueAsButton();
 	}
 
 	public void OnHeavyAttack(CallbackContext context)
 	{
 		heavyAttack = context.ReadValueAsButton();
+		isInCombat = context.ReadValueAsButton();
 	}
 
 	public void OnSpecialAttack(CallbackContext context)
 	{
 		specialAttack = context.ReadValueAsButton();
+		isInCombat = context.ReadValueAsButton();
 	}
 
 	public void OnInteract(CallbackContext context)
 	{
 		interact = context.ReadValueAsButton();
+		isInCombat = !context.ReadValueAsButton();
 	}
 
 	public void OnWalk(CallbackContext context)
 	{
 		walk = context.ReadValueAsButton();
+		isInCombat = !context.ReadValueAsButton();
 	}
 
 	public void OnReveal(CallbackContext context)
