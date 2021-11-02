@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - VirtualCamera
+  - Key Spawner
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -13,10 +15,10 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
+  - Obstacle
+  - Wall
+  - Interactible
+  - Player
   - 
   - 
   - 

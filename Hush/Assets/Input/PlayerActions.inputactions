@@ -62,9 +62,17 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Reveal",
+                    "type": "Button",
+                    "id": "0d2b18c4-626c-4c25-9aff-a0bb96004bd5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "SwitchWeapon",
                     "type": "Button",
-                    "id": "1f708b46-101c-4e7c-9c45-e369c9bf2e00",
+                    "id": "8e42c219-d1df-43f6-93f2-9709da6a79ec",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -315,11 +323,33 @@
                 },
                 {
                     "name": "",
-                    "id": "1bc6daea-5dbc-4da6-af68-4038f9ec36c9",
-                    "path": "<Keyboard>/x",
+                    "id": "df1aeba5-fb7a-47c5-a4dc-19d50a8e60f1",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
+                    "action": "Reveal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "17ee3be7-9434-4785-bef3-f84034624a88",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Reveal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2187209a-ecad-4d12-9459-27bfb5e863b1",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "SwitchWeapon",
                     "isComposite": false,
                     "isPartOfComposite": false
