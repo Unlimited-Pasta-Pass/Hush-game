@@ -165,7 +165,7 @@ public class Enemy : MonoBehaviour, IEnemy
             {
                 // Go to next position in patrol route if arrived
                 agent.speed = patrolSpeed;
-                if (agent.remainingDistance < 0.5f && patrolRoute.Length > 0)
+                if (agent.remainingDistance < 1.0f && patrolRoute.Length > 0)
                 {
                     agent.destination = patrolRoute[_nextPatrolIndex].position;
                     _nextPatrolIndex = (_nextPatrolIndex + 1) % patrolRoute.Length;
@@ -198,7 +198,7 @@ public class Enemy : MonoBehaviour, IEnemy
         Vector3 lookPos = _player.transform.position - transform.position;
         lookPos.y = 0;
         Quaternion targetRotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3.0f * Time.deltaTime);  
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 4.0f * Time.deltaTime);  
     }
 
     #endregion

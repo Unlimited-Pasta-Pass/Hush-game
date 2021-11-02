@@ -34,6 +34,7 @@ namespace Enemies
         #region Public Variables
 
         public int CurrentDamage { get; set; }
+        public int BonusDamage { get; set; }
 
         #endregion
         
