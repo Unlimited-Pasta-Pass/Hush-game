@@ -1,3 +1,4 @@
+using System;
 using Common;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,8 +12,18 @@ public class Enemy : MonoBehaviour, IEnemy
 
     [Header("Parameters")]
     [SerializeField] private int hitPoints = 100;
-    [SerializeField] private float visionAngle = 45.0f;
-    [SerializeField] private float attackRange = 1.0f;
+    [SerializeField] private float visionAngle = 70.0f;
+
+    [Header("Attack")]
+    [SerializeField] private float minAttackRange = 0.5f;
+    [SerializeField] private float maxAttackRange = 1.0f;
+    
+    [Header("Speed")]
+    [SerializeField] private float runSpeed = 5.0f;
+    [SerializeField] private float patrolSpeed = 2.0f;
+    
+    [Header("Patrol")]
+    [SerializeField] private Transform[] patrolRoute;
     
     [Header("References")]
     [SerializeField] private NavMeshAgent agent;
@@ -30,7 +41,9 @@ public class Enemy : MonoBehaviour, IEnemy
         Attacking
     }
 
+    private CharacterController _player;
     private State _state = State.Patrolling;
+    private int _nextPatrolIndex;
 
     #endregion
 
@@ -50,7 +63,7 @@ public class Enemy : MonoBehaviour, IEnemy
     #endregion
 
     #region Events
-
+    
     void Reset()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -64,6 +77,11 @@ public class Enemy : MonoBehaviour, IEnemy
             visionCollider = GetComponentInChildren<SphereCollider>();
     }
 
+    private void Start()
+    {
+        _player = GameObject.FindWithTag(Tags.Player).GetComponent<CharacterController>();
+    }
+
     void OnTriggerStay(Collider other)
     {
         // Only trigger on player
@@ -73,20 +91,13 @@ public class Enemy : MonoBehaviour, IEnemy
         // Test player in enemy vision range
         var player = other.gameObject;
         var playerDir = transform.InverseTransformPoint(player.transform.position).normalized;
-        if (_state == State.Attacking || Vector3.Angle(playerDir, Vector3.forward) < visionAngle)
+        if (_state != State.Patrolling || Vector3.Angle(playerDir, Vector3.forward) < visionAngle)
         {
             // If we have line of sight, keep following player
-            var position = transform.position;
-            position.y = agent.height / 2.0f;
-            var playerPosition = player.transform.position;
-            playerPosition.y = position.y;
-            Vector3 toPlayer = playerPosition - position;
-            if (Physics.Raycast(position, toPlayer.normalized, out var hit, visionCollider.radius) && hit.collider.CompareTag(Tags.Player))
+            if (HasPlayerLineOfSight())
             {
                 _state = State.Attacking;
-                agent.destination = player.transform.position;
             }
-            
             // Otherwise, keep going to last seen location
             else
             {
@@ -106,16 +117,18 @@ public class Enemy : MonoBehaviour, IEnemy
             Mathf.Cos((90.0f - visionAngle) * Mathf.Deg2Rad), 0,
             Mathf.Sin((90.0f - visionAngle) * Mathf.Deg2Rad));
         var position = transform.position;
-        Gizmos.DrawLine(position, position + first);
-        Gizmos.DrawLine(position, position + second);
+        Gizmos.DrawLine(position, transform.TransformPoint(first));
+        Gizmos.DrawLine(position, transform.TransformPoint(second));
     }
 
     void Update()
     {
-        // Enemy reached destination 
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        // Enemy lost track of player
+        if (_state == State.Searching && agent.remainingDistance <= agent.stoppingDistance && !HasPlayerLineOfSight())
+        {
             _state = State.Patrolling;
-        
+        }
+
         // Do movement update logic
         MoveEnemy();
     }
@@ -126,14 +139,68 @@ public class Enemy : MonoBehaviour, IEnemy
 
     private void MoveEnemy()
     {
+        switch (_state)
+        {
+            case State.Attacking:
+            {
+                // Run to player & attack them if in range
+                agent.speed = runSpeed;
+                Vector3 player = _player.transform.position;
+                Vector3 toPlayerNormalized = (player - transform.position).normalized;
+                agent.destination = player - minAttackRange * toPlayerNormalized;
+                if (!IsAttacking && agent.remainingDistance <= maxAttackRange - minAttackRange)
+                {
+                    PerformAttack();
+                }
+                
+                // Rotate to face player when arrived
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    FacePlayer();
+                }
+                break;
+            }
+
+            case State.Patrolling:
+            {
+                // Go to next position in patrol route if arrived
+                agent.speed = patrolSpeed;
+                if (agent.remainingDistance < 0.5f && patrolRoute.Length > 0)
+                {
+                    agent.destination = patrolRoute[_nextPatrolIndex].position;
+                    _nextPatrolIndex = (_nextPatrolIndex + 1) % patrolRoute.Length;
+                }
+                break;
+            }
+
+            case State.Searching:
+            {
+                break;
+            }
+        }
+
         // Update animator
         animator.SetFloat(EnemyAnimator.Speed, agent.velocity.magnitude);
-        if (!IsAttacking && _state == State.Attacking && agent.remainingDistance < attackRange)
-        {
-            PerformAttack();
-        }
+    }
+
+    private bool HasPlayerLineOfSight()
+    {
+        var position = transform.position;
+        position.y = agent.height / 2.0f;
+        var playerPosition = _player.transform.position;
+        playerPosition.y = position.y;
+        Vector3 toPlayer = playerPosition - position;
+        return toPlayer.magnitude <= _player.height / 2 || Physics.Raycast(position, toPlayer.normalized, out var hit, visionCollider.radius) && hit.collider.CompareTag(Tags.Player);
     }
     
+    private void FacePlayer()
+    {
+        Vector3 lookPos = _player.transform.position - transform.position;
+        lookPos.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 3.0f * Time.deltaTime);  
+    }
+
     #endregion
     
     #region Public Methods
