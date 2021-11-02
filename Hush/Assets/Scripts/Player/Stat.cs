@@ -39,8 +39,6 @@ public class Stat
             totalBonuses = bonus.value;
         }
 
-        Debug.Log("Bonus: " + totalBonuses);
-        
         return BaseValue + totalBonuses;
     }
 }

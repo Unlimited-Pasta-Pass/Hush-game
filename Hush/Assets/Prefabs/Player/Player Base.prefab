@@ -5277,10 +5277,12 @@ GameObject:
   - component: {fileID: 5600300516197474806}
   - component: {fileID: 1288701180965618592}
   - component: {fileID: 4040321500388322195}
-  - component: {fileID: 6645072715859601266}
-  - component: {fileID: 8138655829200125369}
-  - component: {fileID: 5684130289085633913}
   - component: {fileID: 5076025907412216654}
+  - component: {fileID: 8887322444545033465}
+  - component: {fileID: 8776228946377483993}
+  - component: {fileID: 326534140489386116}
+  - component: {fileID: 1541592741937186633}
+  - component: {fileID: 2115969719432915281}
   m_Layer: 0
   m_Name: Player Base
   m_TagString: Player
@@ -5518,6 +5520,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0d2b18c4-626c-4c25-9aff-a0bb96004bd5
     m_ActionName: Player/Reveal[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8e42c219-d1df-43f6-93f2-9709da6a79ec
+    m_ActionName: Player/SwitchWeapon[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5544,6 +5550,7 @@ MonoBehaviour:
   interact: 0
   walk: 0
   reveal: 0
+  switchWeapon: 0
   reference: {fileID: 5600300516197474806}
 --- !u!114 &4040321500388322195
 MonoBehaviour:
@@ -5581,6 +5588,77 @@ MonoBehaviour:
   revealDelay: 7
   effect: {fileID: 5040104228952544538}
   input: {fileID: 1288701180965618592}
+--- !u!135 &8887322444545033465
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!54 &8776228946377483993
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &326534140489386116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c3b61c33863e0468649a90259d9b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  critChance: 0.1
+  input: {fileID: 1288701180965618592}
+  sword: {fileID: 1541592741937186633}
+  spell: {fileID: 2115969719432915281}
+--- !u!114 &1541592741937186633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bdd02eaa4730848a13d16293ee38de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+--- !u!114 &2115969719432915281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!95 &8205350870087033752
 Animator:
   serializedVersion: 3
