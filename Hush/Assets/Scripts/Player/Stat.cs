@@ -5,7 +5,6 @@ using Enums;
 
 public class Stat
 {
-    //public enum StatType { Strength , SpellPower }
     public StatType Type { get; set; }
     public List<int> Bonuses = new List<int>();
     public int BaseValue { get; set; }
