@@ -3,12 +3,11 @@ using UnityEngine;
 public class DoorManager : MonoBehaviour
 {
     private bool isDoorOpen; // TODO: modify this value when the door operning conditionals are met
-    [SerializeField] private GameObject TextUI;
-    private Animator TextDoorAnimator;
+    [SerializeField] private GameObject wall;
 
     void Start()
     {
-        TextDoorAnimator = gameObject.GetComponentInChildren<Animator>();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -21,8 +20,7 @@ public class DoorManager : MonoBehaviour
             if (!engagedInCombat && hasRelic)
             {
                 isDoorOpen = true;
-                TextDoorAnimator.SetBool("DoorIsOpen", isDoorOpen);
-                TextDoorAnimator.SetFloat("direction", 1.0f);
+                wall.SetActive(false);
             }
         }
     }
@@ -37,8 +35,7 @@ public class DoorManager : MonoBehaviour
             if (!engagedInCombat && hasRelic)
             {
                 isDoorOpen = false;
-                TextDoorAnimator.SetBool("DoorIsOpen", isDoorOpen);
-                TextDoorAnimator.SetFloat("direction", -1.0f); // reverse animation
+                wall.SetActive(true);
             }
         }
     }
