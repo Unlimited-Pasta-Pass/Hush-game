@@ -1,5 +1,4 @@
-
-using Common;
+﻿using Common;
 using UnityEngine;
 
 namespace Enemies
@@ -9,8 +8,8 @@ namespace Enemies
     {
         #region Parameters
 
-        [Header("References")]
-        [SerializeField] private Enemy enemy;
+        [Header("References")] [SerializeField]
+        private Enemy enemy;
 
         #endregion
 
@@ -42,7 +41,7 @@ namespace Enemies
         public int BonusDamage { get; set; }
 
         #endregion
-        
+
         #region Public Methods
 
         public void PerformAttack(int damage)

@@ -14,14 +14,15 @@ public class Spell : MonoBehaviour, IWeapon
 
     public int CurrentDamage { get; set; }
     [SerializeField] private int bonusDamage = 5;
-    public int BonusDamage 
+
+    public int BonusDamage
     {
-        get => bonusDamage; 
+        get => bonusDamage;
         set => bonusDamage = value;
     }
 
     private const int SPECIAL_DAMAGE = 50;
-    
+
     public void PerformAttack(int damage)
     {
         animator.SetTrigger(PlayerAnimator.SpellAttack);

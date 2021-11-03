@@ -18,16 +18,16 @@ public class PlayerWeaponController : MonoBehaviour
     {
         equippedWeapon = sword;
         characterStats = new CharacterStats(10, 10);
-        
+
         // add any bonuses related to specific weapons
-        characterStats.AddBonus( StatType.Strength , sword.BonusDamage);
-        characterStats.AddBonus( StatType.SpellPower , spell.BonusDamage);
+        characterStats.AddBonus(StatType.Strength, sword.BonusDamage);
+        characterStats.AddBonus(StatType.SpellPower, spell.BonusDamage);
     }
 
     void OnEnable()
     {
         // TODO update to use enum after merge
-        input.reference.actions[Actions.LightAttack].performed += PerformWeaponAttack; 
+        input.reference.actions[Actions.LightAttack].performed += PerformWeaponAttack;
         input.reference.actions[Actions.HeavyAttack].performed += PerformWeaponSpecialAttack;
         input.reference.actions[Actions.SwitchWeapon].performed += SwitchWeapon;
     }
@@ -41,6 +41,7 @@ public class PlayerWeaponController : MonoBehaviour
     {
         equippedWeapon.PerformAttack(CalculateDamage());
     }
+
     public void PerformWeaponSpecialAttack(InputAction.CallbackContext callbackContext)
     {
         equippedWeapon.PerformSpecialAttack();
@@ -51,9 +52,9 @@ public class PlayerWeaponController : MonoBehaviour
         StatType type = (equippedWeapon.Name == sword.name) ? StatType.Strength : StatType.SpellPower;
         int damageToDeal = (characterStats.GetStat(type).GetCalculatedStatValue() * 2);
         damageToDeal += CalculateCrit(damageToDeal);
-        
+
         //TODO damage ui?
-        
+
         return damageToDeal;
     }
 
@@ -61,9 +62,10 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (Random.value <= critChance)
         {
-            int critDamage = (int)(damage * Random.Range(.5f, .75f));
+            int critDamage = (int) (damage * Random.Range(.5f, .75f));
             return critDamage;
         }
+
         return 0;
     }
 }
