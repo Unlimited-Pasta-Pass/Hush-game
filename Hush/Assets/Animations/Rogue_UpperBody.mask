@@ -18,23 +18,23 @@ AvatarMask:
   - m_Path: CharacterArmature/Root/Body
     m_Weight: 0
   - m_Path: CharacterArmature/Root/Body/Hips
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Belt
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Pouch
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Torso
     m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Torso/Neck
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Torso/Neck/Head
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Torso/Neck/Head/Face
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Torso/Neck/Head/Head_end
-    m_Weight: 0
+    m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Torso/Shoulder.L
     m_Weight: 1
   - m_Path: CharacterArmature/Root/Body/Hips/Abdomen/Torso/Shoulder.L/UpperArm.L
@@ -86,34 +86,34 @@ AvatarMask:
   - m_Path: CharacterArmature/Root/Body/UpperLeg.L
     m_Weight: 0
   - m_Path: CharacterArmature/Root/Body/UpperLeg.L/LowerLeg.L
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/Body/UpperLeg.L/LowerLeg.L/LowerLeg.L_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/Body/UpperLeg.R
     m_Weight: 0
   - m_Path: CharacterArmature/Root/Body/UpperLeg.R/LowerLeg.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/Body/UpperLeg.R/LowerLeg.R/LowerLeg.R_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/Foot.L
     m_Weight: 0
   - m_Path: CharacterArmature/Root/Foot.L/Foot.L_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/Foot.L/Shoelace.L
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/Foot.R
     m_Weight: 0
   - m_Path: CharacterArmature/Root/Foot.R/Foot.R_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/Foot.R/Shoelace.R
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/PoleTarget.L
     m_Weight: 0
   - m_Path: CharacterArmature/Root/PoleTarget.L/PoleTarget.L_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: CharacterArmature/Root/PoleTarget.R
     m_Weight: 0
   - m_Path: CharacterArmature/Root/PoleTarget.R/PoleTarget.R_end
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Rogue
     m_Weight: 0
