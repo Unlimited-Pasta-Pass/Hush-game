@@ -28,14 +28,8 @@ public class GameMaster : MonoBehaviour
     void Start()
     {
         if (gm == null) {
-			gm = GameObject.FindGameObjectWithTag ("GM").GetComponent<GameMaster>();
-		}
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+            gm = GameObject.FindGameObjectWithTag ("GM").GetComponent<GameMaster>();
+        }
     }
 
     public static void KeyCollect (Key key) {
