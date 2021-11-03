@@ -8,7 +8,7 @@ namespace Enemies
         #region Parameters
 
         [Header("Parameters")]
-        [SerializeField] private int damage = 20;
+        [SerializeField] private int damage = 10;
         
         [Header("References")]
         [SerializeField] private Enemy enemy;

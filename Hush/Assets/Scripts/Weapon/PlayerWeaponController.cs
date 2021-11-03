@@ -17,7 +17,7 @@ public class PlayerWeaponController : MonoBehaviour
     void Start()
     {
         equippedWeapon = sword;
-        characterStats = new CharacterStats(10, 10);
+        characterStats = new CharacterStats(25, 10);
 
         // add any bonuses related to specific weapons
         characterStats.AddBonus(StatType.Strength, sword.BonusDamage);

@@ -36,7 +36,8 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         Patrolling,
         Searching,
-        Attacking
+        Attacking,
+        Dead
     }
 
     private CharacterController _player;
@@ -86,30 +87,6 @@ public class Enemy : MonoBehaviour, IEnemy
     private void Start()
     {
         _player = GameObject.FindWithTag(Tags.Player).GetComponent<CharacterController>();
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        // Only trigger on player
-        if (!other.CompareTag(Tags.Player))
-            return;
-
-        // Test player in enemy vision range
-        var player = other.gameObject;
-        var playerDir = transform.InverseTransformPoint(player.transform.position).normalized;
-        if (_state != State.Patrolling || Vector3.Angle(playerDir, Vector3.forward) < visionAngle)
-        {
-            // If we have line of sight, keep following player
-            if (HasPlayerLineOfSight())
-            {
-                _state = State.Attacking;
-            }
-            // Otherwise, keep going to last seen location
-            else
-            {
-                _state = State.Searching;
-            }
-        }
     }
 
     void OnDrawGizmos()
@@ -183,6 +160,16 @@ public class Enemy : MonoBehaviour, IEnemy
             {
                 break;
             }
+
+            case State.Dead:
+            {
+                var stateInfo = animator.GetCurrentAnimatorStateInfo(EnemyAnimator.Layer.Base);
+                if (stateInfo.IsName(EnemyAnimator.State.Dead) && stateInfo.normalizedTime >= 0.99f)
+                {
+                    Despawn();
+                }
+                break;
+            }
         }
 
         // Update animator
@@ -207,14 +194,19 @@ public class Enemy : MonoBehaviour, IEnemy
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 4.0f * Time.deltaTime);  
     }
 
+    private void Despawn()
+    {
+        Destroy(gameObject);
+    }
+
     #endregion
     
     #region Public Methods
     
     public void Die()
     {
-        // TODO: Add death animation
-        Destroy(gameObject);
+        _state = State.Dead;
+        animator.SetBool(EnemyAnimator.Dead, true);
     }
 
     public void TakeDamage(int amount)
@@ -228,6 +220,30 @@ public class Enemy : MonoBehaviour, IEnemy
     public void PerformAttack()
     {
         animator.SetTrigger(EnemyAnimator.BaseAttack);
+    }
+
+    public void OnVisionTrigger(Collider other)
+    {
+        // Only trigger on player
+        if (!other.CompareTag(Tags.Player))
+            return;
+
+        // Test player in enemy vision range
+        var player = other.gameObject;
+        var playerDir = transform.InverseTransformPoint(player.transform.position).normalized;
+        if (_state != State.Dead && (_state != State.Patrolling || Vector3.Angle(playerDir, Vector3.forward) < visionAngle))
+        {
+            // If we have line of sight, keep following player
+            if (HasPlayerLineOfSight())
+            {
+                _state = State.Attacking;
+            }
+            // Otherwise, keep going to last seen location
+            else
+            {
+                _state = State.Searching;
+            }
+        }
     }
 
     #endregion

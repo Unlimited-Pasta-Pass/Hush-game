@@ -104,8 +104,9 @@ namespace StarterAssets
         public void Die()
         {
             animator.SetBool(PlayerAnimator.Dead, true);
-            Debug.Log("MISS KEISHA! MISS KEISHA! OMFG SHE FKN DEAD!");
-            // TODO: Disable input
+            var playerInput = GetComponent<PlayerInput>();
+            if (playerInput)
+                playerInput.enabled = false;
         }
         
     }
