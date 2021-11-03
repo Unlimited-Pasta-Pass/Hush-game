@@ -214,7 +214,10 @@ public class Enemy : MonoBehaviour, IEnemy
         // TODO: Add animation
         hitPoints -= amount;
         if (hitPoints <= 0)
+        {
+            hitPoints = 0;
             Die();
+        }
     }
 
     public void PerformAttack()
