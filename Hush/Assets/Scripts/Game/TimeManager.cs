@@ -7,8 +7,6 @@ public class TimeManager : MonoBehaviour
     private bool mGameIsPaused;
 
     private float mPrevTimeScale;
-    private float mPrevDeltaTime = 0f;
-
 
     private void Awake()
     {
