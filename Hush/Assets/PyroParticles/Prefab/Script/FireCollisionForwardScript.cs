@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Common;
 
 namespace DigitalRuby.PyroParticles
 {
@@ -20,6 +21,12 @@ namespace DigitalRuby.PyroParticles
 
         public void OnCollisionEnter(Collision col)
         {
+            Debug.Log(col.gameObject.name);
+            if (col.gameObject.CompareTag(Tags.Player) || col.gameObject.CompareTag(Tags.Ground) )
+            {
+                return;
+            }
+            
             CollisionHandler.HandleCollision(gameObject, col);
         }
     }

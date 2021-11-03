@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 namespace DigitalRuby.PyroParticles
 {
     /// <summary>
@@ -16,6 +17,7 @@ namespace DigitalRuby.PyroParticles
     public class FireProjectileScript : FireBaseScript, ICollisionHandler
     {
         public Transform ShootPosition;
+        public int Damage;
         
         [Tooltip("The collider object to use for collision and physics.")]
         public GameObject ProjectileColliderObject;
@@ -94,6 +96,14 @@ namespace DigitalRuby.PyroParticles
             {
                 ProjectileCollisionSound.Play();
             }
+
+            IEnemy enemy = c.gameObject.GetComponent<IEnemy>();
+            if(enemy != null)
+            {
+                enemy.TakeDamage(Damage);
+            }
+
+           
 
             // if we have contacts, play the collision particle system and call the delegate
             if (c.contacts.Length != 0)
