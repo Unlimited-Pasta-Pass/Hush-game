@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 
-public class Key : MonoBehaviour
+public class Relic : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == Tags.Player) {
+        if (collider.gameObject.tag == Tags.Player && GameMaster.HasRelic == false) {
             gameObject.SetActive(false);
             //Destroy (gameObject);
-            GameMaster.KeyCollect (this);
+            GameMaster.RelicCollect (this);
         }
     }
 }
