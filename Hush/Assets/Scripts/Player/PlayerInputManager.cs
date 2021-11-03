@@ -16,6 +16,7 @@ public class PlayerInputManager : MonoBehaviour
 	public bool interact;
 	public bool walk;
 	public bool reveal;
+	public bool switchWeapon;
 
 	[Header("References")] 
 	public PlayerInput reference;
@@ -70,6 +71,11 @@ public class PlayerInputManager : MonoBehaviour
 	public void OnReveal(CallbackContext context)
 	{
 		reveal = context.ReadValueAsButton();
+	}
+	
+	public void OnSwitchWeapon(CallbackContext context)
+	{
+		switchWeapon = context.ReadValueAsButton();
 	}
 	
 	#endregion

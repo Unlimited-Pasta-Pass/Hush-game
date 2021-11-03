@@ -1,4 +1,5 @@
-﻿using Enums;
+﻿using Common;
+using Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,9 +7,12 @@ namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInput))]
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovementController : MonoBehaviour, IKillable
     {
         #region Parameters
+
+        [Tooltip("Amount of damage the player can receive before dying")] 
+        [SerializeField] private int hitPoints = 100;
 
         [Tooltip("Move speed of the character in m/s")]
         [SerializeField] private float walkSpeed = 2f;
@@ -20,7 +24,7 @@ namespace StarterAssets
         [SerializeField] private float sprintSpeed = 6f;
 
         [Tooltip("Acceleration and deceleration")]
-        [SerializeField] public float speedChangeRate = 10.0f;
+        [SerializeField] private float speedChangeRate = 10.0f;
 
         [Header("Component References")] 
         [SerializeField] private Animator animator;
@@ -29,6 +33,21 @@ namespace StarterAssets
 
         #endregion
 
+        #region Public Variables
+
+        public int HitPoints
+        {
+            get => hitPoints; 
+            set
+            {
+                hitPoints = value;
+                if (hitPoints <= 0)
+                    Die();
+            }
+        }
+
+        #endregion
+        
         private float _playerSpeed;
         private Quaternion _playerRotation;
 
@@ -73,5 +92,22 @@ namespace StarterAssets
                 transform.rotation = _playerRotation;
             }
         }
+        
+        public void TakeDamage(int damage)
+        {
+            // TODO: Add animation
+            hitPoints -= damage;
+            if (hitPoints <= 0)
+                Die();
+        }
+
+        public void Die()
+        {
+            animator.SetBool(PlayerAnimator.Dead, true);
+            var playerInput = GetComponent<PlayerInput>();
+            if (playerInput)
+                playerInput.enabled = false;
+        }
+        
     }
 }
