@@ -18,11 +18,11 @@ public class PlayerInputManager : MonoBehaviour
 	public bool reveal;
 	public bool switchWeapon;
 
-	[Header("References")] 
-	public PlayerInput reference;
-
 	[Header("Door Interactions")]
 	public bool isInCombat;
+	
+	[Header("References")] 
+	public PlayerInput reference;
 
 	private void Start()
 	{

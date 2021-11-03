@@ -2,13 +2,9 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour
 {
-    private bool isDoorOpen; // TODO: modify this value when the door operning conditionals are met
     [SerializeField] private GameObject wall;
 
-    void Start()
-    {
-
-    }
+    private bool isDoorOpen; // TODO: modify this value when the door operning conditionals are met
 
     private void OnTriggerEnter(Collider other)
     {
