@@ -3,11 +3,13 @@ using UnityEngine;
 
 namespace Enemies
 {
-    // TODO: PerformAttack() and PerformSpecialAttack() dont really apply to the weapon because they require animations from the character
     public class EnemySword : MonoBehaviour, IWeapon
     {
         #region Parameters
 
+        [Header("Parameters")]
+        [SerializeField] private int damage = 10;
+        
         [Header("References")]
         [SerializeField] private Enemy enemy;
 
@@ -24,7 +26,7 @@ namespace Enemies
         {
             if (enemy.IsAttacking && other.CompareTag(Tags.Player))
             {
-                // TODO: Damage player
+                other.GetComponent<IKillable>()?.TakeDamage(damage);
             }
         }
 
@@ -34,14 +36,14 @@ namespace Enemies
 
         public string WeaponType => "EnemySword";
 
-        public int CurrentDamage { get; set; }
+        public int CurrentDamage { get => damage; set => damage = value; }
         public int BonusDamage { get; set; }
 
         #endregion
 
         #region Public Methods
 
-        public void PerformAttack(int damage)
+        public void PerformAttack(int attackDamage)
         {
             enemy.PerformAttack();
         }
