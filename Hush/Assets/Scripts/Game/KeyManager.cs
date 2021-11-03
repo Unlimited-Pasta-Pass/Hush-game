@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Keys;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -17,7 +19,7 @@ namespace Game
         {
             FindKeySpawners();
 
-            for (var i = 0; i < numberOfKeysToSpawn; i++)
+            for (var i = 0; i < Math.Min(numberOfKeysToSpawn, _keySpawners.Length); i++)
             {
                 SpawnKey();
             }
