@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class KeyCounterUI : MonoBehaviour
 {
@@ -8,7 +7,7 @@ public class KeyCounterUI : MonoBehaviour
 
     void Update()
     {
-        keyCountText.text = "Keys: " + GameMaster.keysInPossession.ToString();
+        keyCountText.text = "Keys: " + GameMaster.keysInPossession;
     }
 }
 
