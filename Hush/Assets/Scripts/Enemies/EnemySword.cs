@@ -8,8 +8,8 @@ namespace Enemies
     {
         #region Parameters
 
-        [Header("References")] [SerializeField]
-        private Enemy enemy;
+        [Header("References")]
+        [SerializeField] private Enemy enemy;
 
         #endregion
 
@@ -32,10 +32,7 @@ namespace Enemies
 
         #region Public Variables
 
-        public string WeaponType
-        {
-            get => "EnemySword";
-        }
+        public string WeaponType => "EnemySword";
 
         public int CurrentDamage { get; set; }
         public int BonusDamage { get; set; }

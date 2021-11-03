@@ -7,10 +7,7 @@ public class Sword : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
 
-    public string WeaponType
-    {
-        get => "Sword";
-    }
+    public string WeaponType => "Sword";
 
     public int CurrentDamage { get; set; }
 
