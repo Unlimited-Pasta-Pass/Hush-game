@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6707031432028669574}
   - component: {fileID: 6707031432028669573}
   - component: {fileID: 6707031432028669572}
-  - component: {fileID: 6707031432028669624}
+  - component: {fileID: 4386709540114488247}
   m_Layer: 0
   m_Name: Relic
   m_TagString: Untagged
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6707031432028669624
+--- !u!114 &4386709540114488247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,6 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6707031432028669571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f5bfe44e3394a74d94b8113ab6f5b35, type: 3}
+  m_Script: {fileID: 11500000, guid: d5cb0f541560b1d4a80089c41c82cb14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

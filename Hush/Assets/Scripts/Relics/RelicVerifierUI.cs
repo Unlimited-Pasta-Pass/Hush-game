@@ -15,6 +15,6 @@ public class RelicVerifierUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RelicVerifierText.text = "Relic: " + (GameMaster.HasRelic ? "Yes" : "No");
+        RelicVerifierText.text = "Relic: " + (GameMaster.playerHasRelic ? "Yes" : "No");
     }
 }

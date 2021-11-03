@@ -8,7 +8,7 @@ public class RelicDome : MonoBehaviour
     public int keysNeededToUnlock = 0;
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.CompareTag(Tags.Player) && GameMaster.NumOfKeys == keysNeededToUnlock) {
+        if (collider.gameObject.CompareTag(Tags.Player) && GameMaster.keysInPossession == keysNeededToUnlock) {
             gameObject.SetActive(false);
             GameMaster.ResetKeys();
         }
