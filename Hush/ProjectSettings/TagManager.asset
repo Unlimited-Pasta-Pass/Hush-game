@@ -8,6 +8,8 @@ TagManager:
   - Key Spawner
   - Key
   - Enemy
+  - EnemySpawnPoint
+  - Relic
   layers:
   - Default
   - TransparentFX
