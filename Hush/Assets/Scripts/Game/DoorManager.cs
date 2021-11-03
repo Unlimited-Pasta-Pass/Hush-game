@@ -1,3 +1,4 @@
+using Common;
 using UnityEngine;
 
 public class DoorManager : MonoBehaviour
@@ -8,12 +9,9 @@ public class DoorManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag(Tags.Player))
         {
-            bool engagedInCombat = other.gameObject.GetComponent<PlayerInputManager>().isInCombat;
-            bool hasRelic = other.gameObject.GetComponent<PlayerPossessions>().possessesRelic;
-
-            if (!engagedInCombat && hasRelic)
+            if (!GameState.instance.playerEngagedInCombat && GameState.instance.playerHasRelic)
             {
                 isDoorOpen = true;
                 wall.SetActive(false);
@@ -23,12 +21,9 @@ public class DoorManager : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag(Tags.Player))
         {
-            bool engagedInCombat = other.gameObject.GetComponent<PlayerInputManager>().isInCombat;
-            bool hasRelic = other.gameObject.GetComponent<PlayerPossessions>().possessesRelic;
-
-            if (!engagedInCombat && hasRelic)
+            if (!GameState.instance.playerEngagedInCombat && GameState.instance.playerHasRelic)
             {
                 isDoorOpen = false;
                 wall.SetActive(true);
