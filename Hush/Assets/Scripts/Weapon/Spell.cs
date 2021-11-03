@@ -7,7 +7,6 @@ using DigitalRuby.PyroParticles;
 public class Spell : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private int spellLifetime = 5;
     [SerializeField] private GameObject spellPrefab;
 	[SerializeField] private GameObject shootPosition;
 
