@@ -24,6 +24,19 @@ public class GameMaster : MonoBehaviour
     {
         keysInPossession += 1;
     }
+    public static void ResetKeys () {
+        keysInPossession = 0;
+    }
+
+    public static void RelicCollect () {
+        if (!playerHasRelic) {
+            playerHasRelic = true;
+            Debug.Log("Player has 1 relic");
+        }
+        else {
+            Debug.Log("Player cannot have more than 1 relic");
+        }
+    }
 
     public static void IsEngagedInCombat(bool inCombat)
     {
