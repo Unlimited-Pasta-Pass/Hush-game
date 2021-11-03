@@ -13,6 +13,7 @@ public class GameMaster : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        enemiesAttacking = new HashSet<int>();
     }
     
     void Start()
