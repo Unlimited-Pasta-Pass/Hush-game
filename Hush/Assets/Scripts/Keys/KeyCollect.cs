@@ -14,7 +14,7 @@ public class KeyCollect : MonoBehaviour
     public static int keys = 0;
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.name == "Player") {
+        if (collider.gameObject.tag == "Player") {
             numOfKeys += 1;
             gameObject.SetActive(false);
             //Destroy (gameObject);
