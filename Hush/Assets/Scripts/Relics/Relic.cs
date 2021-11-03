@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Common;
 
-public class Key : MonoBehaviour
+public class Relic : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.CompareTag(Tags.Player)) {
-            GameMaster.CollectKey();
+            GameMaster.RelicCollect ();
             gameObject.SetActive(false);
         }
     }

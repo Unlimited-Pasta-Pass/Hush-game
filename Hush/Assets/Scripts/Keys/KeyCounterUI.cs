@@ -1,17 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
-[RequireComponent(typeof(Text))]
 public class KeyCounterUI : MonoBehaviour
 {
-    private Text keyCountText;
-
-    void Awake () {
-        keyCountText = GetComponent<Text>();
-    }
-
+    [SerializeField] private TextMeshProUGUI keyCountText;
+    
     void Update()
     {
-        keyCountText.text = "Keys: " + GameMaster.keysInPossession.ToString();
+        keyCountText.text = "Keys: " + GameMaster.keysInPossession;
     }
 }
