@@ -31,8 +31,8 @@ public class GameMaster : MonoBehaviour
         keyCountUI.SetKeySpriteVisibility(keysInPossession > 0);
         keyCountUI.UpdateKeyCounter();
     }
-    public static void ResetKeys () {
-        keysInPossession = 0;
+    public static void ResetKeys (int leftoverKeys) {
+        keysInPossession = leftoverKeys;
     }
 
     public static void RelicCollect () {

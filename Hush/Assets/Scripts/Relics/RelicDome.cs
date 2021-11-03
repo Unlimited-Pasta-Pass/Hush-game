@@ -24,9 +24,12 @@ public class RelicDome : MonoBehaviour, IKillable
     }
 
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.CompareTag(Tags.Player) && GameMaster.keysInPossession == keysNeededToUnlock) {
+        
+        if (collider.gameObject.CompareTag(Tags.Player) && GameMaster.keysInPossession >= keysNeededToUnlock) {
+
             gameObject.SetActive(false);
-            GameMaster.ResetKeys();
+            
+            GameMaster.ResetKeys(GameMaster.keysInPossession -keysNeededToUnlock);
         }
     }
     public void OpenDome() {
