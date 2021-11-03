@@ -20,7 +20,7 @@ namespace StarterAssets
         [SerializeField] private float sprintSpeed = 6f;
 
         [Tooltip("Acceleration and deceleration")]
-        [SerializeField] public float speedChangeRate = 10.0f;
+        [SerializeField] private float speedChangeRate = 10.0f;
 
         [Header("Component References")] 
         [SerializeField] private Animator animator;

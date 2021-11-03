@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace LOS
@@ -39,12 +40,12 @@ namespace LOS
 
         private void OnEnable()
         {
-            enabled &= Util.Verify(GetComponent<Renderer>() != null, "No renderer attached to this GameObject! LOS Culler component must be added to a GameObject containing a MeshRenderer or Skinned Mesh Renderer!");
+            enabled &= Util.Verify(GetComponent<Renderer>() != null || GetComponentsInChildren<Renderer>().Length > 0, "No renderer attached to this GameObject! LOS Culler component must be added to a GameObject containing a MeshRenderer or Skinned Mesh Renderer!");
         }
 
         private void Update()
         {
-            m_IsVisible = CustomCull(gameObject.GetComponent<Renderer>().bounds, m_RaycastLayerMask.value);
+            m_IsVisible = GetVisibility();
         }
 
         #endregion MonoBehaviour Functions
@@ -71,6 +72,16 @@ namespace LOS
             }
 
             return false;
+        }
+        
+        private bool GetVisibility()
+        {
+            var parentRenderer = GetComponent<Renderer>();
+            if (parentRenderer != null)
+                return CustomCull(gameObject.GetComponent<Renderer>().bounds, m_RaycastLayerMask.value);
+            
+            var childrenRender = GetComponentsInChildren<Renderer>();
+            return childrenRender.Length <= 0 || childrenRender.All(childRenderer => CustomCull(childRenderer.bounds, m_RaycastLayerMask.value));
         }
 
         #endregion Private Functions
