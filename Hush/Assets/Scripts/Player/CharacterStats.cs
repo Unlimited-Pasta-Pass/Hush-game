@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Enums;
 
 public class CharacterStats
 {
@@ -8,18 +9,18 @@ public class CharacterStats
     public CharacterStats(int strength, int spellPower)
     {
         stats = new List<Stat>() {
-            new Stat(Stat.StatType.Strength, strength, "Strength"),
-            new Stat(Stat.StatType.SpellPower, spellPower, "Spell Power")
+            new Stat(StatType.Strength, strength, "Strength"),
+            new Stat(StatType.SpellPower, spellPower, "Spell Power")
         };
     }
 
-    public Stat GetStat(Stat.StatType stat)
+    public Stat GetStat(StatType stat)
     {
         return this.stats.Find(x => x.Type == stat);
     }
 
-	public void AddBonus(Stat.StatType type, int value)
+	public void AddBonus(StatType type, int value)
 	{
-		GetStat(type).AddBonus(new StatBonus(value));
+		GetStat(type).AddBonus(value);
 	}
 }

@@ -11,15 +11,24 @@ public class Spell : MonoBehaviour, IWeapon
     [SerializeField] private GameObject spellPrefab;
 	[SerializeField] private GameObject shootPosition;
 
-    public int CurrentDamage { get; set; }
     public int BonusDamage { get; set; }
 
     private const int SPECIAL_DAMAGE = 50;
     
     void Awake()
+
+    public string WeaponType => "Spell";
+
+    public int CurrentDamage { get; set; }
+    [SerializeField] private int bonusDamage = 5;
+
+    public int BonusDamage
     {
-        BonusDamage = 5;
+        get => bonusDamage;
+        set => bonusDamage = value;
     }
+
+    private const int SPECIAL_DAMAGE = 50;
 
     public void PerformAttack(int damage)
     {
