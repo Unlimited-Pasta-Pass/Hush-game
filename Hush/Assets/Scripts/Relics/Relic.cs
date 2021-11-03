@@ -6,10 +6,9 @@ using Common;
 public class Relic : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == Tags.Player && GameMaster.HasRelic == false) {
+        if (collider.gameObject.CompareTag(Tags.Player)) {
+            GameMaster.RelicCollect ();
             gameObject.SetActive(false);
-            //Destroy (gameObject);
-            GameMaster.RelicCollect (this);
         }
     }
 }

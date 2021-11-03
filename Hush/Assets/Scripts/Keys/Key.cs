@@ -6,10 +6,9 @@ using Common;
 public class Key : MonoBehaviour
 {
     void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.tag == Tags.Player) {
-            gameObject.SetActive(false);
-            //Destroy (gameObject);
+        if (collider.gameObject.CompareTag(Tags.Player)) {
             GameMaster.KeyCollect (this);
+            gameObject.SetActive(false);
         }
     }
 }

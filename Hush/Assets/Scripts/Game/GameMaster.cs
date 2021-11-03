@@ -29,7 +29,7 @@ public class GameMaster : MonoBehaviour
         numOfKeys = 0;
     }
 
-    public static void RelicCollect (Relic relic) {
+    public static void RelicCollect () {
         if (!hasRelic) {
             hasRelic = true;
             Debug.Log("Player has 1 relic");

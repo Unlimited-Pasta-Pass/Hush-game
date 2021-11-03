@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(TMP_Text))]
 public class RelicVerifierUI : MonoBehaviour
 {
-    private Text RelicVerifierText;
+    private TMP_Text RelicVerifierText;
 
     void Awake () {
-        RelicVerifierText = GetComponent<Text>();
+        RelicVerifierText = GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
