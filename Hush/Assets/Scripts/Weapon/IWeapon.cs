@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 
-public interface IWeapon {
+public interface IWeapon
+{
+    string Name { get; }
     int CurrentDamage { get; set; }
     int BonusDamage { get; set; }
 

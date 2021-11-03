@@ -1,4 +1,4 @@
-﻿
+
 using Common;
 using UnityEngine;
 
@@ -32,6 +32,11 @@ namespace Enemies
         #endregion
 
         #region Public Variables
+
+        public string Name
+        {
+            get => "EnemySword";
+        }
 
         public int CurrentDamage { get; set; }
         public int BonusDamage { get; set; }

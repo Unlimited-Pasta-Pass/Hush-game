@@ -6,6 +6,12 @@ using Enums;
 public class Spell : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
+
+    public string Name
+    {
+        get => "Spell";
+    }
+
     public int CurrentDamage { get; set; }
     [SerializeField] private int bonusDamage = 5;
     public int BonusDamage 
