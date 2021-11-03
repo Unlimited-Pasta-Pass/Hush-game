@@ -46,25 +46,21 @@ public class PlayerInputManager : MonoBehaviour
 	public void OnLightAttack(CallbackContext context)
 	{
 		lightAttack = context.ReadValueAsButton();
-		GameMaster.IsEngagedInCombat(context.ReadValueAsButton());
 	}
 
 	public void OnHeavyAttack(CallbackContext context)
 	{
 		heavyAttack = context.ReadValueAsButton();
-		GameMaster.IsEngagedInCombat(context.ReadValueAsButton());
 	}
 
 	public void OnSpecialAttack(CallbackContext context)
 	{
 		specialAttack = context.ReadValueAsButton();
-		GameMaster.IsEngagedInCombat(context.ReadValueAsButton());
 	}
 
 	public void OnInteract(CallbackContext context)
 	{
 		interact = context.ReadValueAsButton();
-		GameMaster.IsEngagedInCombat(context.ReadValueAsButton());
 	}
 
 	public void OnWalk(CallbackContext context)
