@@ -1,5 +1,4 @@
-﻿
-using Common;
+﻿using Common;
 using UnityEngine;
 
 namespace Enemies
@@ -33,11 +32,13 @@ namespace Enemies
 
         #region Public Variables
 
+        public string WeaponType => "EnemySword";
+
         public int CurrentDamage { get; set; }
         public int BonusDamage { get; set; }
 
         #endregion
-        
+
         #region Public Methods
 
         public void PerformAttack(int damage)

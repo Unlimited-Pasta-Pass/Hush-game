@@ -6,17 +6,21 @@ using Enums;
 public class Sword : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
+
+    public string WeaponType => "Sword";
+
     public int CurrentDamage { get; set; }
-    
+
     [SerializeField] private int bonusDamage = 5;
-    public int BonusDamage 
+
+    public int BonusDamage
     {
-        get => bonusDamage; 
+        get => bonusDamage;
         set => bonusDamage = value;
     }
-    
+
     private const int SPECIAL_DAMAGE = 100;
-    
+
     public void PerformAttack(int damage)
     {
         animator.SetTrigger(PlayerAnimator.LightAttack);
