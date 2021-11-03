@@ -3,16 +3,14 @@ using Common;
 using UnityEngine;
 using UnityEngine.AI;
 
-// TODO: Hide an enemy with LOS plugin, it seems to not support hiding meshes on children game objects.
-// We can hide the meshes individually, but it looks weird as each mesh uses its own extent to determine when to hide.
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IEnemy
 {
     #region Parameters
 
     [Header("Parameters")]
-    [SerializeField] private int hitPoints = 100;
     [SerializeField] private float visionAngle = 70.0f;
+    [SerializeField] private int hitPoints = 100;
 
     [Header("Attack")]
     [SerializeField] private float minAttackRange = 0.5f;
@@ -49,14 +47,22 @@ public class Enemy : MonoBehaviour, IEnemy
 
     #region Public Variables
 
-    // TODO: Not sure an ID is needed
-    public int ID { get; set; }
-
     public bool IsAttacking {
         get
         {
             var stateInfo = animator.GetCurrentAnimatorStateInfo(EnemyAnimator.Layer.UpperBody);
             return stateInfo.IsName(EnemyAnimator.State.Attack);
+        }
+    }
+    
+    public int HitPoints
+    {
+        get => hitPoints; 
+        set
+        {
+            hitPoints = value;
+            if (hitPoints <= 0)
+                Die();
         }
     }
 
@@ -208,7 +214,7 @@ public class Enemy : MonoBehaviour, IEnemy
     public void Die()
     {
         // TODO: Add death animation
-        Destroy(this);
+        Destroy(gameObject);
     }
 
     public void TakeDamage(int amount)

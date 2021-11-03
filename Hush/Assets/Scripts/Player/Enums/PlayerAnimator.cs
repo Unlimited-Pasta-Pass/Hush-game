@@ -9,5 +9,6 @@ namespace Enums
 		public static int HeavyAttack => Animator.StringToHash("HeavyAttack");
 		public static int SpellAttack => Animator.StringToHash("SpellAttack");
 		public static int SpellSpecialAttack => Animator.StringToHash("SpellSpecialAttack");
+        public static int Dead => Animator.StringToHash("Dead");
     }
 }
