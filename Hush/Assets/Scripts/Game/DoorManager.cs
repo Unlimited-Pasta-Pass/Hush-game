@@ -11,7 +11,7 @@ public class DoorManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Tags.Player))
         {
-            if (!GameState.instance.playerEngagedInCombat && GameState.instance.playerHasRelic)
+            if (!GameMaster.playerEngagedInCombat && GameMaster.playerHasRelic)
             {
                 isDoorOpen = true;
                 wall.SetActive(false);
@@ -23,7 +23,7 @@ public class DoorManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Tags.Player))
         {
-            if (!GameState.instance.playerEngagedInCombat && GameState.instance.playerHasRelic)
+            if (!GameMaster.playerEngagedInCombat && GameMaster.playerHasRelic)
             {
                 isDoorOpen = false;
                 wall.SetActive(true);

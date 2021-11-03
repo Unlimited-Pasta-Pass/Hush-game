@@ -12,6 +12,6 @@ public class KeyCounterUI : MonoBehaviour
 
     void Update()
     {
-        keyCountText.text = "Keys: " + GameState.instance.keysInPossession.ToString();
+        keyCountText.text = "Keys: " + GameMaster.keysInPossession.ToString();
     }
 }

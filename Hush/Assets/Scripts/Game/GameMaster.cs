@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameState : MonoBehaviour
+public class GameMaster : MonoBehaviour
 {
-    public static GameState instance;
-
-    public bool playerEngagedInCombat;
-    public bool playerHasRelic;
-    public int keysInPossession;
+    public static bool playerEngagedInCombat;
+    public static bool playerHasRelic;
+    public static int keysInPossession;
 
     void Awake()
     {
@@ -22,13 +20,18 @@ public class GameState : MonoBehaviour
         keysInPossession = 0;
     }
 
-    public void CollectKey()
+    public static void CollectKey()
     {
         keysInPossession += 1;
     }
 
-    public void IsEngagedInCombat(bool inCombat)
+    public static void IsEngagedInCombat(bool inCombat)
     {
         playerEngagedInCombat = inCombat;
+    }
+
+    public static void HasRelic(bool inPossession)
+    {
+        playerHasRelic = inPossession;
     }
 }
