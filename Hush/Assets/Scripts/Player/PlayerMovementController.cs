@@ -98,7 +98,10 @@ namespace StarterAssets
             // TODO: Add animation
             hitPoints -= damage;
             if (hitPoints <= 0)
+            {
+                hitPoints = 0;
                 Die();
+            }
         }
 
         public void Die()
