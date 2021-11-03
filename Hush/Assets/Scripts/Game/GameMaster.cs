@@ -18,6 +18,11 @@ public class GameMaster : MonoBehaviour
             return hasRelic;
         }
     }
+
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
     
     // Start is called before the first frame update
     void Start()
