@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
       //    RelicDestroyEvent.Invoke();
       // }
    }
-   
+
    void SpawnEnemy()
    {
       GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag(Tags.EnemySpawnPoint);

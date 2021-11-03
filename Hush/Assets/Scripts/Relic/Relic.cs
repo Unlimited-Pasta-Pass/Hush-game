@@ -7,7 +7,7 @@ public class Relic : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Tags.Player))
         {
-            if (!GameMaster.playerEngagedInCombat && !GameMaster.playerHasRelic)
+            if (!GameMaster.IsPlayerInCombat() && !GameMaster.playerHasRelic)
             {
                 GameMaster.HasRelic(true);
                 gameObject.SetActive(false);
