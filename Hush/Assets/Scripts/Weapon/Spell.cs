@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Enums;
+using DigitalRuby.PyroParticles;
 
 public class Spell : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject spellPrefab; 
+    [SerializeField] private GameObject shootPosition;
 
     public string WeaponType => "Spell";
 
@@ -22,21 +25,23 @@ public class Spell : MonoBehaviour, IWeapon
 
     public void PerformAttack(int damage)
     {
-        animator.SetTrigger(PlayerAnimator.SpellAttack);
         CurrentDamage = damage;
+        animator.SetTrigger(PlayerAnimator.SpellAttack);
+        CreateSpellAttack(CurrentDamage);
+        
     }
 
     public void PerformSpecialAttack()
     {
-        animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
         CurrentDamage = SPECIAL_DAMAGE;
+        animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
+        CreateSpellAttack(CurrentDamage);
     }
 
-    void OnTriggerEnter(Collider col)
+    private void CreateSpellAttack(int currentDamage)
     {
-        if (col.tag == "Enemy")
-        {
-            col.GetComponent<IEnemy>().TakeDamage(CurrentDamage);
-        }
+        Vector3 SpellSpawnLocation = new Vector3(shootPosition.transform.position.x, shootPosition.transform.position.y, shootPosition.transform.position.z);
+        GameObject spellClone = Instantiate(spellPrefab, SpellSpawnLocation, shootPosition.transform.rotation);
+		spellClone.GetComponent<FireProjectileScript>().ShootPosition = shootPosition.transform;
     }
 }

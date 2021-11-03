@@ -5,6 +5,8 @@
         public static string Player => "Player";
         public static string EnemySpawnPoint => "EnemySpawnPoint";
         public static string Relic => "Relic";
+        public static string Enemy => "Enemy";
+        public static string Ground => "Ground";
         public static string KeySpawner => "Key Spawner";
     }
 }

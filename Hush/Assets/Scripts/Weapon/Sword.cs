@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Common;
 using UnityEngine;
 using Enums;
 
@@ -35,7 +36,7 @@ public class Sword : MonoBehaviour, IWeapon
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Enemy")
+        if (col.gameObject.CompareTag(Tags.Enemy))
         {
             col.GetComponent<IEnemy>().TakeDamage(CurrentDamage);
         }

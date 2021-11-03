@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - EnemySpawnPoint
   - Relic
+  - Ground
   layers:
   - Default
   - TransparentFX
