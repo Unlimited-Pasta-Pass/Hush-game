@@ -9,6 +9,8 @@ TagManager:
   - Key
   - Enemy
   - EnemySpawnPoint
+  - GM
+  - Relic Dome
   - Relic
   - Ground
   layers:

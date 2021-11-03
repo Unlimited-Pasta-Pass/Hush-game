@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
 
-[RequireComponent(typeof(Text))]
+[RequireComponent(typeof(TMP_Text))]
 public class KeyCounterUI : MonoBehaviour
 {
-    private Text keyCountText;
+    private TMP_Text keyCountText;
 
     void Awake () {
-        keyCountText = GetComponent<Text>();
+        keyCountText = GetComponent<TMP_Text>();
     }
 
     void Update()
