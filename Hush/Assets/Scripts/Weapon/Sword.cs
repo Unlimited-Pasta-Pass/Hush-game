@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Common;
@@ -6,14 +7,12 @@ using Enums;
 
 public class Sword : MonoBehaviour, IWeapon
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] private int bonusDamage = 5;
+    [SerializeField] private Animator playerAnimator;
 
     public string WeaponType => "Sword";
-
     public int CurrentDamage { get; set; }
-
-    [SerializeField] private int bonusDamage = 5;
-
+    
     public int BonusDamage
     {
         get => bonusDamage;
@@ -22,23 +21,33 @@ public class Sword : MonoBehaviour, IWeapon
 
     private const int SPECIAL_DAMAGE = 100;
 
+    private void Reset()
+    {
+        playerAnimator = GetComponentInParent<Animator>();
+    }
+
     public void PerformAttack(int damage)
     {
-        animator.SetTrigger(PlayerAnimator.LightAttack);
+        playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
         CurrentDamage = damage;
     }
 
     public void PerformSpecialAttack()
     {
-        animator.SetTrigger(PlayerAnimator.HeavyAttack);
+        playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
         CurrentDamage = SPECIAL_DAMAGE;
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag(Tags.Enemy))
+        if (col.CompareTag(Tags.Enemy))
         {
-            col.GetComponent<IEnemy>().TakeDamage(CurrentDamage);
+            var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(PlayerAnimator.Layer.UpperBody);
+            if (stateInfo.IsName(PlayerAnimator.State.LightAttack) || stateInfo.IsName(PlayerAnimator.State.HeavyAttack))
+            {
+                var enemy = col.GetComponent<IEnemy>();
+                enemy.TakeDamage(CurrentDamage);
+            }
         }
     }
 }
