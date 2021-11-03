@@ -18,9 +18,6 @@ public class PlayerInputManager : MonoBehaviour
 	public bool reveal;
 	public bool switchWeapon;
 
-	[Header("Door Interactions")]
-	public bool isInCombat;
-	
 	[Header("References")] 
 	public PlayerInput reference;
 
@@ -49,31 +46,30 @@ public class PlayerInputManager : MonoBehaviour
 	public void OnLightAttack(CallbackContext context)
 	{
 		lightAttack = context.ReadValueAsButton();
-		isInCombat = context.ReadValueAsButton();
+		GameState.instance.engagedInCombat = context.ReadValueAsButton();
 	}
 
 	public void OnHeavyAttack(CallbackContext context)
 	{
 		heavyAttack = context.ReadValueAsButton();
-		isInCombat = context.ReadValueAsButton();
+		GameState.instance.engagedInCombat = context.ReadValueAsButton();
 	}
 
 	public void OnSpecialAttack(CallbackContext context)
 	{
 		specialAttack = context.ReadValueAsButton();
-		isInCombat = context.ReadValueAsButton();
+		GameState.instance.engagedInCombat = context.ReadValueAsButton();
 	}
 
 	public void OnInteract(CallbackContext context)
 	{
 		interact = context.ReadValueAsButton();
-		isInCombat = !context.ReadValueAsButton();
+		GameState.instance.engagedInCombat = context.ReadValueAsButton();
 	}
 
 	public void OnWalk(CallbackContext context)
 	{
 		walk = context.ReadValueAsButton();
-		isInCombat = !context.ReadValueAsButton();
 	}
 
 	public void OnReveal(CallbackContext context)
