@@ -13,6 +13,6 @@ public class KeyCounterUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        keyCountText.text = "Keys: " + KeyCollect.NumOfKeys.ToString();
+        keyCountText.text = "Keys: " + GameMaster.NumOfKeys.ToString();
     }
 }
