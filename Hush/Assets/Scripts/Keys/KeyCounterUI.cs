@@ -12,9 +12,8 @@ public class KeyCounterUI : MonoBehaviour
         keyCountText = GetComponent<TMP_Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        keyCountText.text = "Keys: " + GameMaster.NumOfKeys.ToString();
+        keyCountText.text = "Keys: " + GameMaster.keysInPossession.ToString();
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - GM
   - Relic Dome
   - Relic
+  - Ground
   layers:
   - Default
   - TransparentFX
