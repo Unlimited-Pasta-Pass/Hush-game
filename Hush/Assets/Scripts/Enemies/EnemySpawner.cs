@@ -9,24 +9,15 @@ public class EnemySpawner : MonoBehaviour
 {
    [SerializeField] private GameObject RelicArea;
    [SerializeField] private GameObject EnemyPrefab;
-   UnityEvent RelicDestroyEvent = new UnityEvent();
-   
+
    void Start()
    {
       //RelicDestroyEvent.AddListener(OnRelicDestroy);
       SpawnEnemy();
    }
-   void OnRelicDestroy()
+   public void OnRelicDestroy()
    {
       SpawnEnemy();
-   }
-
-   void Update()
-   {
-      // if (RelicArea.GetComponent<RelicScript>().health < 100)
-      // {
-      //    RelicDestroyEvent.Invoke();
-      // }
    }
 
    void SpawnEnemy()
