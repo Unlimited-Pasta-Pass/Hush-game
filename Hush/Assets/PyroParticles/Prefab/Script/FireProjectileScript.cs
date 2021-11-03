@@ -103,8 +103,6 @@ namespace DigitalRuby.PyroParticles
                 enemy.TakeDamage(Damage);
             }
 
-           
-
             // if we have contacts, play the collision particle system and call the delegate
             if (c.contacts.Length != 0)
             {
