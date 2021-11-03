@@ -21,7 +21,6 @@ namespace DigitalRuby.PyroParticles
 
         public void OnCollisionEnter(Collision col)
         {
-            Debug.Log(col.gameObject.name);
             if (col.gameObject.CompareTag(Tags.Player) || col.gameObject.CompareTag(Tags.Ground) )
             {
                 return;
