@@ -9,12 +9,7 @@ public class EnemySpawner : MonoBehaviour
 {
    [SerializeField] private GameObject RelicArea;
    [SerializeField] private GameObject EnemyPrefab;
-
-   void Start()
-   {
-      //RelicDestroyEvent.AddListener(OnRelicDestroy);
-      SpawnEnemy();
-   }
+   
    public void OnRelicDestroy()
    {
       SpawnEnemy();
