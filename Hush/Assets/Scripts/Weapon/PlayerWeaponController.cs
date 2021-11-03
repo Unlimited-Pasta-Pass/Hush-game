@@ -34,7 +34,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void SwitchWeapon(InputAction.CallbackContext callbackContext)
     {
-        equippedWeapon = (equippedWeapon.Name == sword.name) ? (IWeapon) spell : sword;
+        equippedWeapon = (equippedWeapon.WeaponType == sword.WeaponType) ? (IWeapon) spell : sword;
     }
 
     public void PerformWeaponAttack(InputAction.CallbackContext callbackContext)
@@ -49,7 +49,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private int CalculateDamage()
     {
-        StatType type = (equippedWeapon.Name == sword.name) ? StatType.Strength : StatType.SpellPower;
+        StatType type = (equippedWeapon.WeaponType == sword.WeaponType) ? StatType.Strength : StatType.SpellPower;
         int damageToDeal = (characterStats.GetStat(type).GetCalculatedStatValue() * 2);
         damageToDeal += CalculateCrit(damageToDeal);
 

@@ -32,7 +32,7 @@ namespace Enemies
 
         #region Public Variables
 
-        public string Name
+        public string WeaponType
         {
             get => "EnemySword";
         }
