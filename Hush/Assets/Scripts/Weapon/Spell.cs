@@ -7,8 +7,8 @@ using DigitalRuby.PyroParticles;
 public class Spell : MonoBehaviour, IWeapon
 {
     [SerializeField] private Animator animator;
-    [SerializeField] private GameObject spellPrefab;
-	[SerializeField] private GameObject shootPosition;
+    [SerializeField] private GameObject spellPrefab; 
+    [SerializeField] private GameObject shootPosition;
 
     public string WeaponType => "Spell";
 
