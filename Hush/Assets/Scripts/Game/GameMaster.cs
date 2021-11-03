@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
-    private static int numOfKeys = 0;
-    public static int NumOfKeys {
-        get {
-            return numOfKeys;
-        }
-    }
-    private static bool hasRelic = false;
-    public static bool HasRelic {
-        get {
-            return hasRelic;
-        }
-    }
+    public static bool playerEngagedInCombat;
+    public static bool playerHasRelic;
+    public static int keysInPossession;
 
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
     }
+    
+    void Start()
+    {
+        playerEngagedInCombat = false;
+        playerHasRelic = false;
+        keysInPossession = 0;
+    }
 
-    public static void KeyCollect (Key key) {
-        numOfKeys += 1;
+    public static void CollectKey()
+    {
+        keysInPossession += 1;
+    }
+
+    public static void IsEngagedInCombat(bool inCombat)
+    {
+        playerEngagedInCombat = inCombat;
+    }
+
+    public static void HasRelic(bool inPossession)
+    {
+        playerHasRelic = inPossession;
     }
 }
