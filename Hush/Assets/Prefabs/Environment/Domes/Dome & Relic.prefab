@@ -446,7 +446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
       propertyPath: keysNeededToUnlock
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
       propertyPath: scream.m_PersistentCalls.m_Calls.Array.size
