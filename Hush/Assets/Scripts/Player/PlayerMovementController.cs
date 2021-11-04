@@ -2,6 +2,7 @@
 using Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace StarterAssets
 {
@@ -110,6 +111,7 @@ namespace StarterAssets
             var playerInput = GetComponent<PlayerInput>();
             if (playerInput)
                 playerInput.enabled = false;
+            SceneManager.LoadScene("DemoRespawn");
         }
         
     }
