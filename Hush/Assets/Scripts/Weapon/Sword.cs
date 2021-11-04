@@ -40,13 +40,13 @@ public class Sword : MonoBehaviour, IWeapon
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag(Tags.Enemy))
+        if (col.CompareTag(Tags.Enemy) || col.CompareTag(Tags.Dome))
         {
             var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(PlayerAnimator.Layer.UpperBody);
             if (stateInfo.IsName(PlayerAnimator.State.LightAttack) || stateInfo.IsName(PlayerAnimator.State.HeavyAttack))
             {
-                var enemy = col.GetComponent<IEnemy>();
-                enemy.TakeDamage(CurrentDamage);
+                var killable = col.GetComponent<IKillable>();
+                killable.TakeDamage(CurrentDamage);
             }
         }
     }
