@@ -12,21 +12,21 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseFirstButton;
     
     
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetButtonDown("Cancel"))
-        {
-            if (TimeManager.Instance.GameIsPaused())
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-    }
+    // // Update is called once per frame
+    // void Update()
+    // {
+    //     if (Input.GetButtonDown("Cancel"))
+    //     {
+    //         if (TimeManager.Instance.GameIsPaused())
+    //         {
+    //             Resume();
+    //         }
+    //         else
+    //         {
+    //             Pause();
+    //         }
+    //     }
+    // }
 
     void Pause()
     {
