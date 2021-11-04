@@ -5,13 +5,13 @@ public class DoorManager : MonoBehaviour
 {
     [SerializeField] private GameObject wall;
 
-    private bool isDoorOpen; // TODO: modify this value when the door operning conditionals are met
+    private bool isDoorOpen; // TODO: modify this value when the door opening conditionals are met
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(Tags.Player))
         {
-            if (!GameMaster.playerEngagedInCombat && GameMaster.playerHasRelic)
+            if (!GameMaster.IsPlayerInCombat() && GameMaster.playerHasRelic)
             {
                 isDoorOpen = true;
                 wall.SetActive(false);
@@ -23,7 +23,7 @@ public class DoorManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag(Tags.Player))
         {
-            if (!GameMaster.playerEngagedInCombat && GameMaster.playerHasRelic)
+            if (!GameMaster.IsPlayerInCombat() && GameMaster.playerHasRelic)
             {
                 isDoorOpen = false;
                 wall.SetActive(true);

@@ -1,14 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Common;
+using UnityEngine;
 
 public class Relic : MonoBehaviour
 {
-    void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.CompareTag(Tags.Player)) {
-            GameMaster.RelicCollect ();
-            gameObject.SetActive(false);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(Tags.Player))
+        {
+            if (!GameMaster.IsPlayerInCombat() && !GameMaster.playerHasRelic)
+            {
+                GameMaster.HasRelic(true);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

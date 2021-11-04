@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour, IEnemy
         // Enemy lost track of player
         if (_state == State.Searching && agent.remainingDistance <= agent.stoppingDistance && !HasPlayerLineOfSight())
         {
-            _state = State.Patrolling;
+            SetState(State.Patrolling);
         }
 
         // Do movement update logic
@@ -205,7 +205,7 @@ public class Enemy : MonoBehaviour, IEnemy
     
     public void Die()
     {
-        _state = State.Dead;
+        SetState(State.Dead);
         animator.SetBool(EnemyAnimator.Dead, true);
     }
 
@@ -239,13 +239,26 @@ public class Enemy : MonoBehaviour, IEnemy
             // If we have line of sight, keep following player
             if (HasPlayerLineOfSight())
             {
-                _state = State.Attacking;
+                SetState(State.Attacking);
             }
             // Otherwise, keep going to last seen location
             else
             {
-                _state = State.Searching;
+                SetState(State.Searching);
             }
+        }
+    }
+
+    private void SetState(State state)
+    {
+        _state = state;
+        if (state == State.Attacking)
+        {
+            GameMaster.AddToEnemyList(this.GetInstanceID());
+        }
+        else
+        {
+            GameMaster.RemoveFromEnemyList(this.GetInstanceID());
         }
     }
 

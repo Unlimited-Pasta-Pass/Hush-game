@@ -43,5 +43,6 @@ public class Spell : MonoBehaviour, IWeapon
         Vector3 SpellSpawnLocation = new Vector3(shootPosition.transform.position.x, shootPosition.transform.position.y, shootPosition.transform.position.z);
         GameObject spellClone = Instantiate(spellPrefab, SpellSpawnLocation, shootPosition.transform.rotation);
 		spellClone.GetComponent<FireProjectileScript>().ShootPosition = shootPosition.transform;
+        spellClone.GetComponent<FireProjectileScript>().Damage = currentDamage;
     }
 }
