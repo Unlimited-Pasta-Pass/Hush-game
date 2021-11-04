@@ -1016,6 +1016,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 309399151869482853, guid: bdfdaec2fcf5f1a44ac94cb96db1b8d7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2133102245205176424, guid: bdfdaec2fcf5f1a44ac94cb96db1b8d7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2348724637463424756, guid: bdfdaec2fcf5f1a44ac94cb96db1b8d7, type: 3}
       propertyPath: m_Name
       value: Dome & Relic
