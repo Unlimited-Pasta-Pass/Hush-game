@@ -4,9 +4,23 @@ using TMPro;
 public class KeyCounterUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI keyCountText;
+    [SerializeField] private GameObject keySprite;
     
+    // TODO: take this out of Update()
     void Update()
     {
-        keyCountText.text = "<color=\"yellow\">Keys:</color> " + GameMaster.keysInPossession;
+        if (GameMaster.keysInPossession > 0)
+        {
+            keySprite.SetActive(true);
+        }
+        else
+        {
+            keySprite.SetActive(false);
+        }
+
+        if (GameMaster.keysInPossession > 1)
+        {
+            keyCountText.text = "x " + GameMaster.keysInPossession;
+        }
     }
 }
