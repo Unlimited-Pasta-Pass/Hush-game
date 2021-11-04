@@ -183,10 +183,7 @@ public class Enemy : MonoBehaviour, IEnemy
         var playerPosition = _player.transform.position;
         playerPosition.y = position.y;
         Vector3 toPlayer = playerPosition - position;
-        int layerMask = ~(1 << Layers.Enemy);
-        return toPlayer.magnitude <= _player.height / 2 || 
-               (Physics.Raycast(position, toPlayer.normalized, out var hit, visionCollider.radius, layerMask) && 
-               hit.collider.CompareTag(Tags.Player));
+        return toPlayer.magnitude <= _player.height / 2 || Physics.Raycast(position, toPlayer.normalized, out var hit, visionCollider.radius) && hit.collider.CompareTag(Tags.Player);
     }
     
     private void FacePlayer()
