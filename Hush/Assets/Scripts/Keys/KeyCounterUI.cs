@@ -7,6 +7,6 @@ public class KeyCounterUI : MonoBehaviour
     
     void Update()
     {
-        keyCountText.text = "Keys: " + GameMaster.keysInPossession;
+        keyCountText.text = "<color=\"yellow\">Keys:</color> " + GameMaster.keysInPossession;
     }
 }
