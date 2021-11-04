@@ -1,5 +1,6 @@
 using Common;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoorManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class DoorManager : MonoBehaviour
             {
                 isDoorOpen = true;
                 wall.SetActive(false);
+                
+                // respawn back into scene
+                SceneManager.LoadScene("DemoRespawn");
             }
         }
     }
