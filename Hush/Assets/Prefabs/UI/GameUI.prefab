@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyCountText: {fileID: 8266203884451753822}
-  keySprite: {fileID: 0}
+  keySprite: {fileID: 624753145893013184, guid: e628f03fe26697b44be1147d3a1e37c7, type: 3}
 --- !u!114 &8266203884277320494
 MonoBehaviour:
   m_ObjectHideFlags: 0
