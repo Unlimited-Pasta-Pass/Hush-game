@@ -111,6 +111,7 @@ namespace StarterAssets
             var playerInput = GetComponent<PlayerInput>();
             if (playerInput)
                 playerInput.enabled = false;
+            // TODO: FOR DEMO ONLY ABSOLUTELY FUCKING CHANGE THIS
             SceneManager.LoadScene("DemoRespawn");
         }
         
