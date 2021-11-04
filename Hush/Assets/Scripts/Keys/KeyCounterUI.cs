@@ -16,6 +16,7 @@ public class KeyCounterUI : MonoBehaviour
         else
         {
             keySprite.SetActive(false);
+            keyCountText.text = "";
         }
 
         if (GameMaster.keysInPossession > 1)
