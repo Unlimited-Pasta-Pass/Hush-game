@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Common;
-
 
 namespace DigitalRuby.PyroParticles
 {
@@ -71,7 +69,7 @@ namespace DigitalRuby.PyroParticles
             StartCoroutine(SendCollisionAfterDelay());
         }
 
-        public void HandleCollision(GameObject obj, Collision c)
+        public virtual void HandleCollision(GameObject obj, Collision c)
         {
             if (collided)
             {
@@ -96,12 +94,6 @@ namespace DigitalRuby.PyroParticles
             if (ProjectileCollisionSound != null)
             {
                 ProjectileCollisionSound.Play();
-            }
-
-            IKillable killable = c.gameObject.GetComponent<IKillable>();
-            if(killable != null)
-            {
-                killable.TakeDamage(Damage);
             }
 
             // if we have contacts, play the collision particle system and call the delegate
