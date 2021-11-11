@@ -13,6 +13,7 @@ TagManager:
   - Relic
   - Ground
   - Dome
+  - Relic Dome
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - UI
   - Ground
   - Obstacle
-  - Wall
+  - 
   - Interactible
   - Player
   - Enemy

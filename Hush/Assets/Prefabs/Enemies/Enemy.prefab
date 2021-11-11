@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8490621396511798265}
   - component: {fileID: 7872856842678039438}
   - component: {fileID: 16606687100967124}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -35,6 +35,7 @@ Transform:
   m_Children:
   - {fileID: 9075592076780320822}
   - {fileID: 8507614702795856167}
+  - {fileID: 717557926}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,7 +104,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionAngle: 70
-  hitPoints: 100
+  maxHitPoints: 100
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2048
   minAttackRange: 0.5
   maxAttackRange: 1
   runSpeed: 4
@@ -180,7 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8a3ddfbccc4c3ba2b43cae0d9cd3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  baseDamage: 10
+  enemyAnimator: {fileID: 0}
   enemy: {fileID: 8490621396511798265}
 --- !u!1 &7959901480173517863
 GameObject:
@@ -297,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000088376432427105, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2000088376432427105, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -374,26 +379,6 @@ PrefabInstance:
     - target: {fileID: 2000088376432427109, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
       propertyPath: m_Name
       value: KillableHealthUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000088376600981335, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000088376600981335, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000088376902354755, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000088376902354755, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000088376902354755, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}

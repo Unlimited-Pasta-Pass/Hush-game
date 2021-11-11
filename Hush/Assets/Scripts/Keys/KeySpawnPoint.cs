@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Keys
 {
-    public class KeySpawnController : MonoBehaviour
+    public class KeySpawnPoint : MonoBehaviour
     {
         [Header("References")] 
         [SerializeField] private GameObject keyPrefab;

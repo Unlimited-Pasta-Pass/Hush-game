@@ -1,48 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
+using Common;
 using UnityEngine;
 using Enums;
 using DigitalRuby.PyroParticles;
+using Plugins;
+using UnityEngine.InputSystem;
+using Weapon.Enums;
 
 public class Spell : MonoBehaviour, IWeapon
 {
-    [SerializeField] private Animator animator;
+    [Header("Parameters")]
+    [SerializeField] private float baseDamage = 5f;
+    [SerializeField] private float heavyDamage = 15f;
+    
+    [Header("Spell References")]
     [SerializeField] private GameObject spellPrefab; 
     [SerializeField] private GameObject shootPosition;
+    
+    [Header("Other References")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private PlayerInputManager input;
 
-    public string WeaponType => "Spell";
+    public WeaponType WeaponType => WeaponType.Spell;
 
-    public int CurrentDamage { get; set; }
-    [SerializeField] private int bonusDamage = 5;
-
-    public int BonusDamage
+    public float BaseDamage => baseDamage;
+    public float HeavyDamage => heavyDamage;
+    
+    private void OnEnable()
     {
-        get => bonusDamage;
-        set => bonusDamage = value;
+        input.reference.actions[Actions.LightSpell].performed += PerformAttack;
+        input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
     }
-
-    private const int SPECIAL_DAMAGE = 50;
-
-    public void PerformAttack(int damage)
+    
+    public void PerformAttack(InputAction.CallbackContext context)
     {
-        CurrentDamage = damage;
         animator.SetTrigger(PlayerAnimator.SpellAttack);
-        CreateSpellAttack(CurrentDamage);
-        
+        CreateSpellAttack(AttemptCrit(BaseDamage));
     }
 
-    public void PerformSpecialAttack()
+    public void PerformHeavyAttack(InputAction.CallbackContext context)
     {
-        CurrentDamage = SPECIAL_DAMAGE;
         animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
-        CreateSpellAttack(CurrentDamage);
+        CreateSpellAttack(AttemptCrit(HeavyDamage));
     }
 
-    private void CreateSpellAttack(int currentDamage)
+    public float AttemptCrit(float damage)
     {
-        Vector3 SpellSpawnLocation = new Vector3(shootPosition.transform.position.x, shootPosition.transform.position.y, shootPosition.transform.position.z);
-        GameObject spellClone = Instantiate(spellPrefab, SpellSpawnLocation, shootPosition.transform.rotation);
-		spellClone.GetComponent<FireProjectileScript>().ShootPosition = shootPosition.transform;
-        spellClone.GetComponent<FireProjectileScript>().Damage = currentDamage;
+        return damage;
+    }
+
+    private void CreateSpellAttack(float damage)
+    {
+        var spellClone = Instantiate(spellPrefab);
+        spellClone.transform.position = shootPosition.transform.position;
+        spellClone.transform.rotation = shootPosition.transform.rotation;
+        
+		spellClone.GetComponent<CustomFireProjectile>().ShootPosition = shootPosition.transform;
+        spellClone.GetComponent<CustomFireProjectile>().Damage = (int)damage;
     }
 }

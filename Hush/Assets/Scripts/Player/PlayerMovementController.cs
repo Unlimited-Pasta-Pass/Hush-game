@@ -2,18 +2,14 @@
 using Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInput))]
-    public class PlayerMovementController : MonoBehaviour, IKillable
+    public class PlayerMovementController : MonoBehaviour
     {
         #region Parameters
-
-        [Tooltip("Amount of damage the player can receive before dying")] 
-        [SerializeField] private int hitPoints = 100;
 
         [Tooltip("Move speed of the character in m/s")]
         [SerializeField] private float walkSpeed = 2f;
@@ -34,21 +30,6 @@ namespace StarterAssets
 
         #endregion
 
-        #region Public Variables
-
-        public int HitPoints
-        {
-            get => hitPoints; 
-            set
-            {
-                hitPoints = value;
-                if (hitPoints <= 0)
-                    Die();
-            }
-        }
-
-        #endregion
-        
         private float _playerSpeed;
         private Quaternion _playerRotation;
 
@@ -56,7 +37,7 @@ namespace StarterAssets
         {
             _playerRotation = transform.rotation;
         }
-
+        
         private void Update()
         {
             MovePlayer();
@@ -84,36 +65,14 @@ namespace StarterAssets
             Vector3 targetDirection = new Vector3(input.move.x, 0f, input.move.y);
                 
             // Rotate the player only if the player inputs a new direction
-            if (targetDirection != Vector3.zero)
-            {
-                // Creates curved result rather than a linear one giving a more organic rotation change
-                _playerRotation = Quaternion.Lerp(_playerRotation, Quaternion.LookRotation(targetDirection), rotationSpeed * Time.deltaTime);
+            if (targetDirection == Vector3.zero) 
+                return;
+            
+            // Creates curved result rather than a linear one giving a more organic rotation change
+            _playerRotation = Quaternion.Lerp(_playerRotation, Quaternion.LookRotation(targetDirection), rotationSpeed * Time.deltaTime);
 
-                // Rotate the player
-                transform.rotation = _playerRotation;
-            }
+            // Rotate the player
+            transform.rotation = _playerRotation;
         }
-        
-        public void TakeDamage(int damage)
-        {
-            // TODO: Add animation
-            hitPoints -= damage;
-            if (hitPoints <= 0)
-            {
-                hitPoints = 0;
-                Die();
-            }
-        }
-
-        public void Die()
-        {
-            animator.SetBool(PlayerAnimator.Dead, true);
-            var playerInput = GetComponent<PlayerInput>();
-            if (playerInput)
-                playerInput.enabled = false;
-            // TODO: FOR DEMO ONLY ABSOLUTELY FUCKING CHANGE THIS
-            SceneManager.LoadScene("DemoRespawn");
-        }
-        
     }
 }

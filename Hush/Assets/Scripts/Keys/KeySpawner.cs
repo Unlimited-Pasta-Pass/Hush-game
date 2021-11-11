@@ -6,12 +6,12 @@ using Random = UnityEngine.Random;
 
 namespace Game
 {
-    public class KeyManager : MonoBehaviour
+    public class KeySpawner : MonoBehaviour
     {
         [Header("Parameters")] 
         [SerializeField] private int numberOfKeysToSpawn = 3;
 
-        private KeySpawnController[] _keySpawners;
+        private KeySpawnPoint[] _keySpawners;
         
         private Dictionary<int, bool> _spawnersInUse;
 
@@ -27,7 +27,7 @@ namespace Game
 
         private void FindKeySpawners()
         {
-            _keySpawners = FindObjectsOfType<KeySpawnController>();
+            _keySpawners = FindObjectsOfType<KeySpawnPoint>();
 
             if (_keySpawners.Length <= 0)
                 throw new UnityException("No Key Spawner was found.");

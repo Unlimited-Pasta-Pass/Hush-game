@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7404962802362222977}
-  - component: {fileID: 7404962802355529155}
+  - component: {fileID: 5549057135663355997}
   - component: {fileID: 7404962802355448369}
   - component: {fileID: 7404962802360657713}
   - component: {fileID: 7404962802360708877}
@@ -37,7 +37,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7404962802355529155
+--- !u!114 &5549057135663355997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7404962802362526807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245887334a601354cb1853676e37a7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9765be6104484d4aaf7d498fa2430b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 7404962802360708877}
@@ -67,10 +67,10 @@ MonoBehaviour:
   ProjectileExplosionForce: 500
   ProjectileColliderDelay: 0
   ProjectileColliderSpeed: 25
-  ProjectileDirection: {x: 1, y: 0, z: 0}
+  ProjectileDirection: {x: 1, y: 0, z: 1}
   ProjectileCollisionLayers:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 2176
   ProjectileDestroyParticleSystemsOnCollision:
   - {fileID: 7404962802347069729}
 --- !u!114 &7404962802355448369
@@ -102,7 +102,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b57a5b81c8663e14bbf70a3cc6ff01ad, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -225,7 +225,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: ca679721d8a1b6243acc9a7ce566789b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5141,9 +5141,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7404962802362324215}
-  - component: {fileID: 7404962802349142627}
-  - component: {fileID: 7404962802355434489}
   - component: {fileID: 7404962802359466037}
+  - component: {fileID: 7404962802349142627}
+  - component: {fileID: 3737900302267338706}
   - component: {fileID: 7404962802356137669}
   m_Layer: 0
   m_Name: FireboltCollider
@@ -5166,31 +5166,6 @@ Transform:
   m_Father: {fileID: 7404962802362222977}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7404962802349142627
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7404962802362534829}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7404962802355434489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7404962802362534829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e03644fdf51cfd34f8fdc92879c31a14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &7404962802359466037
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5207,6 +5182,31 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!135 &7404962802349142627
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7404962802362534829}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3737900302267338706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7404962802362534829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6c9e10326a4762b50bf409969c6182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!108 &7404962802356137669
 Light:
   m_ObjectHideFlags: 0

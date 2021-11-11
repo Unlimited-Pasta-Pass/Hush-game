@@ -38,9 +38,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Special Attack",
+                    "name": "Light Spell",
                     "type": "Button",
                     "id": "c76223e7-9695-412f-89ec-d59206966d3e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Heavy Spell",
+                    "type": "Button",
+                    "id": "04817599-5f61-49b9-9bc8-7bdb8807dc7b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -70,9 +78,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "SwitchWeapon",
+                    "name": "Pause",
                     "type": "Button",
-                    "id": "8e42c219-d1df-43f6-93f2-9709da6a79ec",
+                    "id": "72687832-f35c-4fcc-829a-59d75b2eb783",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -235,22 +243,22 @@
                 },
                 {
                     "name": "",
-                    "id": "e7066b3e-262b-4798-92f6-949ad3dbac13",
-                    "path": "<Keyboard>/shift",
+                    "id": "78b9b4d2-6dc4-42de-885f-9a0749eec9af",
+                    "path": "<Gamepad>/leftStickPress",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "Gamepad",
                     "action": "Walk",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "78b9b4d2-6dc4-42de-885f-9a0749eec9af",
-                    "path": "<Gamepad>/leftStickPress",
+                    "id": "e7066b3e-262b-4798-92f6-949ad3dbac13",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Keyboard&Mouse",
                     "action": "Walk",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -284,7 +292,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Special Attack",
+                    "action": "Light Spell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -295,7 +303,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Special Attack",
+                    "action": "Light Spell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -313,7 +321,7 @@
                 {
                     "name": "",
                     "id": "9584a4f9-5e5f-4d34-b19f-f46708d554a0",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -345,12 +353,45 @@
                 },
                 {
                     "name": "",
-                    "id": "2187209a-ecad-4d12-9459-27bfb5e863b1",
-                    "path": "<Keyboard>/shift",
+                    "id": "23982630-3216-45f2-be96-9e62aca78b8e",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "952b81e3-fb0d-432c-852b-d5388531f484",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "SwitchWeapon",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6d2eb9e-7b59-4cdf-a1c9-96cb4c5d3112",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Heavy Spell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ebe813c8-b0ce-4ea8-a061-6a6ef14760d5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Heavy Spell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

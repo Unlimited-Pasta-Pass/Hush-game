@@ -1,20 +1,18 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-using System;
 
 [RequireComponent(typeof(TMP_Text))]
 public class RelicVerifierUI : MonoBehaviour
 {
-    private TMP_Text RelicVerifierText;
+    private TMP_Text _relicVerifierText;
 
-    void Awake () {
-        RelicVerifierText = GetComponent<TMP_Text>();
+    private void Awake () {
+        _relicVerifierText = GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        RelicVerifierText.text = "Relic: " + (GameMaster.playerHasRelic ? "Yes" : "No");
+        _relicVerifierText.text = $"Relic: {(GameManager.Instance.PlayerHasRelic ? "Yes" : "No")}";
     }
 }

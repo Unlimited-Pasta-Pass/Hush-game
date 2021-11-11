@@ -1,35 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using StarterAssets;
-using TMPro;
 using UnityEngine;
 using Common;
-using UnityEngine.UIElements;
 using Slider = UnityEngine.UI.Slider;
 
 public class KillableHealthUI : MonoBehaviour
 {
-    [SerializeField] private Camera virtualCam;
+    [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject killableObject;
     [SerializeField] private Slider healthSlider;
 
-    private int maxHealth;
-
-    void Start()
+    private void OnEnable()
     {
-        virtualCam = Camera.main;
-        maxHealth = (int) healthSlider.value;
+        playerCamera = Camera.main;
     }
-    
-    void Update()
+
+    private void Update()
     {
         healthSlider.value = killableObject.GetComponent<IKillable>().HitPoints;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-       transform.LookAt(virtualCam.transform.position, -Vector3.up);
+       transform.LookAt(playerCamera.transform.position, Vector3.down);
        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
     }
 }
