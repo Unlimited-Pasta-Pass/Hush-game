@@ -544,6 +544,14 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 717557924, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 717557927, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1714795403}
     - target: {fileID: 819068816, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -850,7 +858,7 @@ GameObject:
   - component: {fileID: 1309994838}
   - component: {fileID: 1309994839}
   m_Layer: 0
-  m_Name: GameMaster
+  m_Name: Game Master
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1078,6 +1086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdfdaec2fcf5f1a44ac94cb96db1b8d7, type: 3}
+--- !u!20 &1714795403 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1005489440315475630, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
+  m_PrefabInstance: {fileID: 2072784305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1807225217
 PrefabInstance:
   m_ObjectHideFlags: 0

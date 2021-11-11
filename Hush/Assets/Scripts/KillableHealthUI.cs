@@ -10,7 +10,7 @@ using Slider = UnityEngine.UI.Slider;
 
 public class KillableHealthUI : MonoBehaviour
 {
-    [SerializeField] private Camera virtualCam;
+    [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject killableObject;
     [SerializeField] private Slider healthSlider;
 
@@ -18,7 +18,7 @@ public class KillableHealthUI : MonoBehaviour
 
     void Start()
     {
-        virtualCam = Camera.main;
+        playerCamera = Camera.main;
         maxHealth = (int) healthSlider.value;
     }
     
@@ -29,7 +29,7 @@ public class KillableHealthUI : MonoBehaviour
 
     void LateUpdate()
     {
-       transform.LookAt(virtualCam.transform.position, -Vector3.up);
+       transform.LookAt(playerCamera.transform.position, Vector3.down);
        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
     }
 }
