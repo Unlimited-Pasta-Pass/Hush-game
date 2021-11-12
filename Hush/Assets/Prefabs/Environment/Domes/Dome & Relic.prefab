@@ -372,18 +372,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3484052249403165149, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 525
-      objectReference: {fileID: 0}
-    - target: {fileID: 3484052249403165149, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 525
-      objectReference: {fileID: 0}
-    - target: {fileID: 3484052249403165149, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 525
-      objectReference: {fileID: 0}
-    - target: {fileID: 3484052249403165149, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
       objectReference: {fileID: 0}
@@ -423,85 +411,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3994485805967114560, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: m_Size.z
-      value: 0.005
-      objectReference: {fileID: 0}
-    - target: {fileID: 3994485805967114560, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: m_Center.z
-      value: 0.004
-      objectReference: {fileID: 0}
     - target: {fileID: 4256472995991901031, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
       propertyPath: m_Name
       value: Dome
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256472995991901031, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256472995991901031, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: m_TagString
-      value: Dome
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: keysNeededToUnlock
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: scream.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: onDestroyDome.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: scream.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: scream.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1798717819028047863}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: scream.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: scream.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnRelicDestroy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: onDestroyDome.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: onDestroyDome.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1798717819028047863}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: onDestroyDome.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: onDestroyDome.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnRelicDestroy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: scream.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EnemySpawner, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: onDestroyDome.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: EnemySpawner, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: scream.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
-      propertyPath: onDestroyDome.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3fedf7bdc410b44792804eecc557265, type: 3}

@@ -30,6 +30,12 @@ public class Sword : MonoBehaviour, IWeapon
         input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
     }
 
+    private void OnDisable()
+    {
+        input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
+        input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
+    }
+
     private void Reset()
     {
         playerAnimator = GetComponentInParent<Animator>();

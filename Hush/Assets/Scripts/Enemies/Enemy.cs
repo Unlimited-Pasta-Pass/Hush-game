@@ -211,7 +211,7 @@ public class Enemy : MonoBehaviour, IEnemy
         animator.SetBool(EnemyAnimator.Dead, true);
         SetState(EnemyState.Dead);
         
-        _killed.Invoke();
+        Killed.Invoke();
     }
 
     public void TakeDamage(float damage)

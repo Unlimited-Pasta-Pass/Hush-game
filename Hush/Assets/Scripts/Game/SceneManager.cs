@@ -16,8 +16,18 @@ public class SceneManager : MonoBehaviour
         // var updatedLevel = PlayerPrefs.GetInt("CurrentLevel") + 1;
         // PlayerPrefs.SetInt("CurrentLevel", updatedLevel);
         
-        // For demo
-        UnityEngine.SceneManagement.SceneManager.LoadScene("DemoRespawn");
+        // For dev scene
+        LoadDevScene();
+    }
+
+    public void LoadDevScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    public void LoadDemoScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
     
     public void QuitGame()

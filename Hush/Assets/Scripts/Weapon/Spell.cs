@@ -31,6 +31,12 @@ public class Spell : MonoBehaviour, IWeapon
         input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
     }
     
+    private void OnDisable()
+    {
+        input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
+        input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
+    }
+    
     public void PerformAttack(InputAction.CallbackContext context)
     {
         animator.SetTrigger(PlayerAnimator.SpellAttack);
