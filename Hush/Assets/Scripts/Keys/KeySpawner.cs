@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Keys;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,8 +13,6 @@ namespace Game
         [SerializeField] private int numberOfKeysToSpawn = 3;
 
         private KeySpawnPoint[] _keySpawners;
-        
-        private Dictionary<int, bool> _spawnersInUse;
 
         private void Start()
         {
@@ -32,12 +31,7 @@ namespace Game
             if (_keySpawners.Length <= 0)
                 throw new UnityException("No Key Spawner was found.");
 
-            _spawnersInUse = new Dictionary<int, bool>();
-
-            foreach (var spawner in _keySpawners)
-            {
-                _spawnersInUse.Add(spawner.GetInstanceID(), false);
-            }
+            GameManager.Instance.UpdateKeySpawnerList(_keySpawners.Select(k => k.GetInstanceID()));
         }
 
         private void SpawnKey()
@@ -48,13 +42,13 @@ namespace Game
             do
             {
                 index = (int)Mathf.Round(Random.Range(0, _keySpawners.Length));
-            } while (_spawnersInUse[_keySpawners[index].GetInstanceID()]);
+            } while (GameManager.Instance.KeySpawnersInUse[_keySpawners[index].GetInstanceID()]);
             
             // Spawn the key in the scene
             _keySpawners[index].SpawnKey();
             
             // Mark down the spawner as in use
-            _spawnersInUse[_keySpawners[index].GetInstanceID()] = true;
+            GameManager.Instance.UseKeySpawner(_keySpawners[index].GetInstanceID());
         }
     }
 }

@@ -1,27 +1,49 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.Events;
 
 [Serializable]
 public class GameManager : MonoBehaviour
 {
-    // States
+    // Instance
+    public static GameManager Instance;
+    
+    #region Game States
+
+    private float _playerHitPoints;
+    
     private bool _playerHasRelic;
     private int _keysInPossession;
     private HashSet<int> _enemiesAttacking;
 
-    // Events
+    private int _currentlyLoadedScene;
+    private Dictionary<int, bool> _keySpawnersInUse;
+    
+    #endregion
+
+    #region Events
+    
     public UnityEvent<int> keyCountChanged;
 
-    // Instance
-    public static GameManager Instance;
+    #endregion
+    
+    #region Public Getters
 
-    // Getters
+    public float PlayerHitPoints => _playerHitPoints;
+    
     public bool IsPlayerInCombat => _enemiesAttacking.Count > 0;
     public bool PlayerHasRelic => _playerHasRelic;
     public int KeysInPossession => _keysInPossession;
 
+    public int CurrentlyLoadedScene => _currentlyLoadedScene;
+
+    private ReadOnlyDictionary<int, bool> _readOnlyDictionary;
+    public ReadOnlyDictionary<int, bool> KeySpawnersInUse => _readOnlyDictionary ??= new ReadOnlyDictionary<int, bool>(_keySpawnersInUse);
+
+    #endregion
+    
     private void Awake()
     {
         if (Instance == null)
@@ -36,7 +58,10 @@ public class GameManager : MonoBehaviour
     {
         _playerHasRelic = false;
         _keysInPossession = 0;
-        _enemiesAttacking = new HashSet<int>();
+        _enemiesAttacking ??= new HashSet<int>();
+
+        _currentlyLoadedScene = 0;
+        _keySpawnersInUse ??= new Dictionary<int, bool>();
 
         keyCountChanged ??= new UnityEvent<int>();
         
@@ -44,6 +69,22 @@ public class GameManager : MonoBehaviour
         keyCountChanged.Invoke(_keysInPossession);
     }
 
+    // Player
+    public void SetPlayerHitPoints(float hp)
+    {
+        _playerHitPoints = hp;
+    }
+    public bool UpdatePlayerHitPoints(float hpDelta)
+    {
+        _playerHitPoints += hpDelta;
+
+        if (_playerHitPoints > 0) 
+            return true;
+        
+        _playerHitPoints = 0;
+        return false;
+    }
+    
     // Keys
     public void CollectKey()
     {
@@ -57,14 +98,7 @@ public class GameManager : MonoBehaviour
 
     // Relic
     public void CollectRelic () {
-        if (!_playerHasRelic)
-        {
-            _playerHasRelic = true;
-        }
-        else
-        {
-            Debug.Log("Player cannot have more than 1 relic");
-        }
+        _playerHasRelic = true;
     }
     
     public void ResetRelic () 
@@ -81,5 +115,18 @@ public class GameManager : MonoBehaviour
     public void RemoveFromEnemyList(int id)
     {
         _enemiesAttacking.Remove(id);
+    }
+
+    public void UpdateKeySpawnerList(IEnumerable<int> spawners)
+    {
+        foreach (var spawner in spawners)
+        {
+            _keySpawnersInUse.Add(spawner, false);
+        }
+    }
+    
+    public void UseKeySpawner(int instanceId)
+    {
+        _keySpawnersInUse[instanceId] = true;
     }
 }
