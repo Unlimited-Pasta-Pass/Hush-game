@@ -20,5 +20,7 @@ namespace Common.Models
             Position = new SerializablePosition(position);
             Rotation = new SerializableRotation(rotation);
         }
+
+        public static implicit operator SerializableTransform(Transform t) => new SerializableTransform(t);
     }
 }

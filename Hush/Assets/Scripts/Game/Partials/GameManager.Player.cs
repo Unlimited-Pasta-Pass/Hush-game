@@ -1,4 +1,6 @@
-﻿namespace Game
+﻿using UnityEngine;
+
+namespace Game
 {
     public partial class GameManager
     {
@@ -25,6 +27,11 @@
 
             _state.playerCurrentHitPoints = 0;
             return false;
+        }
+
+        public void MovePlayer(Transform playerTransform)
+        {
+            _state.playerTransform = playerTransform;
         }
     }
 }

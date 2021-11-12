@@ -1,4 +1,5 @@
-﻿using Player.Enums;
+﻿using Game;
+using Player.Enums;
 using UnityEngine;
 
 namespace Player
@@ -50,6 +51,8 @@ namespace Player
         {
             MovePlayer();
             RotatePlayer();
+            
+            GameManager.Instance.MovePlayer(transform);
         }
 
         private void MovePlayer()

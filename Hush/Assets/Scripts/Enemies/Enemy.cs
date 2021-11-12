@@ -181,6 +181,8 @@ namespace Enemies
                 }
             }
 
+            GameManager.Instance.MoveEnemy(gameObject.GetInstanceID(), transform);
+            
             // Update animator
             animator.SetFloat(EnemyAnimator.Speed, agent.velocity.magnitude);
         }
@@ -253,11 +255,11 @@ namespace Enemies
             _state = state;
             if (state == EnemyState.Attacking)
             {
-                GameManager.Instance.AddToEnemyList(GetInstanceID());
+                GameManager.Instance.EnemyStartedAttacking(gameObject.GetInstanceID());
             }
             else
             {
-                GameManager.Instance.RemoveFromEnemyList(GetInstanceID());
+                GameManager.Instance.EnemyStoppedAttacking(gameObject.GetInstanceID());
             }
         }
 
