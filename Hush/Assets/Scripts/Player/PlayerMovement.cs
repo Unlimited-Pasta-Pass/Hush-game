@@ -1,10 +1,7 @@
-﻿using System;
-using Common;
-using Enums;
+﻿using Player.Enums;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace StarterAssets
+namespace Player
 {
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour

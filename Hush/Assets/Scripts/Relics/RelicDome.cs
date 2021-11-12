@@ -1,55 +1,60 @@
+using Common.Enums;
+using Common.Interfaces;
+using Game;
 using UnityEngine;
-using Common;
 using UnityEngine.Events;
 
-public class RelicDome : MonoBehaviour, IKillable
+namespace Relics
 {
-    [SerializeField] private int keysNeededToUnlock;
-    [SerializeField] private float maxHitPoints = 150f;
-
-    private UnityEvent _killed;
-    public UnityEvent Killed => _killed ??= new UnityEvent();
-    
-    private float _hitPoints;
-    public float HitPoints
+    public class RelicDome : MonoBehaviour, IKillable
     {
-        get => _hitPoints;
-        private set
+        [SerializeField] private int keysNeededToUnlock;
+        [SerializeField] private float maxHitPoints = 150f;
+
+        private UnityEvent _killed;
+        public UnityEvent Killed => _killed ??= new UnityEvent();
+    
+        private float _hitPoints;
+        public float HitPoints
         {
-            _hitPoints = value;
-            if (_hitPoints <= 0)
+            get => _hitPoints;
+            private set
             {
-                _hitPoints = 0;
-                Die();
+                _hitPoints = value;
+                if (_hitPoints <= 0)
+                {
+                    _hitPoints = 0;
+                    Die();
+                }
             }
         }
-    }
 
-    private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock;
+        private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock;
 
-    private void Awake()
-    {
-        HitPoints = maxHitPoints;
-    }
+        private void Awake()
+        {
+            HitPoints = maxHitPoints;
+        }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (!other.gameObject.CompareTag(Tags.Player) || !CanUnlockDome) 
-            return;
+        void OnTriggerEnter(Collider other)
+        {
+            if (!other.gameObject.CompareTag(Tags.Player) || !CanUnlockDome) 
+                return;
 
-        GameManager.Instance.ResetKeys();
-        gameObject.SetActive(false);
-    }
+            GameManager.Instance.ResetKeys();
+            gameObject.SetActive(false);
+        }
     
-    public void TakeDamage(float damage)
-    {
-        HitPoints -= damage;
-    }
+        public void TakeDamage(float damage)
+        {
+            HitPoints -= damage;
+        }
 
-    public void Die()
-    {
-        // TODO breaking animation
-        Killed.Invoke();
-        Destroy(gameObject);
+        public void Die()
+        {
+            // TODO breaking animation
+            Killed.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

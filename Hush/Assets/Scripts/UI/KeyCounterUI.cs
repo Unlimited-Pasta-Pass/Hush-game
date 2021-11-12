@@ -1,14 +1,17 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-public class KeyCounterUI : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private TextMeshProUGUI keyCountText;
-    [SerializeField] private GameObject keySprite;
-
-    public void OnKeyCountChanged(int keyCount)
+    public class KeyCounterUI : MonoBehaviour
     {
-        keySprite.SetActive(keyCount > 0);
-        keyCountText.text = keyCount == 0 ? "" : $"x {keyCount}";
+        [SerializeField] private TextMeshProUGUI keyCountText;
+        [SerializeField] private GameObject keySprite;
+
+        public void OnKeyCountChanged(int keyCount)
+        {
+            keySprite.SetActive(keyCount > 0);
+            keyCountText.text = keyCount == 0 ? "" : $"x {keyCount}";
+        }
     }
 }

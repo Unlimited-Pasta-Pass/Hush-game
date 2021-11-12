@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Common;
+using Common.Enums;
 using LOS;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace StarterAssets
+namespace Player
 {
     public class PlayerEcholocation : MonoBehaviour
     {

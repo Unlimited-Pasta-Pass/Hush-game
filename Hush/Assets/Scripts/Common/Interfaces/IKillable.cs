@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Events;
 
-namespace Common
+namespace Common.Interfaces
 {
     public interface IKillable
     {

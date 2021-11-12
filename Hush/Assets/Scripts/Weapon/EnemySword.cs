@@ -1,10 +1,12 @@
-﻿using Common;
+﻿using Common.Enums;
+using Common.Interfaces;
+using Enemies;
 using Enemies.Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapon.Enums;
 
-namespace Enemies
+namespace Weapon
 {
     public class EnemySword : MonoBehaviour, IWeapon
     {

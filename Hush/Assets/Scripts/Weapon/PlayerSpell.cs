@@ -1,69 +1,73 @@
-using Common;
-using UnityEngine;
-using Enums;
+using Common.Enums;
+using Player.Enums;
 using Plugins;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapon.Enums;
+using PlayerInputManager = Player.PlayerInputManager;
 
-public class PlayerSpell : MonoBehaviour, IWeapon
+namespace Weapon
 {
-    [Header("Parameters")]
-    [SerializeField] private float baseDamage = 5f;
-    [SerializeField] private float heavyDamage = 15f;
-    
-    [Header("Spell References")]
-    [SerializeField] private GameObject spellPrefab; 
-    [SerializeField] private GameObject shootPosition;
-    
-    [Header("Other References")]
-    [SerializeField] private Animator animator;
-    
-    private static PlayerInputManager Input => PlayerInputManager.Instance;
-
-    public WeaponType WeaponType => WeaponType.Spell;
-
-    public float BaseDamage => baseDamage;
-    public float HeavyDamage => heavyDamage;
-    
-    private void OnEnable()
+    public class PlayerSpell : MonoBehaviour, IWeapon
     {
-        Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
-        Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
-    }
+        [Header("Parameters")]
+        [SerializeField] private float baseDamage = 5f;
+        [SerializeField] private float heavyDamage = 15f;
     
-    private void OnDisable()
-    {
-        if (Input == null)
-            return;
+        [Header("Spell References")]
+        [SerializeField] private GameObject spellPrefab; 
+        [SerializeField] private GameObject shootPosition;
+    
+        [Header("Other References")]
+        [SerializeField] private Animator animator;
+    
+        private static PlayerInputManager Input => PlayerInputManager.Instance;
+
+        public WeaponType WeaponType => WeaponType.Spell;
+
+        public float BaseDamage => baseDamage;
+        public float HeavyDamage => heavyDamage;
+    
+        private void OnEnable()
+        {
+            Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
+            Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
+        }
+    
+        private void OnDisable()
+        {
+            if (Input == null)
+                return;
         
-        Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
-        Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
-    }
+            Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
+            Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
+        }
     
-    public void PerformAttack(InputAction.CallbackContext context)
-    {
-        animator.SetTrigger(PlayerAnimator.SpellAttack);
-        CreateSpellAttack(AttemptCrit(BaseDamage));
-    }
+        public void PerformAttack(InputAction.CallbackContext context)
+        {
+            animator.SetTrigger(PlayerAnimator.SpellAttack);
+            CreateSpellAttack(AttemptCrit(BaseDamage));
+        }
 
-    public void PerformHeavyAttack(InputAction.CallbackContext context)
-    {
-        animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
-        CreateSpellAttack(AttemptCrit(HeavyDamage));
-    }
+        public void PerformHeavyAttack(InputAction.CallbackContext context)
+        {
+            animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
+            CreateSpellAttack(AttemptCrit(HeavyDamage));
+        }
 
-    public float AttemptCrit(float damage)
-    {
-        return damage;
-    }
+        public float AttemptCrit(float damage)
+        {
+            return damage;
+        }
 
-    private void CreateSpellAttack(float damage)
-    {
-        var spellClone = Instantiate(spellPrefab);
-        spellClone.transform.position = shootPosition.transform.position;
-        spellClone.transform.rotation = shootPosition.transform.rotation;
+        private void CreateSpellAttack(float damage)
+        {
+            var spellClone = Instantiate(spellPrefab);
+            spellClone.transform.position = shootPosition.transform.position;
+            spellClone.transform.rotation = shootPosition.transform.rotation;
         
-		spellClone.GetComponent<CustomFireProjectile>().ShootPosition = shootPosition.transform;
-        spellClone.GetComponent<CustomFireProjectile>().Damage = (int)damage;
+            spellClone.GetComponent<CustomFireProjectile>().ShootPosition = shootPosition.transform;
+            spellClone.GetComponent<CustomFireProjectile>().Damage = (int)damage;
+        }
     }
 }

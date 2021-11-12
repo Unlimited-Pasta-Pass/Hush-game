@@ -1,84 +1,89 @@
-using Common;
+using Common.Enums;
+using Common.Interfaces;
+using Player.Enums;
 using UnityEngine;
-using Enums;
 using UnityEngine.InputSystem;
 using Weapon.Enums;
+using PlayerInputManager = Player.PlayerInputManager;
 
-public class PlayerSword : MonoBehaviour, IWeapon
+namespace Weapon
 {
-    [Header("Damage Parameters")]
-    [SerializeField] private float baseDamage = 5;
-    [SerializeField] private float heavyDamage = 15;
+    public class PlayerSword : MonoBehaviour, IWeapon
+    {
+        [Header("Damage Parameters")]
+        [SerializeField] private float baseDamage = 5;
+        [SerializeField] private float heavyDamage = 15;
     
-    [Header("Crit Parameters")]
-    [SerializeField] private float critChance = 0.10f;
-    [SerializeField] private float critMultiplierLow = 0.5f;
-    [SerializeField] private float critMultiplierHigh = 0.75f;
+        [Header("Crit Parameters")]
+        [SerializeField] private float critChance = 0.10f;
+        [SerializeField] private float critMultiplierLow = 0.5f;
+        [SerializeField] private float critMultiplierHigh = 0.75f;
     
-    [Header("References")]
-    [SerializeField] private Animator playerAnimator;
+        [Header("References")]
+        [SerializeField] private Animator playerAnimator;
     
-    private static PlayerInputManager Input => PlayerInputManager.Instance;
+        private static PlayerInputManager Input => PlayerInputManager.Instance;
 
-    public WeaponType WeaponType => WeaponType.Sword;
+        public WeaponType WeaponType => WeaponType.Sword;
     
-    public float BaseDamage => baseDamage;
-    public float HeavyDamage => heavyDamage;
+        public float BaseDamage => baseDamage;
+        public float HeavyDamage => heavyDamage;
 
-    private void OnEnable()
-    {
-        Input.reference.actions[Actions.LightAttack].performed += PerformAttack;
-        Input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
-    }
-
-    private void OnDisable()
-    {
-        if (Input == null)
-            return;
-
-        Input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
-        Input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
-    }
-
-    private void Reset()
-    {
-        playerAnimator = GetComponentInParent<Animator>();
-    }
-
-    public void PerformAttack(InputAction.CallbackContext context)
-    {
-        playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
-    }
-
-    public void PerformHeavyAttack(InputAction.CallbackContext context)
-    {
-        playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
-    }
-    
-    public float AttemptCrit(float damage)
-    {
-        if (Random.value <= critChance)
+        private void OnEnable()
         {
-            return damage + (damage * Random.Range(critMultiplierLow, critMultiplierHigh));
+            Input.reference.actions[Actions.LightAttack].performed += PerformAttack;
+            Input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
         }
 
-        return damage;
-    }
+        private void OnDisable()
+        {
+            if (Input == null)
+                return;
 
-    private void OnTriggerEnter(Collider col)
-    {
-        if (!col.CompareTag(Tags.Enemy) && !col.CompareTag(Tags.Dome)) 
-            return;
+            Input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
+            Input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
+        }
+
+        private void Reset()
+        {
+            playerAnimator = GetComponentInParent<Animator>();
+        }
+
+        public void PerformAttack(InputAction.CallbackContext context)
+        {
+            playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
+        }
+
+        public void PerformHeavyAttack(InputAction.CallbackContext context)
+        {
+            playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
+        }
+    
+        public float AttemptCrit(float damage)
+        {
+            if (Random.value <= critChance)
+            {
+                return damage + (damage * Random.Range(critMultiplierLow, critMultiplierHigh));
+            }
+
+            return damage;
+        }
+
+        private void OnTriggerEnter(Collider col)
+        {
+            if (!col.CompareTag(Tags.Enemy) && !col.CompareTag(Tags.Dome)) 
+                return;
         
-        var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(PlayerAnimator.Layer.UpperBody);
-        var killable = col.GetComponent<IKillable>();
-        if (stateInfo.IsName(PlayerAnimator.State.LightAttack))
-        {
-            killable.TakeDamage(AttemptCrit(BaseDamage));
-        }
-        if (stateInfo.IsName(PlayerAnimator.State.HeavyAttack))
-        {
-            killable.TakeDamage(AttemptCrit(HeavyDamage));
+            var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(PlayerAnimator.Layer.UpperBody);
+            var killable = col.GetComponent<IKillable>();
+            if (stateInfo.IsName(PlayerAnimator.State.LightAttack))
+            {
+                killable.TakeDamage(AttemptCrit(BaseDamage));
+            }
+            if (stateInfo.IsName(PlayerAnimator.State.HeavyAttack))
+            {
+                killable.TakeDamage(AttemptCrit(HeavyDamage));
+            }
         }
     }
 }

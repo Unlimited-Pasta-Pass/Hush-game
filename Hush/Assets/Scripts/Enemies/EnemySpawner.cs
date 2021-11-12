@@ -1,28 +1,31 @@
-using Common;
+using Common.Enums;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+namespace Enemies
 {
-   [SerializeField] private GameObject enemyPrefab;
+   public class EnemySpawner : MonoBehaviour
+   {
+      [SerializeField] private GameObject enemyPrefab;
    
-   public void OnRelicDestroy()
-   {
-      SpawnEnemy();
-   }
-
-   void SpawnEnemy()
-   {
-      GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag(Tags.EnemySpawnPoint);
-
-      foreach (var spawn in spawnPoints)
+      public void OnRelicDestroy()
       {
-         var enemyClone = Instantiate(enemyPrefab, spawn.transform.position , Quaternion.identity);
-         
-         var target = GameObject.FindWithTag(Tags.Relic);
-         enemyClone.transform.LookAt(target.transform, Vector3.up);
-         
-         //TODO change clone vision
+         SpawnEnemy();
       }
-   }
+
+      void SpawnEnemy()
+      {
+         GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag(Tags.EnemySpawnPoint);
+
+         foreach (var spawn in spawnPoints)
+         {
+            var enemyClone = Instantiate(enemyPrefab, spawn.transform.position , Quaternion.identity);
+         
+            var target = GameObject.FindWithTag(Tags.Relic);
+            enemyClone.transform.LookAt(target.transform, Vector3.up);
+         
+            //TODO change clone vision
+         }
+      }
    
+   }
 }

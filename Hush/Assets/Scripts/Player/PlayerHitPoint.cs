@@ -1,9 +1,10 @@
-﻿using Common;
-using Enums;
+﻿using Common.Interfaces;
+using Game;
+using Player.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace StarterAssets
+namespace Player
 {
     public class PlayerHitPoint : MonoBehaviour, IKillable
     {

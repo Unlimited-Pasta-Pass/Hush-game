@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Keys;
+using Game;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Game
+namespace Keys
 {
     public class KeySpawner : MonoBehaviour
     {

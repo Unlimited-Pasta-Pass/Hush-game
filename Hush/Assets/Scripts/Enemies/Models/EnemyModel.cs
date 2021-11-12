@@ -2,7 +2,7 @@
 using Common.Models;
 using Enemies.Enums;
 
-namespace Enemies
+namespace Enemies.Models
 {
     [Serializable]
     public class EnemyModel
