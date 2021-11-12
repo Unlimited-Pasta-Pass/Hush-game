@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Enemies.Enums
 {
     public enum EnemyState
     {

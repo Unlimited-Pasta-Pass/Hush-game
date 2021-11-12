@@ -11,18 +11,20 @@ public class GameManager : MonoBehaviour
     // Instance
     public static GameManager Instance;
     
+    // Events
     public UnityEvent<int> keyCountChanged;
 
-    private GameModel _game;
+    // Game State
+    private GameState _game;
 
     #region Public Getters
 
-    public GameModel CurrentGame => _game;
+    public GameState CurrentGame => _game;
     public float PlayerCurrentHitPoints => _game.playerCurrentHitPoints;
     public float PlayerMaxHitPoints => _game.playerMaxHitPoints;
     public bool IsPlayerInCombat => _game.enemiesAttacking.Count > 0;
     public bool PlayerHasRelic => _game.playerHasRelic;
-    public int KeysInPossession => _game.keysInPossession;
+    public HashSet<int> KeysInPossession => _game.keysInPossession;
     public int CurrentlyLoadedScene => _game.currentlyLoadedScene;
 
     private ReadOnlyDictionary<int, bool> _readOnlyDictionary;
@@ -42,27 +44,17 @@ public class GameManager : MonoBehaviour
 
     private void InitializeValues()
     {
-        _game ??= new GameModel
-        {
-            playerCurrentHitPoints = 0f,
-            playerMaxHitPoints = 0f,
-            playerHasRelic = false,
-            keysInPossession = 0,
-            enemiesAttacking = new HashSet<int>(),
-            currentlyLoadedScene = 0,
-            keySpawnersInUse = new Dictionary<int, bool>()
-        };
-
+        _game ??= new GameState();
         keyCountChanged ??= new UnityEvent<int>();
         
         // Make sure the UI follows the Game Master State
-        keyCountChanged.Invoke(_game.keysInPossession);
+        keyCountChanged.Invoke(_game.keysInPossession.Count);
     }
 
     // Game Model
-    public void SetGameModel(GameModel gameModel)
+    public void SetGameState(GameState gameState)
     {
-        _game = gameModel;
+        _game = gameState;
     }
     
     // Player
@@ -86,14 +78,14 @@ public class GameManager : MonoBehaviour
     }
     
     // Keys
-    public void CollectKey()
+    public void CollectKey(int instanceId)
     {
-        _game.keysInPossession += 1;
-        keyCountChanged.Invoke(_game.keysInPossession);
+        _game.keysInPossession.Add(instanceId);
+        keyCountChanged.Invoke(_game.keysInPossession.Count);
     }
     
     public void ResetKeys () {
-        _game.keysInPossession = 0;
+        _game.keysInPossession.Clear();
     }
 
     // Relic

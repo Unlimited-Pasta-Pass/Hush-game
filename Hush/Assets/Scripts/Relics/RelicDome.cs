@@ -25,7 +25,7 @@ public class RelicDome : MonoBehaviour, IKillable
         }
     }
 
-    private bool CanUnlockDome => GameManager.Instance.KeysInPossession >= keysNeededToUnlock;
+    private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock;
 
     private void Awake()
     {

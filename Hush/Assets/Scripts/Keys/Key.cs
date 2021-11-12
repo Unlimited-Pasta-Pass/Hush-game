@@ -8,7 +8,7 @@ public class Key : MonoBehaviour
         if (!other.gameObject.CompareTag(Tags.Player)) 
             return;
         
-        GameManager.Instance.CollectKey();
+        GameManager.Instance.CollectKey(transform.parent.gameObject.GetInstanceID());
         gameObject.SetActive(false);
     }
 }

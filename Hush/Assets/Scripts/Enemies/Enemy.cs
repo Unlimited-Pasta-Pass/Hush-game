@@ -1,4 +1,5 @@
 using Common;
+using Enemies.Enums;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;

@@ -30,10 +30,10 @@ namespace Game
                 return;
             
             var stream = new FileStream(_path, FileMode.Open);
-            var model = _formatter.Deserialize(stream) as GameModel;
+            var model = _formatter.Deserialize(stream) as GameState;
             stream.Close();
             
-            GameManager.Instance.SetGameModel(model);
+            GameManager.Instance.SetGameState(model);
         }
     }
 }
