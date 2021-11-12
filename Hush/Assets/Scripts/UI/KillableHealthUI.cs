@@ -4,14 +4,12 @@ using Slider = UnityEngine.UI.Slider;
 
 public class KillableHealthUI : MonoBehaviour
 {
-    [SerializeField] private Camera playerCamera;
+    [Header("Parameters")]
+    [SerializeField] private Vector3 cameraOffset;
+    
+    [Header("References")]
     [SerializeField] private GameObject killableObject;
     [SerializeField] private Slider healthSlider;
-
-    private void OnEnable()
-    {
-        playerCamera = Camera.main;
-    }
 
     private void Update()
     {
@@ -20,7 +18,6 @@ public class KillableHealthUI : MonoBehaviour
 
     private void LateUpdate()
     {
-       transform.LookAt(playerCamera.transform.position, Vector3.down);
-       transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+        transform.rotation = Quaternion.Euler(cameraOffset);
     }
 }
