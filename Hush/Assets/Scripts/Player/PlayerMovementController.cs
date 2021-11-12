@@ -38,7 +38,7 @@ namespace StarterAssets
             _playerRotation = transform.rotation;
         }
         
-        private void Update()
+        private void FixedUpdate()
         {
             MovePlayer();
             RotatePlayer();

@@ -104,14 +104,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionAngle: 70
+  detectionRadius: 3
   maxHitPoints: 100
-  layerMask:
+  targetLayerMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 1152
   minAttackRange: 0.5
   maxAttackRange: 1
-  runSpeed: 4
-  patrolSpeed: 2
+  runSpeed: 3
+  patrolSpeed: 1
   patrolRoute: []
   agent: {fileID: 234692157854127520}
   animator: {fileID: 8391566035528528493}
@@ -184,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8a3ddfbccc4c3ba2b43cae0d9cd3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  baseDamage: 5
   enemyAnimator: {fileID: 0}
   enemy: {fileID: 8490621396511798265}
 --- !u!1 &7959901480173517863
@@ -379,6 +380,14 @@ PrefabInstance:
     - target: {fileID: 2000088376432427109, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
       propertyPath: m_Name
       value: KillableHealthUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000088376600981335, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000088376600981335, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}

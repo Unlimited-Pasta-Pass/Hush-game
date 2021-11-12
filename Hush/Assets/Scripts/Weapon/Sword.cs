@@ -55,10 +55,10 @@ public class Sword : MonoBehaviour, IWeapon
     {
         if (Random.value <= critChance)
         {
-            return (damage * Random.Range(critMultiplierLow, critMultiplierHigh));
+            return damage + (damage * Random.Range(critMultiplierLow, critMultiplierHigh));
         }
 
-        return 0;
+        return damage;
     }
 
     private void OnTriggerEnter(Collider col)

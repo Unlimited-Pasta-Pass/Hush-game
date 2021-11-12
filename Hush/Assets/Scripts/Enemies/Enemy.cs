@@ -10,8 +10,9 @@ public class Enemy : MonoBehaviour, IEnemy
 
     [Header("Parameters")]
     [SerializeField] private float visionAngle = 70.0f;
+    [SerializeField] private float detectionRadius = 3f;
     [SerializeField] private float maxHitPoints = 100;
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private LayerMask targetLayerMask;
 
     [Header("Attack")]
     [SerializeField] private float minAttackRange = 0.5f;
@@ -189,8 +190,11 @@ public class Enemy : MonoBehaviour, IEnemy
         playerPosition.y = position.y;
         
         Vector3 towardsPlayer = playerPosition - position;
+
+        var closeToPlayer = Vector3.Distance(playerPosition, position) <= detectionRadius;
+        var seePlayer = Physics.Raycast(position, towardsPlayer.normalized, out var hit, visionCollider.radius, targetLayerMask) && hit.collider.CompareTag(Tags.Player);
         
-        return Physics.Raycast(position, towardsPlayer.normalized, out var hit, visionCollider.radius, layerMask) && hit.collider.CompareTag(Tags.Player);
+        return closeToPlayer || seePlayer;
     }
     
     private void FacePlayer()

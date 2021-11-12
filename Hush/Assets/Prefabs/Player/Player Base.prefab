@@ -5050,8 +5050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bdd02eaa4730848a13d16293ee38de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 5
-  heavyDamage: 15
+  baseDamage: 20
+  heavyDamage: 50
   critChance: 0.1
   critMultiplierLow: 0.5
   critMultiplierHigh: 0.75
@@ -5367,11 +5367,11 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.5
-  m_Radius: 0.4
-  m_SlopeLimit: 45
+  m_Height: 1.45
+  m_Radius: 0.3
+  m_SlopeLimit: 0
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.03
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &5600300516197474806
@@ -5678,8 +5678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 5
-  heavyDamage: 15
+  baseDamage: 15
+  heavyDamage: 30
   spellPrefab: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
   shootPosition: {fileID: 5956840403188805875}
   animator: {fileID: 8205350870087033752}
