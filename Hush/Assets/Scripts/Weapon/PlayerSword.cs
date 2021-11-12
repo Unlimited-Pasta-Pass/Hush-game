@@ -17,7 +17,8 @@ public class PlayerSword : MonoBehaviour, IWeapon
     
     [Header("References")]
     [SerializeField] private Animator playerAnimator;
-    [SerializeField] private PlayerInputManager input;
+    
+    private static PlayerInputManager Input => PlayerInputManager.Instance;
 
     public WeaponType WeaponType => WeaponType.Sword;
     
@@ -26,14 +27,17 @@ public class PlayerSword : MonoBehaviour, IWeapon
 
     private void OnEnable()
     {
-        input.reference.actions[Actions.LightAttack].performed += PerformAttack;
-        input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
+        Input.reference.actions[Actions.LightAttack].performed += PerformAttack;
+        Input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
     }
 
     private void OnDisable()
     {
-        input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
-        input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
+        if (Input == null)
+            return;
+
+        Input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
+        Input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
     }
 
     private void Reset()

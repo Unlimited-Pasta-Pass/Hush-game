@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 namespace StarterAssets
 {
-    [RequireComponent(typeof(PlayerInputManager))]
     public class PlayerHitPoint : MonoBehaviour, IKillable
     {
         #region Parameters
@@ -23,13 +22,16 @@ namespace StarterAssets
         private UnityEvent _killed;
         public UnityEvent Killed => _killed ??= new UnityEvent();
 
-        public float HitPoints => GameManager.Instance.PlayerHitPoints;
+        public float HitPoints => GameManager.Instance.PlayerCurrentHitPoints;
         
         #endregion
+        
+        private static PlayerInputManager Input => PlayerInputManager.Instance;
 
         private void Awake()
         {
             GameManager.Instance.SetPlayerHitPoints(maxHitPoints);
+            GameManager.Instance.SetPlayerMaxHitPoints(maxHitPoints);
         }
         
         public void TakeDamage(float damage)
@@ -46,10 +48,8 @@ namespace StarterAssets
         public void Die()
         {
             animator.SetBool(PlayerAnimator.Dead, true);
-            var playerInput = GetComponent<PlayerInputManager>();
             
-            if (playerInput)
-                playerInput.enabled = false;
+            Input.enabled = false;
             
             Killed.Invoke();
         }

@@ -1,24 +1,21 @@
-using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    [SerializeField] private PlayerHitPoint player;
     [SerializeField] private TextMeshProUGUI healthValue;
     [SerializeField] private Slider healthSlider;
 
-    private int _maxHealth;
-
     private void Start()
     {
-        _maxHealth = (int) healthSlider.value;
+        healthSlider.minValue = 0f;
+        healthSlider.maxValue = GameManager.Instance.PlayerMaxHitPoints;
     }
 
     private void Update()
     {
-        healthValue.text = $"{player.HitPoints} / {_maxHealth}";
-        healthSlider.value = player.HitPoints;
+        healthValue.text = $"{GameManager.Instance.PlayerCurrentHitPoints} / {GameManager.Instance.PlayerMaxHitPoints}";
+        healthSlider.value = GameManager.Instance.PlayerCurrentHitPoints;
     }
 }

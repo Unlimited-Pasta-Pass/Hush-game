@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using System;
+using Common;
 using Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +7,6 @@ using UnityEngine.InputSystem;
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
-    [RequireComponent(typeof(PlayerInput))]
     public class PlayerMovement : MonoBehaviour
     {
         #region Parameters
@@ -26,12 +26,23 @@ namespace StarterAssets
         [Header("Component References")] 
         [SerializeField] private Animator animator;
         [SerializeField] private CharacterController controller;
-        [SerializeField] private PlayerInputManager input;
 
         #endregion
+        
+        private static PlayerInputManager Input => PlayerInputManager.Instance;
 
         private float _playerSpeed;
         private Quaternion _playerRotation;
+
+        private void Awake()
+        {
+            var input = FindObjectOfType<PlayerInputManager>(true);
+
+            if (input == null)
+                throw new MissingComponentException("Player Input Manager not found");
+
+            input.enabled = true;
+        }
 
         private void Start()
         {
@@ -47,7 +58,7 @@ namespace StarterAssets
         private void MovePlayer()
         {
             // Set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = input.move.normalized.magnitude * (input.walk ? walkSpeed : sprintSpeed);
+            float targetSpeed = Input.move.normalized.magnitude * (Input.walk ? walkSpeed : sprintSpeed);
             
             // Creates curved result rather than a linear one giving a more organic speed change
             _playerSpeed = Mathf.Lerp(_playerSpeed, targetSpeed, speedChangeRate * Time.deltaTime);
@@ -62,7 +73,7 @@ namespace StarterAssets
         private void RotatePlayer()
         {
             // Set the target direction based on the input
-            Vector3 targetDirection = new Vector3(input.move.x, 0f, input.move.y);
+            Vector3 targetDirection = new Vector3(Input.move.x, 0f, Input.move.y);
                 
             // Rotate the player only if the player inputs a new direction
             if (targetDirection == Vector3.zero) 

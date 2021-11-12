@@ -17,7 +17,8 @@ public class PlayerSpell : MonoBehaviour, IWeapon
     
     [Header("Other References")]
     [SerializeField] private Animator animator;
-    [SerializeField] private PlayerInputManager input;
+    
+    private static PlayerInputManager Input => PlayerInputManager.Instance;
 
     public WeaponType WeaponType => WeaponType.Spell;
 
@@ -26,14 +27,17 @@ public class PlayerSpell : MonoBehaviour, IWeapon
     
     private void OnEnable()
     {
-        input.reference.actions[Actions.LightSpell].performed += PerformAttack;
-        input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
+        Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
+        Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
     }
     
     private void OnDisable()
     {
-        input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
-        input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
+        if (Input == null)
+            return;
+        
+        Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
+        Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
     }
     
     public void PerformAttack(InputAction.CallbackContext context)

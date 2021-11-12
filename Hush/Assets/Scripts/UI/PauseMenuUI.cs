@@ -1,22 +1,27 @@
-using System;
 using Common;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenuUI : MonoBehaviour
 {
     public GameObject pauseMenuUI;
-    public GameObject pauseFirstButton;
+    
+    private static PlayerInputManager Input => PlayerInputManager.Instance;
 
     private void OnEnable()
     {
-        PlayerInputManager.Instance.reference.actions[Actions.Pause].performed += TogglePauseMenu;
+        Input.reference.actions[Actions.Pause].performed += TogglePauseMenu;
     }
 
     private void OnDisable()
     {
-        PlayerInputManager.Instance.reference.actions[Actions.Pause].performed -= TogglePauseMenu;
+        if (Input != null) 
+            Input.reference.actions[Actions.Pause].performed -= TogglePauseMenu;
+    }
+
+    private void Start()
+    {
+        pauseMenuUI.SetActive(false);
     }
 
     private void TogglePauseMenu(InputAction.CallbackContext obj)
@@ -30,15 +35,20 @@ public class PauseMenu : MonoBehaviour
     private void Pause()
     {
         TimeManager.Instance.Pause();
-        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
-        
         pauseMenuUI.SetActive(true);
+        
+        // Unlock the cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
     
     private void Resume()
     {
         TimeManager.Instance.Resume();
-        EventSystem.current.SetSelectedGameObject(null);
         pauseMenuUI.SetActive(false);
+        
+        // Lock the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

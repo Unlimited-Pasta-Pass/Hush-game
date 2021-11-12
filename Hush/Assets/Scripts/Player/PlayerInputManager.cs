@@ -3,10 +3,7 @@ using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputManager : MonoBehaviour
-{ 
-	[Header("Mouse Cursor Settings")] 
-	[SerializeField] private bool cursorLocked = true;
-	
+{
 	[Header("Character Input Values")]
 	public Vector2 move;
 	public Vector2 look;
@@ -32,12 +29,9 @@ public class PlayerInputManager : MonoBehaviour
 
 	private void Start()
 	{
-		if (cursorLocked)
-		{
-			// Disable the mouse cursor
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-		}
+		// Lock the mouse cursor
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 	
 	#region Public Event Handlers

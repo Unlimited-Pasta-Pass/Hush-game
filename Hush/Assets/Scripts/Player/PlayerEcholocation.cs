@@ -16,7 +16,8 @@ namespace StarterAssets
 
         [Header("References")]
         [SerializeField] private ParticleSystem effect;
-        [SerializeField] private PlayerInputManager input;
+        
+        private static PlayerInputManager Input => PlayerInputManager.Instance;
         
         private List<LOSObjectHider> _hiddenObjectsInRange;
 
@@ -27,12 +28,13 @@ namespace StarterAssets
 
         private void OnEnable()
         {
-            input.reference.actions[Actions.Reveal].performed += OnEcholocate;
+            Input.reference.actions[Actions.Reveal].performed += OnEcholocate;
         }
 
         private void OnDisable()
         {
-            input.reference.actions[Actions.Reveal].performed -= OnEcholocate;
+            if (Input != null) 
+                Input.reference.actions[Actions.Reveal].performed -= OnEcholocate;
         }
 
         private void Update()
