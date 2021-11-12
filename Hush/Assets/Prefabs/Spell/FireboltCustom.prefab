@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7404962802360708877}
   m_Layer: 0
   m_Name: FireboltCustom
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 7404962802349040907}
   m_Layer: 0
   m_Name: FireboltExplosion
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5147,7 +5147,7 @@ GameObject:
   - component: {fileID: 7404962802356137669}
   m_Layer: 0
   m_Name: FireboltCollider
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5282,7 +5282,7 @@ GameObject:
   - component: {fileID: 7404962802347104701}
   m_Layer: 0
   m_Name: FireboltParticle
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
