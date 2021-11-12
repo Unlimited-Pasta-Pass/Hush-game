@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-    public class PlayerEcholocationController : MonoBehaviour
+    public class PlayerEcholocation : MonoBehaviour
     {
         [Header("Parameters")]
         [SerializeField] private float revealDistance = 20f;

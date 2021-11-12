@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace StarterAssets
 {
     [RequireComponent(typeof(PlayerInputManager))]
-    public class PlayerHitPointController : MonoBehaviour, IKillable
+    public class PlayerHitPoint : MonoBehaviour, IKillable
     {
         #region Parameters
 
@@ -23,32 +23,24 @@ namespace StarterAssets
         private UnityEvent _killed;
         public UnityEvent Killed => _killed ??= new UnityEvent();
 
-        private float _hitPoints;
-        public float HitPoints
-        {
-            get => _hitPoints;
-            private set
-            {
-                _hitPoints = value;
-                if (_hitPoints <= 0)
-                {
-                    _hitPoints = 0;
-                    Die();
-                }
-            }
-        }
-
+        public float HitPoints => GameManager.Instance.PlayerHitPoints;
+        
         #endregion
 
         private void Awake()
         {
-            HitPoints = maxHitPoints;
+            GameManager.Instance.SetPlayerHitPoints(maxHitPoints);
         }
         
         public void TakeDamage(float damage)
         {
             // TODO: Add animation
-            HitPoints -= damage;
+            
+            // If the player's hp is at 0 or lower, they die
+            if (!GameManager.Instance.UpdatePlayerHitPoints(-damage))
+            {
+                Die();
+            }
         }
 
         public void Die()

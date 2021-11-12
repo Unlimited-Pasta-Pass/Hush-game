@@ -7,7 +7,7 @@ namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInput))]
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         #region Parameters
 

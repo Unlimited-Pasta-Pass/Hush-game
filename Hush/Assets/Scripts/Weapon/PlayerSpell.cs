@@ -1,12 +1,11 @@
 using Common;
 using UnityEngine;
 using Enums;
-using DigitalRuby.PyroParticles;
 using Plugins;
 using UnityEngine.InputSystem;
 using Weapon.Enums;
 
-public class Spell : MonoBehaviour, IWeapon
+public class PlayerSpell : MonoBehaviour, IWeapon
 {
     [Header("Parameters")]
     [SerializeField] private float baseDamage = 5f;

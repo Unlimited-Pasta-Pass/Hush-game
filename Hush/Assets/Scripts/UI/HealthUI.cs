@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthUI : MonoBehaviour
 {
-    [SerializeField] private PlayerHitPointController player;
+    [SerializeField] private PlayerHitPoint player;
     [SerializeField] private TextMeshProUGUI healthValue;
     [SerializeField] private Slider healthSlider;
 

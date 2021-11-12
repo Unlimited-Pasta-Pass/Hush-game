@@ -4,7 +4,7 @@ using Enums;
 using UnityEngine.InputSystem;
 using Weapon.Enums;
 
-public class Sword : MonoBehaviour, IWeapon
+public class PlayerSword : MonoBehaviour, IWeapon
 {
     [Header("Damage Parameters")]
     [SerializeField] private float baseDamage = 5;
