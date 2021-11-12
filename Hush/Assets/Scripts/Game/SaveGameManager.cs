@@ -20,7 +20,7 @@ namespace Game
         public void OnSave()
         {
             var stream = new FileStream(_path, FileMode.Create);
-            _formatter.Serialize(stream, GameManager.Instance.CurrentGame);
+            _formatter.Serialize(stream, GameManager.Instance.CurrentGameState);
             stream.Close();
         }
         
