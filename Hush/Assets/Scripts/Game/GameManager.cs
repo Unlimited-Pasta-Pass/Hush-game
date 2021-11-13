@@ -27,10 +27,6 @@ namespace Game
         private void InitializeValues()
         {
             _state ??= new GameState();
-            keyCountChanged ??= new UnityEvent<int>();
-        
-            // Make sure the UI follows the Game Master State
-            keyCountChanged.Invoke(_state.keysInPossession.Count);
         }
 
         // Game Model

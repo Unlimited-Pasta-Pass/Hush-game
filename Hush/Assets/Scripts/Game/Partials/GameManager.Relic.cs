@@ -34,6 +34,11 @@ namespace Game
             _state.playerHasRelic = false;
         }
 
+        public void DisableDome()
+        {
+            _state.relicDomeHitPoints = 0f;
+        }
+
         public bool AttackDome(float damage)
         {
             _state.relicDomeHitPoints = Math.Max(_state.relicDomeHitPoints - damage, 0f);
@@ -42,16 +47,20 @@ namespace Game
 
         private void ApplyRelicState()
         {
-            // Should only ever be 1 relic but iterate to be safe
-            foreach (var relic in FindObjectsOfType<Relic>(true))
+            var relic = FindObjectOfType<Relic>(true);
+            if (relic != null)
             {
                 relic.SetRelicVisibility(!_state.playerHasRelic);
             }
-            
-            // Should only ever be 1 relic dome but iterate to be safe
-            foreach (var dome in FindObjectsOfType<RelicDome>(true))
+
+            var dome = FindObjectOfType<RelicDome>(true);
+            if (dome != null)
             {
-                dome.SetDomeVisibility(!_state.playerHasRelic && RelicDomeHitPoints > 0f);
+                var domeVisible = !_state.playerHasRelic && RelicDomeHitPoints > 0f;
+                dome.SetDomeVisibility(domeVisible);
+                
+                if (!domeVisible)
+                    dome.Killed.Invoke();
             }
         }
     }

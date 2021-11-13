@@ -24,8 +24,7 @@ namespace Relics
             if (!other.gameObject.CompareTag(Tags.Player) || !CanUnlockDome) 
                 return;
 
-            GameManager.Instance.ResetKeys();
-            SetDomeVisibility(false);
+            Die();
         }
     
         public void TakeDamage(float damage)
@@ -43,8 +42,11 @@ namespace Relics
         public void Die()
         {
             // TODO breaking animation
-            Killed.Invoke();
+            
             SetDomeVisibility(false);
+            
+            GameManager.Instance.DisableDome();
+            Killed.Invoke();
         }
 
         public void SetDomeVisibility(bool visibility)

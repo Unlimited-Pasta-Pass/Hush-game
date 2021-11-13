@@ -10,7 +10,7 @@ namespace Game
     public partial class GameManager
     {
         [Header("Keys")]
-        public UnityEvent<int> keyCountChanged;
+        public UnityEvent keyCountChanged;
         
         public HashSet<Guid> KeysInPossession => _state.keysInPossession;
 
@@ -20,12 +20,7 @@ namespace Game
         public void CollectKey(Guid instanceId)
         {
             _state.keysInPossession.Add(instanceId);
-            keyCountChanged.Invoke(_state.keysInPossession.Count);
-        }
-
-        public void ResetKeys()
-        {
-            _state.keysInPossession.Clear();
+            InvokeKeyCountChanged();
         }
         
         public void UpdateKeySpawnerList(IEnumerable<Guid> spawners)
@@ -40,10 +35,16 @@ namespace Game
         {
             _state.keySpawnersInUse[instanceId] = true;
         }
+        
+        public void ResetKeys()
+        {
+            _state.keysInPossession.Clear();
+            InvokeKeyCountChanged();
+        }
 
         private void ApplyKeysState()
         {
-            keyCountChanged.Invoke(_state.keysInPossession.Count);
+            InvokeKeyCountChanged();
             
             // Clear the spawned keys
             foreach (var key in FindObjectsOfType<Key>())
@@ -58,6 +59,12 @@ namespace Game
                 return;
 
             spawner.SelectKeySpawners();
+        }
+
+        private void InvokeKeyCountChanged()
+        {
+            keyCountChanged ??= new UnityEvent();
+            keyCountChanged.Invoke();
         }
     }
 }
