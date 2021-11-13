@@ -37,6 +37,8 @@ namespace Game
         public void SetGameState(GameState gameState)
         {
             _state = gameState;
+
+            ApplyEnemiesState();
         }
     }
 }

@@ -7,12 +7,17 @@ namespace Game
 {
     public class SaveGameManager : MonoBehaviour
     {
+        public static SaveGameManager Instance;
+        
         private string _path = "/pasta.save";
         
         private BinaryFormatter _formatter;
 
         private void Awake()
         {
+            if (Instance == null)
+                Instance = this;
+            
             _path = Application.persistentDataPath + _path;
             _formatter ??= new BinaryFormatter();
         }

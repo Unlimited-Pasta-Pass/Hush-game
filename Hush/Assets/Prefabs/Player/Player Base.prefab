@@ -5310,6 +5310,7 @@ GameObject:
   - component: {fileID: 5076025907412216654}
   - component: {fileID: 3424695256074168618}
   - component: {fileID: 2115969719432915281}
+  - component: {fileID: 90708531195035637}
   m_Layer: 10
   m_Name: Player Base
   m_TagString: Player
@@ -5436,6 +5437,19 @@ MonoBehaviour:
   spellPrefab: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
   shootPosition: {fileID: 5956840403188805875}
   animator: {fileID: 8205350870087033752}
+--- !u!114 &90708531195035637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bbc2c1e63e98543830eec78d976795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedGuid: 
 --- !u!1 &5956840403188805875
 GameObject:
   m_ObjectHideFlags: 0

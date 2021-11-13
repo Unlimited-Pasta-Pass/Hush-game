@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2348724637463424757}
   - component: {fileID: 1798717819028047863}
+  - component: {fileID: 2052870202995907005}
   m_Layer: 9
   m_Name: Dome & Relic
   m_TagString: Untagged
@@ -46,6 +47,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1423858757433039569, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
+--- !u!114 &2052870202995907005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2348724637463424756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bbc2c1e63e98543830eec78d976795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedGuid: 
 --- !u!1 &7742152041357142625
 GameObject:
   m_ObjectHideFlags: 0

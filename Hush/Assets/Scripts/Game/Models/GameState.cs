@@ -23,29 +23,37 @@ namespace Game.Models
         public bool playerHasRelic;
         
         // Keys
-        public Dictionary<int, bool> keySpawnersInUse;
-        public HashSet<int> keysInPossession;
+        public Dictionary<Guid, bool> keySpawnersInUse;
+        public HashSet<Guid> keysInPossession;
 
         // Enemies
-        public HashSet<int> enemiesAttacking;
-        public Dictionary<int, SerializableTransform> enemiesTransforms;
+        public HashSet<Guid> enemiesAttacking;
+        public Dictionary<Guid, SerializableTransform> enemiesTransforms;
+        public Dictionary<Guid, float> enemiesHitPoints;
         
         // Scene
         public int currentlyLoadedScene;
 
         public GameState()
         {
+            // Player
             playerCurrentHitPoints = 0f;
             playerMaxHitPoints = 0f;
-            playerHasRelic = false;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
             
-            keySpawnersInUse = new Dictionary<int, bool>();
-            keysInPossession = new HashSet<int>();
+            // Relic
+            playerHasRelic = false;
             
-            enemiesAttacking = new HashSet<int>();
-            enemiesTransforms = new Dictionary<int, SerializableTransform>();
+            // Keys
+            keySpawnersInUse = new Dictionary<Guid, bool>();
+            keysInPossession = new HashSet<Guid>();
             
+            // Enemies
+            enemiesAttacking = new HashSet<Guid>();
+            enemiesTransforms = new Dictionary<Guid, SerializableTransform>();
+            enemiesHitPoints = new Dictionary<Guid, float>();
+            
+            // Scene
             currentlyLoadedScene = 0;
         }
     }

@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8ae6c7e2dc84b47b9b46b7a972f71c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHitPoints: 100
+  enemyPrefab: {fileID: 1423858757433039569, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
   keyCountChanged:
     m_PersistentCalls:
       m_Calls:

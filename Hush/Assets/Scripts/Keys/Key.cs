@@ -11,7 +11,7 @@ namespace Keys
             if (!other.gameObject.CompareTag(Tags.Player)) 
                 return;
         
-            GameManager.Instance.CollectKey(transform.parent.gameObject.GetInstanceID());
+            GameManager.Instance.CollectKey(transform.parent.GetComponent<GuidComponent>().GetGuid());
             gameObject.SetActive(false);
         }
     }

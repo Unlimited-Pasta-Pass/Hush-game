@@ -1,6 +1,8 @@
+using System;
 using Common.Enums;
 using Enemies.Enums;
 using Game;
+using Game.Models;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -15,7 +17,6 @@ namespace Enemies
         [Header("Parameters")]
         [SerializeField] private float visionAngle = 70.0f;
         [SerializeField] private float detectionRadius = 3f;
-        [SerializeField] private float maxHitPoints = 100;
         [SerializeField] private LayerMask targetLayerMask;
 
         [Header("Attack")]
@@ -75,14 +76,29 @@ namespace Enemies
         #endregion
 
         #region Events
-    
-        private void Start()
+
+        private void OnEnable()
         {
             _player = GameObject.FindWithTag(Tags.Player);
-
-            HitPoints = maxHitPoints;
         }
-    
+
+        private void Start()
+        {
+            InitializeEnemy();
+        }
+
+        private void Update()
+        {
+            // Enemy lost track of player
+            if (_state == EnemyState.Searching && agent.remainingDistance <= agent.stoppingDistance && !HasPlayerLineOfSight())
+            {
+                SetState(EnemyState.Patrolling);
+            }
+
+            // Do movement update logic
+            MoveEnemy();
+        }
+
         private void Reset()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -113,18 +129,12 @@ namespace Enemies
             Gizmos.DrawLine(position, transform.TransformPoint(second));
         }
 
-        void Update()
-        {
-            // Enemy lost track of player
-            if (_state == EnemyState.Searching && agent.remainingDistance <= agent.stoppingDistance && !HasPlayerLineOfSight())
-            {
-                SetState(EnemyState.Patrolling);
-            }
+        #endregion
+        
+        #region Computed Getters
 
-            // Do movement update logic
-            MoveEnemy();
-        }
-
+        private Guid ID => GetComponent<GuidComponent>().GetGuid(); 
+        
         #endregion
     
         #region Private Methods
@@ -181,7 +191,7 @@ namespace Enemies
                 }
             }
 
-            GameManager.Instance.MoveEnemy(gameObject.GetInstanceID(), transform);
+            GameManager.Instance.MoveEnemy(ID, transform);
             
             // Update animator
             animator.SetFloat(EnemyAnimator.Speed, agent.velocity.magnitude);
@@ -215,7 +225,27 @@ namespace Enemies
         #endregion
     
         #region Public Methods
-    
+        
+        public void InitializeEnemy()
+        {
+            HitPoints = GameManager.Instance.GetEnemyHitPoints(ID);
+            
+            // Make sure to add the enemy to the HP dictionary if it's not already there
+            GameManager.Instance.UpdateEnemyHitPoints(ID , HitPoints);
+
+            var enemyTransform = GameManager.Instance.GetEnemyTransform(ID);
+            if (enemyTransform != null)
+            {
+                transform.position = enemyTransform.Position.Get();
+                transform.rotation = enemyTransform.Rotation.Get();
+            }
+
+            if (GameManager.Instance.IsEnemyAttacking(ID))
+            {
+                SetState(EnemyState.Attacking);
+            }
+        }
+        
         public void Die()
         {
             animator.SetBool(EnemyAnimator.Dead, true);
@@ -228,6 +258,8 @@ namespace Enemies
         {
             // TODO: Add animation
             HitPoints -= damage;
+
+            GameManager.Instance.UpdateEnemyHitPoints(ID , HitPoints);
         }
 
         public void PerformAttack()
@@ -255,11 +287,11 @@ namespace Enemies
             _state = state;
             if (state == EnemyState.Attacking)
             {
-                GameManager.Instance.EnemyStartedAttacking(gameObject.GetInstanceID());
+                GameManager.Instance.EnemyStartedAttacking(ID);
             }
             else
             {
-                GameManager.Instance.EnemyStoppedAttacking(gameObject.GetInstanceID());
+                GameManager.Instance.EnemyStoppedAttacking(ID);
             }
         }
 

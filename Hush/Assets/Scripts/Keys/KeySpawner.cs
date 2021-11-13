@@ -30,7 +30,7 @@ namespace Keys
             if (_keySpawners.Length <= 0)
                 throw new UnityException("No Key Spawner was found.");
 
-            GameManager.Instance.UpdateKeySpawnerList(_keySpawners.Select(k => k.gameObject.GetInstanceID()));
+            GameManager.Instance.UpdateKeySpawnerList(_keySpawners.Select(k => k.GetComponent<GuidComponent>().GetGuid()));
         }
 
         private void SpawnKey()
@@ -41,13 +41,13 @@ namespace Keys
             do
             {
                 index = (int)Mathf.Round(Random.Range(0, _keySpawners.Length));
-            } while (GameManager.Instance.KeySpawnersInUse[_keySpawners[index].gameObject.GetInstanceID()]);
+            } while (GameManager.Instance.KeySpawnersInUse[_keySpawners[index].GetComponent<GuidComponent>().GetGuid()]);
             
             // Spawn the key in the scene
             _keySpawners[index].SpawnKey();
             
             // Mark down the spawner as in use
-            GameManager.Instance.UseKeySpawner(_keySpawners[index].gameObject.GetInstanceID());
+            GameManager.Instance.UseKeySpawner(_keySpawners[index].GetComponent<GuidComponent>().GetGuid());
         }
     }
 }
