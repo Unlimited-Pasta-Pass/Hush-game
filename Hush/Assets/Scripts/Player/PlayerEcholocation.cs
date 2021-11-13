@@ -33,8 +33,7 @@ namespace Player
 
         private void OnDisable()
         {
-            if (Input != null) 
-                Input.reference.actions[Actions.Reveal].performed -= OnEcholocate;
+            Input.reference.actions[Actions.Reveal].performed -= OnEcholocate;
         }
 
         private void Update()

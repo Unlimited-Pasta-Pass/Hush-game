@@ -13,7 +13,10 @@ namespace Game
 
         private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+                Instance = this;
+            
+            DontDestroyOnLoad(Instance.gameObject);
         }
 
         public void Pause()

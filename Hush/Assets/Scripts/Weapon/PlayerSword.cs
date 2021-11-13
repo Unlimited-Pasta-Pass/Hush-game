@@ -38,9 +38,6 @@ namespace Weapon
 
         private void OnDisable()
         {
-            if (Input == null)
-                return;
-
             Input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
             Input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
         }

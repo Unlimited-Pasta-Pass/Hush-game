@@ -27,6 +27,8 @@ namespace Player
 		{
 			if (Instance == null)
 				Instance = this;
+			
+			DontDestroyOnLoad(Instance.gameObject);
 		}
 
 		private void Start()

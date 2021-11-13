@@ -44,6 +44,8 @@ namespace Game
                 return true;
             
             // Remove the enemy from the dictionaries when they die
+            // Delay the call to let the death animation occur.
+            // Otherwise the health bar resets before the entity is destroyed.
             StartCoroutine(CleanEnemy(id, enemyCleanupDelay));
             return false;
         }

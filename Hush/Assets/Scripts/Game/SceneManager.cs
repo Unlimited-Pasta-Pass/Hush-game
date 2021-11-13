@@ -10,6 +10,8 @@ namespace Game
         {
             if (Instance == null)
                 Instance = this;
+            
+            DontDestroyOnLoad(Instance.gameObject);
         }
 
         public void LoadNextScene()
@@ -41,6 +43,7 @@ namespace Game
         
         private void ReinitializeSceneState()
         {
+            GameManager.Instance.ResetPlayer();
             GameManager.Instance.ResetKeys();
             GameManager.Instance.ResetRelic();
             GameManager.Instance.ResetEnemies();

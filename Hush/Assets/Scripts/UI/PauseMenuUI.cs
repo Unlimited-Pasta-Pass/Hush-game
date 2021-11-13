@@ -19,8 +19,7 @@ namespace UI
 
         private void OnDisable()
         {
-            if (Input != null) 
-                Input.reference.actions[Actions.Pause].performed -= TogglePauseMenu;
+            Input.reference.actions[Actions.Pause].performed -= TogglePauseMenu;
         }
 
         private void Start()

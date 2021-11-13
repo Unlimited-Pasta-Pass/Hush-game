@@ -18,6 +18,8 @@ namespace Game
             if (Instance == null)
                 Instance = this;
             
+            DontDestroyOnLoad(Instance.gameObject);
+            
             _path = Application.persistentDataPath + _path;
             _formatter ??= new BinaryFormatter();
         }

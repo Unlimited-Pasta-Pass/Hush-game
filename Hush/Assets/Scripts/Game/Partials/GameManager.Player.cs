@@ -62,6 +62,11 @@ namespace Game
             _state.playerTransform = playerTransform;
         }
 
+        public void ResetPlayer()
+        {
+            _state.playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
+        }
+
         private void ApplyPlayerState()
         {
             var playerMovement = FindObjectOfType<PlayerMovement>();
