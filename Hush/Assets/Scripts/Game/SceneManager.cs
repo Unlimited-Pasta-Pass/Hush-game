@@ -14,6 +14,8 @@ namespace Game
 
         public void LoadNextScene()
         {
+            ReinitializeSceneState();
+            
             // real code for incrementing which level we're at
             // var updatedLevel = PlayerPrefs.GetInt("CurrentLevel") + 1;
             // PlayerPrefs.SetInt("CurrentLevel", updatedLevel);
@@ -35,6 +37,13 @@ namespace Game
         public void QuitGame()
         {
             Application.Quit();
+        }
+        
+        private void ReinitializeSceneState()
+        {
+            GameManager.Instance.ResetKeys();
+            GameManager.Instance.ResetRelic();
+            GameManager.Instance.ResetEnemies();
         }
     }
 }

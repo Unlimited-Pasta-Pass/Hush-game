@@ -66,6 +66,13 @@ namespace Game
             return _state.enemiesHitPoints[id];
         }
 
+        public void ResetEnemies()
+        {
+            _state.enemiesHitPoints.Clear();
+            _state.enemiesAttacking.Clear();
+            _state.enemiesTransforms.Clear();
+        }
+
         private void ApplyEnemiesState()
         {
             // Clear all current enemies
