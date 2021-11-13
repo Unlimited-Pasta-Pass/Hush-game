@@ -1,4 +1,4 @@
-﻿using Game;
+using Game;
 using Player.Enums;
 using UnityEngine;
 
@@ -46,7 +46,7 @@ namespace Player
         {
             _playerRotation = transform.rotation;
         }
-        
+
         private void FixedUpdate()
         {
             MovePlayer();
@@ -54,7 +54,7 @@ namespace Player
             
             GameManager.Instance.MovePlayer(transform);
         }
-
+        
         private void MovePlayer()
         {
             // Set target speed based on move speed, sprint speed and if sprint is pressed
@@ -62,9 +62,13 @@ namespace Player
             
             // Creates curved result rather than a linear one giving a more organic speed change
             _playerSpeed = Mathf.Lerp(_playerSpeed, targetSpeed, speedChangeRate * Time.deltaTime);
+
+            // Determine displacement
+            var horizontalDisplacement = Vector3.forward * (_playerSpeed * Time.deltaTime);
+            var verticalDisplacement = Vector3.up * (Physics.gravity.y * Time.deltaTime) * (controller.isGrounded ? 0 : 1);
             
             // Move the player
-            controller.Move(transform.TransformDirection(Vector3.forward * (_playerSpeed * Time.deltaTime)));
+            controller.Move(transform.TransformDirection(horizontalDisplacement + verticalDisplacement));
 
             // Update animator
             animator.SetFloat(PlayerAnimator.Speed, _playerSpeed);
@@ -80,10 +84,7 @@ namespace Player
                 return;
             
             // Creates curved result rather than a linear one giving a more organic rotation change
-            _playerRotation = Quaternion.Lerp(_playerRotation, Quaternion.LookRotation(targetDirection), rotationSpeed * Time.deltaTime);
-
-            // Rotate the player
-            transform.rotation = _playerRotation;
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), rotationSpeed * Time.deltaTime);
         }
     }
 }
