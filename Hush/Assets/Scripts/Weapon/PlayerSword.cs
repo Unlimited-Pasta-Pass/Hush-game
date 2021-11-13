@@ -1,10 +1,10 @@
 using Common.Enums;
 using Common.Interfaces;
+using Player;
 using Player.Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapon.Enums;
-using PlayerInputManager = Player.PlayerInputManager;
 
 namespace Weapon
 {
@@ -22,7 +22,7 @@ namespace Weapon
         [Header("References")]
         [SerializeField] private Animator playerAnimator;
     
-        private static PlayerInputManager Input => PlayerInputManager.Instance;
+        private static InputManager Input => InputManager.Instance;
 
         public WeaponType WeaponType => WeaponType.Sword;
     

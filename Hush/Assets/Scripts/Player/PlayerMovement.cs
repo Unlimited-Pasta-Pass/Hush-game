@@ -1,4 +1,4 @@
-using Game;
+﻿using Game;
 using Player.Enums;
 using UnityEngine;
 
@@ -27,14 +27,14 @@ namespace Player
 
         #endregion
         
-        private static PlayerInputManager Input => PlayerInputManager.Instance;
+        private static InputManager Input => InputManager.Instance;
 
         private float _playerSpeed;
-        private Quaternion _playerRotation;
 
         private void Awake()
         {
-            var input = FindObjectOfType<PlayerInputManager>(true);
+            // Make sure there is a functioning and enabled InputManager for the Player
+            var input = FindObjectOfType<InputManager>(true);
 
             if (input == null)
                 throw new MissingComponentException("Player Input Manager not found");
@@ -44,7 +44,7 @@ namespace Player
 
         private void Start()
         {
-            _playerRotation = transform.rotation;
+            InitializePlayerTransform();
         }
 
         private void FixedUpdate()
@@ -55,6 +55,20 @@ namespace Player
             GameManager.Instance.MovePlayer(transform);
         }
         
+        public void InitializePlayerTransform()
+        {
+            // For some reason disabling the character controller is
+            // required to teleport the player to the desired position...
+            controller.enabled = false;
+            
+            transform.position = GameManager.Instance.PlayerTransform.Position.Get();
+            transform.rotation = GameManager.Instance.PlayerTransform.Rotation.Get();
+            
+            _playerSpeed = 0f;
+            
+            controller.enabled = true;
+        }
+
         private void MovePlayer()
         {
             // Set target speed based on move speed, sprint speed and if sprint is pressed

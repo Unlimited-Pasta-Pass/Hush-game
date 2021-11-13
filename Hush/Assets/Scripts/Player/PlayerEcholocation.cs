@@ -17,7 +17,7 @@ namespace Player
         [Header("References")]
         [SerializeField] private ParticleSystem effect;
         
-        private static PlayerInputManager Input => PlayerInputManager.Instance;
+        private static InputManager Input => InputManager.Instance;
         
         private List<LOSObjectHider> _hiddenObjectsInRange;
 

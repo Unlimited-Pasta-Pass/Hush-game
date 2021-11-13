@@ -1,8 +1,8 @@
 using Common.Enums;
 using Game;
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using PlayerInputManager = Player.PlayerInputManager;
 
 namespace UI
 {
@@ -10,7 +10,7 @@ namespace UI
     {
         public GameObject pauseMenuUI;
     
-        private static PlayerInputManager Input => PlayerInputManager.Instance;
+        private static InputManager Input => InputManager.Instance;
 
         private void OnEnable()
         {

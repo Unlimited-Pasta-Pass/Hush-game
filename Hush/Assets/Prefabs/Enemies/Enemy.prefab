@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1039511428064358437}
   - component: {fileID: 7186588081660783240}
   - component: {fileID: 234692157854127520}
-  - component: {fileID: 8490621396511798265}
   - component: {fileID: 7872856842678039438}
   - component: {fileID: 16606687100967124}
+  - component: {fileID: 8490621396511798265}
   - component: {fileID: 7274856228100845386}
   m_Layer: 11
   m_Name: Enemy
@@ -92,32 +92,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8490621396511798265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423858757433039569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d6b9592bf79d44b965e7d2295bcc90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visionAngle: 70
-  detectionRadius: 3
-  maxHitPoints: 100
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1152
-  minAttackRange: 0.5
-  maxAttackRange: 1
-  runSpeed: 3
-  patrolSpeed: 1
-  patrolRoute: []
-  agent: {fileID: 234692157854127520}
-  animator: {fileID: 8391566035528528493}
-  visionCollider: {fileID: 6732957862493942095}
 --- !u!114 &7872856842678039438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +119,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b334c0935829642b595f043fde9963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8490621396511798265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423858757433039569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d6b9592bf79d44b965e7d2295bcc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionAngle: 70
+  detectionRadius: 3
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 1152
+  minAttackRange: 1
+  maxAttackRange: 2
+  runSpeed: 3
+  patrolSpeed: 1
+  patrolRoute: []
+  agent: {fileID: 234692157854127520}
+  animator: {fileID: 8391566035528528493}
+  visionCollider: {fileID: 6732957862493942095}
 --- !u!114 &7274856228100845386
 MonoBehaviour:
   m_ObjectHideFlags: 0

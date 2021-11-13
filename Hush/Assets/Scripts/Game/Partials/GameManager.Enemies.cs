@@ -58,41 +58,26 @@ namespace Game
 
         private void ApplyEnemiesState()
         {
-            bool saveUpdated = false;
+            // Clear all current enemies
+            foreach (var enemy in FindObjectsOfType<Enemy>())
+            {
+                Destroy(enemy.gameObject);
+            }
             
+            // Add Saved State enemies
             foreach (var id in _state.enemiesTransforms.Keys.ToList())
             {
-                var go = GuidManager.ResolveGuid(id);
-                
-                Enemy enemy;
+                var enemyGo = Instantiate(enemyPrefab);
+                var guid = enemyGo.GetComponent<GuidComponent>().GetGuid();
                     
-                // If the game object was deleted since last save, create a new one
-                if (go == null)
-                {
-                    var enemyGo = Instantiate(enemyPrefab);
-                    var guid = enemyGo.GetComponent<GuidComponent>().GetGuid();
-                    
-                    UpdateEnemyID(guid, id);
+                UpdateEnemyID(guid, id);
 
-                    saveUpdated = true;
-
-                    enemy = enemyGo.GetComponent<Enemy>();
-                }
-                // Otherwise simply move the exising object
-                else
-                {
-                    enemy = go.GetComponent<Enemy>();
-                }
+                var enemy = enemyGo.GetComponent<Enemy>();
                 
                 if (enemy == null)
                     continue;
                 
                 enemy.InitializeEnemy();
-            }
-
-            if (saveUpdated)
-            {
-                SaveGameManager.Instance.OnSave();
             }
         }
 

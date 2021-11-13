@@ -38,6 +38,7 @@ namespace Game
         {
             _state = gameState;
 
+            ApplyPlayerState();
             ApplyEnemiesState();
         }
     }

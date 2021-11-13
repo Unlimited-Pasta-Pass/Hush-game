@@ -37,8 +37,8 @@ namespace Game.Models
         public GameState()
         {
             // Player
-            playerCurrentHitPoints = 0f;
-            playerMaxHitPoints = 0f;
+            playerCurrentHitPoints = -1f;
+            playerMaxHitPoints = -1f;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
             
             // Relic

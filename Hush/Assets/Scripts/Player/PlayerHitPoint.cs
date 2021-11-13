@@ -10,9 +10,6 @@ namespace Player
     {
         #region Parameters
 
-        [Tooltip("Amount of damage the player can receive before dying")] 
-        [SerializeField] private float maxHitPoints = 100f;
-
         [Header("Component References")] 
         [SerializeField] private Animator animator;
 
@@ -27,14 +24,8 @@ namespace Player
         
         #endregion
         
-        private static PlayerInputManager Input => PlayerInputManager.Instance;
+        private static InputManager Input => InputManager.Instance;
 
-        private void Awake()
-        {
-            GameManager.Instance.SetPlayerHitPoints(maxHitPoints);
-            GameManager.Instance.SetPlayerMaxHitPoints(maxHitPoints);
-        }
-        
         public void TakeDamage(float damage)
         {
             // TODO: Add animation

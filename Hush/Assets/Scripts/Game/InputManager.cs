@@ -4,9 +4,9 @@ using static UnityEngine.InputSystem.InputAction;
 
 namespace Player
 {
-	public class PlayerInputManager : MonoBehaviour
+	public class InputManager : MonoBehaviour
 	{
-		[Header("Character Input Values")]
+		[Header("Input Values")]
 		public Vector2 move;
 		public Vector2 look;
 		public bool lightAttack;
@@ -21,7 +21,7 @@ namespace Player
 		[Header("References")] 
 		public PlayerInput reference;
 
-		public static PlayerInputManager Instance;
+		public static InputManager Instance;
 
 		private void Awake()
 		{

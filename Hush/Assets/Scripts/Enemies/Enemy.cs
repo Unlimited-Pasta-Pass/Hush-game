@@ -217,6 +217,9 @@ namespace Enemies
         {
             Vector3 lookPos = _player.transform.position - transform.position;
             lookPos.y = 0;
+            
+            if (lookPos == Vector3.zero)
+                return;
         
             Quaternion targetRotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 4.0f * Time.deltaTime);  
