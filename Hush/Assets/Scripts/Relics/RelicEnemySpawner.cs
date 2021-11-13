@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace Enemies
 {
-   public class EnemySpawner : MonoBehaviour
+   public class RelicEnemySpawner : MonoBehaviour
    {
       [SerializeField] private GameObject enemyPrefab;
    
-      public void OnRelicDestroy()
+      public void OnRelicAttacked()
       {
-         SpawnEnemy();
+         SpawnEnemies();
       }
 
-      void SpawnEnemy()
+      void SpawnEnemies()
       {
          GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag(Tags.EnemySpawnPoint);
 

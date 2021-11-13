@@ -9,6 +9,8 @@ namespace Game
         [Header("Player")]
         [Tooltip("Amount of damage the player can receive before dying")] 
         [SerializeField] private float playerHitPoints = 100f;
+
+        public bool PlayerIsAlive => PlayerCurrentHitPoints > 0f;
         
         public float PlayerCurrentHitPoints
         {
@@ -63,7 +65,10 @@ namespace Game
         private void ApplyPlayerState()
         {
             var playerMovement = FindObjectOfType<PlayerMovement>();
-            
+
+            if (playerMovement == null) 
+                return;
+
             playerMovement.InitializePlayerTransform();
         }
     }

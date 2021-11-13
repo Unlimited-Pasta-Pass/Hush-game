@@ -12,7 +12,7 @@ namespace Keys
                 return;
         
             GameManager.Instance.CollectKey(transform.parent.GetComponent<GuidComponent>().GetGuid());
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

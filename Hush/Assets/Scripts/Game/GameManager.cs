@@ -40,6 +40,8 @@ namespace Game
 
             ApplyPlayerState();
             ApplyEnemiesState();
+            ApplyKeysState();
+            ApplyRelicState();
         }
     }
 }

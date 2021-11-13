@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Game;
 using UnityEngine;
@@ -11,26 +12,44 @@ namespace Keys
         [Header("Parameters")] 
         [SerializeField] private int numberOfKeysToSpawn = 3;
 
-        private KeySpawnPoint[] _keySpawners;
+        private ReadOnlyDictionary<Guid, bool> Spawners => GameManager.Instance.KeySpawnersInUse;
 
         private void Start()
         {
-            FindKeySpawners();
+            SelectKeySpawners();
+        }
 
-            for (var i = 0; i < Math.Min(numberOfKeysToSpawn, _keySpawners.Length); i++)
+        public void SelectKeySpawners()
+        {
+            // If some spawners were already selected spawn keys at the selected spawners
+            if (Spawners.Count > 0)
             {
-                SpawnKey();
+                var spawnersInUse = Spawners.Where(k => k.Value && !GameManager.Instance.KeysInPossession.Contains(k.Key));
+                foreach (var guid in spawnersInUse.Select(s => s.Key))
+                {
+                    SpawnKey(guid);
+                }
+            }
+            // Otherwise spawn the required number of keys in the scene at random spawners
+            else
+            {
+                FindKeySpawners();
+                
+                for (var i = 0; i < Math.Min(numberOfKeysToSpawn, Spawners.Count); i++)
+                {
+                    SpawnKey();
+                }
             }
         }
 
         private void FindKeySpawners()
         {
-            _keySpawners = FindObjectsOfType<KeySpawnPoint>();
+            var keySpawners = FindObjectsOfType<KeySpawnPoint>();
 
-            if (_keySpawners.Length <= 0)
+            if (keySpawners.Length <= 0)
                 throw new UnityException("No Key Spawner was found.");
 
-            GameManager.Instance.UpdateKeySpawnerList(_keySpawners.Select(k => k.GetComponent<GuidComponent>().GetGuid()));
+            GameManager.Instance.UpdateKeySpawnerList(keySpawners.Select(k => k.GetComponent<GuidComponent>().GetGuid()));
         }
 
         private void SpawnKey()
@@ -40,14 +59,29 @@ namespace Keys
             // Make sure we select a spawn point that is not already in use
             do
             {
-                index = (int)Mathf.Round(Random.Range(0, _keySpawners.Length));
-            } while (GameManager.Instance.KeySpawnersInUse[_keySpawners[index].GetComponent<GuidComponent>().GetGuid()]);
+                index = (int)Mathf.Floor(Random.Range(0f, Spawners.Count));
+            } while (Spawners.ElementAt(index).Value);
             
             // Spawn the key in the scene
-            _keySpawners[index].SpawnKey();
+            SpawnKey(Spawners.ElementAt(index).Key);
             
             // Mark down the spawner as in use
-            GameManager.Instance.UseKeySpawner(_keySpawners[index].GetComponent<GuidComponent>().GetGuid());
+            GameManager.Instance.UseKeySpawner(Spawners.ElementAt(index).Key);
+        }
+
+        private void SpawnKey(Guid guid)
+        {
+            var spawnGo = GuidManager.ResolveGuid(guid);
+
+            if (spawnGo == null)
+                return;
+            
+            var spawnPoint = spawnGo.GetComponent<KeySpawnPoint>();
+            
+            if (spawnPoint == null)
+                return;
+            
+            spawnPoint.SpawnKey();
         }
     }
 }

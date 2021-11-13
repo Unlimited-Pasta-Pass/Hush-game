@@ -31,17 +31,6 @@ namespace Player
 
         private float _playerSpeed;
 
-        private void Awake()
-        {
-            // Make sure there is a functioning and enabled InputManager for the Player
-            var input = FindObjectOfType<InputManager>(true);
-
-            if (input == null)
-                throw new MissingComponentException("Player Input Manager not found");
-
-            input.enabled = true;
-        }
-
         private void Start()
         {
             InitializePlayerTransform();
@@ -49,6 +38,9 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if (!GameManager.Instance.PlayerIsAlive)
+                return;
+            
             MovePlayer();
             RotatePlayer();
             

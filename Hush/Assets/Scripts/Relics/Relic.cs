@@ -12,12 +12,17 @@ namespace Relics
         {
             if (!other.gameObject.CompareTag(Tags.Player)) 
                 return;
-        
-            if (canPickupRelic)
-            {
-                GameManager.Instance.CollectRelic();
-                gameObject.SetActive(false);
-            }
+
+            if (!canPickupRelic) 
+                return;
+            
+            GameManager.Instance.CollectRelic();
+            SetRelicVisibility(false);
+        }
+
+        public void SetRelicVisibility(bool visibility)
+        {
+            gameObject.SetActive(visibility);
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 536950302916646976}
   - component: {fileID: 7329761170108876246}
   m_Layer: 0
-  m_Name: TimeManager
+  m_Name: Time Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

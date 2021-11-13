@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 using Common.Models;
 using Enemies;
@@ -10,6 +11,7 @@ namespace Game
     {
         [Header("Enemies")]
         [SerializeField] private float enemyHitPoints = 100f;
+        [SerializeField] private float enemyCleanupDelay = 3f;
         [SerializeField] private GameObject enemyPrefab;
         
         public bool IsPlayerInCombat => _state.enemiesAttacking.Count > 0;
@@ -29,16 +31,21 @@ namespace Game
             _state.enemiesTransforms[id] = enemyTransform;
         }
 
-        public void UpdateEnemyHitPoints(Guid id, float hp)
+        public bool AttackEnemy(Guid id, float damage)
         {
-            if (hp <= 0)
+            if (!_state.enemiesHitPoints.ContainsKey(id))
             {
-                _state.enemiesHitPoints.Remove(id);
-                _state.enemiesTransforms.Remove(id);
-                return;
+                _state.enemiesHitPoints.Add(id, enemyHitPoints);
             }
+
+            _state.enemiesHitPoints[id] -= damage;
+
+            if (_state.enemiesHitPoints[id] > 0) 
+                return true;
             
-            _state.enemiesHitPoints[id] = hp;
+            // Remove the enemy from the dictionaries when they die
+            StartCoroutine(CleanEnemy(id, enemyCleanupDelay));
+            return false;
         }
 
         public bool IsEnemyAttacking(Guid id)
@@ -53,7 +60,10 @@ namespace Game
 
         public float GetEnemyHitPoints(Guid id)
         {
-            return _state.enemiesHitPoints.ContainsKey(id) ? _state.enemiesHitPoints[id] : enemyHitPoints;
+            if (!_state.enemiesHitPoints.ContainsKey(id))
+                _state.enemiesHitPoints.Add(id, enemyHitPoints);
+            
+            return _state.enemiesHitPoints[id];
         }
 
         private void ApplyEnemiesState()
@@ -83,9 +93,9 @@ namespace Game
 
         private void UpdateEnemyID(Guid newId, Guid oldId)
         {
-            var enemyHitPoints = _state.enemiesHitPoints[oldId];
+            var hitPoints = _state.enemiesHitPoints[oldId];
             _state.enemiesHitPoints.Remove(oldId);
-            _state.enemiesHitPoints.Add(newId, enemyHitPoints);
+            _state.enemiesHitPoints.Add(newId, hitPoints);
 
             var enemyTransform = _state.enemiesTransforms[oldId];
             _state.enemiesTransforms.Remove(oldId);
@@ -96,6 +106,14 @@ namespace Game
                 _state.enemiesAttacking.Remove(oldId);
                 _state.enemiesAttacking.Add(newId);
             }
+        }
+
+        private IEnumerator CleanEnemy(Guid id, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            
+            _state.enemiesHitPoints.Remove(id);
+            _state.enemiesTransforms.Remove(id);
         }
     }
 }

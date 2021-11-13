@@ -5418,7 +5418,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21e74c90c7e4f7984fa60bc03487dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHitPoints: 100
   animator: {fileID: 8205350870087033752}
 --- !u!114 &2115969719432915281
 MonoBehaviour:
@@ -5633,6 +5632,10 @@ PrefabInstance:
     - target: {fileID: -1189469776744665737, guid: ee6fef5d00e63ee41a374cdbd8fe89af, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1189469776744665737, guid: ee6fef5d00e63ee41a374cdbd8fe89af, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: -966952926338257106, guid: ee6fef5d00e63ee41a374cdbd8fe89af, type: 3}
       propertyPath: m_Layer

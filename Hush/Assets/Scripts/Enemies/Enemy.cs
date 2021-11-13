@@ -58,20 +58,7 @@ namespace Enemies
             }
         }
 
-        private float _hitPoints;
-        public float HitPoints
-        {
-            get => _hitPoints;
-            private set
-            {
-                _hitPoints = value;
-                if (_hitPoints <= 0f)
-                {
-                    _hitPoints = 0f;
-                    Die();
-                }
-            }
-        }
+        public float HitPoints => GameManager.Instance.GetEnemyHitPoints(ID);
 
         #endregion
 
@@ -231,11 +218,6 @@ namespace Enemies
         
         public void InitializeEnemy()
         {
-            HitPoints = GameManager.Instance.GetEnemyHitPoints(ID);
-            
-            // Make sure to add the enemy to the HP dictionary if it's not already there
-            GameManager.Instance.UpdateEnemyHitPoints(ID , HitPoints);
-
             var enemyTransform = GameManager.Instance.GetEnemyTransform(ID);
             if (enemyTransform != null)
             {
@@ -260,9 +242,8 @@ namespace Enemies
         public void TakeDamage(float damage)
         {
             // TODO: Add animation
-            HitPoints -= damage;
-
-            GameManager.Instance.UpdateEnemyHitPoints(ID , HitPoints);
+            if (!GameManager.Instance.AttackEnemy(ID, damage))
+                Die();
         }
 
         public void PerformAttack()

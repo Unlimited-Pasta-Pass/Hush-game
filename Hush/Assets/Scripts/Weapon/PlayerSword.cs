@@ -1,5 +1,6 @@
 using Common.Enums;
 using Common.Interfaces;
+using Game;
 using Player;
 using Player.Enums;
 using UnityEngine;
@@ -51,11 +52,17 @@ namespace Weapon
 
         public void PerformAttack(InputAction.CallbackContext context)
         {
+            if (!GameManager.Instance.PlayerIsAlive)
+                return;
+            
             playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
         }
 
         public void PerformHeavyAttack(InputAction.CallbackContext context)
         {
+            if (!GameManager.Instance.PlayerIsAlive)
+                return;
+            
             playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
         }
     

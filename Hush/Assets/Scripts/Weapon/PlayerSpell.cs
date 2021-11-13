@@ -1,4 +1,5 @@
 using Common.Enums;
+using Game;
 using Player;
 using Player.Enums;
 using Plugins;
@@ -45,12 +46,18 @@ namespace Weapon
     
         public void PerformAttack(InputAction.CallbackContext context)
         {
+            if (!GameManager.Instance.PlayerIsAlive)
+                return;
+            
             animator.SetTrigger(PlayerAnimator.SpellAttack);
             CreateSpellAttack(AttemptCrit(BaseDamage));
         }
 
         public void PerformHeavyAttack(InputAction.CallbackContext context)
         {
+            if (!GameManager.Instance.PlayerIsAlive)
+                return;
+            
             animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
             CreateSpellAttack(AttemptCrit(HeavyDamage));
         }

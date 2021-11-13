@@ -24,25 +24,18 @@ namespace Player
         
         #endregion
         
-        private static InputManager Input => InputManager.Instance;
-
         public void TakeDamage(float damage)
         {
             // TODO: Add animation
             
             // If the player's hp is at 0 or lower, they die
             if (!GameManager.Instance.UpdatePlayerHitPoints(-damage))
-            {
                 Die();
-            }
         }
 
         public void Die()
         {
             animator.SetBool(PlayerAnimator.Dead, true);
-            
-            Input.enabled = false;
-            
             Killed.Invoke();
         }
         

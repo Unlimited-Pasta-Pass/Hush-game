@@ -4,6 +4,7 @@ namespace Enemies
 {
     public interface IEnemy : IKillable
     {
+        public void PerformAttack();
     }
 }
 

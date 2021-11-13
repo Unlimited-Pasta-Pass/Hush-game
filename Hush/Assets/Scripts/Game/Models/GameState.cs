@@ -21,6 +21,7 @@ namespace Game.Models
         
         // Relic
         public bool playerHasRelic;
+        public float relicDomeHitPoints;
         
         // Keys
         public Dictionary<Guid, bool> keySpawnersInUse;
@@ -43,6 +44,7 @@ namespace Game.Models
             
             // Relic
             playerHasRelic = false;
+            relicDomeHitPoints = -1f;
             
             // Keys
             keySpawnersInUse = new Dictionary<Guid, bool>();

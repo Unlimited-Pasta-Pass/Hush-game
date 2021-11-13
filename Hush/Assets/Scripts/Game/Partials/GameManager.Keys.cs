@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Keys;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -38,6 +39,25 @@ namespace Game
         public void UseKeySpawner(Guid instanceId)
         {
             _state.keySpawnersInUse[instanceId] = true;
+        }
+
+        private void ApplyKeysState()
+        {
+            keyCountChanged.Invoke(_state.keysInPossession.Count);
+            
+            // Clear the spawned keys
+            foreach (var key in FindObjectsOfType<Key>())
+            {
+                Destroy(key.gameObject);
+            }
+            
+            // Spawn the loaded keys
+            var spawner = FindObjectOfType<KeySpawner>();
+            
+            if (spawner == null)
+                return;
+
+            spawner.SelectKeySpawners();
         }
     }
 }
