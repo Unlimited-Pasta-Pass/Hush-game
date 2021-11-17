@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -37,8 +38,14 @@ namespace Player
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
-	
-		#region Public Event Handlers
+
+        private void OnDestroy()
+        {
+            if (Instance == this)
+                Instance = null;
+        }
+
+        #region Public Event Handlers
 	
 		public void OnMove(CallbackContext context)
 		{

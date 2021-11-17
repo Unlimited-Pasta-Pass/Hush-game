@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Common.Enums;
+using Environment.Passage;
 using LOS;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,12 +29,14 @@ namespace Player
 
         private void OnEnable()
         {
-            Input.reference.actions[Actions.Reveal].performed += OnEcholocate;
+            if (Input)
+                Input.reference.actions[Actions.Reveal].performed += OnEcholocate;
         }
 
         private void OnDisable()
         {
-            Input.reference.actions[Actions.Reveal].performed -= OnEcholocate;
+            if (Input)
+                Input.reference.actions[Actions.Reveal].performed -= OnEcholocate;
         }
 
         private void Update()
@@ -70,6 +73,13 @@ namespace Player
             foreach (var hiddenObject in _hiddenObjectsInRange)
             {
                 hiddenObject.RevealObject();
+            }
+
+            var passageDoorList = FindObjectsOfType<SecretPassageDoor>().Where(o => Vector3.Distance(transform.position, o.transform.position) <= revealDistance);
+            foreach (var door in passageDoorList)
+            {
+                door.RevealPassage();
+                Debug.Log("Reveal");
             }
 
             _revealDelta = 0f;
