@@ -4,7 +4,6 @@ namespace Environment.Passage
 {
     public class SecretPassageDoor : ObjectToggle
     {
-
         [SerializeField] private SecretPassage passage;
 
         void Reset()
@@ -16,6 +15,5 @@ namespace Environment.Passage
         {
             passage.Reveal();
         }
-
     }
 }

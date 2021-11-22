@@ -40,7 +40,6 @@ namespace Environment.Passage
             {
                 Hide();
             }
-                
         }
         
         void OnTriggerStay(Collider other)
@@ -92,6 +91,5 @@ namespace Environment.Passage
             foreach (var element in passageElements)
                 element.Hide();
         }
-
     }
 }
