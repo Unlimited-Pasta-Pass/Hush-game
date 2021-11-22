@@ -92,5 +92,7 @@ namespace Player
             // Creates curved result rather than a linear one giving a more organic rotation change
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), rotationSpeed * Time.deltaTime);
         }
+
+        public bool IsRunning => _playerSpeed > walkSpeed + 0.25f * (sprintSpeed - walkSpeed);
     }
 }

@@ -14,6 +14,7 @@ TagManager:
   - Ground
   - Dome
   - Relic Dome
+  - Spell
   layers:
   - Default
   - TransparentFX
@@ -27,8 +28,8 @@ TagManager:
   - Interactible
   - Player
   - Enemy
-  - 
-  - 
+  - Door
+  - Vision
   - 
   - 
   - 
