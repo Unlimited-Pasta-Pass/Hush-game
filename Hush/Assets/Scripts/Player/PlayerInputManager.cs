@@ -12,14 +12,23 @@ public class PlayerInputManager : MonoBehaviour
 	public Vector2 look;
 	public bool lightAttack;
 	public bool heavyAttack;
-	public bool specialAttack;
+	public bool lightSpell;
+	public bool heavySpell;
 	public bool interact;
 	public bool walk;
 	public bool reveal;
-	public bool switchWeapon;
+	public bool pause;
 
 	[Header("References")] 
 	public PlayerInput reference;
+
+	public static PlayerInputManager Instance;
+
+	private void Awake()
+	{
+		if (Instance == null)
+			Instance = this;
+	}
 
 	private void Start()
 	{
@@ -53,9 +62,14 @@ public class PlayerInputManager : MonoBehaviour
 		heavyAttack = context.ReadValueAsButton();
 	}
 
-	public void OnSpecialAttack(CallbackContext context)
+	public void OnLightSpellAttack(CallbackContext context)
 	{
-		specialAttack = context.ReadValueAsButton();
+		lightSpell = context.ReadValueAsButton();
+	}
+
+	public void OnHeavySpellAttack(CallbackContext context)
+	{
+		heavySpell = context.ReadValueAsButton();
 	}
 
 	public void OnInteract(CallbackContext context)
@@ -73,9 +87,9 @@ public class PlayerInputManager : MonoBehaviour
 		reveal = context.ReadValueAsButton();
 	}
 	
-	public void OnSwitchWeapon(CallbackContext context)
+	public void OnPause(CallbackContext context)
 	{
-		switchWeapon = context.ReadValueAsButton();
+		pause = context.ReadValueAsButton();
 	}
 	
 	#endregion

@@ -1,9 +1,14 @@
-﻿namespace Common
+﻿using UnityEngine.Events;
+
+namespace Common
 {
     public interface IKillable
     {
-        public int HitPoints { set; get; }
-        public void TakeDamage(int damage);
+        public float HitPoints { get; }
+
+        public UnityEvent Killed { get; }
+
+        public void TakeDamage(float damage);
         public void Die();
     }
 }

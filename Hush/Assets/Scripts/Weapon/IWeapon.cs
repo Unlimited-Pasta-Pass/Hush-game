@@ -1,11 +1,13 @@
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
+using Weapon.Enums;
 
 public interface IWeapon
 {
-    string WeaponType { get; }
-    int CurrentDamage { get; set; }
-    int BonusDamage { get; set; }
+    public WeaponType WeaponType { get; }
+    public float BaseDamage { get; }
+    public float HeavyDamage { get; }
 
-    void PerformAttack(int damage);
-    void PerformSpecialAttack();
+    void PerformAttack(InputAction.CallbackContext context);
+    void PerformHeavyAttack(InputAction.CallbackContext context);
+    float AttemptCrit(float damage);
 }

@@ -1,7 +1,7 @@
-using System;
 using Common;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour, IEnemy
@@ -10,7 +10,9 @@ public class Enemy : MonoBehaviour, IEnemy
 
     [Header("Parameters")]
     [SerializeField] private float visionAngle = 70.0f;
-    [SerializeField] private int hitPoints = 100;
+    [SerializeField] private float detectionRadius = 3f;
+    [SerializeField] private float maxHitPoints = 100;
+    [SerializeField] private LayerMask targetLayerMask;
 
     [Header("Attack")]
     [SerializeField] private float minAttackRange = 0.5f;
@@ -31,22 +33,17 @@ public class Enemy : MonoBehaviour, IEnemy
     #endregion
     
     #region Private Variables
-    
-    private enum State
-    {
-        Patrolling,
-        Searching,
-        Attacking,
-        Dead
-    }
 
-    private CharacterController _player;
-    private State _state = State.Patrolling;
+    private GameObject _player;
+    private EnemyState _state = EnemyState.Patrolling;
     private int _nextPatrolIndex;
 
     #endregion
 
     #region Public Variables
+
+    private UnityEvent _killed;
+    public UnityEvent Killed => _killed ??= new UnityEvent();
 
     public bool IsAttacking {
         get
@@ -55,15 +52,19 @@ public class Enemy : MonoBehaviour, IEnemy
             return stateInfo.IsName(EnemyAnimator.State.Attack);
         }
     }
-    
-    public int HitPoints
+
+    private float _hitPoints;
+    public float HitPoints
     {
-        get => hitPoints; 
-        set
+        get => _hitPoints;
+        private set
         {
-            hitPoints = value;
-            if (hitPoints <= 0)
+            _hitPoints = value;
+            if (_hitPoints <= 0f)
+            {
+                _hitPoints = 0f;
                 Die();
+            }
         }
     }
 
@@ -71,25 +72,29 @@ public class Enemy : MonoBehaviour, IEnemy
 
     #region Events
     
-    void Reset()
+    private void Start()
+    {
+        _player = GameObject.FindWithTag(Tags.Player);
+
+        HitPoints = maxHitPoints;
+    }
+    
+    private void Reset()
     {
         agent = GetComponent<NavMeshAgent>();
         if (!agent)
             agent = GetComponentInChildren<NavMeshAgent>();
+        
         animator = GetComponent<Animator>();
         if (!animator)
             animator = GetComponentInChildren<Animator>();
+        
         visionCollider = GetComponent<SphereCollider>();
         if (!visionCollider)
             visionCollider = GetComponentInChildren<SphereCollider>();
     }
 
-    private void Start()
-    {
-        _player = GameObject.FindWithTag(Tags.Player).GetComponent<CharacterController>();
-    }
-
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         // Draw some lines for vision cone
         Gizmos.color = Color.red;
@@ -107,9 +112,9 @@ public class Enemy : MonoBehaviour, IEnemy
     void Update()
     {
         // Enemy lost track of player
-        if (_state == State.Searching && agent.remainingDistance <= agent.stoppingDistance && !HasPlayerLineOfSight())
+        if (_state == EnemyState.Searching && agent.remainingDistance <= agent.stoppingDistance && !HasPlayerLineOfSight())
         {
-            SetState(State.Patrolling);
+            SetState(EnemyState.Patrolling);
         }
 
         // Do movement update logic
@@ -124,7 +129,7 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         switch (_state)
         {
-            case State.Attacking:
+            case EnemyState.Attacking:
             {
                 // Run to player & attack them if in range
                 agent.speed = runSpeed;
@@ -144,7 +149,7 @@ public class Enemy : MonoBehaviour, IEnemy
                 break;
             }
 
-            case State.Patrolling:
+            case EnemyState.Patrolling:
             {
                 // Go to next position in patrol route if arrived
                 agent.speed = patrolSpeed;
@@ -156,17 +161,17 @@ public class Enemy : MonoBehaviour, IEnemy
                 break;
             }
 
-            case State.Searching:
+            case EnemyState.Searching:
             {
                 break;
             }
 
-            case State.Dead:
+            case EnemyState.Dead:
             {
                 var stateInfo = animator.GetCurrentAnimatorStateInfo(EnemyAnimator.Layer.Base);
                 if (stateInfo.IsName(EnemyAnimator.State.Dead) && stateInfo.normalizedTime >= 0.99f)
                 {
-                    Despawn();
+                    Destroy(gameObject);
                 }
                 break;
             }
@@ -180,26 +185,25 @@ public class Enemy : MonoBehaviour, IEnemy
     {
         var position = transform.position;
         position.y = agent.height / 2.0f;
+        
         var playerPosition = _player.transform.position;
         playerPosition.y = position.y;
-        Vector3 toPlayer = playerPosition - position;
-        int layerMask = ~(1 << Layers.Enemy);
-        return toPlayer.magnitude <= _player.height / 2 || 
-               (Physics.Raycast(position, toPlayer.normalized, out var hit, visionCollider.radius, layerMask) && 
-               hit.collider.CompareTag(Tags.Player));
+        
+        Vector3 towardsPlayer = playerPosition - position;
+
+        var closeToPlayer = Vector3.Distance(playerPosition, position) <= detectionRadius;
+        var seePlayer = Physics.Raycast(position, towardsPlayer.normalized, out var hit, visionCollider.radius, targetLayerMask) && hit.collider.CompareTag(Tags.Player);
+        
+        return closeToPlayer || seePlayer;
     }
     
     private void FacePlayer()
     {
         Vector3 lookPos = _player.transform.position - transform.position;
         lookPos.y = 0;
+        
         Quaternion targetRotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 4.0f * Time.deltaTime);  
-    }
-
-    private void Despawn()
-    {
-        Destroy(gameObject);
     }
 
     #endregion
@@ -208,19 +212,16 @@ public class Enemy : MonoBehaviour, IEnemy
     
     public void Die()
     {
-        SetState(State.Dead);
         animator.SetBool(EnemyAnimator.Dead, true);
+        SetState(EnemyState.Dead);
+        
+        Killed.Invoke();
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float damage)
     {
         // TODO: Add animation
-        hitPoints -= amount;
-        if (hitPoints <= 0)
-        {
-            hitPoints = 0;
-            Die();
-        }
+        HitPoints -= damage;
     }
 
     public void PerformAttack()
@@ -235,33 +236,24 @@ public class Enemy : MonoBehaviour, IEnemy
             return;
 
         // Test player in enemy vision range
-        var player = other.gameObject;
-        var playerDir = transform.InverseTransformPoint(player.transform.position).normalized;
-        if (_state != State.Dead && (_state != State.Patrolling || Vector3.Angle(playerDir, Vector3.forward) < visionAngle))
+        var playerDir = transform.InverseTransformPoint(other.gameObject.transform.position).normalized;
+        if (_state != EnemyState.Dead && (_state != EnemyState.Patrolling || Vector3.Angle(playerDir, Vector3.forward) < visionAngle))
         {
             // If we have line of sight, keep following player
-            if (HasPlayerLineOfSight())
-            {
-                SetState(State.Attacking);
-            }
-            // Otherwise, keep going to last seen location
-            else
-            {
-                SetState(State.Searching);
-            }
+            SetState(HasPlayerLineOfSight() ? EnemyState.Attacking : EnemyState.Searching);
         }
     }
 
-    private void SetState(State state)
+    private void SetState(EnemyState state)
     {
         _state = state;
-        if (state == State.Attacking)
+        if (state == EnemyState.Attacking)
         {
-            GameMaster.AddToEnemyList(this.GetInstanceID());
+            GameManager.Instance.AddToEnemyList(GetInstanceID());
         }
         else
         {
-            GameMaster.RemoveFromEnemyList(this.GetInstanceID());
+            GameManager.Instance.RemoveFromEnemyList(GetInstanceID());
         }
     }
 

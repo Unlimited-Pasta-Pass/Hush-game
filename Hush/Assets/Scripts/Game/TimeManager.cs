@@ -4,38 +4,34 @@ public class TimeManager : MonoBehaviour
 {
     public static TimeManager Instance;
 
-    private bool mGameIsPaused;
-
-    private float mPrevTimeScale;
+    private bool _gameIsPaused;
+    private float _prevTimeScale;
+    
+    public bool GameIsPaused => _gameIsPaused;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public bool GameIsPaused()
-    {
-        return mGameIsPaused;
-    }
-
     public void Pause()
     {
-        mPrevTimeScale = Time.timeScale;
+        _prevTimeScale = Time.timeScale;
         Time.timeScale = 0f;
-        mGameIsPaused = true;
+        _gameIsPaused = true;
     }
 
     public void Resume()
     {
-        Time.timeScale = mPrevTimeScale;
-        mPrevTimeScale = 0f;
-        mGameIsPaused = false;
+        Time.timeScale = _prevTimeScale;
+        _prevTimeScale = 0f;
+        _gameIsPaused = false;
     }
 
     public void Reset()
     {
         Time.timeScale = 1f;
-        mPrevTimeScale = 0f;
-        mGameIsPaused = false;
+        _prevTimeScale = 0f;
+        _gameIsPaused = false;
     }
 }

@@ -1,62 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Common;
 using UnityEngine.Events;
 
 public class RelicDome : MonoBehaviour, IKillable
 {
-    public int keysNeededToUnlock = 0;
-    public UnityEvent onDestroyDome = new UnityEvent();
-    [SerializeField] private int hitPoints = 150;
-    [SerializeField] private int maxHitPoints = 150;
-     
+    [SerializeField] private int keysNeededToUnlock;
+    [SerializeField] private float maxHitPoints = 150f;
+
+    private UnityEvent _killed;
+    public UnityEvent Killed => _killed ??= new UnityEvent();
     
-    public int HitPoints
+    private float _hitPoints;
+    public float HitPoints
     {
-        get => hitPoints; 
-        set
+        get => _hitPoints;
+        private set
         {
-            hitPoints = value;
-            if (hitPoints <= 0)
+            _hitPoints = value;
+            if (_hitPoints <= 0)
+            {
+                _hitPoints = 0;
                 Die();
+            }
         }
     }
 
-    void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.CompareTag(Tags.Player) && GameMaster.keysInPossession == keysNeededToUnlock) {
-            gameObject.SetActive(false);
-            GameMaster.ResetKeys();
-        }
+    private bool CanUnlockDome => GameManager.Instance.KeysInPossession >= keysNeededToUnlock;
+
+    private void Awake()
+    {
+        HitPoints = maxHitPoints;
     }
-    public void OpenDome() {
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag(Tags.Player) || !CanUnlockDome) 
+            return;
+
+        GameManager.Instance.ResetKeys();
         gameObject.SetActive(false);
     }
-
-    public void TakeDamage(int damage)
+    
+    public void TakeDamage(float damage)
     {
-        hitPoints -= damage;
-        if (hitPoints <= 0)
-        {
-            hitPoints = 0;
-            Die();
-        }
-        if (hitPoints < maxHitPoints)
-        {
-            OnDestroyDome();
-        }
+        HitPoints -= damage;
     }
 
     public void Die()
     {
-        // breaking animation
+        // TODO breaking animation
+        Killed.Invoke();
         Destroy(gameObject);
     }
-
-    public void OnDestroyDome()
-    {
-        onDestroyDome.Invoke();
-    }
-    
-    
 }

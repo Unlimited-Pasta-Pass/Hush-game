@@ -1,5 +1,7 @@
 ﻿using Common;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Weapon.Enums;
 
 namespace Enemies
 {
@@ -8,25 +10,27 @@ namespace Enemies
         #region Parameters
 
         [Header("Parameters")]
-        [SerializeField] private int damage = 10;
+        [SerializeField] private float baseDamage = 10f;
         
         [Header("References")]
+        [SerializeField] private Animator enemyAnimator;
         [SerializeField] private Enemy enemy;
 
         #endregion
 
         #region Events
 
-        void Reset()
+        private void Reset()
         {
+            enemyAnimator = GetComponentInParent<Animator>();
             enemy = GetComponentInParent<Enemy>();
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (enemy.IsAttacking && other.CompareTag(Tags.Player))
             {
-                other.GetComponent<IKillable>()?.TakeDamage(damage);
+                other.GetComponent<IKillable>()?.TakeDamage(baseDamage);
             }
         }
 
@@ -34,23 +38,28 @@ namespace Enemies
 
         #region Public Variables
 
-        public string WeaponType => "EnemySword";
+        public WeaponType WeaponType => WeaponType.EnemySword;
 
-        public int CurrentDamage { get => damage; set => damage = value; }
-        public int BonusDamage { get; set; }
+        public float BaseDamage => baseDamage;
+        public float HeavyDamage => 0f;
 
         #endregion
 
         #region Public Methods
 
-        public void PerformAttack(int attackDamage)
+        public void PerformAttack(InputAction.CallbackContext context)
         {
-            enemy.PerformAttack();
+            enemyAnimator.SetTrigger(EnemyAnimator.BaseAttack);
         }
 
-        public void PerformSpecialAttack()
+        public void PerformHeavyAttack(InputAction.CallbackContext context)
         {
-            // TODO: Implement special attack
+            PerformAttack(context);
+        }
+
+        public float AttemptCrit(float damage)
+        {
+            return damage;
         }
 
         #endregion

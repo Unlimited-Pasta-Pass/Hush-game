@@ -53,7 +53,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8266203882439401620
 RectTransform:
   m_ObjectHideFlags: 0
@@ -255,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8266203883363038619}
   - component: {fileID: 8266203883363038616}
+  - component: {fileID: 8952098256783085975}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -336,6 +337,21 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8952098256783085975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266203883363038618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e48e394f8233bfe4fb22221b7d5e87a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  healthValue: {fileID: 8266203882555600269}
+  healthSlider: {fileID: 8266203883363038616}
 --- !u!1 &8266203883506825292
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,8 +677,6 @@ GameObject:
   - component: {fileID: 8266203884277320488}
   - component: {fileID: 8266203884277320491}
   - component: {fileID: 8266203884277320490}
-  - component: {fileID: 8266203884277320495}
-  - component: {fileID: 8266203884277320494}
   m_Layer: 5
   m_Name: GameUI
   m_TagString: Untagged
@@ -752,35 +766,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &8266203884277320495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8266203884277320533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f482634bb2c997248962121ba776e22d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyCountText: {fileID: 8266203884451753822}
-  keySprite: {fileID: 8266203882439401623}
---- !u!114 &8266203884277320494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8266203884277320533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e48e394f8233bfe4fb22221b7d5e87a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  healthValue: {fileID: 8266203882555600269}
-  healthSlider: {fileID: 8266203883363038616}
 --- !u!1 &8266203884451753816
 GameObject:
   m_ObjectHideFlags: 0

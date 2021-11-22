@@ -1,14 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using Common;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class EnemySpawner : MonoBehaviour
 {
-   [SerializeField] private GameObject RelicArea;
-   [SerializeField] private GameObject EnemyPrefab;
+   [SerializeField] private GameObject enemyPrefab;
    
    public void OnRelicDestroy()
    {
@@ -18,11 +13,12 @@ public class EnemySpawner : MonoBehaviour
    void SpawnEnemy()
    {
       GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag(Tags.EnemySpawnPoint);
-      for (int i = 0; i < spawnPoints.Length; ++i)
+
+      foreach (var spawn in spawnPoints)
       {
-         GameObject enemyClone = Instantiate(EnemyPrefab, spawnPoints[i].transform.position ,Quaternion.identity);
+         var enemyClone = Instantiate(enemyPrefab, spawn.transform.position , Quaternion.identity);
          
-         GameObject target = GameObject.FindWithTag(Tags.Relic);
+         var target = GameObject.FindWithTag(Tags.Relic);
          enemyClone.transform.LookAt(target.transform, Vector3.up);
          
          //TODO change clone vision

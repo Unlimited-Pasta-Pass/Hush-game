@@ -25,9 +25,14 @@ namespace StarterAssets
         private float _revealCountdown;
         private float _revealDelta;
 
-        private void Start()
+        private void OnEnable()
         {
             input.reference.actions[Actions.Reveal].performed += OnEcholocate;
+        }
+
+        private void OnDisable()
+        {
+            input.reference.actions[Actions.Reveal].performed -= OnEcholocate;
         }
 
         private void Update()

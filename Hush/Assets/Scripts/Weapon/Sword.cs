@@ -1,53 +1,80 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Common;
 using UnityEngine;
 using Enums;
+using UnityEngine.InputSystem;
+using Weapon.Enums;
 
 public class Sword : MonoBehaviour, IWeapon
 {
-    [SerializeField] private int bonusDamage = 5;
-    [SerializeField] private Animator playerAnimator;
-
-    public string WeaponType => "Sword";
-    public int CurrentDamage { get; set; }
+    [Header("Damage Parameters")]
+    [SerializeField] private float baseDamage = 5;
+    [SerializeField] private float heavyDamage = 15;
     
-    public int BonusDamage
+    [Header("Crit Parameters")]
+    [SerializeField] private float critChance = 0.10f;
+    [SerializeField] private float critMultiplierLow = 0.5f;
+    [SerializeField] private float critMultiplierHigh = 0.75f;
+    
+    [Header("References")]
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private PlayerInputManager input;
+
+    public WeaponType WeaponType => WeaponType.Sword;
+    
+    public float BaseDamage => baseDamage;
+    public float HeavyDamage => heavyDamage;
+
+    private void OnEnable()
     {
-        get => bonusDamage;
-        set => bonusDamage = value;
+        input.reference.actions[Actions.LightAttack].performed += PerformAttack;
+        input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
     }
 
-    private const int SPECIAL_DAMAGE = 100;
+    private void OnDisable()
+    {
+        input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
+        input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
+    }
 
     private void Reset()
     {
         playerAnimator = GetComponentInParent<Animator>();
     }
 
-    public void PerformAttack(int damage)
+    public void PerformAttack(InputAction.CallbackContext context)
     {
         playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
-        CurrentDamage = damage;
     }
 
-    public void PerformSpecialAttack()
+    public void PerformHeavyAttack(InputAction.CallbackContext context)
     {
         playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
-        CurrentDamage = SPECIAL_DAMAGE;
+    }
+    
+    public float AttemptCrit(float damage)
+    {
+        if (Random.value <= critChance)
+        {
+            return damage + (damage * Random.Range(critMultiplierLow, critMultiplierHigh));
+        }
+
+        return damage;
     }
 
-    void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag(Tags.Enemy) || col.CompareTag(Tags.Dome))
+        if (!col.CompareTag(Tags.Enemy) && !col.CompareTag(Tags.Dome)) 
+            return;
+        
+        var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(PlayerAnimator.Layer.UpperBody);
+        var killable = col.GetComponent<IKillable>();
+        if (stateInfo.IsName(PlayerAnimator.State.LightAttack))
         {
-            var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(PlayerAnimator.Layer.UpperBody);
-            if (stateInfo.IsName(PlayerAnimator.State.LightAttack) || stateInfo.IsName(PlayerAnimator.State.HeavyAttack))
-            {
-                var killable = col.GetComponent<IKillable>();
-                killable.TakeDamage(CurrentDamage);
-            }
+            killable.TakeDamage(AttemptCrit(BaseDamage));
+        }
+        if (stateInfo.IsName(PlayerAnimator.State.HeavyAttack))
+        {
+            killable.TakeDamage(AttemptCrit(HeavyDamage));
         }
     }
 }

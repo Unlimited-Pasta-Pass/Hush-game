@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 3484052249403165149}
   - component: {fileID: 573659860359218808}
   - component: {fileID: 2311186444272300722}
-  - component: {fileID: 7786904841737782451}
+  - component: {fileID: 4107575512628067778}
   - component: {fileID: 6917358588575371276}
   - component: {fileID: 4816975685772881064}
   - component: {fileID: 3994485805967114560}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Dome
-  m_TagString: Relic Dome
+  m_TagString: Dome
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &7786904841737782451
-MeshCollider:
+--- !u!135 &4107575512628067778
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,10 +97,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 289301614986012343, guid: 1753cdcd0a4bf7b419f6ef5c12647717, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.005136337
+  m_Center: {x: -0.000000103995916, y: -0.00009248552, z: -0.000014487676}
 --- !u!135 &6917358588575371276
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -110,7 +109,7 @@ SphereCollider:
   m_GameObject: {fileID: 4256472995991901031}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.008
   m_Center: {x: 0, y: 0, z: 0}
@@ -127,10 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keysNeededToUnlock: 1
-  onDestroyDome:
-    m_PersistentCalls:
-      m_Calls: []
-  hitPoints: 150
   maxHitPoints: 150
 --- !u!114 &3994485805967114560
 MonoBehaviour:
@@ -144,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Size: {x: 0.01, y: 0.01, z: 0.011}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.01, y: 0.01, z: 0.005}
+  m_Center: {x: 0, y: 0, z: 0.004}
   m_Area: 1
   m_AffectedAgents: ffffffff
