@@ -5,6 +5,7 @@ using Player.Enums;
 using Plugins;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 using Weapon.Enums;
 
 namespace Weapon
@@ -12,12 +13,17 @@ namespace Weapon
     public class PlayerSpell : MonoBehaviour, IWeapon
     {
         [Header("Parameters")]
-        [SerializeField] private float baseDamage = 5f;
-        [SerializeField] private float heavyDamage = 15f;
-    
-        [Header("Spell References")]
-        [SerializeField] private GameObject spellPrefab; 
-        [SerializeField] private GameObject shootPosition;
+        [SerializeField] protected float baseDamage = 5f;
+        [SerializeField] protected float heavyDamage = 15f;
+        [SerializeField] protected float castCooldown = 7f;
+        protected bool canCast = true;
+        private float castDelta;
+        
+
+        [Header("Spell References")] 
+        [SerializeField] private string activeSpell = SpellList.Fireball; // default active
+        [SerializeField] protected GameObject spellPrefab; 
+        [SerializeField] protected GameObject shootPosition;
     
         [Header("Other References")]
         [SerializeField] private Animator animator;
@@ -40,23 +46,39 @@ namespace Weapon
             Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
             Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
         }
+
+        protected void Update()
+        {
+            castDelta += Time.deltaTime;
+            
+            if (castDelta >= castCooldown)
+            {
+                canCast = true;
+            }
+        }
     
         public void PerformAttack(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive)
+            if (!GameManager.Instance.PlayerIsAlive || !canCast)
                 return;
+
+            canCast = false;
             
             animator.SetTrigger(PlayerAnimator.SpellAttack);
             CreateSpellAttack(AttemptCrit(BaseDamage));
+            castDelta = 0f;
         }
 
         public void PerformHeavyAttack(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive)
+            if (!GameManager.Instance.PlayerIsAlive || !canCast)
                 return;
+
+            canCast = false;
             
             animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
             CreateSpellAttack(AttemptCrit(HeavyDamage));
+            castDelta = 0f;
         }
 
         public float AttemptCrit(float damage)
@@ -64,14 +86,8 @@ namespace Weapon
             return damage;
         }
 
-        private void CreateSpellAttack(float damage)
+        protected virtual void CreateSpellAttack(float damage)
         {
-            var spellClone = Instantiate(spellPrefab);
-            spellClone.transform.position = shootPosition.transform.position;
-            spellClone.transform.rotation = shootPosition.transform.rotation;
-        
-            spellClone.GetComponent<CustomFireProjectile>().ShootPosition = shootPosition.transform;
-            spellClone.GetComponent<CustomFireProjectile>().Damage = (int)damage;
         }
     }
 }
