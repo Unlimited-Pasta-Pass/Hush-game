@@ -31,14 +31,20 @@ namespace Weapon
     
         private void OnEnable()
         {
-            Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
-            Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
+                Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
+            }
         }
     
         private void OnDisable()
         {
-            Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
-            Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
+                Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
+            }
         }
     
         public void PerformAttack(InputAction.CallbackContext context)

@@ -32,14 +32,20 @@ namespace Weapon
 
         private void OnEnable()
         {
-            Input.reference.actions[Actions.LightAttack].performed += PerformAttack;
-            Input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.LightAttack].performed += PerformAttack;
+                Input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
+            }
         }
 
         private void OnDisable()
         {
-            Input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
-            Input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
+                Input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
+            }
         }
 
         private void Reset()
