@@ -1,44 +1,58 @@
-using System;
-using Common;
+using Common.Enums;
+using Game;
+using Player;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-public class PauseMenu : MonoBehaviour
+namespace UI
 {
-    public GameObject pauseMenuUI;
-    public GameObject pauseFirstButton;
-
-    private void OnEnable()
+    public class PauseMenuUI : MonoBehaviour
     {
-        PlayerInputManager.Instance.reference.actions[Actions.Pause].performed += TogglePauseMenu;
-    }
-
-    private void OnDisable()
-    {
-        PlayerInputManager.Instance.reference.actions[Actions.Pause].performed -= TogglePauseMenu;
-    }
-
-    private void TogglePauseMenu(InputAction.CallbackContext obj)
-    {
-        if (TimeManager.Instance.GameIsPaused)
-            Resume();
-        else
-            Pause();
-    }
-
-    private void Pause()
-    {
-        TimeManager.Instance.Pause();
-        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
-        
-        pauseMenuUI.SetActive(true);
-    }
+        public GameObject pauseMenuUI;
     
-    private void Resume()
-    {
-        TimeManager.Instance.Resume();
-        EventSystem.current.SetSelectedGameObject(null);
-        pauseMenuUI.SetActive(false);
+        private static InputManager Input => InputManager.Instance;
+
+        private void OnEnable()
+        {
+            Input.reference.actions[Actions.Pause].performed += TogglePauseMenu;
+        }
+
+        private void OnDisable()
+        {
+            Input.reference.actions[Actions.Pause].performed -= TogglePauseMenu;
+        }
+
+        private void Start()
+        {
+            pauseMenuUI.SetActive(false);
+        }
+
+        private void TogglePauseMenu(InputAction.CallbackContext obj)
+        {
+            if (TimeManager.Instance.GameIsPaused)
+                Resume();
+            else
+                Pause();
+        }
+
+        private void Pause()
+        {
+            TimeManager.Instance.Pause();
+            pauseMenuUI.SetActive(true);
+        
+            // Unlock the cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    
+        private void Resume()
+        {
+            TimeManager.Instance.Resume();
+            pauseMenuUI.SetActive(false);
+        
+            // Lock the cursor
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

@@ -1,19 +1,28 @@
-using Common;
+using Common.Enums;
+using Game;
 using UnityEngine;
 
-public class Relic : MonoBehaviour
+namespace Relics
 {
-    private bool canPickupRelic => !GameManager.Instance.IsPlayerInCombat && !GameManager.Instance.PlayerHasRelic;
-    
-    private void OnTriggerEnter(Collider other)
+    public class Relic : MonoBehaviour
     {
-        if (!other.gameObject.CompareTag(Tags.Player)) 
-            return;
-        
-        if (canPickupRelic)
+        private bool canPickupRelic => !GameManager.Instance.IsPlayerInCombat && !GameManager.Instance.PlayerHasRelic;
+    
+        private void OnTriggerEnter(Collider other)
         {
+            if (!other.gameObject.CompareTag(Tags.Player)) 
+                return;
+
+            if (!canPickupRelic) 
+                return;
+            
             GameManager.Instance.CollectRelic();
-            gameObject.SetActive(false);
+            SetRelicVisibility(false);
+        }
+
+        public void SetRelicVisibility(bool visibility)
+        {
+            gameObject.SetActive(visibility);
         }
     }
 }

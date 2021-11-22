@@ -1,85 +1,43 @@
 using System;
-using System.Collections.Generic;
+using Game.Models;
 using UnityEngine;
 using UnityEngine.Events;
 
-[Serializable]
-public class GameManager : MonoBehaviour
+namespace Game
 {
-    // States
-    private bool _playerHasRelic;
-    private int _keysInPossession;
-    private HashSet<int> _enemiesAttacking;
-
-    // Events
-    public UnityEvent<int> keyCountChanged;
-
-    // Instance
-    public static GameManager Instance;
-
-    // Getters
-    public bool IsPlayerInCombat => _enemiesAttacking.Count > 0;
-    public bool PlayerHasRelic => _playerHasRelic;
-    public int KeysInPossession => _keysInPossession;
-
-    private void Awake()
+    [Serializable]
+    public partial class GameManager : MonoBehaviour
     {
-        if (Instance == null)
-            Instance = this;
+        public static GameManager Instance;
         
-        DontDestroyOnLoad(Instance.gameObject);
-
-        Instance.InitializeValues();
-    }
-
-    private void InitializeValues()
-    {
-        _playerHasRelic = false;
-        _keysInPossession = 0;
-        _enemiesAttacking = new HashSet<int>();
-
-        keyCountChanged ??= new UnityEvent<int>();
+        private GameState _state;
         
-        // Make sure the UI follows the Game Master State
-        keyCountChanged.Invoke(_keysInPossession);
-    }
+        public GameState CurrentGameState => _state;
 
-    // Keys
-    public void CollectKey()
-    {
-        _keysInPossession += 1;
-        keyCountChanged.Invoke(_keysInPossession);
-    }
-    
-    public void ResetKeys () {
-        _keysInPossession = 0;
-    }
-
-    // Relic
-    public void CollectRelic () {
-        if (!_playerHasRelic)
+        private void Awake()
         {
-            _playerHasRelic = true;
-        }
-        else
-        {
-            Debug.Log("Player cannot have more than 1 relic");
-        }
-    }
-    
-    public void ResetRelic () 
-    {
-        _playerHasRelic = false;
-    }
+            if (Instance == null)
+                Instance = this;
+        
+            DontDestroyOnLoad(Instance.gameObject);
 
-    // Enemies
-    public void AddToEnemyList(int id)
-    {
-        _enemiesAttacking.Add(id);
-    }
-    
-    public void RemoveFromEnemyList(int id)
-    {
-        _enemiesAttacking.Remove(id);
+            Instance.InitializeValues();
+        }
+
+        private void InitializeValues()
+        {
+            _state ??= new GameState();
+        }
+
+        // Game Model
+        public void SetGameState(GameState gameState)
+        {
+            _state = gameState;
+
+            ApplyPlayerState();
+            ApplyEnemiesState();
+            ApplyKeysState();
+            ApplyRelicState();
+        }
     }
 }

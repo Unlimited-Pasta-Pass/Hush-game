@@ -1,37 +1,52 @@
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+namespace Game
 {
-    public static SceneManager Instance;
-
-    private void Awake()
+    public class SceneManager : MonoBehaviour
     {
-        if (Instance == null)
-            Instance = this;
-    }
+        public static SceneManager Instance;
 
-    public void LoadNextScene()
-    {
-        // real code for incrementing which level we're at
-        // var updatedLevel = PlayerPrefs.GetInt("CurrentLevel") + 1;
-        // PlayerPrefs.SetInt("CurrentLevel", updatedLevel);
+        private void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
+            
+            DontDestroyOnLoad(Instance.gameObject);
+        }
+
+        public void LoadNextScene()
+        {
+            ReinitializeSceneState();
+            
+            // real code for incrementing which level we're at
+            // var updatedLevel = PlayerPrefs.GetInt("CurrentLevel") + 1;
+            // PlayerPrefs.SetInt("CurrentLevel", updatedLevel);
         
-        // For dev scene
-        LoadDevScene();
-    }
+            // For dev scene
+            LoadDevScene();
+        }
 
-    public void LoadDevScene()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    }
+        public void LoadDevScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
 
-    public void LoadDemoScene()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-    }
+        public void LoadDemoScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
     
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
+        
+        private void ReinitializeSceneState()
+        {
+            GameManager.Instance.ResetPlayer();
+            GameManager.Instance.ResetKeys();
+            GameManager.Instance.ResetRelic();
+            GameManager.Instance.ResetEnemies();
+        }
     }
 }

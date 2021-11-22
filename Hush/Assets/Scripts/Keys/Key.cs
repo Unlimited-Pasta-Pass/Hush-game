@@ -1,14 +1,18 @@
+using Common.Enums;
+using Game;
 using UnityEngine;
-using Common;
 
-public class Key : MonoBehaviour
+namespace Keys
 {
-    void OnTriggerEnter(Collider other)
+    public class Key : MonoBehaviour
     {
-        if (!other.gameObject.CompareTag(Tags.Player)) 
-            return;
+        void OnTriggerEnter(Collider other)
+        {
+            if (!other.gameObject.CompareTag(Tags.Player)) 
+                return;
         
-        GameManager.Instance.CollectKey();
-        gameObject.SetActive(false);
+            GameManager.Instance.CollectKey(transform.parent.GetComponent<GuidComponent>().GetGuid());
+            Destroy(gameObject);
+        }
     }
 }

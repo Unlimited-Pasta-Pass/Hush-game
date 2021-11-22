@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Enums
+namespace Player.Enums
 {
     public static class PlayerAnimator
     {

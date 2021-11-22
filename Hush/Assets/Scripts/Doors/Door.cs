@@ -1,26 +1,30 @@
-using Common;
+using Common.Enums;
+using Game;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+namespace Doors
 {
-    [SerializeField] private GameObject wall;
-
-    private bool _isDoorOpen = true; // TODO: modify this value when the door opening conditionals are met
-
-    private bool CanGoThroughDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic && _isDoorOpen;
-    
-    private void OnTriggerEnter(Collider other)
+    public class Door : MonoBehaviour
     {
-        if (!other.gameObject.CompareTag(Tags.Player)) 
-            return;
-        
-        if (CanGoThroughDoor)
+        [SerializeField] private GameObject wall;
+
+        private bool _isDoorOpen = true; // TODO: modify this value when the door opening conditionals are met
+
+        private bool CanGoThroughDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic && _isDoorOpen;
+    
+        private void OnTriggerEnter(Collider other)
         {
-            // TODO Door opening animation
-            wall.SetActive(false);
+            if (!other.gameObject.CompareTag(Tags.Player)) 
+                return;
+        
+            if (CanGoThroughDoor)
+            {
+                // TODO Door opening animation
+                wall.SetActive(false);
                 
-            // respawn back into scene
-            SceneManager.Instance.LoadNextScene();
+                // respawn back into scene
+                SceneManager.Instance.LoadNextScene();
+            }
         }
     }
 }

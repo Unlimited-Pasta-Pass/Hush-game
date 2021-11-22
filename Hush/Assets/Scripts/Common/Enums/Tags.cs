@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Common.Enums
 {
     public static class Tags
     {
