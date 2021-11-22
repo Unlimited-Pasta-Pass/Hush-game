@@ -29,13 +29,13 @@ namespace Player
 
         private void OnEnable()
         {
-            if (Input)
+            if (Input != null && Input.reference != null)
                 Input.reference.actions[Actions.Reveal].performed += OnEcholocate;
         }
 
         private void OnDisable()
         {
-            if (Input)
+            if (Input != null && Input.reference != null)
                 Input.reference.actions[Actions.Reveal].performed -= OnEcholocate;
         }
 
@@ -79,7 +79,6 @@ namespace Player
             foreach (var door in passageDoorList)
             {
                 door.RevealPassage();
-                Debug.Log("Reveal");
             }
 
             _revealDelta = 0f;
