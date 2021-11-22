@@ -31,7 +31,7 @@ namespace Weapon
     
         private void OnEnable()
         {
-            if (Input)
+            if (Input != null && Input.reference != null)
             {
                 Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
                 Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
@@ -40,7 +40,7 @@ namespace Weapon
     
         private void OnDisable()
         {
-            if (Input)
+            if (Input != null && Input.reference != null)
             {
                 Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
                 Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;

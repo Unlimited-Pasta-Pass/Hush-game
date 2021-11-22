@@ -14,13 +14,13 @@ namespace UI
 
         private void OnEnable()
         {
-            if (Input)
+            if (Input != null && Input.reference != null)
                 Input.reference.actions[Actions.Pause].performed += TogglePauseMenu;
         }
 
         private void OnDisable()
         {
-            if (Input)
+            if (Input != null && Input.reference != null)
                 Input.reference.actions[Actions.Pause].performed -= TogglePauseMenu;
         }
 
