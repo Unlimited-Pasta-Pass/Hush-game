@@ -16,6 +16,12 @@ namespace Environment.Passage
             _colliders = GetComponentsInChildren<Collider>();
         }
 
+        public virtual void init()
+        {
+            _renderers = GetComponentsInChildren<Renderer>();
+            _colliders = GetComponentsInChildren<Collider>();
+        }
+
         public void Show()
         {
             foreach (var r in _renderers)
