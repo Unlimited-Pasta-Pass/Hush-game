@@ -6,6 +6,7 @@ using Game.Models;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using Weapon.Enums;
 
 namespace Enemies
 {
@@ -42,6 +43,9 @@ namespace Enemies
         private GameObject _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
+
+        private bool isPlayerInvisible => GameManager.Instance.GetActiveSpell() == WeaponType.InvisibleSpell &&
+                                          GameManager.Instance.GetSpellActivationTime() - Time.time < 5; // CHANGE
 
         #endregion
 
@@ -197,7 +201,7 @@ namespace Enemies
             var closeToPlayer = Vector3.Distance(playerPosition, position) <= detectionRadius;
             var seePlayer = Physics.Raycast(position, towardsPlayer.normalized, out var hit, visionCollider.radius, targetLayerMask) && hit.collider.CompareTag(Tags.Player);
         
-            return closeToPlayer || seePlayer;
+            return (closeToPlayer || seePlayer) && !isPlayerInvisible;
         }
     
         private void FacePlayer()

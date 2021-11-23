@@ -17,7 +17,7 @@ namespace Weapon
         [SerializeField] protected float heavyDamage = 15f;
         [SerializeField] protected float castCooldown = 7f;
         protected bool canCast = true;
-        private float lastCastTime;
+        private float lastCastTime => GameManager.Instance.GetSpellCoolDownTime();
         
 
         [Header("Spell References")]
@@ -29,7 +29,7 @@ namespace Weapon
     
         private static InputManager Input => InputManager.Instance;
 
-        public WeaponType WeaponType => WeaponType.FireballSpell;
+        public WeaponType WeaponType => WeaponType.InvisibleSpell;
 
         public float BaseDamage => baseDamage;
         public float HeavyDamage => heavyDamage;
@@ -38,6 +38,8 @@ namespace Weapon
         {
             Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
             Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
+            
+            GameManager.Instance.SetActiveSpell(WeaponType);
         }
     
         private void OnDisable()
@@ -64,7 +66,6 @@ namespace Weapon
             animator.SetTrigger(PlayerAnimator.SpellAttack);
             CreateSpellAttack(AttemptCrit(BaseDamage));
             
-            lastCastTime = Time.time;
             GameManager.Instance.SetSpellCooldownTime(lastCastTime);
         }
 
@@ -78,8 +79,7 @@ namespace Weapon
             animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
             CreateSpellAttack(AttemptCrit(HeavyDamage));
             
-            lastCastTime = Time.time;
-            GameManager.Instance.SetSpellCooldownTime(lastCastTime);
+            GameManager.Instance.SetSpellCooldownTime(Time.time);
         }
 
         public float AttemptCrit(float damage)
