@@ -11,8 +11,7 @@ namespace Environment.Passage
 
         void Start()
         {
-            _renderers = GetComponentsInChildren<Renderer>();
-            _colliders = GetComponentsInChildren<Collider>();
+            Init();
         }
 
         public virtual void Init()
