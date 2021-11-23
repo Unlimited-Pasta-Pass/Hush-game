@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 1039511428064358437}
   - component: {fileID: 7186588081660783240}
   - component: {fileID: 234692157854127520}
-  - component: {fileID: 8490621396511798265}
   - component: {fileID: 7872856842678039438}
   - component: {fileID: 16606687100967124}
-  m_Layer: 0
+  - component: {fileID: 8490621396511798265}
+  - component: {fileID: 7274856228100845386}
+  m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -35,6 +36,7 @@ Transform:
   m_Children:
   - {fileID: 9075592076780320822}
   - {fileID: 8507614702795856167}
+  - {fileID: 717557926}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90,28 +92,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8490621396511798265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423858757433039569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9d6b9592bf79d44b965e7d2295bcc90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  visionAngle: 70
-  hitPoints: 100
-  minAttackRange: 0.5
-  maxAttackRange: 1
-  runSpeed: 4
-  patrolSpeed: 2
-  patrolRoute: []
-  agent: {fileID: 234692157854127520}
-  animator: {fileID: 8391566035528528493}
-  visionCollider: {fileID: 6732957862493942095}
 --- !u!114 &7872856842678039438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +119,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b334c0935829642b595f043fde9963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8490621396511798265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423858757433039569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d6b9592bf79d44b965e7d2295bcc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionAngle: 70
+  detectionRadius: 3
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 1152
+  minAttackRange: 1
+  maxAttackRange: 2
+  runSpeed: 3
+  patrolSpeed: 1
+  patrolRoute: []
+  agent: {fileID: 234692157854127520}
+  animator: {fileID: 8391566035528528493}
+  visionCollider: {fileID: 6732957862493942095}
+--- !u!114 &7274856228100845386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423858757433039569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bbc2c1e63e98543830eec78d976795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedGuid: 
 --- !u!54 &4013357228126335810
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -180,7 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8a3ddfbccc4c3ba2b43cae0d9cd3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  baseDamage: 5
+  enemyAnimator: {fileID: 0}
   enemy: {fileID: 8490621396511798265}
 --- !u!1 &7959901480173517863
 GameObject:
@@ -226,7 +245,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 20
+  m_Radius: 7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5537224499820979692
 Rigidbody:
@@ -297,7 +316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000088376432427105, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2000088376432427105, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -381,18 +400,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2000088376600981335, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000088376902354755, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000088376902354755, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000088376902354755, guid: 16b76d4ac1832d04babcd1dd1231b58f, type: 3}
-      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

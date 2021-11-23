@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Common.Enums
 {
     public class Actions
     {
@@ -10,13 +10,16 @@
         
         public static string HeavyAttack => "Heavy Attack";
         
-        public static string SpecialAttack => "Special Attack";
+        public static string LightSpell => "Light Spell";
+        
+        public static string HeavySpell => "Heavy Spell";
         
         public static string Interact => "Interact";
         
         public static string Walk => "Walk";
         
         public static string Reveal => "Reveal";
-        public static string SwitchWeapon => "SwitchWeapon";
+
+        public static string Pause => "Pause";
     }
 }

@@ -1,41 +1,43 @@
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+namespace Game
 {
-    public static TimeManager Instance;
-
-    private bool mGameIsPaused;
-
-    private float mPrevTimeScale;
-
-    private void Awake()
+    public class TimeManager : MonoBehaviour
     {
-        Instance = this;
-    }
+        public static TimeManager Instance;
 
-    public bool GameIsPaused()
-    {
-        return mGameIsPaused;
-    }
+        private bool _gameIsPaused;
+        private float _prevTimeScale;
+    
+        public bool GameIsPaused => _gameIsPaused;
 
-    public void Pause()
-    {
-        mPrevTimeScale = Time.timeScale;
-        Time.timeScale = 0f;
-        mGameIsPaused = true;
-    }
+        private void Awake()
+        {
+            if (Instance == null)
+                Instance = this;
+            
+            DontDestroyOnLoad(Instance.gameObject);
+        }
 
-    public void Resume()
-    {
-        Time.timeScale = mPrevTimeScale;
-        mPrevTimeScale = 0f;
-        mGameIsPaused = false;
-    }
+        public void Pause()
+        {
+            _prevTimeScale = Time.timeScale;
+            Time.timeScale = 0f;
+            _gameIsPaused = true;
+        }
 
-    public void Reset()
-    {
-        Time.timeScale = 1f;
-        mPrevTimeScale = 0f;
-        mGameIsPaused = false;
+        public void Resume()
+        {
+            Time.timeScale = _prevTimeScale;
+            _prevTimeScale = 0f;
+            _gameIsPaused = false;
+        }
+
+        public void Reset()
+        {
+            Time.timeScale = 1f;
+            _prevTimeScale = 0f;
+            _gameIsPaused = false;
+        }
     }
 }

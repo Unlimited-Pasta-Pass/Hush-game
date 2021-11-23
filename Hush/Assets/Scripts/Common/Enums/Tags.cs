@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Common.Enums
 {
     public static class Tags
     {
@@ -9,5 +9,6 @@
         public static string Ground => "Ground";
         public static string KeySpawner => "Key Spawner";
         public static string Dome => "Dome";
+        public static string Spell => "Spell";
     }
 }

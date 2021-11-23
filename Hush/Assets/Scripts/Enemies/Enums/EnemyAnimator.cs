@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Common
+namespace Enemies.Enums
 {
     public static class EnemyAnimator
     {

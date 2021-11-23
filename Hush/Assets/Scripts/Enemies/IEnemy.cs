@@ -1,6 +1,10 @@
-using Common;
+using Common.Interfaces;
 
-public interface IEnemy : IKillable
+namespace Enemies
 {
+    public interface IEnemy : IKillable
+    {
+        public void PerformAttack();
+    }
 }
 

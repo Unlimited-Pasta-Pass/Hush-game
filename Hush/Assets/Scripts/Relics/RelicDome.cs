@@ -1,62 +1,57 @@
-using System.Collections;
-using System.Collections.Generic;
+using Common.Enums;
+using Common.Interfaces;
+using Game;
 using UnityEngine;
-using Common;
 using UnityEngine.Events;
 
-public class RelicDome : MonoBehaviour, IKillable
+namespace Relics
 {
-    public int keysNeededToUnlock = 0;
-    public UnityEvent onDestroyDome = new UnityEvent();
-    [SerializeField] private int hitPoints = 150;
-    [SerializeField] private int maxHitPoints = 150;
-     
-    
-    public int HitPoints
+    public class RelicDome : MonoBehaviour, IKillable
     {
-        get => hitPoints; 
-        set
-        {
-            hitPoints = value;
-            if (hitPoints <= 0)
-                Die();
-        }
-    }
+        [SerializeField] private int keysNeededToUnlock;
 
-    void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.CompareTag(Tags.Player) && GameMaster.keysInPossession == keysNeededToUnlock) {
-            gameObject.SetActive(false);
-            GameMaster.ResetKeys();
-        }
-    }
-    public void OpenDome() {
-        gameObject.SetActive(false);
-    }
+        public UnityEvent attacked;
 
-    public void TakeDamage(int damage)
-    {
-        hitPoints -= damage;
-        if (hitPoints <= 0)
+        private UnityEvent _killed;
+        public UnityEvent Killed => _killed ??= new UnityEvent();
+        
+        public float HitPoints => GameManager.Instance.RelicDomeHitPoints;
+
+        private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock;
+
+        private void OnTriggerEnter(Collider other)
         {
-            hitPoints = 0;
+            if (!other.gameObject.CompareTag(Tags.Player) || !CanUnlockDome) 
+                return;
+
             Die();
         }
-        if (hitPoints < maxHitPoints)
+    
+        public void TakeDamage(float damage)
         {
-            OnDestroyDome();
+            if (!GameManager.Instance.DomeWasHit)
+            {
+                attacked ??= new UnityEvent();
+                attacked.Invoke();
+            }
+            
+            if (!GameManager.Instance.AttackDome(damage))
+                Die();
+        }
+
+        public void Die()
+        {
+            // TODO breaking animation
+            
+            SetDomeVisibility(false);
+            
+            GameManager.Instance.DisableDome();
+            Killed.Invoke();
+        }
+
+        public void SetDomeVisibility(bool visibility)
+        {
+            gameObject.SetActive(visibility);
         }
     }
-
-    public void Die()
-    {
-        // breaking animation
-        Destroy(gameObject);
-    }
-
-    public void OnDestroyDome()
-    {
-        onDestroyDome.Invoke();
-    }
-    
-    
 }
