@@ -6,7 +6,6 @@ namespace Environment.Passage
 {
     public class ObjectToggle : MonoBehaviour
     {
-
         private Renderer[] _renderers;
         private Collider[] _colliders;
 
@@ -37,6 +36,5 @@ namespace Environment.Passage
             foreach (var c in _colliders)
                 c.enabled = false;
         }
-
     }
 }
