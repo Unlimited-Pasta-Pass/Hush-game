@@ -30,14 +30,13 @@ namespace Environment.Passage
             // Start hidden
             _lastShown = Time.time;
             _lastInside = Time.time;
-            Debug.Log("hide door");
             foreach (var door in passageDoors)
             {
-                door.init();
+                door.Init();
             }
             foreach (var floor in passageElements)
             {
-                floor.init();
+                floor.Init();
             }
             Hide(true);
         }

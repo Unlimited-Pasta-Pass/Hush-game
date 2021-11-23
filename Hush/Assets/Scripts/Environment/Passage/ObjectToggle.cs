@@ -16,7 +16,7 @@ namespace Environment.Passage
             _colliders = GetComponentsInChildren<Collider>();
         }
 
-        public virtual void init()
+        public virtual void Init()
         {
             _renderers = GetComponentsInChildren<Renderer>();
             _colliders = GetComponentsInChildren<Collider>();
