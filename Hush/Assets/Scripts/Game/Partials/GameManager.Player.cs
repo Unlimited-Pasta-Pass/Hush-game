@@ -11,7 +11,7 @@ namespace Game
         [SerializeField] private float playerHitPoints = 100f;
 
         public bool PlayerIsAlive => PlayerCurrentHitPoints > 0f;
-        
+
         public float PlayerCurrentHitPoints
         {
             get

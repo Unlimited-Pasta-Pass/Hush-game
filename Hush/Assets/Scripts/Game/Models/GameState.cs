@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Common.Models;
 using UnityEngine;
+using Weapon.Enums;
 
 namespace Game.Models
 {
@@ -19,6 +20,11 @@ namespace Game.Models
         public float playerMaxHitPoints;
         public SerializableTransform playerTransform;
         
+        // Spell
+        public WeaponType activeSpell;
+        public float spellActivationTime;
+        public float spellCooldownTime;
+
         // Relic
         public bool playerHasRelic;
         public float relicDomeHitPoints;
@@ -41,6 +47,7 @@ namespace Game.Models
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
+            
             
             // Relic
             playerHasRelic = false;

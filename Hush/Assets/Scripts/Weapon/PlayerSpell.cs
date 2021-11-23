@@ -17,11 +17,10 @@ namespace Weapon
         [SerializeField] protected float heavyDamage = 15f;
         [SerializeField] protected float castCooldown = 7f;
         protected bool canCast = true;
-        private float castDelta;
+        private float lastCastTime;
         
 
-        [Header("Spell References")] 
-        [SerializeField] private string activeSpell = SpellList.Fireball; // default active
+        [Header("Spell References")]
         [SerializeField] protected GameObject spellPrefab; 
         [SerializeField] protected GameObject shootPosition;
     
@@ -30,7 +29,7 @@ namespace Weapon
     
         private static InputManager Input => InputManager.Instance;
 
-        public WeaponType WeaponType => WeaponType.Spell;
+        public WeaponType WeaponType => WeaponType.FireballSpell;
 
         public float BaseDamage => baseDamage;
         public float HeavyDamage => heavyDamage;
@@ -49,9 +48,7 @@ namespace Weapon
 
         protected void Update()
         {
-            castDelta += Time.deltaTime;
-            
-            if (castDelta >= castCooldown)
+            if (Time.time - lastCastTime >= castCooldown)
             {
                 canCast = true;
             }
@@ -66,7 +63,9 @@ namespace Weapon
             
             animator.SetTrigger(PlayerAnimator.SpellAttack);
             CreateSpellAttack(AttemptCrit(BaseDamage));
-            castDelta = 0f;
+            
+            lastCastTime = Time.time;
+            GameManager.Instance.SetSpellCooldownTime(lastCastTime);
         }
 
         public void PerformHeavyAttack(InputAction.CallbackContext context)
@@ -78,7 +77,9 @@ namespace Weapon
             
             animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
             CreateSpellAttack(AttemptCrit(HeavyDamage));
-            castDelta = 0f;
+            
+            lastCastTime = Time.time;
+            GameManager.Instance.SetSpellCooldownTime(lastCastTime);
         }
 
         public float AttemptCrit(float damage)

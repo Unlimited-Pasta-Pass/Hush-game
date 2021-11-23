@@ -1,64 +1,62 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Game;
 using UnityEngine;
-using UnityEngine.UI;
-using Weapon;
 
-public class InvisibleSpell : PlayerSpell
+namespace Weapon
 {
-    [SerializeField] GameObject playerRoot;
-    [SerializeField] private float alpha = 0.25f;
-    [SerializeField] private float invisibleDuration = 5f;
-
-    private bool canBecomeInvisible = true;
-    private float invisibleCountdown;
-    private bool isInvisible = false;
-
-    protected void Update()
+    public class InvisibleSpell : PlayerSpell
     {
-        base.Update();
+        [SerializeField] GameObject playerRoot;
+        [SerializeField] private float alpha = 0.25f;
+        [SerializeField] private float invisibleDuration = 5f;
         
-        invisibleCountdown += Time.deltaTime;
-        if (invisibleCountdown >= invisibleDuration)
-        { 
-            canBecomeInvisible = true; 
-            ToggleInvisibilty();
-        }
-    }
+        private bool isInvisible = false;
+        
+        private float lastInvisibleTime => GameManager.Instance.GetSpellActivationTime();
 
-    protected override void CreateSpellAttack(float damage)
-    {
-        if (!canBecomeInvisible)
-            return;
-
-        canBecomeInvisible = false;
-        ToggleInvisibilty();
-    }
-
-    private void ToggleTransparent()
-    {
-        isInvisible = !isInvisible;
-        var renderers = playerRoot.GetComponentsInChildren<Renderer>();
-
-        foreach (Renderer r in renderers)
+        protected new void Update()
         {
-            Color newColor = r.material.color;
-            newColor.a = isInvisible ? 1.0f : alpha;
-            r.material.color = newColor;
-        } 
-    }
+            base.Update();
 
-    private void ToggleOutline()
-    {
-        var outline = playerRoot.GetComponent<Outline>();
-        outline.enabled = isInvisible;
-    }
+            if (Time.time - lastInvisibleTime >= invisibleDuration && isInvisible)
+            {
+                SetInvisibilty(false);
+            }
+        }
 
-    private void ToggleInvisibilty()
-    {
-        ToggleOutline();
-        ToggleTransparent();
-        invisibleCountdown = 0f;
+        protected override void CreateSpellAttack(float damage)
+        {
+            SetInvisibilty(true);
+        }
+
+        private void SetTransparent(bool enabled)
+        {
+            var renderers = playerRoot.GetComponentsInChildren<Renderer>();
+
+            foreach (Renderer r in renderers)
+            {
+                Material material = r.material;
+                Color newColor = material.color;
+                newColor.a = enabled ? alpha : 1.0f;
+                material.color = newColor;
+            } 
+        }
+
+        private void SetOutline(bool enabled)
+        {
+            var outline = playerRoot.GetComponent<Outline>();
+            outline.enabled = enabled;
+        }
+
+        private void SetInvisibilty(bool enabled)
+        {
+            isInvisible = enabled;
+            SetOutline(enabled);
+            SetTransparent(enabled);
+            
+            if (enabled)
+            {
+                GameManager.Instance.SetSpellActivationTime(Time.time);
+            }
+        }
     }
 }
