@@ -7,5 +7,6 @@
         EnemySword = 2,
         InvisibleSpell = 3,
         LightningSpell = 4,
+        StunSpell = 5,
     }
 }

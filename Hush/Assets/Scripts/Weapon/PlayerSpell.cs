@@ -29,7 +29,7 @@ namespace Weapon
     
         private static InputManager Input => InputManager.Instance;
 
-        public WeaponType WeaponType => WeaponType.InvisibleSpell;
+        public WeaponType WeaponType => GameManager.Instance.GetActiveSpell();
 
         public float BaseDamage => baseDamage;
         public float HeavyDamage => heavyDamage;
@@ -39,7 +39,7 @@ namespace Weapon
             Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
             Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
             
-            GameManager.Instance.SetActiveSpell(WeaponType);
+            //GameManager.Instance.SetActiveSpell(WeaponType);
         }
     
         private void OnDisable()

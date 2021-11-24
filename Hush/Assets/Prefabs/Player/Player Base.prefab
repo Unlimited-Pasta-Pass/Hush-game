@@ -5313,6 +5313,7 @@ GameObject:
   - component: {fileID: 3424695256074168618}
   - component: {fileID: 2115969719432915281}
   - component: {fileID: 90708531195035637}
+  - component: {fileID: 9199240927236339795}
   m_Layer: 10
   m_Name: Player Base
   m_TagString: Player
@@ -5395,7 +5396,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5381592743170887637}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 763bccd533e8aff498c3cc87c0c87043, type: 3}
   m_Name: 
@@ -5403,7 +5404,6 @@ MonoBehaviour:
   baseDamage: 0
   heavyDamage: 0
   castCooldown: 7
-  activeSpell: Fireball
   spellPrefab: {fileID: 0}
   shootPosition: {fileID: 0}
   animator: {fileID: 8205350870087033752}
@@ -5472,8 +5472,7 @@ MonoBehaviour:
   baseDamage: 15
   heavyDamage: 30
   castCooldown: 7
-  activeSpell: Fireball
-  spellPrefab: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+  spellPrefab: {fileID: 6293275558830136683, guid: 050d56ad264a51440a27f3e66cea2864, type: 3}
   shootPosition: {fileID: 5956840403188805875}
   animator: {fileID: 8205350870087033752}
 --- !u!114 &90708531195035637
@@ -5489,6 +5488,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedGuid: 
+--- !u!114 &9199240927236339795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac10d03a2ad152489b06e19723856fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 5
+  heavyDamage: 15
+  castCooldown: 7
+  spellPrefab: {fileID: 0}
+  shootPosition: {fileID: 5956840403188805875}
+  animator: {fileID: 8205350870087033752}
 --- !u!1 &5956840403188805875
 GameObject:
   m_ObjectHideFlags: 0

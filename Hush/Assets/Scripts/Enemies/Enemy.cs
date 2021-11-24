@@ -43,6 +43,7 @@ namespace Enemies
         private GameObject _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
+        private bool isStunned = false;
 
         private bool isPlayerInvisible => GameManager.Instance.GetActiveSpell() == WeaponType.InvisibleSpell &&
                                           GameManager.Instance.GetSpellActivationTime() - Time.time < 5; // CHANGE
@@ -132,6 +133,9 @@ namespace Enemies
 
         private void MoveEnemy()
         {
+            if (isStunned)
+                return;
+            
             switch (_state)
             {
                 case EnemyState.Attacking:
@@ -268,6 +272,18 @@ namespace Enemies
                 // If we have line of sight, keep following player
                 SetState(HasPlayerLineOfSight() ? EnemyState.Attacking : EnemyState.Searching);
             }
+        }
+
+        public void Stun()
+        {
+            // TODO add stun animation
+            isStunned = !isStunned;
+            Invoke("DisableStun", 5);
+        }
+
+        private void DisableStun()
+        {
+            isStunned = false;
         }
 
         private void SetState(EnemyState state)
