@@ -41,20 +41,12 @@ namespace UI
         {
             TimeManager.Instance.Pause();
             pauseMenuUI.SetActive(true);
-        
-            // Unlock the cursor
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
     
         private void Resume()
         {
             TimeManager.Instance.Resume();
             pauseMenuUI.SetActive(false);
-        
-            // Lock the cursor
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
         }
     }
 }
