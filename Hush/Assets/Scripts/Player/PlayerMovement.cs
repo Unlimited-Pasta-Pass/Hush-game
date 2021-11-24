@@ -111,7 +111,6 @@ namespace Player
             
             // Update the animator
             animator.SetFloat(PlayerAnimator.Speed, _playerSpeed);
-            Debug.Log(controller.velocity.magnitude);
         }
 
         private void RotatePlayer()
