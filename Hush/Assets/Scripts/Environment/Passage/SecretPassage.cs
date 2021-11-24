@@ -7,12 +7,14 @@ namespace Environment.Passage
 {
     public class SecretPassage : MonoBehaviour
     {
-        [Header("Parameters")]
-        [SerializeField] private float hideDelay = 5.0f;
+        [Header("Parameters")] [SerializeField]
+        private float hideDelay = 5.0f;
+
         [SerializeField] private float hideDelayOnLeave = 1.0f;
-        
-        [Header("References")]
-        [SerializeField] private SecretPassageDoor[] passageDoors;
+
+        [Header("References")] [SerializeField]
+        private SecretPassageDoor[] passageDoors;
+
         [SerializeField] private SecretPassageElement[] passageElements;
 
         private bool _shown;
@@ -25,12 +27,22 @@ namespace Environment.Passage
             passageDoors = GetComponentsInChildren<SecretPassageDoor>();
             passageElements = GetComponentsInChildren<SecretPassageElement>();
         }
-        
+
         void Start()
         {
             // Start hidden
             _lastShown = Time.time;
             _lastInside = Time.time;
+            foreach (var door in passageDoors)
+            {
+                door.Init();
+            }
+
+            foreach (var floor in passageElements)
+            {
+                floor.Init();
+            }
+
             Hide(true);
         }
 
@@ -44,7 +56,7 @@ namespace Environment.Passage
                 
         }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             _insideTrigger.Add(other);
         }
@@ -56,7 +68,7 @@ namespace Environment.Passage
                 _lastInside = Time.time;
             }
         }
-        
+
         void OnTriggerExit(Collider other)
         {
             _insideTrigger.Remove(other);
@@ -69,11 +81,11 @@ namespace Environment.Passage
 
             _shown = true;
             _lastShown = Time.time;
-            
+
             // Hide doors
             foreach (var door in passageDoors)
                 door.Hide();
-            
+
             // Show passage elements
             foreach (var element in passageElements)
                 element.Show();
@@ -85,11 +97,11 @@ namespace Environment.Passage
                 return;
 
             _shown = false;
-            
+
             // Show doors
             foreach (var door in passageDoors)
                 door.Show();
-            
+
             // Hide passage elements
             foreach (var element in passageElements)
                 element.Hide();

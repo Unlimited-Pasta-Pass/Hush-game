@@ -15,6 +15,5 @@ namespace Environment.Passage
         {
             gameObject.SetActive(false);
         }
-
     }
 }
