@@ -1,4 +1,5 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -32,17 +33,15 @@ namespace Player
 			DontDestroyOnLoad(Instance.gameObject);
 		}
 
-		private void Start()
-		{
-			// Lock the mouse cursor
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-		}
-
         private void OnDestroy()
         {
             if (Instance == this)
                 Instance = null;
+        }
+
+        private void Start()
+        {
+	        Cursor.lockState = CursorLockMode.Confined;
         }
 
         #region Public Event Handlers
