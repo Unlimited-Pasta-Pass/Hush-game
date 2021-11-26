@@ -233,6 +233,12 @@ namespace Enemies
         
         public void Die()
         {
+            // Disable colliders on NPC death to allow shooting spells through them
+            foreach (var col in GetComponentsInChildren<Collider>())
+            {
+                col.enabled = false;
+            }
+            
             animator.SetBool(EnemyAnimator.Dead, true);
             SetState(EnemyState.Dead);
         
