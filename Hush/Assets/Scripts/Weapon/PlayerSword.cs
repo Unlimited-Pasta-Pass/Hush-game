@@ -14,6 +14,11 @@ namespace Weapon
         [Header("Damage Parameters")]
         [SerializeField] private float baseDamage = 5;
         [SerializeField] private float heavyDamage = 15;
+        
+        [Header("Animation Parameters")]
+        [SerializeField] private float baseDuration = 0.3f;
+        [SerializeField] private float heavyDuration = 0.5f;
+        [SerializeField] private float castDelay = 0.15f;
     
         [Header("Crit Parameters")]
         [SerializeField] private float critChance = 0.10f;
@@ -30,16 +35,29 @@ namespace Weapon
         public float BaseDamage => baseDamage;
         public float HeavyDamage => heavyDamage;
 
+        private PlayerMovement _player;
+
         private void OnEnable()
         {
-            Input.reference.actions[Actions.LightAttack].performed += PerformAttack;
-            Input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.LightAttack].performed += PerformAttack;
+                Input.reference.actions[Actions.HeavyAttack].performed += PerformHeavyAttack;
+            }
+
+            _player = FindObjectOfType<PlayerMovement>();
+
+            if (_player == null)
+                throw new MissingComponentException("Missing PlayerMovement Component in the Scene");
         }
 
         private void OnDisable()
         {
-            Input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
-            Input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.LightAttack].performed -= PerformAttack;
+                Input.reference.actions[Actions.HeavyAttack].performed -= PerformHeavyAttack;
+            }
         }
 
         private void Reset()
@@ -52,7 +70,8 @@ namespace Weapon
             if (!GameManager.Instance.PlayerIsAlive)
                 return;
             
-            playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
+            _player.OnAttackPerformed(baseDuration);
+            Invoke(nameof(LightAttack), castDelay);
         }
 
         public void PerformHeavyAttack(InputAction.CallbackContext context)
@@ -60,7 +79,8 @@ namespace Weapon
             if (!GameManager.Instance.PlayerIsAlive)
                 return;
             
-            playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
+            _player.OnAttackPerformed(heavyDuration);
+            Invoke(nameof(HeavyAttack), castDelay);
         }
     
         public float AttemptCrit(float damage)
@@ -73,12 +93,22 @@ namespace Weapon
             return damage;
         }
 
+        private void LightAttack()
+        {
+            playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
+        }
+
+        private void HeavyAttack()
+        {
+            playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
+        }
+
         private void OnTriggerEnter(Collider col)
         {
             if (!col.CompareTag(Tags.Enemy) && !col.CompareTag(Tags.Dome)) 
                 return;
         
-            var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo(PlayerAnimator.Layer.UpperBody);
+            var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo((int)PlayerAnimator.Layer.UpperBody);
             var killable = col.GetComponent<IKillable>();
             if (stateInfo.IsName(PlayerAnimator.State.LightAttack))
             {

@@ -5428,6 +5428,7 @@ MonoBehaviour:
   speedChangeRate: 10
   animator: {fileID: 8205350870087033752}
   controller: {fileID: 2680335586944316230}
+  mainCamera: {fileID: 1005489440315475630}
 --- !u!114 &5076025907412216654
 MonoBehaviour:
   m_ObjectHideFlags: 0

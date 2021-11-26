@@ -13,39 +13,53 @@ namespace Weapon
     public class PlayerSpell : MonoBehaviour, IWeapon
     {
         [Header("Parameters")]
-        [SerializeField] protected float baseDamage = 5f;
-        [SerializeField] protected float heavyDamage = 15f;
         [SerializeField] protected float castCooldown = 7f;
         protected bool canCast = true;
         private float lastCastTime => GameManager.Instance.GetSpellCoolDownTime();
         
-
+        [SerializeField] private float baseDamage = 5f;
+        [SerializeField] private float heavyDamage = 15f;
+        [SerializeField] private float baseDuration = 0.25f;
+        [SerializeField] private float heavyDuration = 0.4f;
+        [SerializeField] private float castDelay = 0.1f;
+    
         [Header("Spell References")]
         [SerializeField] protected GameObject spellPrefab; 
         [SerializeField] protected GameObject shootPosition;
     
         [Header("Other References")]
         [SerializeField] private Animator animator;
-    
+
         private static InputManager Input => InputManager.Instance;
 
         public WeaponType WeaponType => GameManager.Instance.GetActiveSpell();
 
         public float BaseDamage => baseDamage;
         public float HeavyDamage => heavyDamage;
-    
+
+        private PlayerMovement _player;
+
         private void OnEnable()
         {
-            Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
-            Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
-            
-            //GameManager.Instance.SetActiveSpell(WeaponType);
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.LightSpell].performed += PerformAttack;
+                Input.reference.actions[Actions.HeavySpell].performed += PerformHeavyAttack;
+            }
+
+            _player = FindObjectOfType<PlayerMovement>();
+
+            if (_player == null)
+                throw new MissingComponentException("Missing PlayerMovement Component in the Scene");
         }
-    
+
         private void OnDisable()
         {
-            Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
-            Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.LightSpell].performed -= PerformAttack;
+                Input.reference.actions[Actions.HeavySpell].performed -= PerformHeavyAttack;
+            }
         }
 
         protected void Update()
@@ -62,9 +76,9 @@ namespace Weapon
                 return;
 
             canCast = false;
-            
-            animator.SetTrigger(PlayerAnimator.SpellAttack);
-            CreateSpellAttack(AttemptCrit(BaseDamage));
+
+            _player.OnAttackPerformed(baseDuration);
+            Invoke(nameof(LightAttack), castDelay);
             
             GameManager.Instance.SetSpellCooldownTime(lastCastTime);
         }
@@ -75,9 +89,9 @@ namespace Weapon
                 return;
 
             canCast = false;
-            
-            animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
-            CreateSpellAttack(AttemptCrit(HeavyDamage));
+
+            _player.OnAttackPerformed(heavyDuration);
+            Invoke(nameof(HeavyAttack), castDelay);
             
             GameManager.Instance.SetSpellCooldownTime(Time.time);
         }
@@ -87,8 +101,26 @@ namespace Weapon
             return damage;
         }
 
-        protected virtual void CreateSpellAttack(float damage)
+        private void LightAttack()
         {
+            animator.SetTrigger(PlayerAnimator.SpellAttack);
+            CreateSpellAttack(AttemptCrit(BaseDamage));
+        }
+
+        private void HeavyAttack()
+        {
+            animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
+            CreateSpellAttack(AttemptCrit(HeavyDamage));
+        }
+
+        private void CreateSpellAttack(float damage)
+        {
+            var spellClone = Instantiate(spellPrefab);
+            spellClone.transform.position = shootPosition.transform.position;
+            spellClone.transform.rotation = shootPosition.transform.rotation;
+
+            spellClone.GetComponent<CustomFireProjectile>().ShootPosition = shootPosition.transform;
+            spellClone.GetComponent<CustomFireProjectile>().Damage = (int)damage;
         }
     }
 }

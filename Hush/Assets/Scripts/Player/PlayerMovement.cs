@@ -1,6 +1,9 @@
-﻿using Game;
+using System;
+using Common.Enums;
+using Game;
 using Player.Enums;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -24,12 +27,17 @@ namespace Player
         [Header("Component References")] 
         [SerializeField] private Animator animator;
         [SerializeField] private CharacterController controller;
+        [SerializeField] private Camera mainCamera;
 
         #endregion
         
         private static InputManager Input => InputManager.Instance;
-
+        
+        private bool _isAttacking;
+        private float _attackDelta;
         private float _playerSpeed;
+
+        private float _attackPauseTime;
 
         private void Start()
         {
@@ -40,6 +48,15 @@ namespace Player
         {
             if (!GameManager.Instance.PlayerIsAlive)
                 return;
+
+            if (_attackDelta >= _attackPauseTime && _isAttacking)
+            {
+                _isAttacking = false;
+            }
+            else
+            {
+                _attackDelta += Time.fixedDeltaTime;
+            }
             
             MovePlayer();
             RotatePlayer();
@@ -56,15 +73,31 @@ namespace Player
             transform.position = GameManager.Instance.PlayerTransform.Position.Get();
             transform.rotation = GameManager.Instance.PlayerTransform.Rotation.Get();
             
-            _playerSpeed = 0f;
-            
             controller.enabled = true;
+        }
+
+        public void OnAttackPerformed(float delay)
+        {
+            _attackPauseTime = delay;
+            _attackDelta = 0f;
+
+            _isAttacking = true;
+            
+            // Set the target direction based on the input
+            var cameraRay = mainCamera.ScreenPointToRay(Input.look);
+            var groundPlane = new Plane(Vector3.up, transform.position);
+
+            if (!groundPlane.Raycast(cameraRay, out var rayLength)) 
+                return;
+            
+            var pointToLook = cameraRay.GetPoint(rayLength);
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
         }
 
         private void MovePlayer()
         {
             // Set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = Input.move.normalized.magnitude * (Input.walk ? walkSpeed : sprintSpeed);
+            float targetSpeed = Input.move.normalized.magnitude * GetDesiredSpeed();
             
             // Creates curved result rather than a linear one giving a more organic speed change
             _playerSpeed = Mathf.Lerp(_playerSpeed, targetSpeed, speedChangeRate * Time.deltaTime);
@@ -75,13 +108,16 @@ namespace Player
             
             // Move the player
             controller.Move(transform.TransformDirection(horizontalDisplacement + verticalDisplacement));
-
-            // Update animator
+            
+            // Update the animator
             animator.SetFloat(PlayerAnimator.Speed, _playerSpeed);
         }
 
         private void RotatePlayer()
         {
+            if (_isAttacking)
+                return;
+            
             // Set the target direction based on the input
             Vector3 targetDirection = new Vector3(Input.move.x, 0f, Input.move.y);
                 
@@ -91,6 +127,14 @@ namespace Player
             
             // Creates curved result rather than a linear one giving a more organic rotation change
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(targetDirection), rotationSpeed * Time.deltaTime);
+        }
+
+        private float GetDesiredSpeed()
+        {
+            if (_isAttacking)
+                return 0f;
+            
+            return Input.walk ? walkSpeed : sprintSpeed;
         }
     }
 }
