@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Player.Enums
 {
@@ -10,11 +10,13 @@ namespace Player.Enums
         public static int SpellAttack => Animator.StringToHash("SpellAttack");
         public static int SpellSpecialAttack => Animator.StringToHash("SpellSpecialAttack");
         public static int Dead => Animator.StringToHash("Dead");
-        public static class Layer
+        
+        public enum Layer
         {
-            public static int Base => 0;
-            public static int UpperBody => 1;
+            Base = 0,
+            UpperBody = 1,
         }
+        
         public static class State
         {
             public static string LightAttack => "Light Attack";
