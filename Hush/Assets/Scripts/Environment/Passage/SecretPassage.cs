@@ -33,16 +33,6 @@ namespace Environment.Passage
             // Start hidden
             _lastShown = Time.time;
             _lastInside = Time.time;
-            foreach (var door in passageDoors)
-            {
-                door.Init();
-            }
-
-            foreach (var floor in passageElements)
-            {
-                floor.Init();
-            }
-
             Hide(true);
         }
 
@@ -53,7 +43,6 @@ namespace Environment.Passage
             {
                 Hide();
             }
-                
         }
 
         void OnTriggerEnter(Collider other)
@@ -106,6 +95,5 @@ namespace Environment.Passage
             foreach (var element in passageElements)
                 element.Hide();
         }
-
     }
 }
