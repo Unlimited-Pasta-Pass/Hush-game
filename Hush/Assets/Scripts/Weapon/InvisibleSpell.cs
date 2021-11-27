@@ -26,10 +26,6 @@ namespace Weapon
         {
             // GameManager.Instance.SetActiveHeavySpell(SpellType.InvisibleSpell);
             // GameManager.Instance.SetActiveLightSpell(SpellType.InvisibleSpell);
-            // GameManager.Instance.SetHeavySpellCooldownTime(4f);
-            // GameManager.Instance.SetLightSpellCooldownTime(4f);
-            // GameManager.Instance.SetHeavySpellActivationTime(0);
-            // GameManager.Instance.SetLightSpellActivationTime(0);
         }
 
         private void OnEnable()

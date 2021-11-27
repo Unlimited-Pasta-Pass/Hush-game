@@ -53,12 +53,8 @@ namespace Weapon
         // TODO Remove
         private void Awake()
         {
-            GameManager.Instance.SetActiveHeavySpell(WeaponType.FireballSpell);
-            GameManager.Instance.SetActiveLightSpell(WeaponType.FireballSpell);
-            GameManager.Instance.SetHeavySpellCooldownTime(4f);
-            GameManager.Instance.SetLightSpellCooldownTime(4f);
-            GameManager.Instance.SetHeavySpellActivationTime(float.MinValue);
-            GameManager.Instance.SetLightSpellActivationTime(float.MinValue);
+            GameManager.Instance.SetActiveHeavySpell(SpellType.FireballSpell);
+            GameManager.Instance.SetActiveLightSpell(SpellType.FireballSpell);
         }
 
         private void OnDisable()
@@ -72,9 +68,7 @@ namespace Weapon
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            Debug.Log(Spell.CanCastLight);
-            Debug.Log(GameManager.Instance.GetActiveLightSpell());
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != WeaponType.FireballSpell || !Spell.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != SpellType.FireballSpell || !Spell.CanCastLight)
                 return;
             
             _player.OnAttackPerformed(baseDuration);
@@ -85,7 +79,7 @@ namespace Weapon
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.FireballSpell || !Spell.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.FireballSpell || !Spell.CanCastHeavy)
                 return;
             
             _player.OnAttackPerformed(heavyDuration);

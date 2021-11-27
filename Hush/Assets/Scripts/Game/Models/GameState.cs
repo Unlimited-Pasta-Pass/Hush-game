@@ -22,11 +22,11 @@ namespace Game.Models
         
         // Spell
         public SpellType activeHeavySpell;
-        public float heavySpellActivationTime;
-        public float heavySpellCooldownTime;
+        public float heavySpellActivationTime = float.MinValue;
+        public float heavySpellCooldownTime = 10f;
         public SpellType activeLightSpell;
-        public float lightSpellActivationTime;
-        public float lightSpellCooldownTime;
+        public float lightSpellActivationTime = float.MinValue;
+        public float lightSpellCooldownTime = 5f;
 
         // Relic
         public bool playerHasRelic;
