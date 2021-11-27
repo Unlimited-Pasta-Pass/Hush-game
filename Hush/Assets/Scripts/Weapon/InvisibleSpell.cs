@@ -96,18 +96,19 @@ namespace Weapon
             } 
         }
 
-        private void SetOutline(bool enabled)
+        private void SetOutline(bool isEnabled)
         {
             var outline = playerRoot.GetComponent<Outline>();
-            outline.enabled = enabled;
+            outline.enabled = isEnabled;
         }
 
-        private void SetInvisibilty(bool enabled, bool isHeavy)
+        private void SetInvisibilty(bool isEnabled, bool isHeavy)
         {
-            SetOutline(enabled);
-            SetTransparent(enabled);
+            SetOutline(isEnabled);
+            SetTransparent(isEnabled);
+            GameManager.Instance.SetIsPlayerInvisible(isEnabled);
 
-            if (enabled)
+            if (isEnabled)
             {
                 if (isHeavy)
                     Invoke(nameof(EndHeavy), heavyDuration);

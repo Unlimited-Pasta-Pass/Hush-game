@@ -53,8 +53,8 @@ namespace Weapon
         // TODO Remove
         private void Awake()
         {
-            GameManager.Instance.SetActiveHeavySpell(SpellType.FireballSpell);
-            GameManager.Instance.SetActiveLightSpell(SpellType.FireballSpell);
+           // GameManager.Instance.SetActiveHeavySpell(SpellType.FireballSpell);
+           // GameManager.Instance.SetActiveLightSpell(SpellType.FireballSpell);
         }
 
         private void OnDisable()

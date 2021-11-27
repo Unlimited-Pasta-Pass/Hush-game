@@ -45,8 +45,7 @@ namespace Enemies
         private int _nextPatrolIndex;
         private bool isStunned = false;
 
-        private bool isPlayerInvisible => GameManager.Instance.GetActiveHeavySpell() == SpellType.InvisibleSpell &&
-                                          GameManager.Instance.GetHeavySpellActivationTime() - Time.time < 5; // TODO CHANGE
+        private bool isPlayerInvisible => GameManager.Instance.GetIsPlayerInvisible();
 
         #endregion
 
@@ -280,11 +279,14 @@ namespace Enemies
             }
         }
 
-        public void Stun()
+        public void Stun(float duration)
         {
-            // TODO add stun animation
-            isStunned = !isStunned;
-            Invoke("DisableStun", 5);
+            if (!isStunned) // if not already stunned
+            {
+                // TODO add stun animation
+                isStunned = !isStunned;
+                Invoke(nameof(DisableStun), duration);
+            }
         }
 
         private void DisableStun()

@@ -19,6 +19,7 @@ namespace Game.Models
         public float playerCurrentHitPoints;
         public float playerMaxHitPoints;
         public SerializableTransform playerTransform;
+        public bool isPlayerInvisible = false;
         
         // Spell
         public SpellType activeHeavySpell;

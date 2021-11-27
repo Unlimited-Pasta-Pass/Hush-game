@@ -13,12 +13,16 @@ public class StunSpell : MonoBehaviour, ISpell
         [SerializeField] private float baseDuration = 0.25f;
         [SerializeField] private float heavyDuration = 0.4f;
         [SerializeField] private float castDelay = 0.1f;
-    
+        [SerializeField] private float spellHeightOffset = 1f;
+        [SerializeField] private float heavySpellDuration = 5f;
+        [SerializeField] private float lightSpellDuration = 3f;
+        [SerializeField] private float stunEffectDuration = 2f;
+        
+
         [Header("Spell References")]
         [SerializeField] protected GameObject heavySpellPrefab; 
-        [SerializeField] protected GameObject lightSpellPrefab; 
-        [SerializeField] protected GameObject shootPosition;
-    
+        [SerializeField] protected GameObject lightSpellPrefab;
+
         [Header("Other References")]
         [SerializeField] private Animator animator;
         private static InputManager Input => InputManager.Instance;
@@ -28,8 +32,8 @@ public class StunSpell : MonoBehaviour, ISpell
         
         private void Awake()
         {
-            // GameManager.Instance.SetActiveHeavySpell(SpellType.InvisibleSpell);
-            // GameManager.Instance.SetActiveLightSpell(SpellType.InvisibleSpell);
+             GameManager.Instance.SetActiveHeavySpell(SpellType.StunSpell);
+             GameManager.Instance.SetActiveLightSpell(SpellType.StunSpell);
         }
 
         private void OnEnable()
@@ -86,34 +90,27 @@ public class StunSpell : MonoBehaviour, ISpell
         private void LightAttack()
         {
             animator.SetTrigger(PlayerAnimator.SpellAttack);
-            CreateSpellAttack(false);
+            CreateSpellAttack(lightSpellDuration, false);
         }
 
         private void HeavyAttack()
         {
             animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
-            CreateSpellAttack(true);
+            CreateSpellAttack(heavySpellDuration, true);
         }
 
-        private void CreateSpellAttack(bool isHeavy) 
+        private void CreateSpellAttack(float stunLength, bool isHeavy) 
         {
             var prefab = isHeavy ? heavySpellPrefab : lightSpellPrefab;
             var spellClone = Instantiate(prefab);
+            spellClone.GetComponent<StunCollision>().duration = stunLength;
             
-            spellClone.transform.position = shootPosition.transform.position;
-            spellClone.transform.rotation = shootPosition.transform.rotation;
-            
-            spellClone.GetComponent<CustomFireProjectile>().ShootPosition = shootPosition.transform;
-            spellClone.GetComponent<CustomFireProjectile>().Damage = (int) 10;
+            Vector3 pos = transform.position;
+            pos.y += spellHeightOffset;
+            spellClone.transform.position = pos;
+
+            spellClone.GetComponent<ParticleSystem>().Play();
+           
+            Destroy(spellClone, stunEffectDuration);
         }
-        
-        // public override void HandleCollision(GameObject obj, Collision c)
-        // {
-        //     base.HandleCollision(obj, c);
-        //     
-        //     if(c.gameObject.TryGetComponent<Enemy>(out var enemy))
-        //     {
-        //         enemy.Stun();
-        //     }
-        // }
 }

@@ -67,6 +67,16 @@ namespace Game
             _state.playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
         }
 
+        public void SetIsPlayerInvisible(bool isInvisble)
+        {
+            _state.isPlayerInvisible = isInvisble;
+        }
+        
+        public bool GetIsPlayerInvisible()
+        {
+            return _state.isPlayerInvisible;
+        }
+
         private void ApplyPlayerState()
         {
             var playerMovement = FindObjectOfType<PlayerMovement>();

@@ -27,9 +27,7 @@ namespace Game
 		{
 			if (Instance == null)
 				Instance = this;
-			
-			Debug.Log("Input Manager Init");
-			
+
 			DontDestroyOnLoad(Instance.gameObject);
 		}
 
