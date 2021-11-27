@@ -8,6 +8,8 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI heavyCooldown;
         [SerializeField] private TextMeshProUGUI lightCooldown;
+        [SerializeField] private GameObject heavyOverlay;
+        [SerializeField] private GameObject lightOverlay;
         private void Update()
         {
             if (!SpellManager.Instance.CanCastHeavy)
@@ -27,7 +29,7 @@ namespace UI
             float timeRemaining = GameManager.Instance.GetHeavySpellCoolDownTime() - timeElapsed;
 
             heavyCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
-            //TODO Grey Out Box
+            heavyOverlay.SetActive(true);
         }
     
         private void DisplayLightCooldown()
@@ -36,7 +38,7 @@ namespace UI
             float timeRemaining = GameManager.Instance.GetLightSpellCoolDownTime() - timeElapsed;
             
             lightCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
-            //TODO Grey out box
+            lightOverlay.SetActive(true);
         }
 
     }
