@@ -24,8 +24,8 @@ namespace Weapon
         //TODO Remove
         private void Awake()
         {
-            // GameManager.Instance.SetActiveHeavySpell(WeaponType.InvisibleSpell);
-            // GameManager.Instance.SetActiveLightSpell(WeaponType.InvisibleSpell);
+            // GameManager.Instance.SetActiveHeavySpell(SpellType.InvisibleSpell);
+            // GameManager.Instance.SetActiveLightSpell(SpellType.InvisibleSpell);
             // GameManager.Instance.SetHeavySpellCooldownTime(4f);
             // GameManager.Instance.SetLightSpellCooldownTime(4f);
             // GameManager.Instance.SetHeavySpellActivationTime(0);
@@ -59,7 +59,7 @@ namespace Weapon
         
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != WeaponType.InvisibleSpell || !SpellManager.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != SpellType.InvisibleSpell || !SpellManager.CanCastLight)
                 return;
 
             SetInvisibilty(true, true);
@@ -68,7 +68,7 @@ namespace Weapon
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.InvisibleSpell || !SpellManager.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.InvisibleSpell || !SpellManager.CanCastHeavy)
                 return;
             
             SetInvisibilty(true, true);

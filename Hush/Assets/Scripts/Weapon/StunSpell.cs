@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Common.Enums;
 using Game;
 using Player;
@@ -7,7 +5,6 @@ using Player.Enums;
 using Plugins;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Weapon;
 using Weapon.Enums;
 
 public class StunSpell : MonoBehaviour, ISpell
@@ -31,8 +28,8 @@ public class StunSpell : MonoBehaviour, ISpell
         
         private void Awake()
         {
-            // GameManager.Instance.SetActiveHeavySpell(WeaponType.InvisibleSpell);
-            // GameManager.Instance.SetActiveLightSpell(WeaponType.InvisibleSpell);
+            // GameManager.Instance.SetActiveHeavySpell(SpellType.InvisibleSpell);
+            // GameManager.Instance.SetActiveLightSpell(SpellType.InvisibleSpell);
             // GameManager.Instance.SetHeavySpellCooldownTime(4f);
             // GameManager.Instance.SetLightSpellCooldownTime(4f);
             // GameManager.Instance.SetHeavySpellActivationTime(0);
@@ -65,7 +62,7 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= WeaponType.StunSpell || !SpellManager.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= SpellType.StunSpell || !SpellManager.CanCastLight)
                 return;
 
             _player.OnAttackPerformed(baseDuration);
@@ -76,7 +73,7 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.StunSpell || !SpellManager.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.StunSpell || !SpellManager.CanCastHeavy)
                 return;
 
             _player.OnAttackPerformed(heavyDuration);

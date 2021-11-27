@@ -25,12 +25,12 @@ namespace Game
             _state.heavySpellCooldownTime = delta;
         }
 
-        public void SetActiveHeavySpell(WeaponType type)
+        public void SetActiveHeavySpell(SpellType type)
         {
             _state.activeHeavySpell = type;
         }
 
-        public WeaponType GetActiveHeavySpell()
+        public SpellType GetActiveHeavySpell()
         {
             return _state.activeHeavySpell;
         }
@@ -55,12 +55,12 @@ namespace Game
             _state.lightSpellCooldownTime = delta;
         }
 
-        public void SetActiveLightSpell(WeaponType type)
+        public void SetActiveLightSpell(SpellType type)
         {
             _state.activeLightSpell = type;
         }
 
-        public WeaponType GetActiveLightSpell()
+        public SpellType GetActiveLightSpell()
         {
             return _state.activeLightSpell;
         }

@@ -2,10 +2,8 @@
 {
     public enum WeaponType
     {
-        Sword = 0,
-        FireballSpell = 1,
+        None = 0,
+        Sword = 1,
         EnemySword = 2,
-        InvisibleSpell = 3,
-        StunSpell = 4, // add none and spell type
     }
 }
