@@ -136,5 +136,19 @@ namespace Player
             
             return Input.walk ? walkSpeed : sprintSpeed;
         }
+
+        public void SetSpeedModifier(float amount, bool isEnabled)
+        {
+            if (isEnabled)
+            {
+                walkSpeed += amount;
+                sprintSpeed += amount;
+            }
+            else
+            {
+                walkSpeed -= amount;
+                sprintSpeed -= amount;
+            }
+        }
     }
 }

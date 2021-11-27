@@ -15,6 +15,7 @@ namespace Weapon
         
         [SerializeField] private float lightDuration = 3f;
         [SerializeField] private float heavyDuration = 6f;
+        [SerializeField] private float speedBoost = 1f;
         
         private static InputManager Input => InputManager.Instance;
         private static SpellManager SpellManager => SpellManager.Instance;
@@ -68,6 +69,7 @@ namespace Weapon
                 return;
             
             SetInvisibilty(true, true);
+            _player.SetSpeedModifier(speedBoost, true);
             GameManager.Instance.SetHeavySpellActivationTime(Time.time);
         }
 
@@ -79,6 +81,7 @@ namespace Weapon
         private void EndHeavy()
         {
             SetInvisibilty(false, false);
+            _player.SetSpeedModifier(speedBoost, false);
         }
 
         private void SetTransparent(bool enabled)
@@ -106,7 +109,7 @@ namespace Weapon
 
             if (enabled)
             {
-                if(isHeavy)
+                if (isHeavy)
                     Invoke(nameof(EndHeavy), heavyDuration);
                 else
                     Invoke(nameof(EndLight), lightDuration);
