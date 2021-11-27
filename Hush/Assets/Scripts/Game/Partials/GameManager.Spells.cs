@@ -5,34 +5,64 @@ namespace Game
 {
     public partial class GameManager
     {
-        public float GetSpellActivationTime()
+        public float GetHeavySpellActivationTime()
         {
-            return _state.spellActivationTime;
+            return _state.heavySpellActivationTime;
         }
 
-        public void SetSpellActivationTime(float delta)
+        public void SetHeavySpellActivationTime(float delta)
         {
-            _state.spellActivationTime = delta;
+            _state.heavySpellActivationTime = delta;
         }
 
-        public float GetSpellCoolDownTime()
+        public float GetHeavySpellCoolDownTime()
         {
-            return _state.spellCooldownTime;
+            return _state.heavySpellCooldownTime;
         }
 
-        public void SetSpellCooldownTime(float delta)
+        public void SetHeavySpellCooldownTime(float delta)
         {
-            _state.spellCooldownTime = delta;
+            _state.heavySpellCooldownTime = delta;
         }
 
-        public void SetActiveSpell(WeaponType type)
+        public void SetActiveHeavySpell(WeaponType type)
         {
-            _state.activeSpell = type;
+            _state.activeHeavySpell = type;
         }
 
-        public WeaponType GetActiveSpell()
+        public WeaponType GetActiveHeavySpell()
         {
-            return _state.activeSpell;
+            return _state.activeHeavySpell;
+        }
+        
+        public float GetLightSpellActivationTime()
+        {
+            return _state.lightSpellActivationTime;
+        }
+
+        public void SetLightSpellActivationTime(float delta)
+        {
+            _state.lightSpellActivationTime = delta;
+        }
+
+        public float GetLightSpellCoolDownTime()
+        {
+            return _state.lightSpellCooldownTime;
+        }
+
+        public void SetLightSpellCooldownTime(float delta)
+        {
+            _state.lightSpellCooldownTime = delta;
+        }
+
+        public void SetActiveLightSpell(WeaponType type)
+        {
+            _state.activeLightSpell = type;
+        }
+
+        public WeaponType GetActiveLightSpell()
+        {
+            return _state.activeLightSpell;
         }
     }
 }

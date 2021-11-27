@@ -45,8 +45,8 @@ namespace Enemies
         private int _nextPatrolIndex;
         private bool isStunned = false;
 
-        private bool isPlayerInvisible => GameManager.Instance.GetActiveSpell() == WeaponType.InvisibleSpell &&
-                                          GameManager.Instance.GetSpellActivationTime() - Time.time < 5; // CHANGE
+        private bool isPlayerInvisible => GameManager.Instance.GetActiveHeavySpell() == WeaponType.InvisibleSpell &&
+                                          GameManager.Instance.GetHeavySpellActivationTime() - Time.time < 5; // CHANGE
 
         #endregion
 

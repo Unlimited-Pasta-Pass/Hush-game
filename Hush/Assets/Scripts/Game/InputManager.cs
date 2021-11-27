@@ -1,10 +1,8 @@
-using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-namespace Player
+namespace Game
 {
 	public class InputManager : MonoBehaviour
 	{
@@ -29,6 +27,8 @@ namespace Player
 		{
 			if (Instance == null)
 				Instance = this;
+			
+			Debug.Log("Input Manager Init");
 			
 			DontDestroyOnLoad(Instance.gameObject);
 		}

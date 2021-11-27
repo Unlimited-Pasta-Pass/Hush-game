@@ -21,9 +21,12 @@ namespace Game.Models
         public SerializableTransform playerTransform;
         
         // Spell
-        public WeaponType activeSpell;
-        public float spellActivationTime;
-        public float spellCooldownTime;
+        public WeaponType activeHeavySpell;
+        public float heavySpellActivationTime;
+        public float heavySpellCooldownTime;
+        public WeaponType activeLightSpell;
+        public float lightSpellActivationTime;
+        public float lightSpellCooldownTime;
 
         // Relic
         public bool playerHasRelic;
