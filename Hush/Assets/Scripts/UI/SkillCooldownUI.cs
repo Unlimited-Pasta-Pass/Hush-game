@@ -16,10 +16,18 @@ namespace UI
             {
                 DisplayHeavyCooldown();
             }
+            else
+            {
+                HideHeavyCooldown();
+            }
 
             if (!SpellManager.Instance.CanCastLight)
             {
                 DisplayLightCooldown();
+            }
+            else
+            {
+                HideLightCooldown();
             }
         }
 
@@ -30,6 +38,7 @@ namespace UI
 
             heavyCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
             heavyOverlay.SetActive(true);
+            heavyCooldown.enabled = true;
         }
     
         private void DisplayLightCooldown()
@@ -39,7 +48,19 @@ namespace UI
             
             lightCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
             lightOverlay.SetActive(true);
+            lightCooldown.enabled = true;
         }
 
+        private void HideLightCooldown()
+        {
+            lightOverlay.SetActive(false);
+            lightCooldown.enabled = false;
+        }
+        
+        private void HideHeavyCooldown()
+        {
+            heavyOverlay.SetActive(false);
+            lightCooldown.enabled = false;
+        }
     }
 }

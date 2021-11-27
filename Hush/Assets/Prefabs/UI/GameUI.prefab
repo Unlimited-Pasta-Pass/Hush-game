@@ -321,6 +321,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heavyCooldown: {fileID: 508018698}
   lightCooldown: {fileID: 1941584965}
+  heavyOverlay: {fileID: 5308394578235922544}
+  lightOverlay: {fileID: 1955602828453004236}
 --- !u!1 &1380436396732668334
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +709,7 @@ GameObject:
   - component: {fileID: 6494682722497116589}
   - component: {fileID: 8082556031045712551}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Overlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
