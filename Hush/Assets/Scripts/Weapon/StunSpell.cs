@@ -31,8 +31,8 @@ public class StunSpell : MonoBehaviour, ISpell
         
         private void Awake()
         {
-             GameManager.Instance.SetActiveHeavySpell(SpellType.StunSpell);
-             GameManager.Instance.SetActiveLightSpell(SpellType.StunSpell);
+             //GameManager.Instance.SetActiveHeavySpell(SpellType.StunSpell);
+             //GameManager.Instance.SetActiveLightSpell(SpellType.StunSpell);
         }
 
         private void OnEnable()
