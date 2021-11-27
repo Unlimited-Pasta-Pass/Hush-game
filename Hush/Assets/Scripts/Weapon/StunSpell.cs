@@ -31,12 +31,12 @@ public class StunSpell : MonoBehaviour, ISpell
         
         private void Awake()
         {
-            GameManager.Instance.SetActiveHeavySpell(WeaponType.InvisibleSpell);
-            GameManager.Instance.SetActiveLightSpell(WeaponType.InvisibleSpell);
-            GameManager.Instance.SetHeavySpellCooldownTime(4f);
-            GameManager.Instance.SetLightSpellCooldownTime(4f);
-            GameManager.Instance.SetHeavySpellActivationTime(0);
-            GameManager.Instance.SetLightSpellActivationTime(0);
+            // GameManager.Instance.SetActiveHeavySpell(WeaponType.InvisibleSpell);
+            // GameManager.Instance.SetActiveLightSpell(WeaponType.InvisibleSpell);
+            // GameManager.Instance.SetHeavySpellCooldownTime(4f);
+            // GameManager.Instance.SetLightSpellCooldownTime(4f);
+            // GameManager.Instance.SetHeavySpellActivationTime(0);
+            // GameManager.Instance.SetLightSpellActivationTime(0);
         }
 
         private void OnEnable()
@@ -65,7 +65,7 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= WeaponType.StunSpell || !SpellManager.canCastLight)
+            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= WeaponType.StunSpell || !SpellManager.CanCastLight)
                 return;
 
             _player.OnAttackPerformed(baseDuration);
@@ -76,7 +76,7 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.StunSpell || !SpellManager.canCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.StunSpell || !SpellManager.CanCastHeavy)
                 return;
 
             _player.OnAttackPerformed(heavyDuration);

@@ -24,12 +24,12 @@ namespace Weapon
         //TODO Remove
         private void Awake()
         {
-            GameManager.Instance.SetActiveHeavySpell(WeaponType.InvisibleSpell);
-            GameManager.Instance.SetActiveLightSpell(WeaponType.InvisibleSpell);
-            GameManager.Instance.SetHeavySpellCooldownTime(4f);
-            GameManager.Instance.SetLightSpellCooldownTime(4f);
-            GameManager.Instance.SetHeavySpellActivationTime(0);
-            GameManager.Instance.SetLightSpellActivationTime(0);
+            // GameManager.Instance.SetActiveHeavySpell(WeaponType.InvisibleSpell);
+            // GameManager.Instance.SetActiveLightSpell(WeaponType.InvisibleSpell);
+            // GameManager.Instance.SetHeavySpellCooldownTime(4f);
+            // GameManager.Instance.SetLightSpellCooldownTime(4f);
+            // GameManager.Instance.SetHeavySpellActivationTime(0);
+            // GameManager.Instance.SetLightSpellActivationTime(0);
         }
 
         private void OnEnable()
@@ -59,7 +59,7 @@ namespace Weapon
         
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != WeaponType.InvisibleSpell || !SpellManager.canCastLight)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != WeaponType.InvisibleSpell || !SpellManager.CanCastLight)
                 return;
 
             SetInvisibilty(true, true);
@@ -68,7 +68,7 @@ namespace Weapon
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.InvisibleSpell || !SpellManager.canCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.InvisibleSpell || !SpellManager.CanCastHeavy)
                 return;
             
             SetInvisibilty(true, true);

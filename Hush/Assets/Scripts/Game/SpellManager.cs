@@ -8,8 +8,8 @@ namespace Game
     {
         public static SpellManager Instance;
         
-        public bool canCastHeavy => Time.time - GameManager.Instance.GetHeavySpellActivationTime() > GameManager.Instance.GetHeavySpellCoolDownTime();
-        public bool canCastLight => Time.time - GameManager.Instance.GetLightSpellActivationTime() > GameManager.Instance.GetLightSpellCoolDownTime();
+        public bool CanCastHeavy => Time.time - GameManager.Instance.GetHeavySpellActivationTime() > GameManager.Instance.GetHeavySpellCoolDownTime();
+        public bool CanCastLight => Time.time - GameManager.Instance.GetLightSpellActivationTime() > GameManager.Instance.GetLightSpellCoolDownTime();
     
         private void Awake()
         {

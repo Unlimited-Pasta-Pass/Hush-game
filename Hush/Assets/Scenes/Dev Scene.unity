@@ -1746,10 +1746,6 @@ PrefabInstance:
       propertyPath: serializedGuid.Array.data[15]
       value: 60
       objectReference: {fileID: 0}
-    - target: {fileID: 1754077503933856976, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2694598201337503891, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1827,21 +1823,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9199240927236339795, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9199240927236339795, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: spellPrefab
       value: 
       objectReference: {fileID: 6293275558830136683, guid: 050d56ad264a51440a27f3e66cea2864, type: 3}
-    - target: {fileID: 9199240927236339795, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: heavySpellPrefab
-      value: 
-      objectReference: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
-    - target: {fileID: 9199240927236339795, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: lightSpellPrefab
-      value: 
-      objectReference: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
 --- !u!1001 &1624678576536236374

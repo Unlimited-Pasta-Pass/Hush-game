@@ -43,8 +43,6 @@ namespace Weapon
                 Input.reference.actions[Actions.LightSpell].performed += PerformLightSpell;
                 Input.reference.actions[Actions.HeavySpell].performed += PerformHeavySpell;
             }
-            
-            print("FireBall Init");
 
             _player = FindObjectOfType<PlayerMovement>();
 
@@ -59,8 +57,8 @@ namespace Weapon
             GameManager.Instance.SetActiveLightSpell(WeaponType.FireballSpell);
             GameManager.Instance.SetHeavySpellCooldownTime(4f);
             GameManager.Instance.SetLightSpellCooldownTime(4f);
-            GameManager.Instance.SetHeavySpellActivationTime(Time.time);
-            GameManager.Instance.SetLightSpellActivationTime(Time.time);
+            GameManager.Instance.SetHeavySpellActivationTime(float.MinValue);
+            GameManager.Instance.SetLightSpellActivationTime(float.MinValue);
         }
 
         private void OnDisable()
@@ -74,7 +72,9 @@ namespace Weapon
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != WeaponType.FireballSpell || !Spell.canCastLight)
+            Debug.Log(Spell.CanCastLight);
+            Debug.Log(GameManager.Instance.GetActiveLightSpell());
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != WeaponType.FireballSpell || !Spell.CanCastLight)
                 return;
             
             _player.OnAttackPerformed(baseDuration);
@@ -85,7 +85,7 @@ namespace Weapon
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.FireballSpell || !Spell.canCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != WeaponType.FireballSpell || !Spell.CanCastHeavy)
                 return;
             
             _player.OnAttackPerformed(heavyDuration);
