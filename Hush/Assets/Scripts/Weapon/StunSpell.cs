@@ -18,7 +18,6 @@ public class StunSpell : MonoBehaviour, ISpell
         [SerializeField] private float lightSpellDuration = 3f;
         [SerializeField] private float stunEffectDuration = 2f;
         
-
         [Header("Spell References")]
         [SerializeField] protected GameObject heavySpellPrefab; 
         [SerializeField] protected GameObject lightSpellPrefab;
