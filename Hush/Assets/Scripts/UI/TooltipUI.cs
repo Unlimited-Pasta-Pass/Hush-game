@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Game;
 using UnityEngine;
 using TMPro;
+using UI;
+using Weapon.Enums;
 
 public class TooltipUI : MonoBehaviour
 {
@@ -64,8 +66,53 @@ public class TooltipUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public static void ShowTooltip(string tooltipText)
+    public static void ShowTooltipHeavySpell()
     {
+        string tooltipText;
+        switch (GameManager.Instance.GetActiveHeavySpell())
+        {
+            case SpellType.FireballSpell:
+                tooltipText = TooltipText.HeavyFireball;
+                break;
+            case SpellType.InvisibleSpell:
+                tooltipText = TooltipText.HeavyInvisibility;
+                break;
+            case SpellType.StunSpell:
+                tooltipText = TooltipText.HeavyStun;
+                break;
+            default:
+                tooltipText = TooltipText.None;
+                break;
+        }
+
+        Instance.Show(tooltipText);
+    }
+    
+    public static void ShowTooltipLightSpell()
+    {
+        string tooltipText;
+        switch (GameManager.Instance.GetActiveHeavySpell())
+        {
+            case SpellType.FireballSpell:
+                tooltipText = TooltipText.LightFireball;
+                break;
+            case SpellType.InvisibleSpell:
+                tooltipText = TooltipText.LightInvisibility;
+                break;
+            case SpellType.StunSpell:
+                tooltipText = TooltipText.LightStun;
+                break;
+            default:
+                tooltipText = TooltipText.None;
+                break;
+        }
+
+        Instance.Show(tooltipText);
+    }
+    
+    public static void ShowTooltipEcholocation()
+    {
+        string tooltipText = TooltipText.Echolocation;
         Instance.Show(tooltipText);
     }
 

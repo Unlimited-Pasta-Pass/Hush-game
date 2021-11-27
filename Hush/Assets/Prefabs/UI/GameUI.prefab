@@ -510,8 +510,8 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8914116423865364070}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
-          m_MethodName: ShowTooltip
-          m_Mode: 5
+          m_MethodName: ShowTooltipHeavySpell
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -667,8 +667,8 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8914116423865364070}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
-          m_MethodName: ShowTooltip
-          m_Mode: 5
+          m_MethodName: ShowTooltipEcholocation
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1477,8 +1477,8 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 8914116423865364070}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
-          m_MethodName: ShowTooltip
-          m_Mode: 5
+          m_MethodName: ShowTooltipLightSpell
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
