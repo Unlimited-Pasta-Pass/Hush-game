@@ -52,7 +52,6 @@ namespace Game.Models
             playerMaxHitPoints = -1f;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
             
-            
             // Relic
             playerHasRelic = false;
             relicDomeHitPoints = -1f;
