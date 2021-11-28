@@ -21,6 +21,9 @@ namespace Weapon
         [SerializeField] private float baseDuration = 0.25f;
         [SerializeField] private float heavyDuration = 0.4f;
         [SerializeField] private float castDelay = 0.1f;
+
+        [SerializeField] private float heavyCooldown = 10f;
+        [SerializeField] private float lightCooldown = 6f;
     
         [Header("Spell References")]
         [SerializeField] protected GameObject heavySpellPrefab; 
@@ -33,8 +36,8 @@ namespace Weapon
 
         public SpellType SpellType => SpellType.FireballSpell;
 
-        public float HeavyCooldown => 10f;
-        public float LightCooldown => 6f;
+        public float HeavyCooldown => heavyCooldown;
+        public float LightCooldown => lightCooldown;
         public float BaseDamage => baseDamage;
         public float HeavyDamage => heavyDamage;
 

@@ -17,13 +17,16 @@ namespace Weapon
         [SerializeField] private float heavyDuration = 6f;
         [SerializeField] private float speedBoost = 1f;
         
+        [SerializeField] private float heavyCooldown = 10f;
+        [SerializeField] private float lightCooldown = 6f;
+        
         private static InputManager Input => InputManager.Instance;
         private PlayerMovement _player;
         
         public SpellType SpellType => SpellType.InvisibleSpell;
         
-        public float HeavyCooldown => 10f;
-        public float LightCooldown => 6f;
+        public float HeavyCooldown => heavyCooldown;
+        public float LightCooldown => lightCooldown;
 
         private void OnEnable()
         {

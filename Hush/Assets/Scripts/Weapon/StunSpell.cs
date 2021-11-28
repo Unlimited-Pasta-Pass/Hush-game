@@ -19,6 +19,9 @@ public class StunSpell : MonoBehaviour, ISpell
         [SerializeField] private float lightSpellDuration = 3f;
         [SerializeField] private float stunEffectDuration = 2f;
         
+        [SerializeField] private float heavyCooldown = 10f;
+        [SerializeField] private float lightCooldown = 6f;
+        
         [Header("Spell References")]
         [SerializeField] protected GameObject heavySpellPrefab; 
         [SerializeField] protected GameObject lightSpellPrefab;
@@ -30,8 +33,8 @@ public class StunSpell : MonoBehaviour, ISpell
         private PlayerMovement _player;
         
         public SpellType SpellType => SpellType.StunSpell;
-        public float HeavyCooldown => 10f;
-        public float LightCooldown => 6f;
+        public float HeavyCooldown => heavyCooldown;
+        public float LightCooldown => lightCooldown;
 
         private void OnEnable()
         {
