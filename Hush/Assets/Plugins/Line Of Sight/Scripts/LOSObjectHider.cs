@@ -47,7 +47,7 @@ namespace LOS
             }
             else if (m_VisibilityInfo != null && m_VisibilityInfo.isActiveAndEnabled)
             {
-                 UpdateVisibility(m_VisibilityInfo.Visibile);
+                UpdateVisibility(m_VisibilityInfo.Visibile);
             }
         }
 
@@ -80,6 +80,12 @@ namespace LOS
         {
             overrideCulling = true;
             isRevealed = true;
+        }
+
+        public void HideObject()
+        {
+            overrideCulling = true;
+            isRevealed = false;
         }
 
         public void ResetObjectVisibility()

@@ -1,6 +1,7 @@
 using System;
 using Common.Enums;
 using Enemies.Enums;
+using Environment.Passage;
 using Game;
 using Game.Models;
 using Player;
@@ -12,7 +13,7 @@ using UnityEngine.ProBuilder;
 namespace Enemies
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class Enemy : MonoBehaviour, IEnemy
+    public class Enemy : ObjectToggleDynamic, IEnemy
     {
 
         #region Parameters
@@ -32,7 +33,10 @@ namespace Enemies
         [SerializeField] private float runSpeed = 3.0f;
         [SerializeField] private float searchSpeed = 2.5f;
         [SerializeField] private float patrolSpeed = 1.0f;
-    
+        
+        [Header("Type")]
+        [SerializeField] private bool isInvisible = false;
+
         [Header("Patrol")]
         [SerializeField] private Transform[] patrolRoute;
     
@@ -40,15 +44,17 @@ namespace Enemies
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Animator animator;
         [SerializeField] private SphereCollider visionCollider;
-
+        
         #endregion
     
         #region Private Variables
-
+        
+        private const float BackstabDamageModifier = 2.0f;
+        
         private PlayerMovement _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
-        private const float BackstabDamageModifier = 2.0f;
+        private float _lastReveal;
 
         #endregion
 
@@ -67,6 +73,8 @@ namespace Enemies
 
         public float HitPoints => GameManager.Instance.GetEnemyHitPoints(ID);
 
+        public override bool RevealOnEcholocate => isInvisible;
+
         #endregion
 
         #region Events
@@ -79,6 +87,8 @@ namespace Enemies
         private void Start()
         {
             InitializeEnemy();
+            if (isInvisible)
+                Hide(true);
         }
 
         private void Update()

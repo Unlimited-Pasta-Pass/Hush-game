@@ -1,19 +1,12 @@
-﻿using System;
-using System.Linq;
+﻿using Common.Interfaces;
 using UnityEngine;
 
 namespace Environment.Passage
 {
-    public class ObjectToggle : MonoBehaviour
+    public abstract class ObjectToggle : MonoBehaviour, ITogglelable
     {
-        public void Show()
-        {
-            gameObject.SetActive(true);
-        }
-
-        public void Hide()
-        {
-            gameObject.SetActive(false);
-        }
+        public abstract bool RevealOnEcholocate { get; }
+        public abstract void Show(bool force = false);
+        public abstract void Hide(bool force = false);
     }
 }
