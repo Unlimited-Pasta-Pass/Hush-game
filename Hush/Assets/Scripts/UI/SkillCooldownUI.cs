@@ -1,3 +1,4 @@
+using System;
 using Game;
 using TMPro;
 using UnityEngine;
@@ -12,62 +13,58 @@ namespace UI
         [SerializeField] private GameObject heavyOverlay;
         [SerializeField] private GameObject lightOverlay;
         [SerializeField] private GameObject echoOverlay;
+
         private void Update()
         {
-            if (!GameManager.Instance.CanCastHeavy)
-            {
-                DisplayHeavyCooldown();
-            }
-            else
-            {
-                HideHeavyCooldown();
-            }
-
-            if (!GameManager.Instance.CanCastLight)
-            {
-                DisplayLightCooldown();
-            }
-            else
-            {
-                HideLightCooldown();
-            }
-            
-            if (!GameManager.Instance.CanReveal)
-            {
-                DisplayEchoCooldown();
-            }
-            else
-            {
-                HideEchoCooldown();
-            }
+           UpdateLightCooldown();
+           UpdateHeavyCooldown();
+           UpdateEchoCooldown();
         }
 
-        private void DisplayHeavyCooldown()
+        private void UpdateHeavyCooldown()
         {
+            if (GameManager.Instance.CanCastHeavy)
+            {
+                HideHeavyCooldown();
+                return;
+            }
+            
             float timeElapsed = Time.time - GameManager.Instance.GetHeavySpellActivationTime();
-            float timeRemaining = GameManager.Instance.GetHeavySpellCoolDownTime() - timeElapsed;
+            float timeRemaining = Mathf.RoundToInt(GameManager.Instance.GetHeavySpellCoolDownTime() - timeElapsed);
 
-            heavyCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
+            heavyCooldown.text = $"{timeRemaining}";
             heavyOverlay.SetActive(true);
             heavyCooldown.gameObject.SetActive(true);
         }
     
-        private void DisplayLightCooldown()
+        private void UpdateLightCooldown()
         {
-            float timeElapsed = Time.time - GameManager.Instance.GetLightSpellActivationTime();
-            float timeRemaining = GameManager.Instance.GetLightSpellCoolDownTime() - timeElapsed;
+            if (GameManager.Instance.CanCastLight)
+            {
+                HideLightCooldown();
+                return;
+            }
             
-            lightCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
+            float timeElapsed = Time.time - GameManager.Instance.GetLightSpellActivationTime();
+            float timeRemaining = Mathf.RoundToInt(GameManager.Instance.GetLightSpellCoolDownTime() - timeElapsed);
+            
+            lightCooldown.text = $"{timeRemaining}";
             lightOverlay.SetActive(true);
             lightCooldown.gameObject.SetActive(true);
         }
         
-        private void DisplayEchoCooldown()
+        private void UpdateEchoCooldown()
         {
-            float timeElapsed = Time.time - GameManager.Instance.EcholocationActivationTime;
-            float timeRemaining = GameManager.Instance.EcholocationCooldownTime - timeElapsed;
+            if (GameManager.Instance.CanPlayerReveal)
+            {
+                HideEchoCooldown();
+                return;
+            }
             
-            echoCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
+            float timeElapsed = Time.time - GameManager.Instance.EcholocationActivationTime;
+            float timeRemaining = Mathf.RoundToInt(GameManager.Instance.EcholocationCooldownTime - timeElapsed);
+
+            echoCooldown.text = $"{timeRemaining}";
             echoOverlay.SetActive(true);
             echoCooldown.gameObject.SetActive(true);
         }

@@ -5,6 +5,7 @@ using Environment.Passage;
 using Game;
 using LOS;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Player
@@ -54,7 +55,7 @@ namespace Player
 
         public void OnEcholocate(InputAction.CallbackContext callbackContext)
         {
-            if (!GameManager.Instance.CanReveal)
+            if (!GameManager.Instance.CanPlayerReveal)
                 return;
 
             effect.Play();
@@ -72,7 +73,7 @@ namespace Player
             {
                 door.RevealPassage();
             }
-
+            
             GameManager.Instance.EcholocationActivationTime = Time.time;
             _revealCountdown = 0f;
         }
