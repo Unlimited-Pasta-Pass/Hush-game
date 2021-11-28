@@ -19,7 +19,7 @@ namespace Game.Models
         public float playerCurrentHitPoints;
         public float playerMaxHitPoints;
         public SerializableTransform playerTransform;
-        public bool isPlayerInvisible = false;
+        public bool isPlayerInvisible;
         
         // Spell
         public SpellType activeHeavySpell;
@@ -51,6 +51,7 @@ namespace Game.Models
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
+            isPlayerInvisible = false;
             
             // Spell
             activeHeavySpell = SpellType.None;
