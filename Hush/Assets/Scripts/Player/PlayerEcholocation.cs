@@ -5,6 +5,7 @@ using Environment.Passage;
 using Game;
 using LOS;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Player
@@ -23,15 +24,14 @@ namespace Player
         
         private List<LOSObjectHider> _hiddenObjectsInRange;
 
-        private bool _canReveal = true;
-        
         private float _revealCountdown;
-        private float _revealDelta;
 
         private void OnEnable()
         {
             if (Input != null && Input.reference != null)
                 Input.reference.actions[Actions.Reveal].performed += OnEcholocate;
+
+            GameManager.Instance.EcholocationCooldownTime = revealDelay;
         }
 
         private void OnDisable()
@@ -43,8 +43,7 @@ namespace Player
         private void Update()
         {
             _revealCountdown += Time.deltaTime;
-            _revealDelta += Time.deltaTime;
-            
+
             if (_revealCountdown >= revealDuration && _hiddenObjectsInRange != null)
             {
                 foreach (var hiddenObject in _hiddenObjectsInRange)
@@ -52,20 +51,13 @@ namespace Player
                     hiddenObject.ResetObjectVisibility();
                 }
             }
-
-            if (_revealDelta >= revealDelay)
-            {
-                _canReveal = true;
-            }
         }
 
         public void OnEcholocate(InputAction.CallbackContext callbackContext)
         {
-            if (!_canReveal)
+            if (!GameManager.Instance.CanPlayerReveal)
                 return;
 
-            _canReveal = false;
-            
             effect.Play();
             
             _hiddenObjectsInRange = new List<LOSObjectHider>();
@@ -81,8 +73,8 @@ namespace Player
             {
                 door.RevealPassage();
             }
-
-            _revealDelta = 0f;
+            
+            GameManager.Instance.EcholocationActivationTime = Time.time;
             _revealCountdown = 0f;
         }
     }
