@@ -3,22 +3,35 @@ using Common.Enums;
 using Game;
 using Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Doors
 {
     public class Door : MonoBehaviour
     {
         [SerializeField] private GameObject wall;
-
-        private bool _isDoorOpen = true; // TODO: modify this value when the door opening conditionals are met
+        
         private bool playerIsClose = false;
 
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
                                     InputManager.Instance.interact;
 
-        private void Update()
+        private static InputManager Input => InputManager.Instance;
+        
+        private void OnEnable()
         {
-            OpenDoor();
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.Interact].performed += OpenDoor;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.Interact].performed -= OpenDoor;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -38,14 +51,12 @@ namespace Doors
             playerIsClose = false;
             // TODO UI hiding interact button
         }
-
-        private void OpenDoor()
+        
+        private void OpenDoor(InputAction.CallbackContext context)
         {
             if (!CanOpenDoor)
                 return;
 
-            _isDoorOpen = true;
-            
             // TODO Door opening animation
             wall.SetActive(false);
             

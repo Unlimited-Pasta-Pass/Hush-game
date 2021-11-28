@@ -5,6 +5,7 @@ using Game;
 using Player;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace Relics
 {
@@ -20,12 +21,25 @@ namespace Relics
         public UnityEvent Killed => _killed ??= new UnityEvent();
         
         public float HitPoints => GameManager.Instance.RelicDomeHitPoints;
+        
+        private static InputManager Input => InputManager.Instance;
 
         private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock && InputManager.Instance.interact && playerIsClose;
 
-        private void Update()
+        private void OnEnable()
         {
-            UnlockDome();
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.Interact].performed += UnlockDome;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.Interact].performed -= UnlockDome;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -73,7 +87,7 @@ namespace Relics
             gameObject.SetActive(visibility);
         }
 
-        private void UnlockDome()
+        private void UnlockDome(InputAction.CallbackContext context)
         {
             if (!CanUnlockDome)
                 return;
