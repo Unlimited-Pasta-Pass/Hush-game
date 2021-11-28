@@ -38,7 +38,7 @@ namespace UI
 
             heavyCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
             heavyOverlay.SetActive(true);
-            heavyCooldown.enabled = true;
+            heavyCooldown.gameObject.SetActive(true);
         }
     
         private void DisplayLightCooldown()
@@ -48,19 +48,19 @@ namespace UI
             
             lightCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
             lightOverlay.SetActive(true);
-            lightCooldown.enabled = true;
+            lightCooldown.gameObject.SetActive(true);
         }
 
         private void HideLightCooldown()
         {
             lightOverlay.SetActive(false);
-            lightCooldown.enabled = false;
+            lightCooldown.gameObject.SetActive(false);
         }
         
         private void HideHeavyCooldown()
         {
             heavyOverlay.SetActive(false);
-            lightCooldown.enabled = false;
+            heavyCooldown.gameObject.SetActive(false);
         }
     }
 }
