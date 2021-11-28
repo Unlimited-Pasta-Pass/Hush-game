@@ -30,9 +30,9 @@ namespace UI
             }
             
             float timeElapsed = Time.time - GameManager.Instance.GetHeavySpellActivationTime();
-            float timeRemaining = Mathf.RoundToInt(GameManager.Instance.GetHeavySpellCoolDownTime() - timeElapsed);
+            string timeRemaining = Mathf.RoundToInt(GameManager.Instance.GetHeavySpellCoolDownTime() - timeElapsed).ToString();
 
-            heavyCooldown.text = $"{timeRemaining}";
+            heavyCooldown.text = timeRemaining;
             heavyOverlay.SetActive(true);
             heavyCooldown.gameObject.SetActive(true);
         }
@@ -46,9 +46,9 @@ namespace UI
             }
             
             float timeElapsed = Time.time - GameManager.Instance.GetLightSpellActivationTime();
-            float timeRemaining = Mathf.RoundToInt(GameManager.Instance.GetLightSpellCoolDownTime() - timeElapsed);
+            string timeRemaining = Mathf.RoundToInt(GameManager.Instance.GetLightSpellCoolDownTime() - timeElapsed).ToString();
             
-            lightCooldown.text = $"{timeRemaining}";
+            lightCooldown.text = timeRemaining;
             lightOverlay.SetActive(true);
             lightCooldown.gameObject.SetActive(true);
         }
@@ -62,9 +62,9 @@ namespace UI
             }
             
             float timeElapsed = Time.time - GameManager.Instance.EcholocationActivationTime;
-            float timeRemaining = Mathf.RoundToInt(GameManager.Instance.EcholocationCooldownTime - timeElapsed);
+            string timeRemaining = Mathf.RoundToInt(GameManager.Instance.EcholocationCooldownTime - timeElapsed).ToString();
 
-            echoCooldown.text = $"{timeRemaining}";
+            echoCooldown.text = timeRemaining;
             echoOverlay.SetActive(true);
             echoCooldown.gameObject.SetActive(true);
         }
