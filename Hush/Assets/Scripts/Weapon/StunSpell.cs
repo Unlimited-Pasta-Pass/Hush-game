@@ -14,7 +14,7 @@ public class StunSpell : MonoBehaviour, ISpell
         [SerializeField] private float baseDuration = 0.25f;
         [SerializeField] private float heavyDuration = 0.4f;
         [SerializeField] private float castDelay = 0.1f;
-        [SerializeField] private float spellHeightOffset = 1f;
+        [SerializeField] private Vector3 spellOffset;
         [SerializeField] private float heavySpellDuration = 5f;
         [SerializeField] private float lightSpellDuration = 3f;
         [SerializeField] private float stunEffectDuration = 2f;
@@ -97,10 +97,8 @@ public class StunSpell : MonoBehaviour, ISpell
         {
             var prefab = isHeavy ? heavySpellPrefab : lightSpellPrefab;
             var spellClone = Instantiate(prefab);
-            
-            
-            Vector3 pos = transform.position;
-            pos.y += spellHeightOffset;
+
+            Vector3 pos = transform.position + spellOffset;
             spellClone.transform.position = pos;
             
             spellClone.GetComponent<StunCollision>().StunEffect(pos, stunLength);
