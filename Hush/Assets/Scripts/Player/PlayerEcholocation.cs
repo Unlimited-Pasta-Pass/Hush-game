@@ -2,6 +2,7 @@
 using System.Linq;
 using Common.Enums;
 using Environment.Passage;
+using Game;
 using LOS;
 using UnityEngine;
 using UnityEngine.InputSystem;

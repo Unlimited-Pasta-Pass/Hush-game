@@ -138,5 +138,19 @@ namespace Player
         }
         
         public bool IsRunning => _playerSpeed > walkSpeed + 0.25f * (sprintSpeed - walkSpeed);
+
+        public void SetSpeedModifier(float amount, bool isEnabled)
+        {
+            if (isEnabled)
+            {
+                walkSpeed += amount;
+                sprintSpeed += amount;
+            }
+            else
+            {
+                walkSpeed -= amount;
+                sprintSpeed -= amount;
+            }
+        }
     }
 }
