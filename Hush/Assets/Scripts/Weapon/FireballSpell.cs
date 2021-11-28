@@ -111,7 +111,7 @@ namespace Weapon
             var spellClone = Instantiate(spellPrefab);
             spellClone.transform.position = shootPosition.transform.position;
             spellClone.transform.rotation = shootPosition.transform.rotation;
-
+            
             spellClone.GetComponent<CustomFireProjectile>().ShootPosition = shootPosition.transform;
             spellClone.GetComponent<CustomFireProjectile>().Damage = (int)damage;
         }
