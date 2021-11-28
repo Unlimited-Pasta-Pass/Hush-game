@@ -14,7 +14,7 @@ using Weapon.Enums;
 namespace Enemies
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class Enemy : ObjectToggleDynamic, IEnemy
+    public class Enemy : ObjectToggleLOS, IEnemy
     {
 
         #region Parameters

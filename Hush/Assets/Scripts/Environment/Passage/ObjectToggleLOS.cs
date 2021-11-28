@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Environment.Passage
 {
     [RequireComponent(typeof(LOSObjectHider))]
-    public abstract class ObjectToggleDynamic : ObjectToggle
+    public abstract class ObjectToggleLOS : ObjectToggle
     {
         [SerializeField] private LOSObjectHider hider;
         
