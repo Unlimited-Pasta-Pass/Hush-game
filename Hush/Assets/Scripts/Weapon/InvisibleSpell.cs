@@ -18,7 +18,6 @@ namespace Weapon
         [SerializeField] private float speedBoost = 1f;
         
         private static InputManager Input => InputManager.Instance;
-        private static SpellManager SpellManager => SpellManager.Instance;
 
         private PlayerMovement _player;
         
@@ -55,7 +54,7 @@ namespace Weapon
         
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != SpellType.InvisibleSpell || !SpellManager.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != SpellType.InvisibleSpell || !GameManager.Instance.CanCastLight)
                 return;
 
             SetInvisibilty(true, true);
@@ -64,7 +63,7 @@ namespace Weapon
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.InvisibleSpell || !SpellManager.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.InvisibleSpell || !GameManager.Instance.CanCastHeavy)
                 return;
             
             SetInvisibilty(true, true);

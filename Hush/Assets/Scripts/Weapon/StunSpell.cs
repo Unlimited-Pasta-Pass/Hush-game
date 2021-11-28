@@ -25,7 +25,6 @@ public class StunSpell : MonoBehaviour, ISpell
         [Header("Other References")]
         [SerializeField] private Animator animator;
         private static InputManager Input => InputManager.Instance;
-        private static SpellManager SpellManager => SpellManager.Instance;
 
         private PlayerMovement _player;
         
@@ -61,7 +60,7 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= SpellType.StunSpell || !SpellManager.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= SpellType.StunSpell || !GameManager.Instance.CanCastLight)
                 return;
 
             _player.OnAttackPerformed(baseDuration);
@@ -72,18 +71,13 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.StunSpell || !SpellManager.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.StunSpell || !GameManager.Instance.CanCastHeavy)
                 return;
 
             _player.OnAttackPerformed(heavyDuration);
             Invoke(nameof(HeavyAttack), castDelay);
             
             GameManager.Instance.SetHeavySpellActivationTime(Time.time);
-        }
-
-        public float AttemptCrit(float damage)
-        {
-            return damage;
         }
 
         private void LightAttack()

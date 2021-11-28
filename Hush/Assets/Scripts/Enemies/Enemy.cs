@@ -284,7 +284,7 @@ namespace Enemies
             if (!isStunned) // if not already stunned
             {
                 // TODO add stun animation
-                isStunned = !isStunned;
+                isStunned = true;
                 Invoke(nameof(DisableStun), duration);
             }
         }

@@ -23,11 +23,11 @@ namespace Game.Models
         
         // Spell
         public SpellType activeHeavySpell;
-        public float heavySpellActivationTime = float.MinValue;
-        public float heavySpellCooldownTime = 10f;
+        public float heavySpellActivationTime;
+        public float heavySpellCooldownTime;
         public SpellType activeLightSpell;
-        public float lightSpellActivationTime = float.MinValue;
-        public float lightSpellCooldownTime = 5f;
+        public float lightSpellActivationTime;
+        public float lightSpellCooldownTime;
 
         // Relic
         public bool playerHasRelic;
@@ -51,6 +51,14 @@ namespace Game.Models
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
+            
+            // Spell
+            activeHeavySpell = SpellType.None;
+            heavySpellActivationTime = float.MinValue;
+            heavySpellCooldownTime = 10f;
+            activeLightSpell = SpellType.None;
+            lightSpellActivationTime = float.MinValue;
+            lightSpellCooldownTime = 5f;
             
             // Relic
             playerHasRelic = false;
