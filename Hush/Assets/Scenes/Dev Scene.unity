@@ -1746,10 +1746,6 @@ PrefabInstance:
       propertyPath: serializedGuid.Array.data[15]
       value: 60
       objectReference: {fileID: 0}
-    - target: {fileID: 1754077503933856976, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2694598201337503891, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1797,10 +1793,6 @@ PrefabInstance:
     - target: {fileID: 5381592743170887637, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 9199240927236339795, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}

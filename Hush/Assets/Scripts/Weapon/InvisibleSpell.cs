@@ -24,8 +24,8 @@ namespace Weapon
         //TODO Remove
         private void Awake()
         {
-            GameManager.Instance.SetActiveHeavySpell(SpellType.InvisibleSpell);
-            GameManager.Instance.SetActiveLightSpell(SpellType.InvisibleSpell);
+            // GameManager.Instance.SetActiveHeavySpell(SpellType.InvisibleSpell);
+            // GameManager.Instance.SetActiveLightSpell(SpellType.InvisibleSpell);
         }
 
         private void OnEnable()

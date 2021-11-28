@@ -5,6 +5,7 @@ using Player.Enums;
 using Plugins;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Weapon;
 using Weapon.Enums;
 
 public class StunSpell : MonoBehaviour, ISpell
@@ -30,8 +31,8 @@ public class StunSpell : MonoBehaviour, ISpell
         
         private void Awake()
         {
-             //GameManager.Instance.SetActiveHeavySpell(SpellType.StunSpell);
-             //GameManager.Instance.SetActiveLightSpell(SpellType.StunSpell);
+             GameManager.Instance.SetActiveHeavySpell(SpellType.StunSpell);
+             GameManager.Instance.SetActiveLightSpell(SpellType.StunSpell);
         }
 
         private void OnEnable()
@@ -96,12 +97,13 @@ public class StunSpell : MonoBehaviour, ISpell
         {
             var prefab = isHeavy ? heavySpellPrefab : lightSpellPrefab;
             var spellClone = Instantiate(prefab);
-            spellClone.GetComponent<StunCollision>().duration = stunLength;
+            
             
             Vector3 pos = transform.position;
             pos.y += spellHeightOffset;
             spellClone.transform.position = pos;
-
+            
+            spellClone.GetComponent<StunCollision>().StunEffect(pos, stunLength);
             spellClone.GetComponent<ParticleSystem>().Play();
            
             Destroy(spellClone, stunEffectDuration);
