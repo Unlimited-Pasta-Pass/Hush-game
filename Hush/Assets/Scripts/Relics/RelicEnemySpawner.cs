@@ -2,12 +2,20 @@ using System.Collections;
 using Common.Enums;
 using UnityEngine;
 
-namespace Enemies
+namespace Relics
 {
    public class RelicEnemySpawner : MonoBehaviour
    {
       [SerializeField] private GameObject enemyPrefab;
       [SerializeField] private GameObject smokePrefab;
+      [SerializeField] private float enemySpawnDelay = 0.3f;
+      [SerializeField] private float smokeDuration = 1.5f;
+      private GameObject relic;
+
+      private void Awake()
+      {
+         relic = GameObject.Find(Tags.Relic);
+      }
 
       public void OnRelicAttacked()
       {
@@ -31,16 +39,15 @@ namespace Enemies
       {
          var smokeClone = Instantiate(smokePrefab, position, Quaternion.identity);
          smokeClone.GetComponent<ParticleSystem>().Play();
-         Destroy(smokeClone, 1.5f);
+         Destroy(smokeClone, smokeDuration);
       }
 
       IEnumerator CreateEnemy(Vector3 position)
       {
-         yield return new WaitForSeconds(.3f);
+         yield return new WaitForSeconds(enemySpawnDelay);
          
          var enemyClone = Instantiate(enemyPrefab, position, Quaternion.identity);
-         var target = GameObject.FindWithTag(Tags.Relic);
-         enemyClone.transform.LookAt(target.transform, Vector3.up);
+         enemyClone.transform.LookAt(relic.transform, Vector3.up);
       }
    }
 }
