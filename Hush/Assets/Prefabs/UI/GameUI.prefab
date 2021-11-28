@@ -319,8 +319,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heavyCooldown: {fileID: 508018698}
   lightCooldown: {fileID: 1941584965}
+  echoCooldown: {fileID: 9158860554975008553}
   heavyOverlay: {fileID: 5308394578235922544}
   lightOverlay: {fileID: 1955602828453004236}
+  echoOverlay: {fileID: 3709295536952262371}
 --- !u!1 &1380436396732668334
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,7 +742,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 348794bfd8705514eb15ccdb70f707a6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4571,7 +4573,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1de4613725ab1454ba82117c24cebc6c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

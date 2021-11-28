@@ -31,6 +31,15 @@ namespace UI
             {
                 HideLightCooldown();
             }
+            
+            if (!GameManager.Instance.CanReveal)
+            {
+                DisplayEchoCooldown();
+            }
+            else
+            {
+                HideEchoCooldown();
+            }
         }
 
         private void DisplayHeavyCooldown()
@@ -55,12 +64,12 @@ namespace UI
         
         private void DisplayEchoCooldown()
         {
-            float timeElapsed = Time.time - GameManager.Instance.GetLightSpellActivationTime();
-            float timeRemaining = GameManager.Instance.GetLightSpellCoolDownTime() - timeElapsed;
+            float timeElapsed = Time.time - GameManager.Instance.EcholocationActivationTime;
+            float timeRemaining = GameManager.Instance.EcholocationCooldownTime - timeElapsed;
             
-            lightCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
-            lightOverlay.SetActive(true);
-            lightCooldown.gameObject.SetActive(true);
+            echoCooldown.text = $"{Mathf.RoundToInt(timeRemaining)}";
+            echoOverlay.SetActive(true);
+            echoCooldown.gameObject.SetActive(true);
         }
 
         private void HideLightCooldown()
@@ -77,8 +86,8 @@ namespace UI
         
         private void HideEchoCooldown()
         {
-            heavyOverlay.SetActive(false);
-            heavyCooldown.gameObject.SetActive(false);
+            echoOverlay.SetActive(false);
+            echoCooldown.gameObject.SetActive(false);
         }
     }
 }
