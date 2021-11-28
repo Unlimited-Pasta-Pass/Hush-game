@@ -3,29 +3,35 @@ using Common.Enums;
 using Enemies.Enums;
 using Game;
 using Game.Models;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.ProBuilder;
 
 namespace Enemies
 {
     [RequireComponent(typeof(NavMeshAgent))]
     public class Enemy : MonoBehaviour, IEnemy
     {
+
         #region Parameters
 
         [Header("Parameters")]
         [SerializeField] private float visionAngle = 70.0f;
-        [SerializeField] private float detectionRadius = 3f;
+        [SerializeField] private float detectionRadius = 3.0f;
+        [SerializeField] private float soundPerceptionRadius = 4.0f;
         [SerializeField] private LayerMask targetLayerMask;
 
         [Header("Attack")]
         [SerializeField] private float minAttackRange = 0.5f;
         [SerializeField] private float maxAttackRange = 1.0f;
-    
+        [SerializeField] private float attackRotationOffset = 0.0f;
+        
         [Header("Speed")]
-        [SerializeField] private float runSpeed = 5.0f;
-        [SerializeField] private float patrolSpeed = 2.0f;
+        [SerializeField] private float runSpeed = 3.0f;
+        [SerializeField] private float searchSpeed = 2.5f;
+        [SerializeField] private float patrolSpeed = 1.0f;
     
         [Header("Patrol")]
         [SerializeField] private Transform[] patrolRoute;
@@ -39,9 +45,10 @@ namespace Enemies
     
         #region Private Variables
 
-        private GameObject _player;
+        private PlayerMovement _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
+        private const float BackstabDamageModifier = 2.0f;
 
         #endregion
 
@@ -66,7 +73,7 @@ namespace Enemies
 
         private void OnEnable()
         {
-            _player = GameObject.FindWithTag(Tags.Player);
+            _player = GameObject.FindWithTag(Tags.Player).GetComponent<PlayerMovement>();
         }
 
         private void Start()
@@ -79,7 +86,7 @@ namespace Enemies
             // Enemy lost track of player
             if (_state == EnemyState.Searching && agent.remainingDistance <= agent.stoppingDistance && !HasPlayerLineOfSight())
             {
-                SetState(EnemyState.Patrolling);
+                ResumePatrolFromClosestNode();
             }
 
             // Do movement update logic
@@ -137,15 +144,14 @@ namespace Enemies
                     Vector3 player = _player.transform.position;
                     Vector3 toPlayerNormalized = (player - transform.position).normalized;
                     agent.destination = player - minAttackRange * toPlayerNormalized;
-                    if (!IsAttacking && agent.remainingDistance <= maxAttackRange - minAttackRange)
+                    if (agent.remainingDistance <= maxAttackRange - minAttackRange)
                     {
-                        PerformAttack();
-                    }
-                
-                    // Rotate to face player when arrived
-                    if (agent.remainingDistance <= agent.stoppingDistance)
-                    {
+                        // Rotate to face player when close
                         FacePlayer();
+                        
+                        // Attack if able to
+                        if (!IsAttacking)
+                            PerformAttack();
                     }
                     break;
                 }
@@ -164,6 +170,7 @@ namespace Enemies
 
                 case EnemyState.Searching:
                 {
+                    agent.speed = searchSpeed;
                     break;
                 }
 
@@ -208,8 +215,25 @@ namespace Enemies
             if (lookPos == Vector3.zero)
                 return;
         
-            Quaternion targetRotation = Quaternion.LookRotation(lookPos);
+            Quaternion targetRotation = Quaternion.Euler(Quaternion.LookRotation(lookPos).eulerAngles + new Vector3(0, attackRotationOffset, 0));
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 4.0f * Time.deltaTime);  
+        }
+
+        private void ResumePatrolFromClosestNode()
+        {
+            float lowestDist = float.MaxValue;
+            int closestNodeIndex = -1;
+            for (int i = 0; i < patrolRoute.Length; i++)
+            {
+                float dist = Vector3.Distance(patrolRoute[i].position, transform.position);
+                if (dist < lowestDist)
+                {
+                    closestNodeIndex = i;
+                    lowestDist = dist;
+                }
+            }
+            SetState(EnemyState.Patrolling);
+            _nextPatrolIndex = closestNodeIndex > 0 ? closestNodeIndex : 0;
         }
 
         #endregion
@@ -242,8 +266,11 @@ namespace Enemies
         public void TakeDamage(float damage)
         {
             // TODO: Add animation
-            if (!GameManager.Instance.AttackEnemy(ID, damage))
+            // Take damage
+            if (!GameManager.Instance.AttackEnemy(ID, _state == EnemyState.Patrolling ? BackstabDamageModifier * damage : damage))
                 Die();
+            else
+                SetState(EnemyState.Attacking);
         }
 
         public void PerformAttack()
@@ -254,15 +281,37 @@ namespace Enemies
         public void OnVisionTrigger(Collider other)
         {
             // Only trigger on player
-            if (!other.CompareTag(Tags.Player))
+            // Only update state if not dead
+            if (_state == EnemyState.Dead || !other.CompareTag(Tags.Player))
                 return;
 
-            // Test player in enemy vision range
-            var playerDir = transform.InverseTransformPoint(other.gameObject.transform.position).normalized;
-            if (_state != EnemyState.Dead && (_state != EnemyState.Patrolling || Vector3.Angle(playerDir, Vector3.forward) < visionAngle))
+            // Compute distance and direction to player
+            var playerPosition = _player.transform.position;
+            var playerDir = transform.InverseTransformPoint(playerPosition).normalized;
+            var playerDist = Vector3.Distance(transform.position, playerPosition);
+
+            // Test player is in enemy vision range
+            var isPatrolling = _state == EnemyState.Patrolling;
+            var playerInVisionCone = Vector3.Angle(playerDir, Vector3.forward) < visionAngle;
+            if (!isPatrolling || playerInVisionCone)
             {
                 // If we have line of sight, keep following player
                 SetState(HasPlayerLineOfSight() ? EnemyState.Attacking : EnemyState.Searching);
+            }
+            
+            // Test player is making sound within sound perception radius
+            var playerMadeSound = playerDist < soundPerceptionRadius && _player.IsRunning;
+            if (playerMadeSound)
+            {
+                if (HasPlayerLineOfSight())
+                {
+                    SetState(EnemyState.Attacking);
+                }
+                else
+                {
+                    SetState(EnemyState.Searching);
+                    agent.destination = playerPosition;
+                }
             }
         }
 
