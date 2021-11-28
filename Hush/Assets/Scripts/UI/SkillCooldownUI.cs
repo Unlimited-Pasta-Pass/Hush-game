@@ -12,7 +12,7 @@ namespace UI
         [SerializeField] private GameObject lightOverlay;
         private void Update()
         {
-            if (!SpellManager.Instance.CanCastHeavy)
+            if (!GameManager.Instance.CanCastHeavy)
             {
                 DisplayHeavyCooldown();
             }
@@ -21,7 +21,7 @@ namespace UI
                 HideHeavyCooldown();
             }
 
-            if (!SpellManager.Instance.CanCastLight)
+            if (!GameManager.Instance.CanCastLight)
             {
                 DisplayLightCooldown();
             }

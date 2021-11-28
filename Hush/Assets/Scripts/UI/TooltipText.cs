@@ -4,13 +4,13 @@ namespace UI
 {
     public class TooltipText : MonoBehaviour
     {
-        public static string HeavyFireball = "";
+        public static string HeavyFireball = "HeavyFireball";
         
-        public static string LightFireball = "";
+        public static string LightFireball = "LightFireball";
         
-        public static string LightStun = "";
+        public static string LightStun = "LightStun";
         
-        public static string HeavyStun = "";
+        public static string HeavyStun = "HeavyStun";
         
         public static string LightInvisibility = "";
         
