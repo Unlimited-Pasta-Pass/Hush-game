@@ -1,8 +1,11 @@
+using System;
 using Common.Enums;
 using Common.Interfaces;
 using Game;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 namespace Relics
 {
@@ -10,21 +13,51 @@ namespace Relics
     {
         [SerializeField] private int keysNeededToUnlock;
 
+        private bool playerIsClose = false;
+
         public UnityEvent attacked;
 
         private UnityEvent _killed;
         public UnityEvent Killed => _killed ??= new UnityEvent();
         
         public float HitPoints => GameManager.Instance.RelicDomeHitPoints;
+        
+        private static InputManager Input => InputManager.Instance;
 
-        private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock;
+        private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock && InputManager.Instance.interact && playerIsClose;
+
+        private void OnEnable()
+        {
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.Interact].performed += UnlockDome;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.Interact].performed -= UnlockDome;
+            }
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.gameObject.CompareTag(Tags.Player) || !CanUnlockDome) 
+            if (!other.gameObject.CompareTag(Tags.Player)) 
                 return;
 
-            Die();
+            playerIsClose = true;
+            // TODO UI showing interact button
+        }
+        
+        private void OnTriggerExit(Collider collider)
+        {
+            if (!collider.gameObject.CompareTag(Tags.Player))
+                return;
+        
+            playerIsClose = false;
+            // TODO UI hiding interact button
         }
     
         public void TakeDamage(float damage)
@@ -52,6 +85,14 @@ namespace Relics
         public void SetDomeVisibility(bool visibility)
         {
             gameObject.SetActive(visibility);
+        }
+
+        private void UnlockDome(InputAction.CallbackContext context)
+        {
+            if (!CanUnlockDome)
+                return;
+            
+            Die();
         }
     }
 }
