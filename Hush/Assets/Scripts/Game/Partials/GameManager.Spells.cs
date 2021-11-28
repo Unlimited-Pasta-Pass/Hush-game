@@ -5,8 +5,9 @@ namespace Game
 {
     public partial class GameManager
     {
-        public bool CanCastHeavy => Time.time - GameManager.Instance.GetHeavySpellActivationTime() > GameManager.Instance.GetHeavySpellCoolDownTime();
-        public bool CanCastLight => Time.time - GameManager.Instance.GetLightSpellActivationTime() > GameManager.Instance.GetLightSpellCoolDownTime();
+        public bool CanCastHeavy => Time.time - GetHeavySpellActivationTime() > GetHeavySpellCoolDownTime();
+        public bool CanCastLight => Time.time - GetLightSpellActivationTime() > GetLightSpellCoolDownTime();
+        
         public float GetHeavySpellActivationTime()
         {
             return _state.heavySpellActivationTime;
