@@ -29,7 +29,6 @@ namespace Weapon
         [Header("Other References")]
         [SerializeField] private Animator animator;
         private static InputManager Input => InputManager.Instance;
-        private static SpellManager Spell => SpellManager.Instance;
 
         public float BaseDamage => baseDamage;
         public float HeavyDamage => heavyDamage;
@@ -68,7 +67,7 @@ namespace Weapon
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != SpellType.FireballSpell || !Spell.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != SpellType.FireballSpell || !GameManager.Instance.CanCastLight)
                 return;
             
             _player.OnAttackPerformed(baseDuration);
@@ -79,7 +78,7 @@ namespace Weapon
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.FireballSpell || !Spell.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.FireballSpell || !GameManager.Instance.CanCastHeavy)
                 return;
             
             _player.OnAttackPerformed(heavyDuration);
@@ -112,7 +111,7 @@ namespace Weapon
             var spellClone = Instantiate(spellPrefab);
             spellClone.transform.position = shootPosition.transform.position;
             spellClone.transform.rotation = shootPosition.transform.rotation;
-
+            
             spellClone.GetComponent<CustomFireProjectile>().ShootPosition = shootPosition.transform;
             spellClone.GetComponent<CustomFireProjectile>().Damage = (int)damage;
         }

@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RaycastLayerMask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 128
 --- !u!114 &16606687100967124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,12 +133,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visionAngle: 70
   detectionRadius: 3
+  soundPerceptionRadius: 6
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 1152
   minAttackRange: 1
   maxAttackRange: 2
-  runSpeed: 3
+  attackRotationOffset: -30
+  runSpeed: 3.5
+  searchSpeed: 2.5
   patrolSpeed: 1
   patrolRoute: []
   agent: {fileID: 234692157854127520}
@@ -213,7 +216,7 @@ GameObject:
   - component: {fileID: 6732957862493942095}
   - component: {fileID: 5537224499820979692}
   - component: {fileID: 4128955325863381564}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: VisionTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +248,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5537224499820979692
 Rigidbody:

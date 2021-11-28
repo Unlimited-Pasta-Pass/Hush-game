@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.Enums;
 using UnityEngine;
 
@@ -16,10 +17,10 @@ namespace Environment.Passage
 
         [SerializeField] private SecretPassageElement[] passageElements;
 
-        private bool _playerInside;
         private bool _shown;
         private float _lastShown;
         private float _lastInside;
+        private readonly HashSet<Collider> _insideTrigger = new HashSet<Collider>();
 
         public void Reset()
         {
@@ -32,26 +33,21 @@ namespace Environment.Passage
             // Start hidden
             _lastShown = Time.time;
             _lastInside = Time.time;
-            foreach (var door in passageDoors)
-            {
-                door.Init();
-            }
-
-            foreach (var floor in passageElements)
-            {
-                floor.Init();
-            }
-
             Hide(true);
         }
 
         void Update()
         {
-            // Hide after delay if player not in passage
-            if (!_playerInside && Time.time - _lastShown >= hideDelay && Time.time - _lastInside >= hideDelayOnLeave)
+            // Hide after delay if no objects in passage
+            if (_insideTrigger.Count <= 0 && Time.time - _lastShown >= hideDelay && Time.time - _lastInside >= hideDelayOnLeave)
             {
                 Hide();
             }
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            _insideTrigger.Add(other);
         }
 
         void OnTriggerStay(Collider other)
@@ -59,16 +55,12 @@ namespace Environment.Passage
             if (other.CompareTag(Tags.Player))
             {
                 _lastInside = Time.time;
-                _playerInside = true;
             }
         }
 
         void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag(Tags.Player))
-            {
-                _playerInside = false;
-            }
+            _insideTrigger.Remove(other);
         }
 
         public void Reveal(bool force = false)

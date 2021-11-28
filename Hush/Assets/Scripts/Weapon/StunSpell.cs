@@ -5,6 +5,7 @@ using Player.Enums;
 using Plugins;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Weapon;
 using Weapon.Enums;
 
 public class StunSpell : MonoBehaviour, ISpell
@@ -13,7 +14,7 @@ public class StunSpell : MonoBehaviour, ISpell
         [SerializeField] private float baseDuration = 0.25f;
         [SerializeField] private float heavyDuration = 0.4f;
         [SerializeField] private float castDelay = 0.1f;
-        [SerializeField] private float spellHeightOffset = 1f;
+        [SerializeField] private Vector3 spellOffset;
         [SerializeField] private float heavySpellDuration = 5f;
         [SerializeField] private float lightSpellDuration = 3f;
         [SerializeField] private float stunEffectDuration = 2f;
@@ -25,7 +26,6 @@ public class StunSpell : MonoBehaviour, ISpell
         [Header("Other References")]
         [SerializeField] private Animator animator;
         private static InputManager Input => InputManager.Instance;
-        private static SpellManager SpellManager => SpellManager.Instance;
 
         private PlayerMovement _player;
         
@@ -61,7 +61,7 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= SpellType.StunSpell || !SpellManager.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= SpellType.StunSpell || !GameManager.Instance.CanCastLight)
                 return;
 
             _player.OnAttackPerformed(baseDuration);
@@ -72,18 +72,13 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.StunSpell || !SpellManager.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.StunSpell || !GameManager.Instance.CanCastHeavy)
                 return;
 
             _player.OnAttackPerformed(heavyDuration);
             Invoke(nameof(HeavyAttack), castDelay);
             
             GameManager.Instance.SetHeavySpellActivationTime(Time.time);
-        }
-
-        public float AttemptCrit(float damage)
-        {
-            return damage;
         }
 
         private void LightAttack()
@@ -102,12 +97,11 @@ public class StunSpell : MonoBehaviour, ISpell
         {
             var prefab = isHeavy ? heavySpellPrefab : lightSpellPrefab;
             var spellClone = Instantiate(prefab);
-            spellClone.GetComponent<StunCollision>().duration = stunLength;
-            
-            Vector3 pos = transform.position;
-            pos.y += spellHeightOffset;
-            spellClone.transform.position = pos;
 
+            Vector3 pos = transform.position + spellOffset;
+            spellClone.transform.position = pos;
+            
+            spellClone.GetComponent<StunCollision>().StunEffect(pos, stunLength);
             spellClone.GetComponent<ParticleSystem>().Play();
            
             Destroy(spellClone, stunEffectDuration);

@@ -5460,7 +5460,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5381592743170887637}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ac10d03a2ad152489b06e19723856fa, type: 3}
   m_Name: 
@@ -5468,9 +5468,12 @@ MonoBehaviour:
   baseDuration: 0.25
   heavyDuration: 0.4
   castDelay: 0.1
+  spellOffset: {x: 0, y: 0.2, z: 0}
+  heavySpellDuration: 5
+  lightSpellDuration: 4
+  stunEffectDuration: 4
   heavySpellPrefab: {fileID: 7914988123797705053, guid: c38086c1e93ed6940bb492e27c5057c6, type: 3}
   lightSpellPrefab: {fileID: 7914988123797705053, guid: 7cf4a77ef986c91479e83d5a95b74ace, type: 3}
-  shootPosition: {fileID: 5956840403188805875}
   animator: {fileID: 8205350870087033752}
 --- !u!114 &2041735674550938981
 MonoBehaviour:
@@ -5479,7 +5482,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5381592743170887637}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
   m_Name: 
@@ -5505,10 +5508,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763bccd533e8aff498c3cc87c0c87043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRoot: {fileID: 9103870156791235135}
+  playerRoot: {fileID: 6912435066956005903}
   alpha: 0.25
   lightDuration: 3
   heavyDuration: 6
+  speedBoost: 1
 --- !u!1 &5956840403188805875
 GameObject:
   m_ObjectHideFlags: 0
