@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.ProBuilder;
+using Weapon.Enums;
 
 namespace Enemies
 {
@@ -54,6 +55,9 @@ namespace Enemies
         private PlayerMovement _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
+        private bool isStunned = false;
+
+        private bool isPlayerInvisible => GameManager.Instance.GetIsPlayerInvisible();
 
         #endregion
 
@@ -144,6 +148,9 @@ namespace Enemies
 
         private void MoveEnemy()
         {
+            if (isStunned)
+                return;
+            
             switch (_state)
             {
                 case EnemyState.Attacking:
@@ -213,7 +220,7 @@ namespace Enemies
             var closeToPlayer = Vector3.Distance(playerPosition, position) <= detectionRadius;
             var seePlayer = Physics.Raycast(position, towardsPlayer.normalized, out var hit, visionCollider.radius, targetLayerMask) && hit.collider.CompareTag(Tags.Player);
         
-            return closeToPlayer || seePlayer;
+            return (closeToPlayer || seePlayer) && !isPlayerInvisible;
         }
     
         private void FacePlayer()
@@ -266,6 +273,12 @@ namespace Enemies
         
         public void Die()
         {
+            // Disable colliders on NPC death to allow shooting spells through them
+            foreach (var col in GetComponentsInChildren<Collider>())
+            {
+                col.enabled = false;
+            }
+            
             animator.SetBool(EnemyAnimator.Dead, true);
             SetState(EnemyState.Dead);
         
@@ -322,6 +335,21 @@ namespace Enemies
                     agent.destination = playerPosition;
                 }
             }
+        }
+
+        public void Stun(float duration)
+        {
+            if (!isStunned) // if not already stunned
+            {
+                // TODO add stun animation
+                isStunned = true;
+                Invoke(nameof(DisableStun), duration);
+            }
+        }
+
+        private void DisableStun()
+        {
+            isStunned = false;
         }
 
         private void SetState(EnemyState state)
