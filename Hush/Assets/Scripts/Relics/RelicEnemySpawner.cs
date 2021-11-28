@@ -23,7 +23,7 @@ namespace Enemies
             Vector3 position = spawn.transform.position;
             
             CreateSmoke(position);
-            StartCoroutine(CreateEnemey(position));
+            StartCoroutine(CreateEnemy(position));
          }
       }
 
@@ -34,7 +34,7 @@ namespace Enemies
          Destroy(smokeClone, 1.5f);
       }
 
-      IEnumerator CreateEnemey(Vector3 position)
+      IEnumerator CreateEnemy(Vector3 position)
       {
          yield return new WaitForSeconds(.3f);
          
