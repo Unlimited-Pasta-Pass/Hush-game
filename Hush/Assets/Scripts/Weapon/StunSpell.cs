@@ -29,11 +29,9 @@ public class StunSpell : MonoBehaviour, ISpell
 
         private PlayerMovement _player;
         
-        private void Awake()
-        {
-             GameManager.Instance.SetActiveHeavySpell(SpellType.StunSpell);
-             GameManager.Instance.SetActiveLightSpell(SpellType.StunSpell);
-        }
+        public SpellType SpellType => SpellType.StunSpell;
+        public float HeavyCooldown => 10f;
+        public float LightCooldown => 6f;
 
         private void OnEnable()
         {
@@ -61,7 +59,7 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= SpellType.StunSpell || !GameManager.Instance.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive ||  GameManager.Instance.GetActiveLightSpell()!= SpellType || !GameManager.Instance.CanCastLight)
                 return;
 
             _player.OnAttackPerformed(baseDuration);
@@ -72,7 +70,7 @@ public class StunSpell : MonoBehaviour, ISpell
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.StunSpell || !GameManager.Instance.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType || !GameManager.Instance.CanCastHeavy)
                 return;
 
             _player.OnAttackPerformed(heavyDuration);
