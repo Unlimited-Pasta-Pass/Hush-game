@@ -42,7 +42,6 @@ namespace Weapon
 
             if (_player == null)
                 throw new MissingComponentException("Missing PlayerMovement Component in the Scene");
-            
         }
 
         private void OnDisable()
