@@ -54,7 +54,6 @@ namespace Enemies
         private PlayerMovement _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
-        private float _lastReveal;
 
         #endregion
 
