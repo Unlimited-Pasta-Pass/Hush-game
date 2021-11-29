@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2311186444272300722}
   - component: {fileID: 4107575512628067778}
   - component: {fileID: 6917358588575371276}
+  - component: {fileID: 5254003493128670858}
   - component: {fileID: 4816975685772881064}
-  - component: {fileID: 3994485805967114560}
   - component: {fileID: 6951234651915499436}
   m_Layer: 7
   m_Name: Dome
@@ -114,6 +114,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.008
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &5254003493128670858
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4256472995991901031}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.0050000004, y: 0.0050000004, z: 0.003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.003}
+  m_TimeToStationary: 0.5
 --- !u!114 &4816975685772881064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,23 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keysNeededToUnlock: 1
-  maxHitPoints: 150
---- !u!114 &3994485805967114560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4256472995991901031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Size: {x: 0.01, y: 0.01, z: 0.005}
-  m_Center: {x: 0, y: 0, z: 0.004}
-  m_Area: 1
-  m_AffectedAgents: ffffffff
+  attacked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6951234651915499436
 MonoBehaviour:
   m_ObjectHideFlags: 0
