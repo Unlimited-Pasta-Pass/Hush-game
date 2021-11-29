@@ -31,7 +31,6 @@ public class Menus : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("Resume");
         TimeManager.Instance.Resume();
         EventSystem.current.SetSelectedGameObject(null);
         pauseMenuUI.SetActive(false);
