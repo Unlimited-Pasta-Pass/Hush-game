@@ -7,6 +7,8 @@ namespace Relics
    public class RelicEnemySpawner : MonoBehaviour
    {
       [SerializeField] private GameObject enemyPrefab;
+      [SerializeField] private GameObject healthUI;
+   
       [SerializeField] private GameObject smokePrefab;
       [SerializeField] private float enemySpawnDelay = 0.3f;
       [SerializeField] private float smokeDuration = 1.5f;
@@ -20,6 +22,7 @@ namespace Relics
       public void OnRelicAttacked()
       {
          SpawnEnemies();
+         ShowUI();
       }
 
       void SpawnEnemies()
@@ -49,5 +52,11 @@ namespace Relics
          var enemyClone = Instantiate(enemyPrefab, position, Quaternion.identity);
          enemyClone.transform.LookAt(relic.transform, Vector3.up);
       }
+
+      void ShowUI()
+      {
+         healthUI.SetActive(true);
+      }
+   
    }
 }
