@@ -15,6 +15,9 @@ namespace Game.Models
     [Serializable]
     public class GameState
     {
+        // Save
+        public float saveTime;
+
         // Player
         public float playerCurrentHitPoints;
         public float playerMaxHitPoints;
@@ -51,6 +54,9 @@ namespace Game.Models
 
         public GameState()
         {
+            // Save
+            saveTime = float.MinValue;
+
             // Player
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
