@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1423858757433039569, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
   healthUI: {fileID: 1824608412538047714}
+  smokePrefab: {fileID: 4736385885712022117, guid: 0d3b47f0fe249d34583b9438c5799bee, type: 3}
+  enemySpawnDelay: 0.3
+  smokeDuration: 1.5
 --- !u!114 &2052870202995907005
 MonoBehaviour:
   m_ObjectHideFlags: 0
