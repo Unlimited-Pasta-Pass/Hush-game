@@ -1023,7 +1023,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 25}
+  m_AnchoredPosition: {x: -40, y: 30}
   m_SizeDelta: {x: 75, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1202885186
@@ -1672,7 +1672,7 @@ GameObject:
   - component: {fileID: 1972393464}
   - component: {fileID: 1972393463}
   m_Layer: 5
-  m_Name: Reward
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1837,7 +1837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reward(s)
+  m_text: Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 120e93d743b9871479b7b98fbcee1a16, type: 2}
   m_sharedMaterial: {fileID: 6313852495158935412, guid: 120e93d743b9871479b7b98fbcee1a16, type: 2}
