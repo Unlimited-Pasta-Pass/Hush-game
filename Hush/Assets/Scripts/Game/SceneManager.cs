@@ -26,14 +26,24 @@ namespace Game
             LoadDevScene();
         }
 
-        public void LoadDevScene()
+        public void ReloadCurrentScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
+
+        public void LoadMainMenu()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
 
-        public void LoadDemoScene()
+        public void LoadDevScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
+
+        public void LoadDemoScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         }
     
         public void QuitGame()

@@ -5,7 +5,6 @@ using Game;
 
 public class Menus : MonoBehaviour
 {
-    
     // brackeys tutorial: https://youtu.be/JivuXdrIHK0
     public GameObject pauseMenuUI;
     // controller nav https://www.youtube.com/watch?v=SXBgBmUcTe0&ab_channel=gamesplusjames
@@ -13,12 +12,12 @@ public class Menus : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        Game.SceneManager.Instance.LoadNextScene();
     }
     
     public void Replay()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Game.SceneManager.Instance.ReloadCurrentScene();
     }
 
     void Pause()
@@ -39,15 +38,17 @@ public class Menus : MonoBehaviour
 
     public void Credits() {
         // POP-UP FOR CREDITS
+        Debug.Log("CREDITS");
     }
     
     public void MainMenu() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        Game.SceneManager.Instance.LoadMainMenu();
         Debug.Log("BACK TO MAIN MENU");
     }
 
-    public void Quit() {
-        Application.Quit();
+    public void Quit()
+    {
         Debug.Log("QUIT");
+        Game.SceneManager.Instance.QuitGame();
     }
 }
