@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Common.Models;
 using UnityEngine;
+using Weapon.Enums;
 
 namespace Game.Models
 {
@@ -18,7 +19,20 @@ namespace Game.Models
         public float playerCurrentHitPoints;
         public float playerMaxHitPoints;
         public SerializableTransform playerTransform;
+        public bool isPlayerInvisible;
         
+        // Echolocation
+        public float echolocationActivationTime;
+        public float echolocationCooldownTime;
+        
+        // Spell
+        public SpellType activeHeavySpell;
+        public float heavySpellActivationTime;
+        public float heavySpellCooldownTime;
+        public SpellType activeLightSpell;
+        public float lightSpellActivationTime;
+        public float lightSpellCooldownTime;
+
         // Relic
         public bool playerHasRelic;
         public float relicDomeHitPoints;
@@ -41,6 +55,19 @@ namespace Game.Models
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
+            isPlayerInvisible = false;
+            
+            // Echolocation
+            echolocationActivationTime = float.MinValue;
+            echolocationCooldownTime = 7f;
+
+            // Spell
+            activeHeavySpell = SpellType.None;
+            heavySpellActivationTime = float.MinValue;
+            heavySpellCooldownTime = 10f;
+            activeLightSpell = SpellType.None;
+            lightSpellActivationTime = float.MinValue;
+            lightSpellCooldownTime = 5f;
             
             // Relic
             playerHasRelic = false;

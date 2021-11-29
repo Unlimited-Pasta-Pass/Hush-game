@@ -11,7 +11,7 @@ namespace Game
         [SerializeField] private float playerHitPoints = 100f;
 
         public bool PlayerIsAlive => PlayerCurrentHitPoints > 0f;
-        
+
         public float PlayerCurrentHitPoints
         {
             get
@@ -65,6 +65,16 @@ namespace Game
         public void ResetPlayer()
         {
             _state.playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
+        }
+
+        public void SetIsPlayerInvisible(bool isInvisble)
+        {
+            _state.isPlayerInvisible = isInvisble;
+        }
+        
+        public bool GetIsPlayerInvisible()
+        {
+            return _state.isPlayerInvisible;
         }
 
         private void ApplyPlayerState()

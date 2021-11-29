@@ -54,17 +54,24 @@ namespace LOS
         private void UpdateVisibility(bool visible)
         {
             var parentRenderer = GetComponent<Renderer>();
-            
             if (parentRenderer != null)
                 parentRenderer.enabled = visible;
 
-            var childrenRender = GetComponentsInChildren<Renderer>();
-            
-            if (childrenRender != null && childrenRender.Length > 0)
+            var childRenderers = GetComponentsInChildren<Renderer>();
+            if (childRenderers != null && childRenderers.Length > 0)
             {
-                foreach (var childRenderer in childrenRender)
+                foreach (var childRenderer in childRenderers)
                 {
                     childRenderer.enabled = visible;
+                }
+            }
+            
+            var childCanvasses = GetComponentsInChildren<Canvas>();
+            if (childCanvasses != null && childCanvasses.Length > 0)
+            {
+                foreach (var childCanvas in childCanvasses)
+                {
+                    childCanvas.enabled = visible;
                 }
             }
         }

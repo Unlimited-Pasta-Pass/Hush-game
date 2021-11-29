@@ -5052,6 +5052,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 20
   heavyDamage: 50
+  baseDuration: 0.3
+  heavyDuration: 0.5
+  castDelay: 0.15
   critChance: 0.1
   critMultiplierLow: 0.5
   critMultiplierHigh: 0.75
@@ -5310,8 +5313,10 @@ GameObject:
   - component: {fileID: 4040321500388322195}
   - component: {fileID: 5076025907412216654}
   - component: {fileID: 3424695256074168618}
-  - component: {fileID: 2115969719432915281}
   - component: {fileID: 90708531195035637}
+  - component: {fileID: 9199240927236339795}
+  - component: {fileID: 2041735674550938981}
+  - component: {fileID: 1754077503933856976}
   m_Layer: 10
   m_Name: Player Base
   m_TagString: Player
@@ -5405,6 +5410,7 @@ MonoBehaviour:
   speedChangeRate: 10
   animator: {fileID: 8205350870087033752}
   controller: {fileID: 2680335586944316230}
+  mainCamera: {fileID: 1005489440315475630}
 --- !u!114 &5076025907412216654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5434,23 +5440,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8205350870087033752}
---- !u!114 &2115969719432915281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5381592743170887637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseDamage: 15
-  heavyDamage: 30
-  spellPrefab: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
-  shootPosition: {fileID: 5956840403188805875}
-  animator: {fileID: 8205350870087033752}
 --- !u!114 &90708531195035637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5464,6 +5453,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedGuid: 
+--- !u!114 &9199240927236339795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac10d03a2ad152489b06e19723856fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDuration: 0.25
+  heavyDuration: 0.4
+  castDelay: 0.1
+  spellOffset: {x: 0, y: 0.2, z: 0}
+  heavySpellDuration: 5
+  lightSpellDuration: 4
+  stunEffectDuration: 4
+  heavySpellPrefab: {fileID: 7914988123797705053, guid: c38086c1e93ed6940bb492e27c5057c6, type: 3}
+  lightSpellPrefab: {fileID: 7914988123797705053, guid: 7cf4a77ef986c91479e83d5a95b74ace, type: 3}
+  animator: {fileID: 8205350870087033752}
+--- !u!114 &2041735674550938981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 5
+  heavyDamage: 15
+  baseDuration: 0.25
+  heavyDuration: 0.4
+  castDelay: 0.1
+  heavySpellPrefab: {fileID: 7404962802362526807, guid: 4378b9a7a72b3ad4383bc52044afa951, type: 3}
+  lightSpellPrefab: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+  shootPosition: {fileID: 5956840403188805875}
+  animator: {fileID: 8205350870087033752}
+--- !u!114 &1754077503933856976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5381592743170887637}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 763bccd533e8aff498c3cc87c0c87043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRoot: {fileID: 6912435066956005903}
+  alpha: 0.25
+  lightDuration: 3
+  heavyDuration: 6
+  speedBoost: 1
 --- !u!1 &5956840403188805875
 GameObject:
   m_ObjectHideFlags: 0
@@ -5513,6 +5562,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8407895776990013603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6912435066956005903}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0.5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &5993322160462036830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5833,6 +5900,11 @@ PrefabInstance:
 --- !u!1 &4346722727684657705 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1189469776744665737, guid: ee6fef5d00e63ee41a374cdbd8fe89af, type: 3}
+  m_PrefabInstance: {fileID: 5993322160462036830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9103870156791235135 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3277493994875174241, guid: ee6fef5d00e63ee41a374cdbd8fe89af, type: 3}
   m_PrefabInstance: {fileID: 5993322160462036830}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6099624031289186485 stripped

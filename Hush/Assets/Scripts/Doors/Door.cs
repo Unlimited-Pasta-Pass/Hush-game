@@ -1,30 +1,67 @@
+using System;
 using Common.Enums;
 using Game;
+using Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Doors
 {
     public class Door : MonoBehaviour
     {
         [SerializeField] private GameObject wall;
+        
+        private bool playerIsClose = false;
 
-        private bool _isDoorOpen = true; // TODO: modify this value when the door opening conditionals are met
+        private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
+                                    InputManager.Instance.interact;
 
-        private bool CanGoThroughDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic && _isDoorOpen;
-    
+        private static InputManager Input => InputManager.Instance;
+        
+        private void OnEnable()
+        {
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.Interact].performed += OpenDoor;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (Input != null && Input.reference != null)
+            {
+                Input.reference.actions[Actions.Interact].performed -= OpenDoor;
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.gameObject.CompareTag(Tags.Player)) 
+            if (!other.gameObject.CompareTag(Tags.Player))
                 return;
+
+            playerIsClose = true;
+            // TODO UI showing interact button
+        }
         
-            if (CanGoThroughDoor)
-            {
-                // TODO Door opening animation
-                wall.SetActive(false);
-                
-                // respawn back into scene
-                SceneManager.Instance.LoadNextScene();
-            }
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.gameObject.CompareTag(Tags.Player))
+                return;
+
+            playerIsClose = false;
+            // TODO UI hiding interact button
+        }
+        
+        private void OpenDoor(InputAction.CallbackContext context)
+        {
+            if (!CanOpenDoor)
+                return;
+
+            // TODO Door opening animation
+            wall.SetActive(false);
+            
+            // respawn back into scene
+            SceneManager.Instance.LoadNextScene();
         }
     }
 }

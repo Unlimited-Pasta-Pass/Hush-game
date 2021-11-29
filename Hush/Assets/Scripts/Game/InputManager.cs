@@ -1,9 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-namespace Player
+namespace Game
 {
 	public class InputManager : MonoBehaviour
 	{
@@ -28,21 +27,19 @@ namespace Player
 		{
 			if (Instance == null)
 				Instance = this;
-			
-			DontDestroyOnLoad(Instance.gameObject);
-		}
 
-		private void Start()
-		{
-			// Lock the mouse cursor
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
+			DontDestroyOnLoad(Instance.gameObject);
 		}
 
         private void OnDestroy()
         {
             if (Instance == this)
                 Instance = null;
+        }
+
+        private void Start()
+        {
+	        Cursor.lockState = CursorLockMode.Confined;
         }
 
         #region Public Event Handlers

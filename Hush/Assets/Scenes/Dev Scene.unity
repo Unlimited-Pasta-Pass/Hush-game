@@ -590,7 +590,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -706,7 +706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3946320261341067803, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3946320261341067803, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1610,62 +1610,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 976542287}
-    - target: {fileID: 1340388474430204491, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnLoad
-      objectReference: {fileID: 0}
-    - target: {fileID: 1340388474430204491, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Game.SaveGameManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1340388474430204491, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413100095681595894, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413100095681595894, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6413100095681595894, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 931799511}
-    - target: {fileID: 6413100095681595894, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413100095681595894, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413100095681595894, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Game.SceneManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6413100095681595894, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 7610813691096931993, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 976542287}
-    - target: {fileID: 7610813691096931993, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnSave
-      objectReference: {fileID: 0}
-    - target: {fileID: 7610813691096931993, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Game.SaveGameManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7610813691096931993, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8266203884042852494, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1684,7 +1636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8266203884277320489, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 8266203884277320489, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1758,10 +1710,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8266203884277320494, guid: e12c3b3264d0e524186504da5369e263, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1834451001}
     - target: {fileID: 8266203884277320533, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -1777,17 +1725,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f482634bb2c997248962121ba776e22d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1834451001 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3424695256074168618, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-  m_PrefabInstance: {fileID: 2072784305}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d21e74c90c7e4f7984fa60bc03487dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2072784305
@@ -1860,6 +1797,10 @@ PrefabInstance:
     - target: {fileID: 90708531195035637, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: serializedGuid.Array.data[15]
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2041735674550938981, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2694598201337503891, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: m_RootOrder

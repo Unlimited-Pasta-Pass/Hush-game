@@ -52,21 +52,23 @@ namespace DigitalRuby.PyroParticles
         public FireProjectileCollisionDelegate CollisionDelegate;
 
         private bool collided;
-
-        private IEnumerator SendCollisionAfterDelay()
-        {
-            yield return new WaitForSeconds(ProjectileColliderDelay);
-
-            Vector3 dir = ShootPosition.forward * ProjectileColliderSpeed;
-            dir = ProjectileColliderObject.transform.rotation * dir;
-            ProjectileColliderObject.GetComponent<Rigidbody>().velocity = dir;
-        }
+        private float startTime;
+        private Vector3 velocity;
 
         protected override void Start()
         {
             base.Start();
+            startTime = Time.time;
+            velocity = transform.TransformDirection(ProjectileDirection * ProjectileColliderSpeed);
+        }
 
-            StartCoroutine(SendCollisionAfterDelay());
+        protected override void Update()
+        {
+            base.Update();
+            if (Time.time - startTime >= ProjectileColliderDelay)
+            {
+                ProjectileColliderObject.transform.position += Time.deltaTime * velocity;
+            }
         }
 
         public virtual void HandleCollision(GameObject obj, Collision c)
