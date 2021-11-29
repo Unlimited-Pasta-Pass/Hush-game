@@ -1,4 +1,5 @@
 using System;
+using Common.Enums;
 using UnityEngine;
 using Weapon;
 using Weapon.Enums;
@@ -8,7 +9,7 @@ namespace Game
     public class SpellSelectorManager : MonoBehaviour
     {
         public static SpellSelectorManager Instance;
-        [SerializeField] private GameObject player;
+        private GameObject player;
 
         private void Awake()
         {
@@ -16,6 +17,8 @@ namespace Game
                 Instance = this;
             
             DontDestroyOnLoad(Instance.gameObject);
+            
+            player = GameObject.FindWithTag(Tags.Player);
         }
 
         public void SetupLightSpell(SpellType chosenSpell)
