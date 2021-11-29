@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1423858757433039569, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
+  healthUI: {fileID: 1824608412538047714}
 --- !u!114 &2052870202995907005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +430,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dome
       objectReference: {fileID: 0}
+    - target: {fileID: 4260453333412353702, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260453333412353702, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260453333849405840, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260453333849405844, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4816975685772881064, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
       propertyPath: attacked.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -462,5 +479,10 @@ PrefabInstance:
 --- !u!4 &1309337045783444651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3484052249403165149, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
+  m_PrefabInstance: {fileID: 2482156385484010870}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1824608412538047714 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4260453333849405844, guid: a3fedf7bdc410b44792804eecc557265, type: 3}
   m_PrefabInstance: {fileID: 2482156385484010870}
   m_PrefabAsset: {fileID: 0}

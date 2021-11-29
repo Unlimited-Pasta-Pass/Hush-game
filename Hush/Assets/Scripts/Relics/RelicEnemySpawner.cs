@@ -6,10 +6,12 @@ namespace Enemies
    public class RelicEnemySpawner : MonoBehaviour
    {
       [SerializeField] private GameObject enemyPrefab;
+      [SerializeField] private GameObject healthUI;
    
       public void OnRelicAttacked()
       {
          SpawnEnemies();
+         ShowUI();
       }
 
       void SpawnEnemies()
@@ -25,6 +27,11 @@ namespace Enemies
          
             //TODO change clone vision
          }
+      }
+
+      void ShowUI()
+      {
+         healthUI.SetActive(true);
       }
    
    }
