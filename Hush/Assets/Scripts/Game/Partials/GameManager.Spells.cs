@@ -74,6 +74,5 @@ namespace Game
             _state.heavySpellActivationTime += delta;
             _state.lightSpellActivationTime += delta;
         }
-
     }
 }
