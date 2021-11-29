@@ -14,12 +14,10 @@ namespace Weapon
            
             foreach (var hitCollider in hitColliders)
             {
-               Debug.Log(hitCollider.gameObject.name);
-               if (hitCollider.gameObject.CompareTag(Tags.Enemy))
-               {
-                   Debug.Log("HitEnemy");
-                   hitCollider.gameObject.GetComponent<Enemy>().Stun(duration);
-               }
+                if (hitCollider.gameObject.CompareTag(Tags.Enemy))
+                {
+                    hitCollider.gameObject.GetComponent<Enemy>().Stun(duration);
+                }
             }
         }
     }

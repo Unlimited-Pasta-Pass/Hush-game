@@ -21,6 +21,10 @@ namespace Game.Models
         public SerializableTransform playerTransform;
         public bool isPlayerInvisible;
         
+        // Echolocation
+        public float echolocationActivationTime;
+        public float echolocationCooldownTime;
+        
         // Spell
         public SpellType activeHeavySpell;
         public float heavySpellActivationTime;
@@ -53,6 +57,10 @@ namespace Game.Models
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
             isPlayerInvisible = false;
             
+            // Echolocation
+            echolocationActivationTime = float.MinValue;
+            echolocationCooldownTime = 7f;
+
             // Spell
             activeHeavySpell = SpellType.None;
             heavySpellActivationTime = float.MinValue;
