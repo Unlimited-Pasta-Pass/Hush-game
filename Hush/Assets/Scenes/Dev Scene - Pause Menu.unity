@@ -1491,6 +1491,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 124518319190243255, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: Confirm
+      objectReference: {fileID: 0}
     - target: {fileID: 497075069979445376, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1531,6 +1535,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 976542287}
+    - target: {fileID: 2179358211123637805, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fdae51215be04874d9a0b2b236478a10, type: 3}
     - target: {fileID: 2184298815304412903, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1546,11 +1554,43 @@ PrefabInstance:
     - target: {fileID: 2184298815304412903, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2804608516757762685, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -125
+      objectReference: {fileID: 0}
+    - target: {fileID: 3180647292814365837, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: Spell 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488399229425330976, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_text
+      value: Spell 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691726048557169098, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: Spell 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3810012871695868541, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_text
+      value: Spell 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3864347323579509895, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: Spell 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3981440409639457760, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_text
+      value: Confirm
       objectReference: {fileID: 0}
     - target: {fileID: 4020346294832038639, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4592518837530066901, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: RegSpellSelectionMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 4694876389425409506, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1582,6 +1622,14 @@ PrefabInstance:
     - target: {fileID: 4878260890207251568, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269532318498717746, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: Spell 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546255066922662681, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_text
+      value: Spell 2
       objectReference: {fileID: 0}
     - target: {fileID: 5640277662282495252, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_IsActive
@@ -1589,20 +1637,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6278167533493464567, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309186146031025885, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: EmpSpellSelectionMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309186146031025885, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6373345658992613965, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6398248823252269266, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_text
+      value: Spell 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6413100095681595894, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 931799511}
+    - target: {fileID: 6603595474337521522, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -300
+      objectReference: {fileID: 0}
+    - target: {fileID: 6769572711561847443, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_text
+      value: Spell 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6910005842723017281, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_text
+      value: Spell 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7610813691096931993, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 976542287}
+    - target: {fileID: 8184073907554198930, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: Spell 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8266203884042852494, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1613,7 +1689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8266203884277320488, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_PixelPerfect
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8266203884277320489, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_Pivot.x
@@ -1702,6 +1778,14 @@ PrefabInstance:
     - target: {fileID: 8266203884277320533, guid: e12c3b3264d0e524186504da5369e263, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8290231003371217738, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: Empowered
+      objectReference: {fileID: 0}
+    - target: {fileID: 8593786473142469018, guid: e12c3b3264d0e524186504da5369e263, type: 3}
+      propertyPath: m_Name
+      value: Spell 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e12c3b3264d0e524186504da5369e263, type: 3}
