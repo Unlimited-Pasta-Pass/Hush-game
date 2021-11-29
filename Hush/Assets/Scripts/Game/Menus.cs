@@ -12,12 +12,13 @@ public class Menus : MonoBehaviour
 
     public void Play()
     {
+        Debug.Log("PLAY >>>>> " + Game.SceneManager.Instance);
         Game.SceneManager.Instance.LoadNextScene();
     }
     
     public void Replay()
     {
-        Game.SceneManager.Instance.ReloadCurrentScene();
+        Game.SceneManager.Instance.LoadPreviousScene();
     }
 
     void Pause()
