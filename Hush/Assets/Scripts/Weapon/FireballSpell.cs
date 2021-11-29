@@ -1,5 +1,6 @@
 using System;
 using Common.Enums;
+using DigitalRuby.PyroParticles;
 using Game;
 using Player;
 using Player.Enums;
@@ -20,6 +21,9 @@ namespace Weapon
         [SerializeField] private float baseDuration = 0.25f;
         [SerializeField] private float heavyDuration = 0.4f;
         [SerializeField] private float castDelay = 0.1f;
+
+        [SerializeField] private float heavyCooldown = 10f;
+        [SerializeField] private float lightCooldown = 6f;
     
         [Header("Spell References")]
         [SerializeField] protected GameObject heavySpellPrefab; 
@@ -30,6 +34,10 @@ namespace Weapon
         [SerializeField] private Animator animator;
         private static InputManager Input => InputManager.Instance;
 
+        public SpellType SpellType => SpellType.FireballSpell;
+
+        public float HeavyCooldown => heavyCooldown;
+        public float LightCooldown => lightCooldown;
         public float BaseDamage => baseDamage;
         public float HeavyDamage => heavyDamage;
 
@@ -49,13 +57,6 @@ namespace Weapon
                 throw new MissingComponentException("Missing PlayerMovement Component in the Scene");
         }
 
-        // TODO Remove
-        private void Awake()
-        {
-           // GameManager.Instance.SetActiveHeavySpell(SpellType.FireballSpell);
-           // GameManager.Instance.SetActiveLightSpell(SpellType.FireballSpell);
-        }
-
         private void OnDisable()
         {
             if (Input != null && Input.reference != null)
@@ -67,7 +68,7 @@ namespace Weapon
 
         public void PerformLightSpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != SpellType.FireballSpell || !GameManager.Instance.CanCastLight)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveLightSpell() != SpellType || !GameManager.Instance.CanCastLight)
                 return;
             
             _player.OnAttackPerformed(baseDuration);
@@ -78,7 +79,7 @@ namespace Weapon
 
         public void PerformHeavySpell(InputAction.CallbackContext context)
         {
-            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType.FireballSpell || !GameManager.Instance.CanCastHeavy)
+            if (!GameManager.Instance.PlayerIsAlive || GameManager.Instance.GetActiveHeavySpell() != SpellType || !GameManager.Instance.CanCastHeavy)
                 return;
             
             _player.OnAttackPerformed(heavyDuration);

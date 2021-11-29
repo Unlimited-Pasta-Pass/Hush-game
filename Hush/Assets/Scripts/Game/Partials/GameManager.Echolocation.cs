@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -30,6 +28,11 @@ namespace Game
             {
                 _state.echolocationCooldownTime = value;
             }
+        }
+
+        public void ApplyEcholocationState()
+        {
+            _state.echolocationActivationTime += Time.time - _state.saveTime;
         }
     }
 }

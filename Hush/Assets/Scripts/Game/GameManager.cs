@@ -1,7 +1,6 @@
 using System;
 using Game.Models;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Game
 {
@@ -24,6 +23,11 @@ namespace Game
             Instance.InitializeValues();
         }
 
+        public void SetSaveTime(float time)
+        {
+            _state.saveTime = time;
+        }
+
         private void InitializeValues()
         {
             _state ??= new GameState();
@@ -38,6 +42,8 @@ namespace Game
             ApplyEnemiesState();
             ApplyKeysState();
             ApplyRelicState();
+            ApplyEcholocationState();
+            ApplySpellState();
         }
     }
 }
