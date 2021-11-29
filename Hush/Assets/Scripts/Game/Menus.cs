@@ -12,7 +12,6 @@ public class Menus : MonoBehaviour
 
     public void Play()
     {
-        Debug.Log("PLAY >>>>> " + Game.SceneManager.Instance);
         Game.SceneManager.Instance.LoadNextScene();
     }
     
