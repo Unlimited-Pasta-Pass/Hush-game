@@ -9,17 +9,23 @@ namespace Doors
 {
     public class Door : MonoBehaviour
     {
-        [SerializeField] private GameObject wall;
-        
         private bool playerIsClose = false;
 
+        private Animator anim;
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
                                     InputManager.Instance.interact;
 
         private static InputManager Input => InputManager.Instance;
-        
+
+
+        private void Start()
+        {
+            anim = GetComponent<Animator>();
+        }
+
         private void OnEnable()
         {
+            
             if (Input != null && Input.reference != null)
             {
                 Input.reference.actions[Actions.Interact].performed += OpenDoor;
@@ -57,10 +63,12 @@ namespace Doors
             if (!CanOpenDoor)
                 return;
 
-            // TODO Door opening animation
-            wall.SetActive(false);
-            
-            // respawn back into scene
+            anim.SetTrigger("Open");
+            Invoke("LoadNext", 2f);
+        }
+
+        private void LoadNext()
+        {
             SceneManager.Instance.LoadNextScene();
         }
     }
