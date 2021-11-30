@@ -140,11 +140,12 @@ MonoBehaviour:
     m_Bits: 1152
   minAttackRange: 1
   maxAttackRange: 2
-  attackRotationOffset: -30
+  attackRotationOffset: -40
+  backstabDamageModifier: 2
   runSpeed: 3.5
   searchSpeed: 2.5
   patrolSpeed: 1
-  isInvisible: 0
+  invisible: 0
   patrolRoute: []
   agent: {fileID: 234692157854127520}
   animator: {fileID: 8391566035528528493}

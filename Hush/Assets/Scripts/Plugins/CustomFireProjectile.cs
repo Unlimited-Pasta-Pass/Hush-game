@@ -1,6 +1,7 @@
 ﻿using Common;
 using Common.Interfaces;
 using DigitalRuby.PyroParticles;
+using Player;
 using UnityEngine;
 
 namespace Plugins
@@ -11,7 +12,7 @@ namespace Plugins
         {
             base.HandleCollision(obj, c);
             
-            if(c.gameObject.TryGetComponent<IKillable>(out var killable))
+            if (c.gameObject.TryGetComponent<IKillable>(out var killable))
             {
                 killable.TakeDamage(Damage);
             }

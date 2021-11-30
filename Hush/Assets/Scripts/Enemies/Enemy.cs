@@ -18,41 +18,43 @@ namespace Enemies
         #region Parameters
 
         [Header("Parameters")]
-        [SerializeField] private float visionAngle = 70.0f;
-        [SerializeField] private float detectionRadius = 3.0f;
-        [SerializeField] private float soundPerceptionRadius = 4.0f;
-        [SerializeField] private LayerMask targetLayerMask;
+        [SerializeField] protected float visionAngle = 70.0f;
+        [SerializeField] protected float detectionRadius = 3.0f;
+        [SerializeField] protected float soundPerceptionRadius = 4.0f;
+        [SerializeField] protected LayerMask targetLayerMask;
 
         [Header("Attack")]
-        [SerializeField] private float minAttackRange = 0.5f;
-        [SerializeField] private float maxAttackRange = 1.0f;
-        [SerializeField] private float attackRotationOffset = 0.0f;
-        [SerializeField] private float backstabDamageModifier = 2.0f;
+        [SerializeField] protected float minAttackRange = 0.5f;
+        [SerializeField] protected float maxAttackRange = 1.0f;
+        [SerializeField] protected float attackRotationOffset = 0.0f;
+        [SerializeField] protected float attackCooldown = 2.0f;
+        [SerializeField] protected float backstabDamageModifier = 2.0f;
         
         [Header("Speed")]
-        [SerializeField] private float runSpeed = 3.0f;
-        [SerializeField] private float searchSpeed = 2.5f;
-        [SerializeField] private float patrolSpeed = 1.0f;
+        [SerializeField] protected float runSpeed = 3.0f;
+        [SerializeField] protected float searchSpeed = 2.5f;
+        [SerializeField] protected float patrolSpeed = 1.0f;
         
         [Header("Type")]
-        [SerializeField] private bool invisible = false;
+        [SerializeField] protected bool invisible = false;
 
         [Header("Patrol")]
-        [SerializeField] private Transform[] patrolRoute;
+        [SerializeField] protected Transform[] patrolRoute;
     
         [Header("References")]
-        [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private Animator animator;
-        [SerializeField] private SphereCollider visionCollider;
+        [SerializeField] protected NavMeshAgent agent;
+        [SerializeField] protected Animator animator;
+        [SerializeField] protected SphereCollider visionCollider;
         
         #endregion
     
         #region Private Variables
 
-        private PlayerMovement _player;
+        protected PlayerMovement player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
         private bool _isStunned = false;
+        private float _lastAttack;
 
         private bool isPlayerInvisible => GameManager.Instance.GetIsPlayerInvisible();
 
@@ -81,7 +83,7 @@ namespace Enemies
 
         private void OnEnable()
         {
-            _player = GameObject.FindWithTag(Tags.Player).GetComponent<PlayerMovement>();
+            player = GameObject.FindWithTag(Tags.Player).GetComponent<PlayerMovement>();
         }
 
         private void Start()
@@ -163,17 +165,20 @@ namespace Enemies
                 {
                     // Run to player & attack them if in range
                     agent.speed = runSpeed;
-                    Vector3 player = _player.transform.position;
-                    Vector3 toPlayerNormalized = (player - transform.position).normalized;
-                    agent.destination = player - minAttackRange * toPlayerNormalized;
+                    Vector3 playerPosition = player.transform.position;
+                    Vector3 toPlayerNormalized = (playerPosition - transform.position).normalized;
+                    agent.destination = playerPosition - minAttackRange * toPlayerNormalized;
                     if (agent.remainingDistance <= maxAttackRange - minAttackRange)
                     {
                         // Rotate to face player when close
                         FacePlayer();
                         
                         // Attack if able to
-                        if (!IsAttacking)
+                        if (Time.time - _lastAttack >= attackCooldown)
+                        {
+                            _lastAttack = Time.time;
                             PerformAttack();
+                        }
                     }
                     break;
                 }
@@ -215,7 +220,7 @@ namespace Enemies
             var position = transform.position;
             position.y = agent.height / 2.0f;
         
-            var playerPosition = _player.transform.position;
+            var playerPosition = player.transform.position;
             playerPosition.y = position.y;
         
             Vector3 towardsPlayer = playerPosition - position;
@@ -228,7 +233,7 @@ namespace Enemies
     
         private void FacePlayer()
         {
-            Vector3 lookPos = _player.transform.position - transform.position;
+            Vector3 lookPos = player.transform.position - transform.position;
             lookPos.y = 0;
             
             if (lookPos == Vector3.zero)
@@ -306,7 +311,7 @@ namespace Enemies
                 SetState(EnemyState.Attacking);
         }
 
-        public void PerformAttack()
+        public virtual void PerformAttack()
         {
             animator.SetTrigger(EnemyAnimator.BaseAttack);
         }
@@ -319,7 +324,7 @@ namespace Enemies
                 return;
 
             // Compute distance and direction to player
-            var playerPosition = _player.transform.position;
+            var playerPosition = player.transform.position;
             var playerDir = transform.InverseTransformPoint(playerPosition).normalized;
             var playerDist = Vector3.Distance(transform.position, playerPosition);
 
@@ -333,7 +338,7 @@ namespace Enemies
             }
             
             // Test player is making sound within sound perception radius
-            var playerMadeSound = playerDist < soundPerceptionRadius && _player.IsRunning;
+            var playerMadeSound = playerDist < soundPerceptionRadius && player.IsRunning;
             if (playerMadeSound)
             {
                 if (HasPlayerLineOfSight())
