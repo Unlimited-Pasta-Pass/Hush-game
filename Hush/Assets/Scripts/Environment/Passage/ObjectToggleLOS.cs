@@ -20,7 +20,7 @@ namespace Environment.Passage
 
         public override void Show(bool force = false)
         {
-            hider.ResetObjectVisibility();
+            hider.RevealObject();
         }
     }
 }

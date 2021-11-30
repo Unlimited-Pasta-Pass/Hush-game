@@ -7,6 +7,7 @@ namespace Enemies.Enums
         public static int Speed => Animator.StringToHash("Speed");
         public static int BaseAttack => Animator.StringToHash("Base_Attack");
         public static int Dead => Animator.StringToHash("Dead");
+        public static int TakeHit => Animator.StringToHash("Take_Hit");
 
         public static class State
         {

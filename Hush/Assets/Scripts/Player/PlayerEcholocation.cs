@@ -45,17 +45,19 @@ namespace Player
         {
             _revealCountdown += Time.deltaTime;
 
-            if (_revealCountdown >= revealDuration && _hiddenObjectsInRange != null)
+            if (_revealCountdown >= revealDuration)
             {
                 foreach (var hiddenObject in _hiddenObjectsInRange)
                 {
                     hiddenObject.ResetObjectVisibility();
                 }
+                _hiddenObjectsInRange.Clear();
                 
                 foreach (var togglelable in _togglelablesInRange)
                 {
                     togglelable.Hide();
                 }
+                _togglelablesInRange.Clear();
             }
         }
 
