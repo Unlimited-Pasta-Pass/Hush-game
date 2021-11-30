@@ -12,6 +12,8 @@ namespace Doors
         private bool playerIsClose = false;
 
         private Animator anim;
+        private static readonly int Open = Animator.StringToHash("Open");
+
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
                                     InputManager.Instance.interact;
 
@@ -63,7 +65,7 @@ namespace Doors
             if (!CanOpenDoor)
                 return;
 
-            anim.SetTrigger("Open");
+            anim.SetTrigger(Open);
             Invoke(nameof(LoadNext), 2f);
         }
 
