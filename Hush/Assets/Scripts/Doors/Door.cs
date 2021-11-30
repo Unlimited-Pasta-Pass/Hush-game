@@ -10,8 +10,6 @@ namespace Doors
 {
     public class Door : MonoBehaviour
     {
-        [SerializeField] private GameObject interactionOverlay;
-
         private bool playerIsClose = false;
 
         private Animator anim;
@@ -20,7 +18,6 @@ namespace Doors
                                     InputManager.Instance.interact;
 
         private static InputManager Input => InputManager.Instance;
-
 
         private void Start()
         {
@@ -48,7 +45,7 @@ namespace Doors
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
 
-            // toggle interaction script
+            // show interaction text
             if (other.gameObject.CompareTag(Tags.Player))
             {
                 transform.GetChild(0).gameObject.SetActive(true);
@@ -62,7 +59,7 @@ namespace Doors
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
 
-            // toggle interaction script
+            // hide interaction text
             if (other.gameObject.CompareTag(Tags.Player))
             {
                 transform.GetChild(0).gameObject.SetActive(false);

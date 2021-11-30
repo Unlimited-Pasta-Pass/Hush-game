@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableUI : MonoBehaviour
+namespace  UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class InteractableUI : MonoBehaviour
     {
-        
-    }
+        [Header("Parameters")]
+        [SerializeField] private Vector3 cameraOffset;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void LateUpdate()
+        {
+            // rotate to ease legibility
+            transform.rotation = Quaternion.Euler(cameraOffset);
+        }
     }
 }

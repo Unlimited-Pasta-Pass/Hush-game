@@ -14,16 +14,12 @@ namespace Relics
         [SerializeField] private int keysNeededToUnlock;
 
         private bool playerIsClose = false;
-
-        public UnityEvent attacked;
-
         private UnityEvent _killed;
-        public UnityEvent Killed => _killed ??= new UnityEvent();
-        
-        public float HitPoints => GameManager.Instance.RelicDomeHitPoints;
-        
         private static InputManager Input => InputManager.Instance;
 
+        public UnityEvent attacked;
+        public UnityEvent Killed => _killed ??= new UnityEvent();
+        public float HitPoints => GameManager.Instance.RelicDomeHitPoints;
         private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock && InputManager.Instance.interact && playerIsClose;
 
         private void OnEnable()
@@ -47,17 +43,27 @@ namespace Relics
             if (!other.gameObject.CompareTag(Tags.Player)) 
                 return;
 
+            // show interaction text
+            if (other.gameObject.CompareTag(Tags.Player))
+            {
+                transform.GetChild(0).gameObject.SetActive(true);
+            }
+            
             playerIsClose = true;
-            // TODO UI showing interact button
         }
         
         private void OnTriggerExit(Collider collider)
         {
             if (!collider.gameObject.CompareTag(Tags.Player))
                 return;
-        
+
+            // hide interaction text
+            if (collider.gameObject.CompareTag(Tags.Player))
+            {
+                transform.GetChild(0).gameObject.SetActive(false);
+            }
+            
             playerIsClose = false;
-            // TODO UI hiding interact button
         }
     
         public void TakeDamage(float damage)
