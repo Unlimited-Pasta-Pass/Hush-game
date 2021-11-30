@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Enums;
+using Common.Interfaces;
 using UnityEngine;
 
 namespace Environment.Passage
 {
-    public class SecretPassage : MonoBehaviour
+    public class SecretPassage : MonoBehaviour, ITogglelable
     {
-        [Header("Parameters")] [SerializeField]
-        private float hideDelay = 5.0f;
-
+        [Header("Parameters")] 
+        [SerializeField] private float hideDelay = 5.0f;
         [SerializeField] private float hideDelayOnLeave = 1.0f;
 
         [Header("References")] [SerializeField]
@@ -21,6 +21,9 @@ namespace Environment.Passage
         private float _lastShown;
         private float _lastInside;
         private readonly HashSet<Collider> _insideTrigger = new HashSet<Collider>();
+
+        public bool RevealOnEcholocate => false;
+        public bool Shown => _shown;
 
         public void Reset()
         {
@@ -38,11 +41,8 @@ namespace Environment.Passage
 
         void Update()
         {
-            // Hide after delay if no objects in passage
-            if (_insideTrigger.Count <= 0 && Time.time - _lastShown >= hideDelay && Time.time - _lastInside >= hideDelayOnLeave)
-            {
-                Hide();
-            }
+            // Always attempt to hide since hiding is based on a timer
+            Hide();
         }
 
         void OnTriggerEnter(Collider other)
@@ -63,7 +63,7 @@ namespace Environment.Passage
             _insideTrigger.Remove(other);
         }
 
-        public void Reveal(bool force = false)
+        public void Show(bool force = false)
         {
             if (_shown && !force)
                 return;
@@ -71,9 +71,9 @@ namespace Environment.Passage
             _shown = true;
             _lastShown = Time.time;
 
-            // Hide doors
+            // Show doors
             foreach (var door in passageDoors)
-                door.Hide();
+                door.Show();
 
             // Show passage elements
             foreach (var element in passageElements)
@@ -84,12 +84,17 @@ namespace Environment.Passage
         {
             if (!_shown && !force)
                 return;
+        
+            // Check preconditions to hide
+            // Hide after delay if no objects in passage
+            if ((_insideTrigger.Count > 0 || Time.time - _lastShown < hideDelay || Time.time - _lastInside < hideDelayOnLeave) && !force)
+                return;
 
             _shown = false;
 
-            // Show doors
+            // Hide doors
             foreach (var door in passageDoors)
-                door.Show();
+                door.Hide();
 
             // Hide passage elements
             foreach (var element in passageElements)
