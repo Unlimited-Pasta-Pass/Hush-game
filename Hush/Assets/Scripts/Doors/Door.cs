@@ -64,7 +64,7 @@ namespace Doors
                 return;
 
             anim.SetTrigger("Open");
-            Invoke("LoadNext", 2f);
+            Invoke(nameof(LoadNext), 2f);
         }
 
         private void LoadNext()
