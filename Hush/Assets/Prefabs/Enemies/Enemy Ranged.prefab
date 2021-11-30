@@ -194,7 +194,7 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 1.6
   m_Direction: 1
-  m_Center: {x: 0, y: 0.7, z: 0.07}
+  m_Center: {x: 0, y: 0.7, z: 0}
 --- !u!195 &8550123874155823685
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -263,10 +263,11 @@ MonoBehaviour:
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 1152
-  minAttackRange: 5
-  maxAttackRange: 6
+  minAttackRange: 6
+  maxAttackRange: 8
   attackRotationOffset: -40
-  attackCooldown: 2
+  attackRotationTolerance: 20
+  attackCooldown: 2.5
   backstabDamageModifier: 2
   runSpeed: 3
   searchSpeed: 2

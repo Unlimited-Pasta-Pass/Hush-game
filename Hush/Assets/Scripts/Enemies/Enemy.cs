@@ -27,6 +27,7 @@ namespace Enemies
         [SerializeField] protected float minAttackRange = 0.5f;
         [SerializeField] protected float maxAttackRange = 1.0f;
         [SerializeField] protected float attackRotationOffset = 0.0f;
+        [SerializeField] protected float attackRotationTolerance = 30.0f;
         [SerializeField] protected float attackCooldown = 2.0f;
         [SerializeField] protected float backstabDamageModifier = 2.0f;
         
@@ -50,7 +51,7 @@ namespace Enemies
     
         #region Private Variables
 
-        protected PlayerMovement player;
+        protected PlayerMovement _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
         private bool _isStunned = false;
@@ -83,7 +84,7 @@ namespace Enemies
 
         private void OnEnable()
         {
-            player = GameObject.FindWithTag(Tags.Player).GetComponent<PlayerMovement>();
+            _player = GameObject.FindWithTag(Tags.Player).GetComponent<PlayerMovement>();
         }
 
         private void Start()
@@ -157,15 +158,21 @@ namespace Enemies
             
             // Do not do state update if stunned
             if (_isStunned)
+            {
+                agent.isStopped = true;
                 return;
+            }
             
+            // Resume nav mesh agent
+            agent.isStopped = false;
+
             switch (_state)
             {
                 case EnemyState.Attacking:
                 {
                     // Run to player & attack them if in range
                     agent.speed = runSpeed;
-                    Vector3 playerPosition = player.transform.position;
+                    Vector3 playerPosition = _player.transform.position;
                     Vector3 toPlayerNormalized = (playerPosition - transform.position).normalized;
                     agent.destination = playerPosition - minAttackRange * toPlayerNormalized;
                     if (agent.remainingDistance <= maxAttackRange - minAttackRange)
@@ -173,8 +180,9 @@ namespace Enemies
                         // Rotate to face player when close
                         FacePlayer();
                         
-                        // Attack if able to
-                        if (Time.time - _lastAttack >= attackCooldown)
+                        // Attack if able to and in angle tolerance range
+                        Vector3 forward = GetForwardVector();
+                        if (Time.time - _lastAttack >= attackCooldown && Vector3.Angle(forward, toPlayerNormalized) < attackRotationTolerance)
                         {
                             _lastAttack = Time.time;
                             PerformAttack();
@@ -203,6 +211,8 @@ namespace Enemies
 
                 case EnemyState.Dead:
                 {
+                    // Despawn after death animation
+                    agent.isStopped = true;
                     var stateInfo = animator.GetCurrentAnimatorStateInfo(EnemyAnimator.Layer.Base);
                     if (stateInfo.IsName(EnemyAnimator.State.Dead) && stateInfo.normalizedTime >= 0.99f)
                     {
@@ -220,7 +230,7 @@ namespace Enemies
             var position = transform.position;
             position.y = agent.height / 2.0f;
         
-            var playerPosition = player.transform.position;
+            var playerPosition = _player.transform.position;
             playerPosition.y = position.y;
         
             Vector3 towardsPlayer = playerPosition - position;
@@ -233,14 +243,14 @@ namespace Enemies
     
         private void FacePlayer()
         {
-            Vector3 lookPos = player.transform.position - transform.position;
+            Vector3 lookPos = _player.transform.position - transform.position;
             lookPos.y = 0;
             
             if (lookPos == Vector3.zero)
                 return;
         
             Quaternion targetRotation = Quaternion.Euler(Quaternion.LookRotation(lookPos).eulerAngles + new Vector3(0, attackRotationOffset, 0));
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 4.0f * Time.deltaTime);  
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 6.0f * Time.deltaTime);  
         }
 
         private void ResumePatrolFromClosestNode()
@@ -262,6 +272,16 @@ namespace Enemies
 
         #endregion
     
+        #region Protected Methods
+
+        protected Vector3 GetForwardVector()
+        {
+            Vector3 forwardDir = Quaternion.AngleAxis(-attackRotationOffset, Vector3.up) * Vector3.forward;
+            return transform.TransformDirection(forwardDir);
+        }
+
+        #endregion
+        
         #region Public Methods
         
         public void InitializeEnemy()
@@ -324,7 +344,7 @@ namespace Enemies
                 return;
 
             // Compute distance and direction to player
-            var playerPosition = player.transform.position;
+            var playerPosition = _player.transform.position;
             var playerDir = transform.InverseTransformPoint(playerPosition).normalized;
             var playerDist = Vector3.Distance(transform.position, playerPosition);
 
@@ -338,7 +358,7 @@ namespace Enemies
             }
             
             // Test player is making sound within sound perception radius
-            var playerMadeSound = playerDist < soundPerceptionRadius && player.IsRunning;
+            var playerMadeSound = playerDist < soundPerceptionRadius && _player.IsRunning;
             if (playerMadeSound)
             {
                 if (HasPlayerLineOfSight())

@@ -59,7 +59,7 @@ MonoBehaviour:
   ManualParticleSystems:
   - {fileID: 7404962802347036071}
   ShootPosition: {fileID: 7404962802362222977}
-  Damage: 0
+  Damage: 10
   ProjectileColliderObject: {fileID: 7404962802362534829}
   ProjectileCollisionSound: {fileID: 7404962802360657713}
   ProjectileExplosionParticleSystem: {fileID: 7404962802347036071}

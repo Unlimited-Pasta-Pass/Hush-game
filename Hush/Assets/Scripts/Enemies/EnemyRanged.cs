@@ -21,7 +21,7 @@ namespace Enemies
             yield return new WaitForSeconds(shootDelay);
             Vector3 offsetPosition = Quaternion.AngleAxis(-attackRotationOffset, Vector3.up) * shootPosition.localPosition;
             Vector3 spellPosition = transform.TransformPoint(offsetPosition);
-            Vector3 playerDir = player.transform.position - spellPosition;
+            Vector3 playerDir = _player.transform.position - spellPosition;
             playerDir.y = 0;
             Instantiate(projectilePrefab, spellPosition, Quaternion.LookRotation(playerDir));
         }

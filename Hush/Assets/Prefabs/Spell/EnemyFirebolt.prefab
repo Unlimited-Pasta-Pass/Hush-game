@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5549057135663355997, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: ProjectileColliderSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802347069729, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7404962802359466037, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
       propertyPath: m_IsKinematic
       value: 0
@@ -61,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
       propertyPath: m_Name
-      value: Enemy Firebolt
+      value: EnemyFirebolt
       objectReference: {fileID: 0}
     - target: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
       propertyPath: m_Layer
