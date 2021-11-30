@@ -18,6 +18,7 @@ namespace Relics
         [SerializeField] private AudioSource shatterSound;
         [SerializeField] private AudioSource hitSound;
 
+        private bool shatterTriggered = false;
         private bool playerIsClose = false;
 
         public UnityEvent attacked;
@@ -81,6 +82,10 @@ namespace Relics
 
         public void Die()
         {
+            if (shatterTriggered)
+                return;
+
+            shatterTriggered = true;
             shatterSound.Play();
             SetDomeVisibility(false);
             

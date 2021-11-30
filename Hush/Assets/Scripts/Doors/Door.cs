@@ -18,7 +18,7 @@ namespace Doors
         private Animator anim;
 
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
-                                    InputManager.Instance.interact;
+                                    InputManager.Instance.interact && playerIsClose;
 
         private static InputManager Input => InputManager.Instance;
 
