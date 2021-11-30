@@ -15,11 +15,18 @@ namespace Game.Models
     [Serializable]
     public class GameState
     {
+        // Save
+        public float saveTime;
+
         // Player
         public float playerCurrentHitPoints;
         public float playerMaxHitPoints;
         public SerializableTransform playerTransform;
         public bool isPlayerInvisible;
+        
+        // Echolocation
+        public float echolocationActivationTime;
+        public float echolocationCooldownTime;
         
         // Spell
         public SpellType activeHeavySpell;
@@ -47,12 +54,19 @@ namespace Game.Models
 
         public GameState()
         {
+            // Save
+            saveTime = float.MinValue;
+
             // Player
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
             isPlayerInvisible = false;
             
+            // Echolocation
+            echolocationActivationTime = float.MinValue;
+            echolocationCooldownTime = 7f;
+
             // Spell
             activeHeavySpell = SpellType.None;
             heavySpellActivationTime = float.MinValue;

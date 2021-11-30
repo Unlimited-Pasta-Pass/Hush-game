@@ -26,6 +26,8 @@ namespace Game
 
         public void OnSave()
         {
+            GameManager.Instance.SetSaveTime(Time.time);
+            
             var stream = new FileStream(_path, FileMode.Create);
             _formatter.Serialize(stream, GameManager.Instance.CurrentGameState);
             stream.Close();
