@@ -10,6 +10,7 @@ namespace Doors
     public class Door : MonoBehaviour
     {
         [SerializeField] private GameObject wall;
+        [SerializeField] private AudioSource openSound;
         
         private bool playerIsClose = false;
 
@@ -57,6 +58,8 @@ namespace Doors
             if (!CanOpenDoor)
                 return;
 
+            openSound.PlayOneShot(openSound.clip);
+            
             // TODO Door opening animation
             wall.SetActive(false);
             
