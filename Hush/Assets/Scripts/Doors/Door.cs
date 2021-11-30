@@ -1,5 +1,6 @@
 using System;
 using Common.Enums;
+using Doors.enums;
 using Game;
 using Player;
 using UnityEngine;
@@ -9,15 +10,19 @@ namespace Doors
 {
     public class Door : MonoBehaviour
     {
-        [SerializeField] private GameObject wall;
-        
+        [SerializeField] private GameObject interactOverlay;
         private bool playerIsClose = false;
-
+        private Animator anim;
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
                                     InputManager.Instance.interact;
 
         private static InputManager Input => InputManager.Instance;
-        
+
+        private void Start()
+        {
+            anim = GetComponent<Animator>();
+        }
+
         private void OnEnable()
         {
             if (Input != null && Input.reference != null)
@@ -39,28 +44,34 @@ namespace Doors
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
 
+            // show interaction text
+            interactOverlay.SetActive(true);
+
             playerIsClose = true;
-            // TODO UI showing interact button
         }
-        
+
         private void OnTriggerExit(Collider other)
         {
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
 
+            // hide interaction text
+            interactOverlay.SetActive(false);
+
             playerIsClose = false;
-            // TODO UI hiding interact button
         }
-        
+
         private void OpenDoor(InputAction.CallbackContext context)
         {
             if (!CanOpenDoor)
                 return;
 
-            // TODO Door opening animation
-            wall.SetActive(false);
-            
-            // respawn back into scene
+            anim.SetTrigger(DoorAnimator.Open);
+            Invoke(nameof(LoadNext), 2f);
+        }
+
+        private void LoadNext()
+        {
             SceneManager.Instance.LoadNextScene();
         }
     }

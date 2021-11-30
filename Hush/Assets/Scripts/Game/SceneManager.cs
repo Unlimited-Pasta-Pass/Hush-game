@@ -16,7 +16,11 @@ namespace Game
 
         public void LoadNextScene()
         {
-            ReinitializeSceneState();
+            // ignore scene state reinitialization if main menu 
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu")
+            {
+                ReinitializeSceneState();
+            }
             
             // real code for incrementing which level we're at
             // var updatedLevel = PlayerPrefs.GetInt("CurrentLevel") + 1;
@@ -26,12 +30,17 @@ namespace Game
             LoadDevScene();
         }
 
-        public void LoadDevScene()
+        public void LoadPreviousScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(PlayerPrefs.GetInt("CurrentLevel"));
+        }
+
+        public void LoadMainMenu()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         }
 
-        public void LoadDemoScene()
+        public void LoadDevScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
