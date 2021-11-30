@@ -12,6 +12,9 @@ namespace Relics
     public class RelicDome : MonoBehaviour, IKillable
     {
         [SerializeField] private int keysNeededToUnlock;
+        [SerializeField] private ParticleSystem explosion;
+        [SerializeField] private GameObject healthBar;
+        
         [SerializeField] private AudioSource shatterSound;
         [SerializeField] private AudioSource hitSound;
 
@@ -78,10 +81,10 @@ namespace Relics
 
         public void Die()
         {
-            // TODO breaking animation
-            
             shatterSound.Play();
             SetDomeVisibility(false);
+            
+            explosion.Play();
             
             GameManager.Instance.DisableDome();
             Killed.Invoke();
@@ -89,7 +92,9 @@ namespace Relics
 
         public void SetDomeVisibility(bool visibility)
         {
-            gameObject.SetActive(visibility);
+            GetComponent<MeshRenderer>().enabled = visibility;
+            GetComponent<Collider>().enabled = visibility;
+            healthBar.SetActive(visibility);
         }
 
         private void UnlockDome(InputAction.CallbackContext context)

@@ -2534,7 +2534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 652322082810480882}
   - component: {fileID: 2616762372153112438}
-  - component: {fileID: 3727170882609009407}
+  - component: {fileID: 2844261173677002578}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -2570,7 +2570,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6373345658992613965}
   m_CullTransparentMesh: 1
---- !u!114 &3727170882609009407
+--- !u!114 &2844261173677002578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

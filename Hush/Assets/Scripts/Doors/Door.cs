@@ -1,5 +1,6 @@
 using System;
 using Common.Enums;
+using Doors.enums;
 using Game;
 using Player;
 using UnityEngine;
@@ -14,11 +15,19 @@ namespace Doors
         
         private bool playerIsClose = false;
 
+        private Animator anim;
+
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
                                     InputManager.Instance.interact;
 
         private static InputManager Input => InputManager.Instance;
-        
+
+
+        private void Start()
+        {
+            anim = GetComponent<Animator>();
+        }
+
         private void OnEnable()
         {
             if (Input != null && Input.reference != null)
@@ -43,7 +52,7 @@ namespace Doors
             playerIsClose = true;
             // TODO UI showing interact button
         }
-        
+
         private void OnTriggerExit(Collider other)
         {
             if (!other.gameObject.CompareTag(Tags.Player))
@@ -52,18 +61,19 @@ namespace Doors
             playerIsClose = false;
             // TODO UI hiding interact button
         }
-        
+
         private void OpenDoor(InputAction.CallbackContext context)
         {
             if (!CanOpenDoor)
                 return;
 
             openSound.PlayOneShot(openSound.clip);
-            
-            // TODO Door opening animation
-            wall.SetActive(false);
-            
-            // respawn back into scene
+            anim.SetTrigger(DoorAnimator.Open);
+            Invoke(nameof(LoadNext), 2f);
+        }
+
+        private void LoadNext()
+        {
             SceneManager.Instance.LoadNextScene();
         }
     }
