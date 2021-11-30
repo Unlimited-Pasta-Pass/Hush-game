@@ -11,7 +11,6 @@ namespace Doors
     public class Door : MonoBehaviour
     {
         [SerializeField] private GameObject interactOverlay;
-        [SerializeField] private GameObject wall;
         [SerializeField] private AudioSource openSound;
         
         private bool playerIsClose = false;
@@ -72,6 +71,7 @@ namespace Doors
             openSound.PlayOneShot(openSound.clip);
             anim.SetTrigger(DoorAnimator.Open);
             Invoke(nameof(LoadNext), 2f);
+            interactOverlay.SetActive(false);
         }
 
         private void LoadNext()
