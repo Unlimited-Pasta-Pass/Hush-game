@@ -418,6 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d6b9592bf79d44b965e7d2295bcc90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hider: {fileID: 16606687100967124}
   visionAngle: 70
   detectionRadius: 3
   soundPerceptionRadius: 6
@@ -432,6 +433,7 @@ MonoBehaviour:
   runSpeed: 3.5
   searchSpeed: 2.5
   patrolSpeed: 1
+  isInvisible: 0
   patrolRoute: []
   agent: {fileID: 234692157854127520}
   animator: {fileID: 8391566035528528493}

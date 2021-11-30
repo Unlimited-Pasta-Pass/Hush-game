@@ -23,7 +23,8 @@ namespace Player
         
         private static InputManager Input => InputManager.Instance;
         
-        private List<LOSObjectHider> _hiddenObjectsInRange;
+        private readonly List<LOSObjectHider> _hiddenObjectsInRange = new List<LOSObjectHider>();
+        private readonly List<ObjectToggle> _togglelablesInRange = new List<ObjectToggle>();
 
         private float _revealCountdown;
 
@@ -45,12 +46,19 @@ namespace Player
         {
             _revealCountdown += Time.deltaTime;
 
-            if (_revealCountdown >= revealDuration && _hiddenObjectsInRange != null)
+            if (_revealCountdown >= revealDuration)
             {
                 foreach (var hiddenObject in _hiddenObjectsInRange)
                 {
                     hiddenObject.ResetObjectVisibility();
                 }
+                _hiddenObjectsInRange.Clear();
+                
+                foreach (var togglelable in _togglelablesInRange)
+                {
+                    togglelable.Hide();
+                }
+                _togglelablesInRange.Clear();
             }
         }
 
@@ -62,18 +70,18 @@ namespace Player
             effect.Play();
             echolocationSound.Play();
             
-            _hiddenObjectsInRange = new List<LOSObjectHider>();
+            _hiddenObjectsInRange.Clear();
             _hiddenObjectsInRange.AddRange(FindObjectsOfType<LOSObjectHider>().Where(o => Vector3.Distance(transform.position, o.transform.position) <= revealDistance));
-
             foreach (var hiddenObject in _hiddenObjectsInRange)
             {
                 hiddenObject.RevealObject();
             }
-
-            var passageDoorList = FindObjectsOfType<SecretPassageDoor>().Where(o => Vector3.Distance(transform.position, o.transform.position) <= revealDistance);
-            foreach (var door in passageDoorList)
+            
+            _togglelablesInRange.Clear();
+            _togglelablesInRange.AddRange(FindObjectsOfType<ObjectToggle>().Where(o => o.RevealOnEcholocate && Vector3.Distance(transform.position, o.transform.position) <= revealDistance));
+            foreach (var togglelable in _togglelablesInRange)
             {
-                door.RevealPassage();
+                togglelable.Show();
             }
             
             GameManager.Instance.EcholocationActivationTime = Time.time;

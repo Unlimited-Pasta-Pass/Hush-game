@@ -2,7 +2,9 @@
 
 namespace Environment.Passage
 {
-    public class SecretPassageElement : ObjectToggle
+    public class SecretPassageElement : ObjectToggleStatic
     {
+        public override bool RevealOnEcholocate => false;
     }
 }
+ 
