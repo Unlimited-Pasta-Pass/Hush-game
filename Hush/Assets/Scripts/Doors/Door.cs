@@ -10,10 +10,9 @@ namespace Doors
 {
     public class Door : MonoBehaviour
     {
+        [SerializeField] private GameObject interactOverlay;
         private bool playerIsClose = false;
-
         private Animator anim;
-
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
                                     InputManager.Instance.interact;
 
@@ -46,10 +45,7 @@ namespace Doors
                 return;
 
             // show interaction text
-            if (other.gameObject.CompareTag(Tags.Player))
-            {
-                transform.GetChild(0).gameObject.SetActive(true);
-            }
+            interactOverlay.SetActive(true);
 
             playerIsClose = true;
         }
@@ -60,10 +56,7 @@ namespace Doors
                 return;
 
             // hide interaction text
-            if (other.gameObject.CompareTag(Tags.Player))
-            {
-                transform.GetChild(0).gameObject.SetActive(false);
-            }
+            interactOverlay.SetActive(false);
 
             playerIsClose = false;
         }

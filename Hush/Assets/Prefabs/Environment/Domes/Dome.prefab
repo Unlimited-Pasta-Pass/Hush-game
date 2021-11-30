@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36da024524674424ea1164727dbc3e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactOverlay: {fileID: 9191415903306477465}
   keysNeededToUnlock: 1
   attacked:
     m_PersistentCalls:
@@ -468,6 +469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3fca15112c28804cbb7f58df81420f7, type: 3}
+--- !u!1 &9191415903306477465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2000088376432427109, guid: c3fca15112c28804cbb7f58df81420f7, type: 3}
+  m_PrefabInstance: {fileID: 7228213462077403132}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &9191415903306477469 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2000088376432427105, guid: c3fca15112c28804cbb7f58df81420f7, type: 3}

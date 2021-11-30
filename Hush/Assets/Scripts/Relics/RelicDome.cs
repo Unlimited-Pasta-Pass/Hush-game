@@ -11,6 +11,7 @@ namespace Relics
 {
     public class RelicDome : MonoBehaviour, IKillable
     {
+        [SerializeField] private GameObject interactOverlay;
         [SerializeField] private int keysNeededToUnlock;
 
         private bool playerIsClose = false;
@@ -44,11 +45,8 @@ namespace Relics
                 return;
 
             // show interaction text
-            if (other.gameObject.CompareTag(Tags.Player))
-            {
-                transform.GetChild(0).gameObject.SetActive(true);
-            }
-            
+            interactOverlay.SetActive(true);
+
             playerIsClose = true;
         }
         
@@ -58,11 +56,8 @@ namespace Relics
                 return;
 
             // hide interaction text
-            if (collider.gameObject.CompareTag(Tags.Player))
-            {
-                transform.GetChild(0).gameObject.SetActive(false);
-            }
-            
+            interactOverlay.SetActive(false);
+
             playerIsClose = false;
         }
     
