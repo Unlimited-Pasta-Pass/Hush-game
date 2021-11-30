@@ -42,7 +42,6 @@ public class Menus : MonoBehaviour
     
     public void MainMenu() {
         Game.SceneManager.Instance.LoadMainMenu();
-        Debug.Log("BACK TO MAIN MENU");
     }
 
     public void Quit()

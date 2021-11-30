@@ -44,11 +44,6 @@ namespace Game
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
-
-        public void LoadDemoScene()
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
-        }
     
         public void QuitGame()
         {
