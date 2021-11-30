@@ -16173,6 +16173,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2302601229720179905, guid: 1c6cc96100eca404aae558265545be05, type: 3}
+      propertyPath: passage
+      value: 
+      objectReference: {fileID: 1532236811828165419}
     - target: {fileID: 4497398211073119611, guid: 1c6cc96100eca404aae558265545be05, type: 3}
       propertyPath: m_Name
       value: Secret
@@ -16184,6 +16188,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 414170787499500462, guid: 1c6cc96100eca404aae558265545be05, type: 3}
   m_PrefabInstance: {fileID: 2201798557217731815}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1532236811828165419 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 850552905267498956, guid: 1c6cc96100eca404aae558265545be05, type: 3}
+  m_PrefabInstance: {fileID: 2201798557217731815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f2548f84afc42f9bc971ec2760c3736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2208560696318586286
 PrefabInstance:
   m_ObjectHideFlags: 0
