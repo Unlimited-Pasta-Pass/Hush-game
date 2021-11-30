@@ -67,5 +67,12 @@ namespace Game
         {
             return _state.activeLightSpell;
         }
+
+        public void ApplySpellState()
+        {
+            float delta = Time.time - _state.saveTime;
+            _state.heavySpellActivationTime += delta;
+            _state.lightSpellActivationTime += delta;
+        }
     }
 }
