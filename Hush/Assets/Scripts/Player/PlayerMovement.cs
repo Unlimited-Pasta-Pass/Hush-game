@@ -33,6 +33,11 @@ namespace Player
         
         private static InputManager Input => InputManager.Instance;
         
+        public bool IsRunning => _playerSpeed > WalkSpeed + 0.25f * (SprintSpeed - WalkSpeed);
+
+        public float WalkSpeed => walkSpeed + GameManager.Instance.GetPlayerSpeedBoost();
+        public float SprintSpeed => sprintSpeed + GameManager.Instance.GetPlayerSpeedBoost();
+        
         private bool _isAttacking;
         private float _attackDelta;
         private float _playerSpeed;
@@ -134,10 +139,8 @@ namespace Player
             if (_isAttacking)
                 return 0f;
             
-            return Input.walk ? walkSpeed : sprintSpeed;
+            return Input.walk ? WalkSpeed : SprintSpeed;
         }
-        
-        public bool IsRunning => _playerSpeed > walkSpeed + 0.25f * (sprintSpeed - walkSpeed);
 
         public void SetSpeedModifier(float amount, bool isEnabled)
         {
