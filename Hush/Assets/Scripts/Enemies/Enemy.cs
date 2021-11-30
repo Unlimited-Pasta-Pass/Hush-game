@@ -28,7 +28,7 @@ namespace Enemies
         [SerializeField] private float maxAttackRange = 1.0f;
         [SerializeField] private float attackRotationOffset = 0.0f;
         [SerializeField] private float backstabDamageModifier = 2.0f;
-        
+
         [Header("Speed")]
         [SerializeField] private float runSpeed = 3.0f;
         [SerializeField] private float searchSpeed = 2.5f;
@@ -36,6 +36,8 @@ namespace Enemies
         
         [Header("Type")]
         [SerializeField] private bool invisible = false;
+        [Tooltip("The amount of time in seconds that the enemy gets revealed for when it takes damage. This only applies if `invisible` is set to true.")]
+        [SerializeField] private float onHitRevealDuration = 1.0f;
 
         [Header("Patrol")]
         [SerializeField] private Transform[] patrolRoute;
@@ -382,7 +384,7 @@ namespace Enemies
         private IEnumerator Reveal()
         {
             Show();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(onHitRevealDuration);
             Hide();
         }
 
