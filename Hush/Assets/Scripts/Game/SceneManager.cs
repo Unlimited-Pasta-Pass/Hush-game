@@ -16,6 +16,7 @@ namespace Game
 
         public void LoadNextScene()
         {
+            // ignore scene state reinitialization if main menu 
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu")
             {
                 ReinitializeSceneState();
