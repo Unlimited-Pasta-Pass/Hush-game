@@ -12,6 +12,8 @@ namespace Relics
     public class RelicDome : MonoBehaviour, IKillable
     {
         [SerializeField] private int keysNeededToUnlock;
+        [SerializeField] private AudioSource shatterSound;
+        [SerializeField] private AudioSource hitSound;
 
         private bool playerIsClose = false;
 
@@ -68,6 +70,8 @@ namespace Relics
                 attacked.Invoke();
             }
             
+            hitSound.Play();
+            
             if (!GameManager.Instance.AttackDome(damage))
                 Die();
         }
@@ -76,6 +80,7 @@ namespace Relics
         {
             // TODO breaking animation
             
+            shatterSound.Play();
             SetDomeVisibility(false);
             
             GameManager.Instance.DisableDome();
