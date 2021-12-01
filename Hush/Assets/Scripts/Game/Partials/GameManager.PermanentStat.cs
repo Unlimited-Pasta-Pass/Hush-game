@@ -6,20 +6,20 @@ namespace Game
     {
         public float PermanentDamage
         {
-            get => _state.damagePermanent;
-            set => _state.damagePermanent = value;
+            get => _state.baseDamagePermanent;
+            set => _state.baseDamagePermanent = value;
         }
         
         public float PermanentSpeed
         {
-            get => _state.speedPermanent;
-            set => _state.speedPermanent = value;
+            get => _state.BaseSpeedPermanent;
+            set => _state.BaseSpeedPermanent = value;
         }
         
         public float PermanentVitality
         {
-            get => _state.vitalityPermanent;
-            set => _state.vitalityPermanent = value;
+            get => _state.BaseVitalityPermanent;
+            set => _state.BaseVitalityPermanent = value;
         }
         
     }
