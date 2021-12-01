@@ -25,6 +25,7 @@ public class StunSpell : MonoBehaviour, ISpell
         [Header("Spell References")]
         [SerializeField] protected GameObject heavySpellPrefab; 
         [SerializeField] protected GameObject lightSpellPrefab;
+        [SerializeField] private AudioSource stunAudio;
 
         [Header("Other References")]
         [SerializeField] private Animator animator;
@@ -104,6 +105,7 @@ public class StunSpell : MonoBehaviour, ISpell
             
             spellClone.GetComponent<StunCollision>().StunEffect(pos, stunLength);
             spellClone.GetComponent<ParticleSystem>().Play();
+            stunAudio.Play();
            
             Destroy(spellClone, stunEffectDuration);
         }

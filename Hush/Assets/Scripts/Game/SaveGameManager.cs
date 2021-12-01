@@ -8,6 +8,10 @@ namespace Game
     public class SaveGameManager : MonoBehaviour
     {
         public static SaveGameManager Instance;
+
+        public bool HasSavedGame => File.Exists(_path);
+        
+        public int SavedGameScene => OnLoad(false).currentlyLoadedScene;
         
         private string _path = "/pasta.save";
         
@@ -33,16 +37,19 @@ namespace Game
             stream.Close();
         }
         
-        public void OnLoad()
+        public GameState OnLoad(bool applySavedGames = true)
         {
-            if (!File.Exists(_path))
-                return;
+            if (!HasSavedGame)
+                return null;
             
             var stream = new FileStream(_path, FileMode.Open);
             var model = _formatter.Deserialize(stream) as GameState;
             stream.Close();
             
-            GameManager.Instance.SetGameState(model);
+            if (applySavedGames)
+                GameManager.Instance.SetGameState(model);
+
+            return model;
         }
     }
 }

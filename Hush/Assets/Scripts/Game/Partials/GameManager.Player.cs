@@ -35,15 +35,40 @@ namespace Game
         }
 
         public SerializableTransform PlayerTransform => _state.playerTransform;
-        
-        public void SetPlayerMaxHitPoints(float hp)
+
+        public void SetPlayerMaxHitPoints(float hp, float vitalityBoost)
         {
-            _state.playerMaxHitPoints = hp;
+            _state.playerMaxHitPoints = hp + vitalityBoost;
         }
 
-        public void SetPlayerHitPoints(float hp)
+        public void SetPlayerHitPoints(float hp, float vitalityBoost)
         {
-            _state.playerCurrentHitPoints = hp;
+            _state.playerCurrentHitPoints = hp + vitalityBoost;
+        }
+
+        public void AddToPlayerSpeedBoost(float speedBoost)
+        {
+            _state.speedBoost += speedBoost;
+        }
+
+        public void AddToPlayerDamageBoost(float damageBoost)
+        {
+            _state.damageBoost += damageBoost;
+        }
+
+        public float GetPlayerSpeedBoost()
+        {
+            return _state.speedBoost;
+        }
+        
+        public float GetPlayerVitalityBoost()
+        {
+            return _state.vitalityBoost;
+        }
+        
+        public float GetPlayerDamageBoost()
+        {
+            return _state.damageBoost;
         }
 
         public bool UpdatePlayerHitPoints(float hpDelta)

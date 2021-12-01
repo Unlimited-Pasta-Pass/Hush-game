@@ -278,6 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7922327649963067216}
   - component: {fileID: 2662309735114594445}
+  - component: {fileID: 1626416989}
   m_Layer: 5
   m_Name: Skillbar
   m_TagString: Untagged
@@ -323,6 +324,23 @@ MonoBehaviour:
   heavyOverlay: {fileID: 5308394578235922544}
   lightOverlay: {fileID: 1955602828453004236}
   echoOverlay: {fileID: 3709295536952262371}
+--- !u!114 &1626416989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497075069979445376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936519842d2a748438bc5df2d8d1f62b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heavyIcon: {fileID: 8309447514871291728}
+  lightIcon: {fileID: 1555622029722842319}
+  stunSprite: {fileID: 21300000, guid: 1de4613725ab1454ba82117c24cebc6c, type: 3}
+  fireSprite: {fileID: 21300000, guid: 98fb065fb3d8d104db2667cab6386005, type: 3}
+  invisibleSprite: {fileID: 21300000, guid: 348794bfd8705514eb15ccdb70f707a6, type: 3}
 --- !u!1 &1380436396732668334
 GameObject:
   m_ObjectHideFlags: 0

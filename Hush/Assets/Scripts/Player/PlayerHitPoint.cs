@@ -12,6 +12,10 @@ namespace Player
 
         [Header("Component References")] 
         [SerializeField] private Animator animator;
+        [SerializeField] private AudioSource deathSound;
+        [SerializeField] private AudioSource damageSound;
+
+        private bool deathSoundPlayed = false; // Used to prevent additional death sounds if the player is hit after death
 
         #endregion
 
@@ -27,6 +31,7 @@ namespace Player
         public void TakeDamage(float damage)
         {
             // TODO: Add animation
+            damageSound.Play();
             
             // If the player's hp is at 0 or lower, they die
             if (!GameManager.Instance.UpdatePlayerHitPoints(-damage))
@@ -35,6 +40,12 @@ namespace Player
 
         public void Die()
         {
+            if (!deathSoundPlayed)
+            {
+                deathSoundPlayed = true;
+                deathSound.Play();
+            }
+            
             animator.SetBool(PlayerAnimator.Dead, true);
             Killed.Invoke();
         }
