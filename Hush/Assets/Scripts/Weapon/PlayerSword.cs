@@ -38,8 +38,8 @@ namespace Weapon
 
         public WeaponType WeaponType => WeaponType.Sword;
     
-        public float BaseDamage => baseDamage;
-        public float HeavyDamage => heavyDamage;
+        public float BaseDamage => baseDamage + GameManager.Instance.GetPlayerDamageBoost();
+        public float HeavyDamage => heavyDamage + GameManager.Instance.GetPlayerDamageBoost();
 
         private PlayerMovement _player;
 
