@@ -243,7 +243,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2289938410097380234}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PowerUpSelectionManager, Assembly-CSharp
+        m_MethodName: SetCurrentlySelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &352843720252914924
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +484,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6356132154299311197}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PowerUpSelectionManager, Assembly-CSharp
+        m_MethodName: SetCurrentlySelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1133066502069261403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2328,7 +2352,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6529796501244784052}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PowerUpSelectionManager, Assembly-CSharp
+        m_MethodName: SetCurrentlySelected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7933216092637718212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2449,7 +2485,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 893657940060090717}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: PowerUpSelectionManager, Assembly-CSharp
+        m_MethodName: OnSubmit
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8225351293874883372
 GameObject:
   m_ObjectHideFlags: 0

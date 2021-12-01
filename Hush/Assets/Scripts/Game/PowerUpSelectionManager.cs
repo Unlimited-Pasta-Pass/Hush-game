@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class PowerUpSelectionManager : MonoBehaviour
 {
-    public enum Choice
-    {
-        Strength = 0,
-        Speed = 1,
-        Vitality = 2,
-    }
+    // public enum Choice
+    // {
+    //     Strength = 0,
+    //     Speed = 1,
+    //     Vitality = 2,
+    // }
     
     public static PowerUpSelectionManager Instance;
-    private Choice currentlySelected = 0;
+    private int currentlySelected = 0;
 
     private void Awake()
     {
@@ -27,13 +27,13 @@ public class PowerUpSelectionManager : MonoBehaviour
     {
         switch(currentlySelected)
         {
-            case Choice.Strength:
+            case 1:
                 SetupDamageBoost(boost);
                 break;
-            case Choice.Speed:
+            case 2:
                 SetupSpeedBoost(boost);
                 break;
-            case Choice.Vitality:
+            case 3:
                 SetupVitalityBoost(boost);
                 break;
             default: // select nothing
@@ -41,7 +41,7 @@ public class PowerUpSelectionManager : MonoBehaviour
         }
     }
 
-    public void SetCurrentlySelected(Choice selected)
+    public void SetCurrentlySelected(int selected)
     {
         currentlySelected = selected;
     }
