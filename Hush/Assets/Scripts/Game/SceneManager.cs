@@ -27,6 +27,8 @@ namespace Game
         
             // For dev scene
             LoadDevScene();
+            
+            GameManager.Instance.SetLoadedScene(1);
         }
 
         public void LoadScene(int sceneIndex)
@@ -39,6 +41,8 @@ namespace Game
             
             // For dev scene
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
+            
+            GameManager.Instance.SetLoadedScene(sceneIndex);
         }
 
         public void ReloadScene()
