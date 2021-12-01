@@ -278,6 +278,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7922327649963067216}
   - component: {fileID: 2662309735114594445}
+  - component: {fileID: 1626416989}
   m_Layer: 5
   m_Name: Skillbar
   m_TagString: Untagged
