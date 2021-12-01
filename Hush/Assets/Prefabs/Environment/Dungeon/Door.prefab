@@ -55,5 +55,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 437931977057568733, guid: 09c4e709ac1af8f4f9ad37bfcbab9c97, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7356864394049701299, guid: 09c4e709ac1af8f4f9ad37bfcbab9c97, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09c4e709ac1af8f4f9ad37bfcbab9c97, type: 3}
