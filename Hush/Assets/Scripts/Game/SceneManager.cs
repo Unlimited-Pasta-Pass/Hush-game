@@ -101,6 +101,11 @@ namespace Game
             TransitionToScene(endgameSceneIndex);
         }
         
+        public void LoadGameOverScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        }
+    
         public void QuitGame()
         {
             #if UNITY_EDITOR
