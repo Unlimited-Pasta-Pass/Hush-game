@@ -1,18 +1,18 @@
 using System;
+using System.Collections;
 using Common.Enums;
 using Enemies.Enums;
+using Environment.Passage;
 using Game;
-using Game.Models;
 using Player;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-using Weapon.Enums;
 
 namespace Enemies
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class Enemy : MonoBehaviour, IEnemy
+    public class Enemy : ObjectToggleLOS, IEnemy
     {
 
         #region Parameters
@@ -22,17 +22,25 @@ namespace Enemies
         [SerializeField] private float detectionRadius = 3.0f;
         [SerializeField] private float soundPerceptionRadius = 4.0f;
         [SerializeField] private LayerMask targetLayerMask;
+        [SerializeField] private AudioSource enemyHit;
+        [SerializeField] private AudioSource deathSound;
 
         [Header("Attack")]
         [SerializeField] private float minAttackRange = 0.5f;
         [SerializeField] private float maxAttackRange = 1.0f;
         [SerializeField] private float attackRotationOffset = 0.0f;
-        
+        [SerializeField] private float backstabDamageModifier = 2.0f;
+
         [Header("Speed")]
         [SerializeField] private float runSpeed = 3.0f;
         [SerializeField] private float searchSpeed = 2.5f;
         [SerializeField] private float patrolSpeed = 1.0f;
-    
+        
+        [Header("Type")]
+        [SerializeField] private bool invisible = false;
+        [Tooltip("The amount of time in seconds that the enemy gets revealed for when it takes damage. This only applies if `invisible` is set to true.")]
+        [SerializeField] private float onHitRevealDuration = 1.0f;
+
         [Header("Patrol")]
         [SerializeField] private Transform[] patrolRoute;
     
@@ -40,7 +48,7 @@ namespace Enemies
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Animator animator;
         [SerializeField] private SphereCollider visionCollider;
-
+        
         #endregion
     
         #region Private Variables
@@ -48,8 +56,7 @@ namespace Enemies
         private PlayerMovement _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
-        private bool isStunned = false;
-        private const float BackstabDamageModifier = 2.0f;
+        private bool _isStunned = false;
 
         private bool isPlayerInvisible => GameManager.Instance.GetIsPlayerInvisible();
 
@@ -70,6 +77,8 @@ namespace Enemies
 
         public float HitPoints => GameManager.Instance.GetEnemyHitPoints(ID);
 
+        public override bool RevealOnEcholocate => invisible;
+
         #endregion
 
         #region Events
@@ -82,6 +91,8 @@ namespace Enemies
         private void Start()
         {
             InitializeEnemy();
+            if (invisible)
+                Hide(true);
         }
 
         private void Update()
@@ -96,8 +107,10 @@ namespace Enemies
             MoveEnemy();
         }
 
-        private void Reset()
+        public override void Reset()
         {
+            base.Reset();
+            
             agent = GetComponent<NavMeshAgent>();
             if (!agent)
                 agent = GetComponentInChildren<NavMeshAgent>();
@@ -138,7 +151,14 @@ namespace Enemies
 
         private void MoveEnemy()
         {
-            if (isStunned)
+            // Notify game manager
+            GameManager.Instance.MoveEnemy(ID, transform);
+            
+            // Update animator
+            animator.SetFloat(EnemyAnimator.Speed, agent.velocity.magnitude);
+            
+            // Do not do state update if stunned
+            if (_isStunned)
                 return;
             
             switch (_state)
@@ -191,10 +211,7 @@ namespace Enemies
                 }
             }
 
-            GameManager.Instance.MoveEnemy(ID, transform);
             
-            // Update animator
-            animator.SetFloat(EnemyAnimator.Speed, agent.velocity.magnitude);
         }
 
         private bool HasPlayerLineOfSight()
@@ -269,17 +286,26 @@ namespace Enemies
                 col.enabled = false;
             }
             
+            deathSound.Play();
             animator.SetBool(EnemyAnimator.Dead, true);
             SetState(EnemyState.Dead);
-        
+
             Killed.Invoke();
         }
 
         public void TakeDamage(float damage)
         {
-            // TODO: Add animation
+            // Reveal if invisible
+            if (invisible)
+            {
+                StartCoroutine(Reveal());
+            }
+
+            // Stun
+            Stun(0.5f);
+            
             // Take damage
-            if (!GameManager.Instance.AttackEnemy(ID, _state == EnemyState.Patrolling ? BackstabDamageModifier * damage : damage))
+            if (!GameManager.Instance.AttackEnemy(ID, _state == EnemyState.Patrolling ? backstabDamageModifier * damage : damage))
                 Die();
             else
                 SetState(EnemyState.Attacking);
@@ -287,6 +313,7 @@ namespace Enemies
 
         public void PerformAttack()
         {
+            enemyHit.Play();
             animator.SetTrigger(EnemyAnimator.BaseAttack);
         }
 
@@ -329,17 +356,20 @@ namespace Enemies
 
         public void Stun(float duration)
         {
-            if (!isStunned) // if not already stunned
+            // Only trigger if not already stunned
+            if (!_isStunned)
             {
-                // TODO add stun animation
-                isStunned = true;
+                // Play hit animation
+                animator.SetTrigger(EnemyAnimator.TakeHit);
+                _isStunned = true;
+                
                 Invoke(nameof(DisableStun), duration);
             }
         }
 
         private void DisableStun()
         {
-            isStunned = false;
+            _isStunned = false;
         }
 
         private void SetState(EnemyState state)
@@ -353,6 +383,13 @@ namespace Enemies
             {
                 GameManager.Instance.EnemyStoppedAttacking(ID);
             }
+        }
+        
+        private IEnumerator Reveal()
+        {
+            Show();
+            yield return new WaitForSeconds(onHitRevealDuration);
+            Hide();
         }
 
         #endregion

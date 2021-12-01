@@ -6,6 +6,7 @@ namespace Relics
 {
     public class Relic : MonoBehaviour
     {
+        [SerializeField] private AudioSource collectRelicSound;
         private bool canPickupRelic => !GameManager.Instance.IsPlayerInCombat && !GameManager.Instance.PlayerHasRelic;
     
         private void OnTriggerEnter(Collider other)
@@ -22,6 +23,7 @@ namespace Relics
 
         public void SetRelicVisibility(bool visibility)
         {
+            collectRelicSound.Play();
             gameObject.SetActive(visibility);
         }
     }

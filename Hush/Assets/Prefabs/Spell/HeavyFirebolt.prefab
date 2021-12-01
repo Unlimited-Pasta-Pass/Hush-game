@@ -66,8 +66,8 @@ MonoBehaviour:
   ProjectileExplosionRadius: 3
   ProjectileExplosionForce: 500
   ProjectileColliderDelay: 0
-  ProjectileColliderSpeed: 25
-  ProjectileDirection: {x: 1, y: 0, z: 1}
+  ProjectileColliderSpeed: 40
+  ProjectileDirection: {x: 0, y: 0, z: 1}
   ProjectileCollisionLayers:
     serializedVersion: 2
     m_Bits: 2176

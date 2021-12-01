@@ -11,19 +11,22 @@ namespace Relics
 {
     public class RelicDome : MonoBehaviour, IKillable
     {
+        [SerializeField] private GameObject interactOverlay;
         [SerializeField] private int keysNeededToUnlock;
+        [SerializeField] private ParticleSystem explosion;
+        [SerializeField] private GameObject healthBar;
+        
+        [SerializeField] private AudioSource shatterSound;
+        [SerializeField] private AudioSource hitSound;
 
+        private bool shatterTriggered = false;
         private bool playerIsClose = false;
-
-        public UnityEvent attacked;
-
         private UnityEvent _killed;
-        public UnityEvent Killed => _killed ??= new UnityEvent();
-        
-        public float HitPoints => GameManager.Instance.RelicDomeHitPoints;
-        
         private static InputManager Input => InputManager.Instance;
 
+        public UnityEvent attacked;
+        public UnityEvent Killed => _killed ??= new UnityEvent();
+        public float HitPoints => GameManager.Instance.RelicDomeHitPoints;
         private bool CanUnlockDome => GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock && InputManager.Instance.interact && playerIsClose;
 
         private void OnEnable()
@@ -47,17 +50,21 @@ namespace Relics
             if (!other.gameObject.CompareTag(Tags.Player)) 
                 return;
 
+            // show interaction text
+            interactOverlay.SetActive(true);
+
             playerIsClose = true;
-            // TODO UI showing interact button
         }
         
         private void OnTriggerExit(Collider collider)
         {
             if (!collider.gameObject.CompareTag(Tags.Player))
                 return;
-        
+
+            // hide interaction text
+            interactOverlay.SetActive(false);
+
             playerIsClose = false;
-            // TODO UI hiding interact button
         }
     
         public void TakeDamage(float damage)
@@ -68,15 +75,22 @@ namespace Relics
                 attacked.Invoke();
             }
             
+            hitSound.Play();
+            
             if (!GameManager.Instance.AttackDome(damage))
                 Die();
         }
 
         public void Die()
         {
-            // TODO breaking animation
-            
+            if (shatterTriggered)
+                return;
+
+            shatterTriggered = true;
+            shatterSound.Play();
             SetDomeVisibility(false);
+            
+            explosion.Play();
             
             GameManager.Instance.DisableDome();
             Killed.Invoke();
@@ -84,7 +98,9 @@ namespace Relics
 
         public void SetDomeVisibility(bool visibility)
         {
-            gameObject.SetActive(visibility);
+            GetComponent<MeshRenderer>().enabled = visibility;
+            GetComponent<Collider>().enabled = visibility;
+            healthBar.SetActive(visibility);
         }
 
         private void UnlockDome(InputAction.CallbackContext context)
@@ -93,6 +109,7 @@ namespace Relics
                 return;
             
             Die();
+            interactOverlay.SetActive(false);
         }
     }
 }

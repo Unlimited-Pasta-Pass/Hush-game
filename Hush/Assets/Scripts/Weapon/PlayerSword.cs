@@ -11,6 +11,12 @@ namespace Weapon
 {
     public class PlayerSword : MonoBehaviour, IWeapon
     {
+        [Header("Sound Parameters")]
+        [SerializeField] private AudioSource lightAttack;
+        [SerializeField] private AudioSource heavyAttack;
+        [SerializeField] private AudioSource heavyHit;
+        [SerializeField] private AudioSource lightHit;
+        
         [Header("Damage Parameters")]
         [SerializeField] private float baseDamage = 5;
         [SerializeField] private float heavyDamage = 15;
@@ -32,8 +38,8 @@ namespace Weapon
 
         public WeaponType WeaponType => WeaponType.Sword;
     
-        public float BaseDamage => baseDamage;
-        public float HeavyDamage => heavyDamage;
+        public float BaseDamage => baseDamage + GameManager.Instance.GetPlayerDamageBoost();
+        public float HeavyDamage => heavyDamage + GameManager.Instance.GetPlayerDamageBoost();
 
         private PlayerMovement _player;
 
@@ -95,11 +101,13 @@ namespace Weapon
 
         private void LightAttack()
         {
+            lightAttack.Play();
             playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
         }
 
         private void HeavyAttack()
         {
+            heavyAttack.Play();
             playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
         }
 
@@ -112,10 +120,12 @@ namespace Weapon
             var killable = col.GetComponent<IKillable>();
             if (stateInfo.IsName(PlayerAnimator.State.LightAttack))
             {
+                lightHit.Play();
                 killable.TakeDamage(AttemptCrit(BaseDamage));
             }
             if (stateInfo.IsName(PlayerAnimator.State.HeavyAttack))
             {
+                heavyHit.Play();
                 killable.TakeDamage(AttemptCrit(HeavyDamage));
             }
         }

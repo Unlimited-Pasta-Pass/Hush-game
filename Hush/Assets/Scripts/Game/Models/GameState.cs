@@ -23,6 +23,10 @@ namespace Game.Models
         public float playerMaxHitPoints;
         public SerializableTransform playerTransform;
         public bool isPlayerInvisible;
+        public float damageBoost;
+        public float speedBoost;
+        public float vitalityBoost;
+        
         
         // Echolocation
         public float echolocationActivationTime;
@@ -62,8 +66,11 @@ namespace Game.Models
             playerMaxHitPoints = -1f;
             playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
             isPlayerInvisible = false;
-            
-            // Echolocation
+            damageBoost = 0f;
+            speedBoost = 0f;
+            vitalityBoost = 0f;
+
+                // Echolocation
             echolocationActivationTime = float.MinValue;
             echolocationCooldownTime = 7f;
 
