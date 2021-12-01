@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33116752984088188}
   - component: {fileID: 23029104854387900}
   - component: {fileID: 64231187810665544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: W_drawer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 33815767865269322}
   - component: {fileID: 23944995109723490}
   - component: {fileID: 64592073696785998}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: W_drawer1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4167183367052818}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightDrawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4662406454721634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftDrawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 33702659627431978}
   - component: {fileID: 23135002716992478}
   - component: {fileID: 65585224625052552}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 33216015333544238}
   - component: {fileID: 23343523291170776}
   - component: {fileID: 65490184224795520}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 33923819606675154}
   - component: {fileID: 23590789087357968}
   - component: {fileID: 64142478414144850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: dfk_wardrobe_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
