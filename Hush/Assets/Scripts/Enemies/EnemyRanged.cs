@@ -13,12 +13,11 @@ namespace Enemies
         public override void PerformAttack()
         {
             base.PerformAttack();
-            StartCoroutine(FireProjectile());
+            Invoke(nameof(FireProjectile), shootDelay);
         }
 
-        private IEnumerator FireProjectile()
+        private void FireProjectile()
         {
-            yield return new WaitForSeconds(shootDelay);
             Vector3 offsetPosition = Quaternion.AngleAxis(-attackRotationOffset, Vector3.up) * shootPosition.localPosition;
             Vector3 spellPosition = transform.TransformPoint(offsetPosition);
             Vector3 playerDir = _player.transform.position - spellPosition;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Common.Enums;
 using Enemies.Enums;
 using Environment.Passage;
@@ -79,6 +80,8 @@ namespace Enemies
         public float HitPoints => GameManager.Instance.GetEnemyHitPoints(ID);
 
         public override bool RevealOnEcholocate => invisible;
+        
+        public readonly HashSet<GameObject> AttackedObjects = new HashSet<GameObject>();
 
         #endregion
 
@@ -335,6 +338,7 @@ namespace Enemies
 
         public virtual void PerformAttack()
         {
+            AttackedObjects.Clear();
             animator.SetTrigger(EnemyAnimator.BaseAttack);
         }
 

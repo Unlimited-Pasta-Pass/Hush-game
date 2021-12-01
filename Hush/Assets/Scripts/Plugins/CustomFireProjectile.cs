@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Enums;
 using Common.Interfaces;
 using DigitalRuby.PyroParticles;
 using Player;
@@ -14,7 +15,10 @@ namespace Plugins
             
             if (c.gameObject.TryGetComponent<IKillable>(out var killable))
             {
-                killable.TakeDamage(Damage);
+                if (!gameObject.CompareTag(Tags.Spell) || gameObject.layer != Layers.Enemy || !c.gameObject.CompareTag(Tags.Dome))
+                {
+                    killable.TakeDamage(Damage);
+                }
             }
         }
     }
