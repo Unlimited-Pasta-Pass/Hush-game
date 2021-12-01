@@ -103,6 +103,9 @@ namespace Player
 
         public void OnAttackPerformed(float delay)
         {
+            if (TimeManager.Instance.GameIsPaused)
+                return;
+            
             _attackPauseTime = delay;
             _attackDelta = 0f;
 

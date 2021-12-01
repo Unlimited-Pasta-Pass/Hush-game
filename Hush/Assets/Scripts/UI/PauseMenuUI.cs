@@ -43,7 +43,7 @@ namespace UI
             pauseMenuUI.SetActive(true);
         }
     
-        private void Resume()
+        public void Resume()
         {
             TimeManager.Instance.Resume();
             pauseMenuUI.SetActive(false);

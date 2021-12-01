@@ -8,16 +8,16 @@ using Weapon.Enums;
 
 public class SkillBarManager : MonoBehaviour
 {
-    [SerializeField] private GameObject heavyIcon;
-    [SerializeField] private GameObject lightIcon;
+    [SerializeField] private Image heavyIcon;
+    [SerializeField] private Image lightIcon;
     [SerializeField] private Sprite stunSprite;
     [SerializeField] private Sprite fireSprite;
     [SerializeField] private Sprite invisibleSprite;
 
     private void Start()
     {
-        heavyIcon.GetComponent<Image>().sprite = GetSpellIcon(GameManager.Instance.GetActiveHeavySpell());
-        lightIcon.GetComponent<Image>().sprite = GetSpellIcon(GameManager.Instance.GetActiveLightSpell());
+        heavyIcon.sprite = GetSpellIcon(GameManager.Instance.GetActiveHeavySpell());
+        lightIcon.sprite = GetSpellIcon(GameManager.Instance.GetActiveLightSpell());
     }
 
     private Sprite GetSpellIcon(SpellType spell)
