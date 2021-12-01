@@ -1,4 +1,5 @@
-﻿using Common.Enums;
+﻿using System.Collections.Generic;
+using Common.Enums;
 using Common.Interfaces;
 using Enemies;
 using Enemies.Enums;
@@ -20,7 +21,7 @@ namespace Weapon
         [SerializeField] private Enemy enemy;
 
         #endregion
-
+        
         #region Events
 
         private void Reset()
@@ -29,11 +30,12 @@ namespace Weapon
             enemy = GetComponentInParent<Enemy>();
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
-            if (enemy.IsAttacking && other.CompareTag(Tags.Player))
+            if (enemy.IsAttacking && other.CompareTag(Tags.Player) && !enemy.AttackedObjects.Contains(other.gameObject))
             {
                 other.GetComponent<IKillable>()?.TakeDamage(baseDamage);
+                enemy.AttackedObjects.Add(other.gameObject);
             }
         }
 
@@ -49,7 +51,7 @@ namespace Weapon
         #endregion
 
         #region Public Methods
-
+        
         public void PerformAttack(InputAction.CallbackContext context)
         {
             enemyAnimator.SetTrigger(EnemyAnimator.BaseAttack);
