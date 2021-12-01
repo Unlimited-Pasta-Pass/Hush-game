@@ -31,10 +31,19 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private CharacterController controller;
         [SerializeField] private Camera mainCamera;
+        [SerializeField] private AudioSource footsteps;
+        [SerializeField] private AudioClip running;
+        [SerializeField] private AudioClip walking;
 
         #endregion
         
         private static InputManager Input => InputManager.Instance;
+        
+        public bool IsRunning => _playerSpeed > WalkSpeed + 0.25f * (SprintSpeed - WalkSpeed);
+        public bool IsWalking => !IsRunning && _playerSpeed > 1;
+
+        public float WalkSpeed => walkSpeed + GameManager.Instance.GetPlayerSpeedBoost();
+        public float SprintSpeed => sprintSpeed + GameManager.Instance.GetPlayerSpeedBoost();
         
         private bool _isAttacking;
         private float _attackDelta;
@@ -45,6 +54,19 @@ namespace Player
         private void Start()
         {
             InitializePlayerTransform();
+        }
+
+        private void Update()
+        {
+            if(IsWalking)
+                footsteps.clip = walking;
+            else if (IsRunning)
+                footsteps.clip = running;
+
+            if (!footsteps.isPlaying && (IsWalking || IsRunning))
+                footsteps.Play();
+            else if(!IsRunning && !IsWalking)
+                footsteps.Stop();
         }
 
         private void FixedUpdate()
@@ -140,10 +162,8 @@ namespace Player
             if (_isAttacking)
                 return 0f;
             
-            return Input.walk ? walkSpeed : sprintSpeed;
+            return Input.walk ? WalkSpeed : SprintSpeed;
         }
-        
-        public bool IsRunning => _playerSpeed > walkSpeed + 0.25f * (sprintSpeed - walkSpeed);
 
         public void SetSpeedModifier(float amount, bool isEnabled)
         {

@@ -16,6 +16,10 @@ namespace Relics
         [SerializeField] private ParticleSystem explosion;
         [SerializeField] private GameObject healthBar;
         
+        [SerializeField] private AudioSource shatterSound;
+        [SerializeField] private AudioSource hitSound;
+
+        private bool shatterTriggered = false;
         private bool playerIsClose = false;
         private UnityEvent _killed;
         private static InputManager Input => InputManager.Instance;
@@ -71,12 +75,19 @@ namespace Relics
                 attacked.Invoke();
             }
             
+            hitSound.Play();
+            
             if (!GameManager.Instance.AttackDome(damage))
                 Die();
         }
 
         public void Die()
         {
+            if (shatterTriggered)
+                return;
+
+            shatterTriggered = true;
+            shatterSound.Play();
             SetDomeVisibility(false);
             
             explosion.Play();
@@ -98,6 +109,7 @@ namespace Relics
                 return;
             
             Die();
+            interactOverlay.SetActive(false);
         }
     }
 }

@@ -19,6 +19,8 @@ namespace Weapon
         
         [SerializeField] private float heavyCooldown = 10f;
         [SerializeField] private float lightCooldown = 6f;
+
+        [SerializeField] private AudioSource invisibleAudio;
         
         private static InputManager Input => InputManager.Instance;
         private PlayerMovement _player;
@@ -108,6 +110,7 @@ namespace Weapon
 
             if (isEnabled)
             {
+                invisibleAudio.Play();
                 if (isHeavy)
                     Invoke(nameof(EndHeavy), heavyDuration);
                 else

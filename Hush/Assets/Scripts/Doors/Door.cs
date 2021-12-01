@@ -11,10 +11,12 @@ namespace Doors
     public class Door : MonoBehaviour
     {
         [SerializeField] private GameObject interactOverlay;
+        [SerializeField] private AudioSource openSound;
+        
         private bool playerIsClose = false;
         private Animator anim;
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
-                                    InputManager.Instance.interact;
+                                    InputManager.Instance.interact && playerIsClose;
 
         private static InputManager Input => InputManager.Instance;
 
@@ -66,8 +68,10 @@ namespace Doors
             if (!CanOpenDoor)
                 return;
 
+            openSound.Play();
             anim.SetTrigger(DoorAnimator.Open);
             Invoke(nameof(LoadNext), 2f);
+            interactOverlay.SetActive(false);
         }
 
         private void LoadNext()
