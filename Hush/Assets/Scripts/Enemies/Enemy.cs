@@ -22,6 +22,9 @@ namespace Enemies
         [SerializeField] private float detectionRadius = 3.0f;
         [SerializeField] private float soundPerceptionRadius = 4.0f;
         [SerializeField] private LayerMask targetLayerMask;
+        [SerializeField] private AudioSource enemyHit;
+        [SerializeField] private AudioSource deathSound;
+        [SerializeField] private AudioSource runningSound;
 
         [Header("Attack")]
         [SerializeField] private float minAttackRange = 0.5f;
@@ -65,6 +68,8 @@ namespace Enemies
         private UnityEvent _killed;
         public UnityEvent Killed => _killed ??= new UnityEvent();
 
+        public bool IsRunning => agent.velocity.magnitude > 0;
+
         public bool IsAttacking {
             get
             {
@@ -81,13 +86,14 @@ namespace Enemies
 
         #region Events
 
-        private void OnEnable()
-        {
-            _player = GameObject.FindWithTag(Tags.Player).GetComponent<PlayerMovement>();
-        }
-
         private void Start()
         {
+            var player = GameObject.FindWithTag(Tags.Player);
+            if (player == null)
+                throw new MissingComponentException("Missing Player in Scene");
+
+            _player = player.GetComponent<PlayerMovement>();
+            
             InitializeEnemy();
             if (invisible)
                 Hide(true);
@@ -100,6 +106,11 @@ namespace Enemies
             {
                 ResumePatrolFromClosestNode();
             }
+            
+            if(!runningSound.isPlaying && IsRunning)
+                runningSound.Play();
+            else if(!IsRunning)
+                runningSound.Stop();
 
             // Do movement update logic
             MoveEnemy();
@@ -284,9 +295,10 @@ namespace Enemies
                 col.enabled = false;
             }
             
+            deathSound.Play();
             animator.SetBool(EnemyAnimator.Dead, true);
             SetState(EnemyState.Dead);
-        
+
             Killed.Invoke();
         }
 
@@ -310,6 +322,7 @@ namespace Enemies
 
         public void PerformAttack()
         {
+            enemyHit.Play();
             animator.SetTrigger(EnemyAnimator.BaseAttack);
         }
 
