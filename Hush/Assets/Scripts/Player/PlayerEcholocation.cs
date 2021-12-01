@@ -16,6 +16,7 @@ namespace Player
         [SerializeField] private float revealDistance = 20f;
         [SerializeField] private float revealDuration = 5f;
         [SerializeField] private float revealDelay = 7f;
+        [SerializeField] private AudioSource echolocationSound;
 
         [Header("References")]
         [SerializeField] private ParticleSystem effect;
@@ -67,6 +68,7 @@ namespace Player
                 return;
 
             effect.Play();
+            echolocationSound.Play();
             
             _hiddenObjectsInRange.Clear();
             _hiddenObjectsInRange.AddRange(FindObjectsOfType<LOSObjectHider>().Where(o => Vector3.Distance(transform.position, o.transform.position) <= revealDistance));

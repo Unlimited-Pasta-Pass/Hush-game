@@ -22,6 +22,8 @@ namespace Enemies
         [SerializeField] private float detectionRadius = 3.0f;
         [SerializeField] private float soundPerceptionRadius = 4.0f;
         [SerializeField] private LayerMask targetLayerMask;
+        [SerializeField] private AudioSource enemyHit;
+        [SerializeField] private AudioSource deathSound;
 
         [Header("Attack")]
         [SerializeField] private float minAttackRange = 0.5f;
@@ -284,9 +286,10 @@ namespace Enemies
                 col.enabled = false;
             }
             
+            deathSound.Play();
             animator.SetBool(EnemyAnimator.Dead, true);
             SetState(EnemyState.Dead);
-        
+
             Killed.Invoke();
         }
 
@@ -310,6 +313,7 @@ namespace Enemies
 
         public void PerformAttack()
         {
+            enemyHit.Play();
             animator.SetTrigger(EnemyAnimator.BaseAttack);
         }
 
