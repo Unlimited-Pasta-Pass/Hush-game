@@ -83,7 +83,7 @@ namespace Doors
 
         private void LoadNext()
         {
-            SceneManager.Instance.LoadNextScene();
+            SceneManager.Instance.LoadTempPowerScene();
         }
     }
 }
