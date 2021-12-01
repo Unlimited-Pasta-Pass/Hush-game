@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Common.Enums;
 using Enemies.Enums;
 using Environment.Passage;
@@ -18,46 +19,49 @@ namespace Enemies
         #region Parameters
 
         [Header("Parameters")]
-        [SerializeField] private float visionAngle = 70.0f;
-        [SerializeField] private float detectionRadius = 3.0f;
-        [SerializeField] private float soundPerceptionRadius = 4.0f;
-        [SerializeField] private LayerMask targetLayerMask;
+        [SerializeField] protected float visionAngle = 70.0f;
+        [SerializeField] protected float detectionRadius = 3.0f;
+        [SerializeField] protected float soundPerceptionRadius = 4.0f;
+        [SerializeField] protected LayerMask targetLayerMask;
         [SerializeField] private AudioSource enemyHit;
         [SerializeField] private AudioSource deathSound;
         [SerializeField] private AudioSource runningSound;
 
         [Header("Attack")]
-        [SerializeField] private float minAttackRange = 0.5f;
-        [SerializeField] private float maxAttackRange = 1.0f;
-        [SerializeField] private float attackRotationOffset = 0.0f;
-        [SerializeField] private float backstabDamageModifier = 2.0f;
-
+        [SerializeField] protected float minAttackRange = 0.5f;
+        [SerializeField] protected float maxAttackRange = 1.0f;
+        [SerializeField] protected float attackRotationOffset = 0.0f;
+        [SerializeField] protected float attackRotationTolerance = 30.0f;
+        [SerializeField] protected float attackCooldown = 2.0f;
+        [SerializeField] protected float backstabDamageModifier = 2.0f;
+        
         [Header("Speed")]
-        [SerializeField] private float runSpeed = 3.0f;
-        [SerializeField] private float searchSpeed = 2.5f;
-        [SerializeField] private float patrolSpeed = 1.0f;
+        [SerializeField] protected float runSpeed = 3.0f;
+        [SerializeField] protected float searchSpeed = 2.5f;
+        [SerializeField] protected float patrolSpeed = 1.0f;
         
         [Header("Type")]
-        [SerializeField] private bool invisible = false;
+        [SerializeField] protected bool invisible = false;
         [Tooltip("The amount of time in seconds that the enemy gets revealed for when it takes damage. This only applies if `invisible` is set to true.")]
-        [SerializeField] private float onHitRevealDuration = 1.0f;
+        [SerializeField] protected float onHitRevealDuration = 1.0f;
 
         [Header("Patrol")]
-        [SerializeField] private Transform[] patrolRoute;
+        [SerializeField] protected Transform[] patrolRoute;
     
         [Header("References")]
-        [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private Animator animator;
-        [SerializeField] private SphereCollider visionCollider;
+        [SerializeField] protected NavMeshAgent agent;
+        [SerializeField] protected Animator animator;
+        [SerializeField] protected SphereCollider visionCollider;
         
         #endregion
     
         #region Private Variables
 
-        private PlayerMovement _player;
+        protected PlayerMovement _player;
         private EnemyState _state = EnemyState.Patrolling;
         private int _nextPatrolIndex;
         private bool _isStunned = false;
+        private float _lastAttack;
 
         private bool isPlayerInvisible => GameManager.Instance.GetIsPlayerInvisible();
 
@@ -81,6 +85,8 @@ namespace Enemies
         public float HitPoints => GameManager.Instance.GetEnemyHitPoints(ID);
 
         public override bool RevealOnEcholocate => invisible;
+        
+        public readonly HashSet<GameObject> AttackedObjects = new HashSet<GameObject>();
 
         #endregion
 
@@ -168,25 +174,35 @@ namespace Enemies
             
             // Do not do state update if stunned
             if (_isStunned)
+            {
+                agent.isStopped = true;
                 return;
+            }
             
+            // Resume nav mesh agent
+            agent.isStopped = false;
+
             switch (_state)
             {
                 case EnemyState.Attacking:
                 {
                     // Run to player & attack them if in range
                     agent.speed = runSpeed;
-                    Vector3 player = _player.transform.position;
-                    Vector3 toPlayerNormalized = (player - transform.position).normalized;
-                    agent.destination = player - minAttackRange * toPlayerNormalized;
+                    Vector3 playerPosition = _player.transform.position;
+                    Vector3 toPlayerNormalized = (playerPosition - transform.position).normalized;
+                    agent.destination = playerPosition - minAttackRange * toPlayerNormalized;
                     if (agent.remainingDistance <= maxAttackRange - minAttackRange)
                     {
                         // Rotate to face player when close
                         FacePlayer();
                         
-                        // Attack if able to
-                        if (!IsAttacking)
+                        // Attack if able to and in angle tolerance range
+                        Vector3 forward = GetForwardVector();
+                        if (Time.time - _lastAttack >= attackCooldown && Vector3.Angle(forward, toPlayerNormalized) < attackRotationTolerance)
+                        {
+                            _lastAttack = Time.time;
                             PerformAttack();
+                        }
                     }
                     break;
                 }
@@ -211,6 +227,8 @@ namespace Enemies
 
                 case EnemyState.Dead:
                 {
+                    // Despawn after death animation
+                    agent.isStopped = true;
                     var stateInfo = animator.GetCurrentAnimatorStateInfo(EnemyAnimator.Layer.Base);
                     if (stateInfo.IsName(EnemyAnimator.State.Dead) && stateInfo.normalizedTime >= 0.99f)
                     {
@@ -248,7 +266,7 @@ namespace Enemies
                 return;
         
             Quaternion targetRotation = Quaternion.Euler(Quaternion.LookRotation(lookPos).eulerAngles + new Vector3(0, attackRotationOffset, 0));
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 4.0f * Time.deltaTime);  
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 6.0f * Time.deltaTime);  
         }
 
         private void ResumePatrolFromClosestNode()
@@ -270,6 +288,16 @@ namespace Enemies
 
         #endregion
     
+        #region Protected Methods
+
+        protected Vector3 GetForwardVector()
+        {
+            Vector3 forwardDir = Quaternion.AngleAxis(-attackRotationOffset, Vector3.up) * Vector3.forward;
+            return transform.TransformDirection(forwardDir);
+        }
+
+        #endregion
+        
         #region Public Methods
         
         public void InitializeEnemy()
@@ -320,8 +348,9 @@ namespace Enemies
                 SetState(EnemyState.Attacking);
         }
 
-        public void PerformAttack()
+        public virtual void PerformAttack()
         {
+            AttackedObjects.Clear();
             enemyHit.Play();
             animator.SetTrigger(EnemyAnimator.BaseAttack);
         }
