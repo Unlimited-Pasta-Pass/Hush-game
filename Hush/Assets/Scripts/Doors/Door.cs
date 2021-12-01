@@ -68,7 +68,7 @@ namespace Doors
             if (!CanOpenDoor)
                 return;
 
-            openSound.PlayOneShot(openSound.clip);
+            openSound.Play();
             anim.SetTrigger(DoorAnimator.Open);
             Invoke(nameof(LoadNext), 2f);
             interactOverlay.SetActive(false);
