@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4609281226093430}
   - component: {fileID: 33673691868581514}
   - component: {fileID: 23778686320600096}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Candle03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 4387133803466356}
   - component: {fileID: 198607134019798832}
   - component: {fileID: 199184797868876570}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Candlelight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4910,7 +4910,7 @@ GameObject:
   - component: {fileID: 4876623560501770}
   - component: {fileID: 33223097790862204}
   - component: {fileID: 23485320944652174}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Candle03 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4992,7 +4992,7 @@ GameObject:
   - component: {fileID: 4973208379834510}
   - component: {fileID: 198528664180188856}
   - component: {fileID: 199505043326339672}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Candlelight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9809,7 +9809,7 @@ GameObject:
   - component: {fileID: 4231538343824480}
   - component: {fileID: 33776891131377344}
   - component: {fileID: 23110726572546664}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Candle03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9892,7 +9892,7 @@ GameObject:
   - component: {fileID: 33936407886326888}
   - component: {fileID: 23862599732557722}
   - component: {fileID: 64874461008478210}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: dfk_candleholder_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9990,7 +9990,7 @@ GameObject:
   - component: {fileID: 4068836782102580}
   - component: {fileID: 198563609489428160}
   - component: {fileID: 199005767184927150}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Candlelight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
