@@ -23,6 +23,9 @@ namespace Player
 
         [Tooltip("Acceleration and deceleration")]
         [SerializeField] private float speedChangeRate = 10.0f;
+        
+        [Tooltip("The height at which the player will always stay at")]
+        [SerializeField] private float playerHeight = 0.0f;
 
         [Header("Component References")] 
         [SerializeField] private Animator animator;
@@ -129,11 +132,14 @@ namespace Player
 
             // Determine displacement
             var horizontalDisplacement = Vector3.forward * (_playerSpeed * Time.deltaTime);
-            var verticalDisplacement = Vector3.up * (Physics.gravity.y * Time.deltaTime) * (controller.isGrounded ? 0 : 1);
             
             // Move the player
-            controller.Move(transform.TransformDirection(horizontalDisplacement + verticalDisplacement));
+            controller.Move(transform.TransformDirection(horizontalDisplacement));
             
+            // Lock player on y axis
+            var pos = controller.transform.position;
+            controller.transform.position = new Vector3(pos.x, playerHeight, pos.z);
+
             // Update the animator
             animator.SetFloat(PlayerAnimator.Speed, _playerSpeed);
         }

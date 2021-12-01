@@ -558,7 +558,9 @@ MonoBehaviour:
   runningSound: {fileID: 2027018368}
   minAttackRange: 1
   maxAttackRange: 2
-  attackRotationOffset: -30
+  attackRotationOffset: -40
+  attackRotationTolerance: 30
+  attackCooldown: 1
   backstabDamageModifier: 2
   runSpeed: 3.5
   searchSpeed: 2.5

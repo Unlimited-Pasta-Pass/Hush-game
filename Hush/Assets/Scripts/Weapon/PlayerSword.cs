@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Common.Enums;
 using Common.Interfaces;
 using Game;
@@ -42,6 +43,8 @@ namespace Weapon
         public float HeavyDamage => heavyDamage + GameManager.Instance.GetPlayerDamageBoost();
 
         private PlayerMovement _player;
+
+        private readonly HashSet<GameObject> _attackedObjects = new HashSet<GameObject>();
 
         private void OnEnable()
         {
@@ -101,32 +104,39 @@ namespace Weapon
 
         private void LightAttack()
         {
+            _attackedObjects.Clear();
             lightAttack.Play();
             playerAnimator.SetTrigger(PlayerAnimator.LightAttack);
         }
 
         private void HeavyAttack()
         {
+            _attackedObjects.Clear();
             heavyAttack.Play();
             playerAnimator.SetTrigger(PlayerAnimator.HeavyAttack);
         }
 
-        private void OnTriggerEnter(Collider col)
+        private void OnTriggerStay(Collider col)
         {
             if (!col.CompareTag(Tags.Enemy) && !col.CompareTag(Tags.Dome)) 
                 return;
-        
+
+            if (_attackedObjects.Contains(col.gameObject))
+                return;
+
             var stateInfo = playerAnimator.GetCurrentAnimatorStateInfo((int)PlayerAnimator.Layer.UpperBody);
             var killable = col.GetComponent<IKillable>();
             if (stateInfo.IsName(PlayerAnimator.State.LightAttack))
             {
                 lightHit.Play();
                 killable.TakeDamage(AttemptCrit(BaseDamage));
+                _attackedObjects.Add(col.gameObject);
             }
             if (stateInfo.IsName(PlayerAnimator.State.HeavyAttack))
             {
                 heavyHit.Play();
                 killable.TakeDamage(AttemptCrit(HeavyDamage));
+                _attackedObjects.Add(col.gameObject);
             }
         }
     }

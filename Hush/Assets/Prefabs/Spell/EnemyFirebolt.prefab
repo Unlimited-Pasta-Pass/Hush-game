@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4290663165682719484
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5549057135663355997, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: ProjectileColliderSpeed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802347069729, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802359466037, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802359466037, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362222977, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_Name
+      value: EnemyFirebolt
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362526807, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362534207, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362534829, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404962802362688607, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33623e9f48183ac4a8d5a93ff71f9a8d, type: 3}
