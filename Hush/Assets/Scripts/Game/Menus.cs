@@ -1,38 +1,29 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using Game;
+using UnityEngine;
 
 public class Menus : MonoBehaviour
 {
-    // brackeys tutorial: https://youtu.be/JivuXdrIHK0
-    public GameObject pauseMenuUI;
-    // controller nav https://www.youtube.com/watch?v=SXBgBmUcTe0&ab_channel=gamesplusjames
-    public GameObject pauseFirstButton;
+    [SerializeField] private GameObject loadGameButton;
 
-    public void Play()
+    private void Start()
     {
-        Game.SceneManager.Instance.LoadNextScene();
+        loadGameButton.SetActive(SaveGameManager.Instance.HasSavedGame);
+    }
+
+    public void NewGame()
+    {
+        SceneManager.Instance.LoadNextScene();
+    }
+    
+    public void LoadGame()
+    {
+        SceneManager.Instance.LoadScene(SaveGameManager.Instance.SavedGameScene);
+        SaveGameManager.Instance.OnLoad();
     }
     
     public void Replay()
     {
-        Game.SceneManager.Instance.LoadPreviousScene();
-    }
-
-    void Pause()
-    {
-        TimeManager.Instance.Pause();
-        EventSystem.current.SetSelectedGameObject(pauseFirstButton);
-
-        pauseMenuUI.SetActive(true);
-    }
-
-    public void Resume()
-    {
-        TimeManager.Instance.Resume();
-        EventSystem.current.SetSelectedGameObject(null);
-        pauseMenuUI.SetActive(false);
+        SceneManager.Instance.ReloadScene();
     }
 
     public void Credits() {
@@ -41,12 +32,11 @@ public class Menus : MonoBehaviour
     }
     
     public void MainMenu() {
-        Game.SceneManager.Instance.LoadMainMenu();
+        SceneManager.Instance.LoadMainMenu();
     }
 
     public void Quit()
     {
-        Debug.Log("QUIT");
-        Game.SceneManager.Instance.QuitGame();
+        SceneManager.Instance.QuitGame();
     }
 }
