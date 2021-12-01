@@ -66,8 +66,8 @@ namespace Game.Models
             saveTime = float.MinValue;
 
             // Permanent Progress
-            baseDamagePermanent = 0f;
-            BaseSpeedPermanent = 0f;
+            baseDamagePermanent = 5f;
+            BaseSpeedPermanent = 2f;
             BaseVitalityPermanent = 100f;
             
             // Player
