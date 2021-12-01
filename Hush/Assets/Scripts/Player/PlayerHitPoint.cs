@@ -1,4 +1,4 @@
-﻿using Common.Interfaces;
+using Common.Interfaces;
 using Game;
 using Player.Enums;
 using UnityEngine;
@@ -21,7 +21,7 @@ namespace Player
 
         #region Public Variables
 
-        private UnityEvent _killed;
+        [SerializeField] private UnityEvent _killed;
         public UnityEvent Killed => _killed ??= new UnityEvent();
 
         public float HitPoints => GameManager.Instance.PlayerCurrentHitPoints;
