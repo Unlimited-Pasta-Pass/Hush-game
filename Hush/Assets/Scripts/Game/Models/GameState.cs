@@ -27,7 +27,11 @@ namespace Game.Models
         public float speedBoost;
         public float vitalityBoost;
         
-        
+        // Permanent Stat
+        public float damagePermanent;
+        public float speedPermanent;
+        public float vitalityPermanent;
+
         // Echolocation
         public float echolocationActivationTime;
         public float echolocationCooldownTime;
@@ -69,8 +73,13 @@ namespace Game.Models
             damageBoost = 0f;
             speedBoost = 0f;
             vitalityBoost = 0f;
+            
+            // Stat Improvements
+            damagePermanent = 0f;
+            speedPermanent = 0f;
+            vitalityPermanent = 0f;
 
-                // Echolocation
+            // Echolocation
             echolocationActivationTime = float.MinValue;
             echolocationCooldownTime = 7f;
 
