@@ -56,7 +56,7 @@ namespace Player
             InitializePlayerTransform();
             
             // set speed from game state
-            walkSpeed = GameManager.Instance.PermanentSpeed + GameManager.Instance.GetPlayerSpeedBoost();
+            walkSpeed = GameManager.Instance.PermanentSpeed;
             sprintSpeed = walkSpeed + 4;
 
         }
