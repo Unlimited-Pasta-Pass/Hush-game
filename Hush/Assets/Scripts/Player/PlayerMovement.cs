@@ -37,6 +37,7 @@ namespace Player
         private static InputManager Input => InputManager.Instance;
         
         public bool IsRunning => _playerSpeed > WalkSpeed + 0.25f * (SprintSpeed - WalkSpeed);
+        public bool IsWalking => !IsRunning && _playerSpeed > 1;
 
         public float WalkSpeed => walkSpeed + GameManager.Instance.GetPlayerSpeedBoost();
         public float SprintSpeed => sprintSpeed + GameManager.Instance.GetPlayerSpeedBoost();
@@ -46,14 +47,10 @@ namespace Player
         private float _playerSpeed;
 
         private float _attackPauseTime;
-        
-        public bool IsRunning => _playerSpeed > walkSpeed + 0.25f * (sprintSpeed - walkSpeed);
-        public bool IsWalking => !IsRunning && _playerSpeed > 1;
 
         private void Start()
         {
             InitializePlayerTransform();
-            //footsteps.loop = true;
         }
 
         private void Update()
