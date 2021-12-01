@@ -14,7 +14,7 @@ namespace Game
             {
                 // if less than 0, that player HP not initialized, initialize it
                 if (_state.playerCurrentHitPoints < 0)
-                    _state.playerCurrentHitPoints = _state.BaseVitalityPermanent;
+                    _state.playerCurrentHitPoints = PermanentVitality;
                 
                 return _state.playerCurrentHitPoints;
             }
@@ -26,7 +26,7 @@ namespace Game
             {
                 // if less than 0, that player HP not initialized, initialize it
                 if (_state.playerMaxHitPoints < 0)
-                    _state.playerMaxHitPoints = _state.BaseVitalityPermanent;
+                    _state.playerMaxHitPoints = PermanentVitality;
                 
                 return _state.playerMaxHitPoints;
             }
