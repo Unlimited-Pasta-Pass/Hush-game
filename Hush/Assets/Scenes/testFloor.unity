@@ -2277,6 +2277,30 @@ PrefabInstance:
       propertyPath: serializedGuid.Array.data[15]
       value: 153
       objectReference: {fileID: 0}
+    - target: {fileID: 2041735674550938981, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
+      propertyPath: castDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2041735674550938981, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
+      propertyPath: heavyCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2041735674550938981, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
+      propertyPath: heavyDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2041735674550938981, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
+      propertyPath: lightCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2041735674550938981, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
+      propertyPath: projectileDelay
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2326891898717451601, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.95
+      objectReference: {fileID: 0}
     - target: {fileID: 2694598201337503891, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: m_RootOrder
       value: 2

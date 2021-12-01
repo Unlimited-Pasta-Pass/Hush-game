@@ -12,11 +12,13 @@ namespace Relics
       [SerializeField] private GameObject smokePrefab;
       [SerializeField] private float enemySpawnDelay = 0.3f;
       [SerializeField] private float smokeDuration = 1.5f;
-      private GameObject relic;
+      
+      private GameObject _player;
 
       private void Awake()
-      {
-         relic = GameObject.Find(Tags.Relic);
+      { 
+          _player = GameObject.FindWithTag(Tags.Player);
+          Debug.Log(_player);
       }
 
       public void OnRelicAttacked()
@@ -50,7 +52,7 @@ namespace Relics
          yield return new WaitForSeconds(enemySpawnDelay);
          
          var enemyClone = Instantiate(enemyPrefab, position, Quaternion.identity);
-         enemyClone.transform.LookAt(relic.transform, Vector3.up);
+         enemyClone.transform.LookAt(_player.transform, Vector3.up);
       }
 
       void ShowUI()

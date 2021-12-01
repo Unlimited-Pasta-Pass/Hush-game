@@ -1340,7 +1340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606303676958024562}
   m_LocalRotation: {x: 0.28336862, y: 0.21979892, z: -0.066894256, w: 0.9310832}
-  m_LocalPosition: {x: -26.04, y: 15, z: -20}
+  m_LocalPosition: {x: -10, y: 15, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2694598201337503891}
@@ -1480,11 +1480,36 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1733411793681418752}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.0056800963, y: 0.0015658555, z: 0.033355277}
   m_Center: {x: 0.000000007450581, y: -0.0000000025308542, z: 0.011210685}
+--- !u!114 &1170532242146981699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733411793681418752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bdd02eaa4730848a13d16293ee38de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightAttack: {fileID: 871730103}
+  heavyAttack: {fileID: 1166744042}
+  heavyHit: {fileID: 1634170269}
+  lightHit: {fileID: 884170440}
+  baseDamage: 25
+  heavyDamage: 50
+  baseDuration: 0.3
+  heavyDuration: 0.7
+  castDelay: 0.15
+  critChance: 0.1
+  critMultiplierLow: 0.5
+  critMultiplierHigh: 0.75
+  playerAnimator: {fileID: 552221037835826511}
 --- !u!95 &552221037835826511
 Animator:
   serializedVersion: 3
@@ -6806,10 +6831,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 5
-  heavyDamage: 15
+  baseDamage: 20
+  heavyDamage: 40
   baseDuration: 0.25
   heavyDuration: 0.4
+  projectileDelay: 0.3
   castDelay: 0.1
   heavyCooldown: 10
   lightCooldown: 6
@@ -6861,7 +6887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5956840403188805875}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.036, y: 0.585, z: 0.959}
+  m_LocalPosition: {x: 0.036, y: 0.585, z: 1.326}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2694598201337503891}
@@ -7072,7 +7098,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 89308960417071028, guid: 0bd603ae65b91ae46932d63be086f7fc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.949855
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 450655593628871426, guid: 0bd603ae65b91ae46932d63be086f7fc, type: 3}
       propertyPath: m_Layer
