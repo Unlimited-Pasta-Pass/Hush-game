@@ -47,13 +47,11 @@ namespace Player
 
         private float _attackPauseTime;
         
-        public bool IsRunning => _playerSpeed > walkSpeed + 0.25f * (sprintSpeed - walkSpeed);
         public bool IsWalking => !IsRunning && _playerSpeed > 1;
 
         private void Start()
         {
             InitializePlayerTransform();
-            //footsteps.loop = true;
         }
 
         private void Update()
