@@ -16,11 +16,11 @@ public class SkillBarManager : MonoBehaviour
 
     private void Start()
     {
-        heavyIcon.GetComponent<Image>().sprite = SpellIcon(GameManager.Instance.GetActiveHeavySpell());
-        lightIcon.GetComponent<Image>().sprite = SpellIcon(GameManager.Instance.GetActiveLightSpell());
+        heavyIcon.GetComponent<Image>().sprite = GetSpellIcon(GameManager.Instance.GetActiveHeavySpell());
+        lightIcon.GetComponent<Image>().sprite = GetSpellIcon(GameManager.Instance.GetActiveLightSpell());
     }
 
-    private Sprite SpellIcon(SpellType spell)
+    private Sprite GetSpellIcon(SpellType spell)
     {
         Sprite sprite;
         switch (spell)
@@ -38,7 +38,6 @@ public class SkillBarManager : MonoBehaviour
                 sprite = fireSprite;
                 break;
         }
-
         return sprite;
     }
 }
