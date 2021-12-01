@@ -105,6 +105,11 @@ namespace Game
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(3);
         }
+        
+        public void LoadTempPowerScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(5);
+        }
     
         public void QuitGame()
         {
