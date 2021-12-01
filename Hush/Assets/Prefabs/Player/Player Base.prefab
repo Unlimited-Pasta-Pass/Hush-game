@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 1238345704}
   - component: {fileID: 1238345705}
   m_Layer: 10
-  m_Name: Step
+  m_Name: Footsteps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -716,9 +716,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f956f48b5ac49644e9f73226e32c9c00, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 760c9fad8e19c5141a8cff2e00978fd5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -6726,6 +6726,9 @@ MonoBehaviour:
   animator: {fileID: 8205350870087033752}
   controller: {fileID: 2680335586944316230}
   mainCamera: {fileID: 1005489440315475630}
+  footsteps: {fileID: 1238345705}
+  running: {fileID: 8300000, guid: 760c9fad8e19c5141a8cff2e00978fd5, type: 3}
+  walking: {fileID: 8300000, guid: 217256672ece0e440928a68f2458cf7d, type: 3}
 --- !u!114 &5076025907412216654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6794,7 +6797,7 @@ MonoBehaviour:
   lightCooldown: 6
   heavySpellPrefab: {fileID: 7914988123797705053, guid: c38086c1e93ed6940bb492e27c5057c6, type: 3}
   lightSpellPrefab: {fileID: 7914988123797705053, guid: 7cf4a77ef986c91479e83d5a95b74ace, type: 3}
-  stunAudio: {fileID: 0}
+  stunAudio: {fileID: 796894819}
   animator: {fileID: 8205350870087033752}
 --- !u!114 &2041735674550938981
 MonoBehaviour:
@@ -6838,7 +6841,7 @@ MonoBehaviour:
   speedBoost: 1
   heavyCooldown: 10
   lightCooldown: 6
-  invisibleAudio: {fileID: 0}
+  invisibleAudio: {fileID: 1621491536}
 --- !u!1 &5956840403188805875
 GameObject:
   m_ObjectHideFlags: 0

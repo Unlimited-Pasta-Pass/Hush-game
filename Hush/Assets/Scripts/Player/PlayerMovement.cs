@@ -28,6 +28,9 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private CharacterController controller;
         [SerializeField] private Camera mainCamera;
+        [SerializeField] private AudioSource footsteps;
+        [SerializeField] private AudioClip running;
+        [SerializeField] private AudioClip walking;
 
         #endregion
         
@@ -38,10 +41,30 @@ namespace Player
         private float _playerSpeed;
 
         private float _attackPauseTime;
+        
+        public bool IsRunning => _playerSpeed > walkSpeed + 0.25f * (sprintSpeed - walkSpeed);
+        public bool IsWalking => !IsRunning && _playerSpeed > 1;
 
         private void Start()
         {
             InitializePlayerTransform();
+            //footsteps.loop = true;
+        }
+
+        private void Update()
+        {
+            if(IsWalking)
+                footsteps.clip = walking;
+            else if (IsRunning)
+                footsteps.clip = running;
+
+            if (!footsteps.isPlaying && (IsWalking || IsRunning))
+            {
+                Debug.Log("Playing");
+                footsteps.Play();
+            }
+            else if(!IsRunning && !IsWalking)
+                footsteps.Stop();
         }
 
         private void FixedUpdate()
@@ -136,8 +159,6 @@ namespace Player
             
             return Input.walk ? walkSpeed : sprintSpeed;
         }
-        
-        public bool IsRunning => _playerSpeed > walkSpeed + 0.25f * (sprintSpeed - walkSpeed);
 
         public void SetSpeedModifier(float amount, bool isEnabled)
         {
