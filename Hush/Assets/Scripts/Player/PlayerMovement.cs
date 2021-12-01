@@ -12,14 +12,14 @@ namespace Player
     {
         #region Parameters
 
-        [Tooltip("Move speed of the character in m/s")]
-        [SerializeField] private float walkSpeed = 2f;
+        [Tooltip("Move speed of the character in m/s")] // [SerializeField] 
+        private float walkSpeed;
 
         [Tooltip("Rotation speed of the character")]
         [SerializeField] private float rotationSpeed = 15f;
 
-        [Tooltip("Sprint speed of the character in m/s")]
-        [SerializeField] private float sprintSpeed = 6f;
+        // [Tooltip("Sprint speed of the character in m/s")] // [SerializeField]
+        private float sprintSpeed;
 
         [Tooltip("Acceleration and deceleration")]
         [SerializeField] private float speedChangeRate = 10.0f;
@@ -54,6 +54,11 @@ namespace Player
         private void Start()
         {
             InitializePlayerTransform();
+            
+            // set speed from game state
+            walkSpeed = GameManager.Instance.PermanentSpeed + GameManager.Instance.GetPlayerSpeedBoost();
+            sprintSpeed = walkSpeed + 4;
+
         }
 
         private void Update()
