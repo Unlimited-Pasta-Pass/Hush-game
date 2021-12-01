@@ -6,18 +6,15 @@ namespace Game
 {
     public partial class GameManager
     {
-        [Header("Player")]
-        [Tooltip("Amount of damage the player can receive before dying")] 
-        [SerializeField] private float playerHitPoints = 100f;
-
         public bool PlayerIsAlive => PlayerCurrentHitPoints > 0f;
 
         public float PlayerCurrentHitPoints
         {
             get
             {
+                // if less than 0, that player HP not initialized, initialize it
                 if (_state.playerCurrentHitPoints < 0)
-                    _state.playerCurrentHitPoints = playerHitPoints;
+                    _state.playerCurrentHitPoints = _state.BaseVitalityPermanent;
                 
                 return _state.playerCurrentHitPoints;
             }
@@ -27,8 +24,9 @@ namespace Game
         {
             get
             {
+                // if less than 0, that player HP not initialized, initialize it
                 if (_state.playerMaxHitPoints < 0)
-                    _state.playerMaxHitPoints = playerHitPoints;
+                    _state.playerMaxHitPoints = _state.BaseVitalityPermanent;
                 
                 return _state.playerMaxHitPoints;
             }
