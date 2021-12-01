@@ -5,15 +5,11 @@ using UnityEngine;
 
 public class PowerUpSelectionManager : MonoBehaviour
 {
-    // public enum Choice
-    // {
-    //     Strength = 0,
-    //     Speed = 1,
-    //     Vitality = 2,
-    // }
-    
     public static PowerUpSelectionManager Instance;
     private int currentlySelected = 0;
+    [SerializeField] private float speedBoost = 0.5f;
+    [SerializeField] private float damageBoost =  10f;
+    [SerializeField] private float vitalityBoost = 15f;
 
     private void Awake()
     {
@@ -23,18 +19,18 @@ public class PowerUpSelectionManager : MonoBehaviour
         DontDestroyOnLoad(Instance.gameObject);
     }
 
-    public void OnSubmit(float boost)
+    public void OnSubmit()
     {
         switch(currentlySelected)
         {
             case 1:
-                SetupDamageBoost(boost);
+                SetupDamageBoost(damageBoost);
                 break;
             case 2:
-                SetupSpeedBoost(boost);
+                SetupSpeedBoost(speedBoost);
                 break;
             case 3:
-                SetupVitalityBoost(boost);
+                SetupVitalityBoost(vitalityBoost);
                 break;
             default: // select nothing
                 break;
