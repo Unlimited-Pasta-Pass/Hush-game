@@ -28,12 +28,16 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private CharacterController controller;
         [SerializeField] private Camera mainCamera;
+        [SerializeField] private AudioSource footsteps;
+        [SerializeField] private AudioClip running;
+        [SerializeField] private AudioClip walking;
 
         #endregion
         
         private static InputManager Input => InputManager.Instance;
         
         public bool IsRunning => _playerSpeed > WalkSpeed + 0.25f * (SprintSpeed - WalkSpeed);
+        public bool IsWalking => !IsRunning && _playerSpeed > 1;
 
         public float WalkSpeed => walkSpeed + GameManager.Instance.GetPlayerSpeedBoost();
         public float SprintSpeed => sprintSpeed + GameManager.Instance.GetPlayerSpeedBoost();
@@ -47,6 +51,19 @@ namespace Player
         private void Start()
         {
             InitializePlayerTransform();
+        }
+
+        private void Update()
+        {
+            if(IsWalking)
+                footsteps.clip = walking;
+            else if (IsRunning)
+                footsteps.clip = running;
+
+            if (!footsteps.isPlaying && (IsWalking || IsRunning))
+                footsteps.Play();
+            else if(!IsRunning && !IsWalking)
+                footsteps.Stop();
         }
 
         private void FixedUpdate()
