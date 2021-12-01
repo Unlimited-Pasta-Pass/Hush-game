@@ -11,6 +11,8 @@ namespace Game
         public static SpellSelectorManager Instance;
         private float heavyCooldown;
         private float lightCooldown;
+        
+        private int currentlySelected = 0;
 
         private void Awake()
         {
@@ -18,6 +20,47 @@ namespace Game
                 Instance = this;
             
             DontDestroyOnLoad(Instance.gameObject);
+        }
+        
+        public void OnSubmitLight()
+        {
+            switch(currentlySelected)
+            {
+                case 1:
+                    SetupLightSpell(SpellType.InvisibleSpell);
+                    break;
+                case 2:
+                    SetupLightSpell(SpellType.FireballSpell);
+                    break;
+                case 3:
+                    SetupLightSpell(SpellType.StunSpell);
+                    break;
+                default: // select nothing
+                    break;
+            }
+        }
+        
+        public void OnSubmitHeavy()
+        {
+            switch(currentlySelected)
+            {
+                case 1:
+                    SetupHeavySpell(SpellType.InvisibleSpell);
+                    break;
+                case 2:
+                    SetupHeavySpell(SpellType.FireballSpell);
+                    break;
+                case 3:
+                    SetupHeavySpell(SpellType.StunSpell);
+                    break;
+                default: // select nothing
+                    break;
+            }
+        }
+        
+        public void SetCurrentlySelected(int selected)
+        {
+            currentlySelected = selected;
         }
 
         public void SetupLightSpell(SpellType chosenSpell)
@@ -77,7 +120,5 @@ namespace Game
                     break;
             }
         }
-    
-    
     }
 }
