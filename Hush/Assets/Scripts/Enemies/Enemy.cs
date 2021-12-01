@@ -83,13 +83,14 @@ namespace Enemies
 
         #region Events
 
-        private void OnEnable()
-        {
-            _player = GameObject.FindWithTag(Tags.Player).GetComponent<PlayerMovement>();
-        }
-
         private void Start()
         {
+            var player = GameObject.FindWithTag(Tags.Player);
+            if (player == null)
+                throw new MissingComponentException("Missing Player in Scene");
+
+            _player = player.GetComponent<PlayerMovement>();
+            
             InitializeEnemy();
             if (invisible)
                 Hide(true);
