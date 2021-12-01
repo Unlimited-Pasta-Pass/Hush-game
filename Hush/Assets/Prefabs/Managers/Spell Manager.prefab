@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 742700691880628044}
   - component: {fileID: 742700691880628045}
   m_Layer: 0
-  m_Name: SpellSelectorManager
+  m_Name: Spell Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
