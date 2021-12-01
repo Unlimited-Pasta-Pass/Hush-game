@@ -59,10 +59,7 @@ namespace Player
                 footsteps.clip = running;
 
             if (!footsteps.isPlaying && (IsWalking || IsRunning))
-            {
-                Debug.Log("Playing");
                 footsteps.Play();
-            }
             else if(!IsRunning && !IsWalking)
                 footsteps.Stop();
         }
