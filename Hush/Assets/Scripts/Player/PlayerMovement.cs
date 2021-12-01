@@ -173,7 +173,7 @@ namespace Player
             return Input.walk ? WalkSpeed : SprintSpeed;
         }
 
-        public void SetSpeedModifier(float amount, bool isEnabled)
+        public void SetTemporarySpeedModifier(float amount, bool isEnabled)
         {
             if (isEnabled)
             {
