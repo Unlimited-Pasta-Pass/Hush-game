@@ -5,6 +5,20 @@ namespace Game
 {
     public partial class GameManager
     {
+        [SerializeField] private float fireHeavyCooldown = 10f;
+        [SerializeField] private float fireLightCooldown = 5f;
+        [SerializeField] private float stunHeavyCooldown =  10f;
+        [SerializeField] private float stunLightCooldown = 5f;
+        [SerializeField] private float invisibleHeavyCooldown = 10f;
+        [SerializeField] private float invisibleLightCooldown =  5f;
+        
+        public float FireHeavyCooldown => fireHeavyCooldown;
+        public float FireLightCooldown => fireLightCooldown;
+        public float StunHeavyCooldown => stunHeavyCooldown ;
+        public float StunLightCooldown => stunLightCooldown;
+        public float InvisibleHeavyCooldown => invisibleHeavyCooldown ;
+        public float InvisibleLightCooldown => invisibleLightCooldown;
+
         public bool CanCastHeavy => Time.time - GetHeavySpellActivationTime() > GetHeavySpellCoolDownTime();
         public bool CanCastLight => Time.time - GetLightSpellActivationTime() > GetLightSpellCoolDownTime();
         
