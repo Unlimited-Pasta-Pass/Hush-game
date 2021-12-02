@@ -17,8 +17,8 @@ namespace Game
 
         public float PermanentSpeed
         {
-            get => _state.BaseSpeedPermanent;
-            private set => _state.BaseSpeedPermanent = value;
+            get => _state.baseSpeedPermanent;
+            private set => _state.baseSpeedPermanent = value;
         }
 
         public void BoostPermanentSpeed()
@@ -28,8 +28,8 @@ namespace Game
         
         public float PermanentVitality
         {
-            get => _state.BaseVitalityPermanent;
-            private set => _state.BaseVitalityPermanent = value;
+            get => _state.baseVitalityPermanent;
+            private set => _state.baseVitalityPermanent = value;
         }
 
         public void BoostPermanentVitality()

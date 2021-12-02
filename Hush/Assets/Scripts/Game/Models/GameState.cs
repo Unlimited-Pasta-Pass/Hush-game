@@ -29,8 +29,8 @@ namespace Game.Models
         
         // Permanent Stat
         public float baseDamagePermanent;
-        public float BaseSpeedPermanent;
-        public float BaseVitalityPermanent;
+        public float baseSpeedPermanent;
+        public float baseVitalityPermanent;
 
         // Echolocation
         public float echolocationActivationTime;
@@ -59,6 +59,8 @@ namespace Game.Models
         
         // Scene
         public int currentlyLoadedScene;
+        public int randomSceneSeed;
+        public int sceneProgress;
 
         public GameState()
         {
@@ -67,8 +69,8 @@ namespace Game.Models
 
             // Permanent Progress
             baseDamagePermanent = 5f;
-            BaseSpeedPermanent = 2f;
-            BaseVitalityPermanent = 100f;
+            baseSpeedPermanent = 2f;
+            baseVitalityPermanent = 100f;
             
             // Player
             playerCurrentHitPoints = -1f;
@@ -107,6 +109,8 @@ namespace Game.Models
             
             // Scene
             currentlyLoadedScene = 0;
+            randomSceneSeed = 0;
+            sceneProgress = -1;
         }
     }
 }
