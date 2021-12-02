@@ -30,7 +30,7 @@ namespace Player
         
         public void TakeDamage(float damage)
         {
-            // TODO: Add animation
+            animator.SetTrigger(PlayerAnimator.TakeHit);
             damageSound.Play();
             
             // If the player's hp is at 0 or lower, they die
