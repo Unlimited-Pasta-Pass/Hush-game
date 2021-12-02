@@ -12,7 +12,7 @@ public class Menus : MonoBehaviour
 
     public void NewGame()
     {
-        SceneManager.Instance.LoadNextScene();
+        SceneManager.Instance.LoadFirstFloor();
     }
     
     public void LoadGame()

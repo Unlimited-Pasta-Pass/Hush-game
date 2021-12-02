@@ -107,6 +107,11 @@ namespace Game
             UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.GameOver);
         }
         
+        public void LoadFirstFloor()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.FirstFloor);
+        }
+
         public void LoadTempPowerScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.PowerUp);
