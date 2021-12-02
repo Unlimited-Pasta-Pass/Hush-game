@@ -1,4 +1,5 @@
 using UnityEngine;
+using Weapon.Enums;
 
 namespace Game
 {
@@ -6,10 +7,15 @@ namespace Game
     {
         public static SceneManager Instance;
 
+        [Header("Scene Build Indexes")]
         [SerializeField] private int[] levelSceneIndexes;
         [SerializeField] private int mainMenuIndex;
         [SerializeField] private int finalSceneIndex;
         [SerializeField] private int endgameSceneIndex;
+        
+        [Header("New Game Parameters")]
+        [SerializeField] private SpellType initialLightSpell = SpellType.FireballSpell;
+        [SerializeField] private SpellType initialHeavySpell = SpellType.StunSpell;
 
         // private Dictionary<int, int> _randomScenes;
 
@@ -105,6 +111,10 @@ namespace Game
         private void StartNewGame()
         {
             // TODO Generate seed & randomize scene order based on seed
+            
+            // Hack to set initial spells
+            GameManager.Instance.SetActiveLightSpell(initialLightSpell);
+            GameManager.Instance.SetActiveHeavySpell(initialHeavySpell);
         }
 
         private void TransitionToScene(int index)
