@@ -16,7 +16,7 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private AudioSource deathSound;
         [SerializeField] private AudioSource damageSound;
-        [SerializeField] private CanvasGroup damageUI;
+        private CanvasGroup damageOverlay;
 
         private bool deathSoundPlayed = false; // Used to prevent additional death sounds if the player is hit after death
 
@@ -31,6 +31,10 @@ namespace Player
         
         #endregion
         
+        void Start() {
+            damageOverlay = GameObject.Find("Overlay").GetComponent<CanvasGroup>();
+        }
+
         public void TakeDamage(float damage)
         {
             animator.SetTrigger(PlayerAnimator.TakeHit);
@@ -43,12 +47,12 @@ namespace Player
         }
 
         public void FadeIn() {
-            StartCoroutine(FadeCanvasGroup(damageUI, damageUI.alpha, 1, 0.5f));
+            StartCoroutine(FadeCanvasGroup(damageOverlay, damageOverlay.alpha, 1, 0.5f));
             Invoke(nameof(FadeOut), 0.5f);
         }
 
         public void FadeOut() {
-            StartCoroutine(FadeCanvasGroup(damageUI, damageUI.alpha, 0, 0.5f));
+            StartCoroutine(FadeCanvasGroup(damageOverlay, damageOverlay.alpha, 0, 0.5f));
         }
 
         public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 1) {

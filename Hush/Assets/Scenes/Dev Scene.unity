@@ -1920,10 +1920,6 @@ PrefabInstance:
       propertyPath: serializedGuid.Array.data[15]
       value: 60
       objectReference: {fileID: 0}
-    - target: {fileID: 2041735674550938981, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2694598201337503891, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1972,14 +1968,6 @@ PrefabInstance:
       propertyPath: damageUI
       value: 
       objectReference: {fileID: 1168144224}
-    - target: {fileID: 4051060434028570058, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4051060434028570058, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20
-      objectReference: {fileID: 0}
     - target: {fileID: 5381592743170887637, guid: 100992fbf20ff3b4caca1e6e2e308d2b, type: 3}
       propertyPath: m_Name
       value: Player
