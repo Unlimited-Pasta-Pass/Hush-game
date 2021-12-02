@@ -36,12 +36,12 @@ namespace Game
             }
 
             // Done with regular levels & Boss => Endgame
-            if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length + 1)
+            if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length)
             {
                 LoadEndgame();
             }
             // Done with regular levels = Final Level
-            else if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length)
+            else if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length - 1)
             {
                 LoadFinal();
             }
