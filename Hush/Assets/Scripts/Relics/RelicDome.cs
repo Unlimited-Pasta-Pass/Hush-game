@@ -98,6 +98,7 @@ namespace Relics
             SetDomeVisibility(false);
             
             explosion.Play();
+            interactOverlay.SetActive(false);
             
             GameManager.Instance.DisableDome();
             Killed.Invoke();
