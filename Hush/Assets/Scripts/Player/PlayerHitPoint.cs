@@ -14,6 +14,7 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private AudioSource deathSound;
         [SerializeField] private AudioSource damageSound;
+        [SerializeField] private GameObject damageUI;
 
         private bool deathSoundPlayed = false; // Used to prevent additional death sounds if the player is hit after death
 
@@ -37,6 +38,13 @@ namespace Player
             if (!GameManager.Instance.UpdatePlayerHitPoints(-damage))
                 Die();
         }
+
+        public void DisplayDamageUI() {
+            damageUI.SetActive(true);
+            
+        }
+
+
 
         public void Die()
         {
