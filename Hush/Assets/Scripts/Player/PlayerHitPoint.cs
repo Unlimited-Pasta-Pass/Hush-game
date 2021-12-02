@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using Common.Enums;
 
 namespace Player
 {
@@ -31,8 +32,9 @@ namespace Player
         
         #endregion
         
-        void Start() {
-            damageOverlay = FindObjectOfType<CanvasGroup>();
+        void Start()
+        {
+            damageOverlay = GameObject.FindWithTag(Tags.DamageOverlay).GetComponent<CanvasGroup>();
         }
 
         public void TakeDamage(float damage)
