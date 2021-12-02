@@ -1,6 +1,7 @@
 using System;
 using Game.Models;
 using UnityEngine;
+using Weapon.Enums;
 
 namespace Game
 {
