@@ -299,7 +299,7 @@ RectTransform:
   m_Children:
   - {fileID: 2790129223667568943}
   m_Father: {fileID: 8266203884277320489}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -692,7 +692,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8914116423865364070}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
           m_MethodName: ShowTooltipHeavySpell
           m_Mode: 1
@@ -708,7 +708,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8914116423865364070}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
           m_MethodName: HideTooltip
           m_Mode: 1
@@ -1122,7 +1122,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8914116423865364070}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
           m_MethodName: ShowTooltipEcholocation
           m_Mode: 1
@@ -1138,7 +1138,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8914116423865364070}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
           m_MethodName: HideTooltip
           m_Mode: 1
@@ -1182,7 +1182,7 @@ RectTransform:
   m_Children:
   - {fileID: 8842922975204438058}
   m_Father: {fileID: 8266203884277320489}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1850,6 +1850,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3922397136122347312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6919934420436303989}
+  m_Layer: 5
+  m_Name: SavingText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &6919934420436303989
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3922397136122347312}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4170836318743854760}
+  m_Father: {fileID: 6352764527784536309}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 779.5, y: -413}
+  m_SizeDelta: {x: 300, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4437958104107774373
 GameObject:
   m_ObjectHideFlags: 0
@@ -2071,7 +2107,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8914116423865364070}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
           m_MethodName: ShowTooltipLightSpell
           m_Mode: 1
@@ -2087,7 +2123,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8914116423865364070}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: TooltipUI, Assembly-CSharp
           m_MethodName: HideTooltip
           m_Mode: 1
@@ -2110,7 +2146,7 @@ GameObject:
   - component: {fileID: 8842922975204438058}
   - component: {fileID: 932250904255440706}
   - component: {fileID: 3265812249849297232}
-  - component: {fileID: 8223617712937950445}
+  - component: {fileID: 1168144224}
   m_Layer: 5
   m_Name: Overlay
   m_TagString: Untagged
@@ -2175,7 +2211,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &8223617712937950445
+--- !u!225 &1168144224
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2555,7 +2591,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4353619293567609812}
-  - component: {fileID: 8914116423865364070}
+  - component: {fileID: 168523048}
   m_Layer: 5
   m_Name: Tooltip
   m_TagString: Untagged
@@ -2577,14 +2613,14 @@ RectTransform:
   - {fileID: 1900456419148201646}
   - {fileID: 1104473938791728303}
   m_Father: {fileID: 8266203884277320489}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 901, y: 490}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &8914116423865364070
+--- !u!114 &168523048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2778,14 +2814,13 @@ GameObject:
   m_Component:
   - component: {fileID: 652322082810480882}
   - component: {fileID: 2616762372153112438}
-  - component: {fileID: 2844261173677002578}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &652322082810480882
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2814,19 +2849,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6373345658992613965}
   m_CullTransparentMesh: 1
---- !u!114 &2844261173677002578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6373345658992613965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4bc933e9fcc9d34a8b2417443cdc473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 6871144102019165746}
 --- !u!1 &6457916929256334163
 GameObject:
   m_ObjectHideFlags: 0
@@ -3157,8 +3179,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2146090452211496026, guid: d0f6be0b20d8ad94a819251733695b17, type: 3}
-        m_TargetAssemblyTypeName: Game.SceneManager, Assembly-CSharp
+      - m_Target: {fileID: 1351470289}
+        m_TargetAssemblyTypeName: UI.PauseMenuUI, Assembly-CSharp
         m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
@@ -3200,6 +3222,7 @@ RectTransform:
   - {fileID: 4492830342475980814}
   - {fileID: 988418358490879868}
   - {fileID: 1015157808573223772}
+  - {fileID: 6919934420436303989}
   m_Father: {fileID: 652322082810480882}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4392,7 +4415,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2146090452211496026, guid: d0f6be0b20d8ad94a819251733695b17, type: 3}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Game.SceneManager, Assembly-CSharp
         m_MethodName: ReloadScene
         m_Mode: 1
@@ -4404,6 +4427,140 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &7970524313123715327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4170836318743854760}
+  - component: {fileID: 2485696205227949751}
+  - component: {fileID: 6034777539356135891}
+  m_Layer: 5
+  m_Name: Saving
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4170836318743854760
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970524313123715327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6919934420436303989}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 300, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2485696205227949751
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970524313123715327}
+  m_CullTransparentMesh: 1
+--- !u!114 &6034777539356135891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970524313123715327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Save Failed.
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 120e93d743b9871479b7b98fbcee1a16, type: 2}
+  m_sharedMaterial: {fileID: 6313852495158935412, guid: 120e93d743b9871479b7b98fbcee1a16, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 49.44639, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &8115773034607902919
 GameObject:
   m_ObjectHideFlags: 0
@@ -4968,7 +5125,7 @@ RectTransform:
   - {fileID: 8266203883923954660}
   - {fileID: 8266203882555600268}
   m_Father: {fileID: 8266203884277320489}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5070,7 +5227,7 @@ RectTransform:
   m_Children:
   - {fileID: 8266203882439401620}
   m_Father: {fileID: 8266203884277320489}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -5364,6 +5521,8 @@ GameObject:
   - component: {fileID: 8266203884277320488}
   - component: {fileID: 8266203884277320491}
   - component: {fileID: 8266203884277320490}
+  - component: {fileID: 1223908764525887208}
+  - component: {fileID: 1351470289}
   m_Layer: 5
   m_Name: GameUI
   m_TagString: Untagged
@@ -5382,12 +5541,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 2771410513772092130}
   - {fileID: 8266203883363038619}
   - {fileID: 8266203883506825293}
   - {fileID: 7922327649963067216}
-  - {fileID: 4353619293567609812}
   - {fileID: 652322082810480882}
-  - {fileID: 2771410513772092130}
+  - {fileID: 4353619293567609812}
   - {fileID: 7171158317327256567}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -5416,7 +5575,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &8266203884277320491
 MonoBehaviour:
@@ -5458,6 +5617,32 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &1223908764525887208
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266203884277320533}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &1351470289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8266203884277320533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bc933e9fcc9d34a8b2417443cdc473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 6871144102019165746}
+  savingFeedbackText: {fileID: 3922397136122347312}
 --- !u!1 &8266203884451753816
 GameObject:
   m_ObjectHideFlags: 0
@@ -5788,9 +5973,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6988889643294743885, guid: b714265a326a28b4bac74dd68dc9dbd8, type: 3}
-        m_TargetAssemblyTypeName: Game.SaveGameManager, Assembly-CSharp
-        m_MethodName: OnSave
+      - m_Target: {fileID: 1351470289}
+        m_TargetAssemblyTypeName: UI.PauseMenuUI, Assembly-CSharp
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6538,7 +6723,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2844261173677002578}
+      - m_Target: {fileID: 1351470289}
         m_TargetAssemblyTypeName: UI.PauseMenuUI, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
