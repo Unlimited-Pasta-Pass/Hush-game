@@ -100,6 +100,19 @@ namespace Game
             return _state.isPlayerInvisible;
         }
 
+        public void RestorePlayerHealth()
+        {
+            _state.playerCurrentHitPoints = _state.playerMaxHitPoints;
+        }
+
+        public void ResetTemporaryBuffs()
+        {
+            _state.damageBoost = 0;
+            _state.speedBoost = 0;
+            _state.vitalityBoost = 0;
+            _state.isPlayerInvisible = false;
+        }
+
         private void ApplyPlayerState()
         {
             var playerMovement = FindObjectOfType<PlayerMovement>();

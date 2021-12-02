@@ -96,6 +96,8 @@ namespace Game
         {
             // Leave before scene transition to save progress
             GameManager.Instance.ResetSceneProgress();
+            GameManager.Instance.RestorePlayerHealth();
+            GameManager.Instance.ResetTemporaryBuffs();
             TransitionToScene(endgameSceneIndex);
         }
         
@@ -137,7 +139,7 @@ namespace Game
             GameManager.Instance.ResetPlayer();
             GameManager.Instance.ResetKeys();
             GameManager.Instance.ResetRelic();
-            GameManager.Instance.ResetEnemies();
+            GameManager.Instance.ResetEnemies(); 
         }
     }
 }
