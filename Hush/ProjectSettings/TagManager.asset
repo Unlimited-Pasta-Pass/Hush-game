@@ -15,6 +15,7 @@ TagManager:
   - Dome
   - Relic Dome
   - Spell
+  - DamageOverlay
   layers:
   - Default
   - TransparentFX

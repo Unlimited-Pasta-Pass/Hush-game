@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using Common.Enums;
 
 namespace Player
 {
@@ -32,10 +33,10 @@ namespace Player
         public float HitPoints => GameManager.Instance.PlayerCurrentHitPoints;
 
         #endregion
-
+        
         void Start()
         {
-            damageOverlay = FindObjectOfType<CanvasGroup>();
+            damageOverlay = GameObject.FindWithTag(Tags.DamageOverlay).GetComponent<CanvasGroup>();
         }
 
         public void TakeDamage(float damage)
