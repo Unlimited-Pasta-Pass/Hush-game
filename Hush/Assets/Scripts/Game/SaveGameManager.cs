@@ -46,12 +46,9 @@ namespace Game
         public void OnSave()
         {
             GameManager.Instance.SetSaveTime(Time.time);
-            
-            if(_path.Equals("/pasta.save"))
-                _path = Application.persistentDataPath + _path;
-                
-            var stream = new FileStream(_path, FileMode.Create);
-            _formatter.Serialize(stream, GameManager.Instance.CurrentGameState);
+
+            var stream = new FileStream(Instance._path, FileMode.Create);
+            Instance._formatter.Serialize(stream, GameManager.Instance.CurrentGameState);
             stream.Close();
         }
         
