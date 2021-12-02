@@ -135,7 +135,7 @@ namespace Game
 
             // TEMPORARY VALUE REMOVE
             LoadFirstFloor();
-            GameManager.Instance.SetLoadedScene( firstFloor);
+            GameManager.Instance.SetLoadedScene( Instance.firstFloor);
             
             // Hack to set initial spells
             GameManager.Instance.SetActiveLightSpell(initialLightSpell);
