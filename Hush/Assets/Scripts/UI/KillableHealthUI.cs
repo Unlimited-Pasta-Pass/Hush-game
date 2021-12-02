@@ -1,4 +1,6 @@
+using Common.Enums;
 using Common.Interfaces;
+using Game;
 using UnityEngine;
 using Slider = UnityEngine.UI.Slider;
 
@@ -12,6 +14,24 @@ namespace UI
         [Header("References")]
         [SerializeField] private GameObject killableObject;
         [SerializeField] private Slider healthSlider;
+        
+        private void OnEnable()
+        {
+            if (killableObject.CompareTag(Tags.Enemy))
+            {
+                healthSlider.maxValue = 50;
+            }
+
+            if (killableObject.CompareTag(Tags.Dome))
+            {
+                healthSlider.maxValue = GameManager.Instance.RelicDomeHitPoints;
+            }
+
+            else // default
+            {
+                healthSlider.maxValue = 100;
+            }
+        }
 
         private void Update()
         {
