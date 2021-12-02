@@ -6782,6 +6782,7 @@ MonoBehaviour:
   animator: {fileID: 552221037835826511}
   deathSound: {fileID: 61987279}
   damageSound: {fileID: 1886860495}
+  damageUI: {fileID: 0}
 --- !u!114 &9199240927236339795
 MonoBehaviour:
   m_ObjectHideFlags: 0
