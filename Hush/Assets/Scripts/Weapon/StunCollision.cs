@@ -6,11 +6,12 @@ namespace Weapon
 {
     public class StunCollision : MonoBehaviour
     {
-        [SerializeField] private float radius = 10f;
+        [SerializeField] private float lightRadius = 5f;
+        [SerializeField] private float heavyRadius = 10f;
 
-        public void StunEffect(Vector3 center, float duration)
+        public void StunEffect(Vector3 center, float duration, bool isHeavy)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+            Collider[] hitColliders = Physics.OverlapSphere(center, isHeavy ? heavyRadius : lightRadius);
            
             foreach (var hitCollider in hitColliders)
             {

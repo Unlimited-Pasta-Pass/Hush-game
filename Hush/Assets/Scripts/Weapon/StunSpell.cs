@@ -104,7 +104,7 @@ public class StunSpell : MonoBehaviour, ISpell
             Vector3 pos = transform.position + spellOffset;
             spellClone.transform.position = pos;
             
-            spellClone.GetComponent<StunCollision>().StunEffect(pos, stunLength);
+            spellClone.GetComponent<StunCollision>().StunEffect(pos, stunLength, isHeavy);
             spellClone.GetComponent<ParticleSystem>().Play();
             stunAudio.Play();
            
