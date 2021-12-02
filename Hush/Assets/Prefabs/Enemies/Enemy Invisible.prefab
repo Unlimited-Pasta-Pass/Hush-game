@@ -15,6 +15,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2027018368, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
+      propertyPath: MaxDistance
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027018368, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
+      propertyPath: rolloffMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1423858757433039569, guid: 0a7eeb171ce643041827899f574c115a, type: 3}
       propertyPath: m_Name
       value: Enemy Invisible
