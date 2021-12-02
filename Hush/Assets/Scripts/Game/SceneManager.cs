@@ -83,8 +83,6 @@ namespace Game
             }
             else
             {
-                // Leave before scene transition to save progress
-                GameManager.Instance.IncreaseSceneProgress();
                 TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
             }
             
@@ -93,17 +91,19 @@ namespace Game
         private void LoadFinal()
         {
             // Leave before scene transition to save progress
-            GameManager.Instance.IncreaseSceneProgress();
             TransitionToScene(Scenes.FinalFloor);
         }
 
         private void LoadWinScreen()
         {
             // Leave before scene transition to save progress
-            GameManager.Instance.ResetSceneProgress();
             GameManager.Instance.RestorePlayerHealth();
             GameManager.Instance.ResetTemporaryBuffs();
+            
             TransitionToScene(Scenes.Win);
+            
+            // Leave Here
+            GameManager.Instance.ResetSceneProgress();
         }
 
         public void LoadGameOverScene()
@@ -137,6 +137,7 @@ namespace Game
             UnityEngine.SceneManagement.SceneManager.LoadScene((int) sceneIndex);
 
             GameManager.Instance.SetLoadedScene(sceneIndex);
+            GameManager.Instance.IncreaseSceneProgress();
 
             // Don't save moving to the menu
             if (sceneIndex != Scenes.MainMenu)

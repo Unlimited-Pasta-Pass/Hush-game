@@ -7,7 +7,7 @@ namespace Game
     {
         public Scenes CurrentlyLoadedScene => _state.currentlyLoadedScene;
 
-        public int RandomSceneSeed => _state.randomSceneSeed;
+        // public int RandomSceneSeed => _state.randomSceneSeed;
 
         public int SceneProgression => _state.sceneProgress;
 
