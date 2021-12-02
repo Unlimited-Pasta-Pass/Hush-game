@@ -24,8 +24,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/PowersPermanent.unity
     guid: 150c782d30e752d42a9bce7c9b8c1930
   - enabled: 1
-    path: Assets/Scenes/Floors/FinalFloor.unity
-    guid: bf52399c27d1efc40b085574eed0e887
+    path: Assets/Scenes/FinalRoom.unity
+    guid: b76e101a02a0e7e4699f4146964981a0
   - enabled: 1
     path: Assets/Scenes/Floors/Floor053.unity
     guid: 55db267034d7acd4098b825eae2ec74f
