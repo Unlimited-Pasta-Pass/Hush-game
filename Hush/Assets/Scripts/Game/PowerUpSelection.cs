@@ -3,21 +3,15 @@ using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
-public class PowerUpSelectionManager : MonoBehaviour
+public class PowerUpSelection : MonoBehaviour
 {
-    public static PowerUpSelectionManager Instance;
     private int currentlySelected = 0;
     [SerializeField] private float speedBoost = 0.5f;
     [SerializeField] private float damageBoost =  10f;
     [SerializeField] private float vitalityBoost = 15f;
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-            
-        DontDestroyOnLoad(Instance.gameObject);
-    }
+    [SerializeField] private GameObject powerBorder;
+    [SerializeField] private GameObject speedBorder;
+    [SerializeField] private GameObject vitalityBorder;
 
     public void OnSubmit()
     {
@@ -32,13 +26,28 @@ public class PowerUpSelectionManager : MonoBehaviour
             case 3:
                 SetupVitalityBoost(vitalityBoost);
                 break;
-            default: // select nothing
-                break;
         }
     }
 
     public void SetCurrentlySelected(int selected)
     {
+        powerBorder.SetActive(false);
+        speedBorder.SetActive(false);
+        vitalityBorder.SetActive(false);
+
+        switch(selected)
+        {
+            case 1:
+                powerBorder.SetActive(true);
+                break;
+            case 2:
+                speedBorder.SetActive(true);
+                break;
+            case 3:
+                vitalityBorder.SetActive(true);
+                break;
+        }
+
         currentlySelected = selected;
     }
 
