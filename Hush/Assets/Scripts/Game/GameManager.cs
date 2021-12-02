@@ -49,5 +49,12 @@ namespace Game
             ApplyEcholocationState();
             ApplySpellState();
         }
+
+        public void NewGame()
+        {
+            _state = new GameState();
+            SceneManager.Instance.LoadNextScene();
+        }
+        
     }
 }

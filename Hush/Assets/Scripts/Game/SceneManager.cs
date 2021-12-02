@@ -80,11 +80,16 @@ namespace Game
             if (GameManager.Instance.SceneProgression < 0)
             {
                 StartNewGame();
+                GameManager.Instance.IncreaseSceneProgress();
             }
+            else
+            {
+                GameManager.Instance.IncreaseSceneProgress();
+                // Leave before scene transition to save progress
+                TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
+            }
+            
 
-            // Leave before scene transition to save progress
-            GameManager.Instance.IncreaseSceneProgress();
-            TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
             // TransitionToScene(RandomScenes[GameManager.Instance.SceneProgress]);
         }
 
@@ -134,9 +139,8 @@ namespace Game
             // TODO Generate seed & randomize scene order based on seed
 
             // TEMPORARY VALUE REMOVE
-            LoadFirstFloor();
-            GameManager.Instance.SetLoadedScene( Instance.firstFloor);
-            
+            TransitionToScene(firstFloor);
+
             // Hack to set initial spells
             GameManager.Instance.SetActiveLightSpell(initialLightSpell);
             GameManager.Instance.SetActiveHeavySpell(initialHeavySpell);
