@@ -1,10 +1,11 @@
-﻿using Common.Interfaces;
+using Common.Interfaces;
 using Game;
 using Player.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using Common.Enums;
 
 namespace Player
 {
@@ -12,13 +13,15 @@ namespace Player
     {
         #region Parameters
 
-        [Header("Component References")] 
-        [SerializeField] private Animator animator;
+        [Header("Component References")] [SerializeField]
+        private Animator animator;
+
         [SerializeField] private AudioSource deathSound;
         [SerializeField] private AudioSource damageSound;
         private CanvasGroup damageOverlay;
 
-        private bool deathSoundPlayed = false; // Used to prevent additional death sounds if the player is hit after death
+        // Used to prevent additional death sounds if the player is hit after death
+        private bool deathSoundPlayed = false;
 
         #endregion
 
@@ -28,11 +31,12 @@ namespace Player
         public UnityEvent Killed => _killed ??= new UnityEvent();
 
         public float HitPoints => GameManager.Instance.PlayerCurrentHitPoints;
-        
+
         #endregion
         
-        void Start() {
-            damageOverlay = FindObjectOfType<CanvasGroup>();
+        void Start()
+        {
+            damageOverlay = GameObject.FindWithTag(Tags.DamageOverlay).GetComponent<CanvasGroup>();
         }
 
         public void TakeDamage(float damage)
@@ -40,13 +44,14 @@ namespace Player
             animator.SetTrigger(PlayerAnimator.TakeHit);
             damageSound.Play();
             FadeIn();
-            
+
             // If the player's hp is at 0 or lower, they die
             if (!GameManager.Instance.UpdatePlayerHitPoints(-damage))
                 Die();
         }
 
-        public void FadeIn() {
+        public void FadeIn()
+        {
             if (damageOverlay)
             {
                 StartCoroutine(FadeCanvasGroup(damageOverlay, damageOverlay.alpha, 1, 0.5f));
@@ -54,17 +59,20 @@ namespace Player
             }
         }
 
-        public void FadeOut() {
-            if(damageOverlay)
+        public void FadeOut()
+        {
+            if (damageOverlay)
                 StartCoroutine(FadeCanvasGroup(damageOverlay, damageOverlay.alpha, 0, 0.5f));
         }
 
-        public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 1) {
+        public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 1)
+        {
             float _timeStartedLerping = Time.time;
-		    float timeSinceStarted = Time.time - _timeStartedLerping;
-		    float percentageComplete = timeSinceStarted / lerpTime;
+            float timeSinceStarted = Time.time - _timeStartedLerping;
+            float percentageComplete = timeSinceStarted / lerpTime;
 
-            while(true) {
+            while (true)
+            {
                 timeSinceStarted = Time.time - _timeStartedLerping;
                 percentageComplete = timeSinceStarted / lerpTime;
 
@@ -72,9 +80,11 @@ namespace Player
 
                 cg.alpha = currentValue;
 
-                if (percentageComplete >= 1) {
+                if (percentageComplete >= 1)
+                {
                     break;
                 }
+
                 yield return new WaitForFixedUpdate();
             }
         }
@@ -86,10 +96,9 @@ namespace Player
                 deathSoundPlayed = true;
                 deathSound.Play();
             }
-            
+
             animator.SetBool(PlayerAnimator.Dead, true);
             Killed.Invoke();
         }
-        
     }
 }

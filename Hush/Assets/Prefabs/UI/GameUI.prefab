@@ -2149,7 +2149,7 @@ GameObject:
   - component: {fileID: 1168144224}
   m_Layer: 5
   m_Name: Overlay
-  m_TagString: Untagged
+  m_TagString: DamageOverlay
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5642,7 +5642,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 6871144102019165746}
-  savingFeedbackText: {fileID: 3922397136122347312}
 --- !u!1 &8266203884451753816
 GameObject:
   m_ObjectHideFlags: 0

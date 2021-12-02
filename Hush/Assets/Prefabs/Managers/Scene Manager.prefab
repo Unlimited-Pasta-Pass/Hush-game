@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6225878688b9ee3419c10a07b0e86cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSceneIndexes: 010000000200000003000000
-  mainMenuIndex: 0
-  finalSceneIndex: 4
-  endgameSceneIndex: 5
+  levelSceneIndexes: 070000000800000009000000
+  initialLightSpell: 1
+  initialHeavySpell: 3

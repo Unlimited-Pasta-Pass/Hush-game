@@ -10,5 +10,6 @@
         public static string KeySpawner => "Key Spawner";
         public static string Dome => "Dome";
         public static string Spell => "Spell";
+        public static string DamageOverlay => "DamageOverlay";
     }
 }
