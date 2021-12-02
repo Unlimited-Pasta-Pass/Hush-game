@@ -23,7 +23,7 @@ namespace Relics
 
         public void SetRelicVisibility(bool visibility)
         {
-            collectRelicSound.Play();
+            AudioSource.PlayClipAtPoint(collectRelicSound.clip, transform.position);
             gameObject.SetActive(visibility);
         }
     }
