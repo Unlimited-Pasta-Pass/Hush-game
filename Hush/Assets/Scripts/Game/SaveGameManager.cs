@@ -1,3 +1,4 @@
+﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Game.Enums;
@@ -43,13 +44,22 @@ namespace Game
             _formatter ??= new BinaryFormatter();
         }
 
-        public void OnSave()
+        public bool OnSave()
         {
-            GameManager.Instance.SetSaveTime(Time.time);
+            try
+            {
+                GameManager.Instance.SetSaveTime(Time.time);
 
-            var stream = new FileStream(Instance._path, FileMode.Create);
-            Instance._formatter.Serialize(stream, GameManager.Instance.CurrentGameState);
-            stream.Close();
+                var stream = new FileStream(Instance._path, FileMode.Create);
+                _formatter.Serialize(stream, GameManager.Instance.CurrentGameState);
+                stream.Close();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
         }
         
         public GameState OnLoad(bool applySavedGames = true)

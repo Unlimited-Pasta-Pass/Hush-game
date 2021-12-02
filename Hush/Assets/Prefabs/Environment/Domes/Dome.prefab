@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3484052249403165149}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &496926752884777774
 ParticleSystem:
@@ -4995,9 +4995,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactOverlay: {fileID: 9191415903306477465}
-  keysNeededToUnlock: 1
+  keysNeededToUnlock: 3
   explosion: {fileID: 496926752884777774}
   healthBar: {fileID: 4260453333849405844}
+  shatterSound: {fileID: 0}
+  hitSound: {fileID: 0}
   attacked:
     m_PersistentCalls:
       m_Calls: []

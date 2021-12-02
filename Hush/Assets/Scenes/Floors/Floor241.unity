@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 82b660520bdecce4daf45d270ec93fe4, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4490121, g: 0.49907756, b: 0.5757116, a: 1}
+  m_IndirectSpecularColor: {r: 0.13471615, g: 0.14837316, b: 0.16128165, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -265,27 +265,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[0]
-      value: 204
+      value: 217
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[1]
-      value: 36
+      value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
+      propertyPath: serializedGuid.Array.data[2]
+      value: 245
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[3]
-      value: 41
+      value: 122
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[4]
-      value: 82
+      value: 168
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[5]
-      value: 231
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[6]
-      value: 243
+      value: 162
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[7]
@@ -293,35 +297,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[8]
-      value: 180
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[9]
-      value: 239
+      value: 107
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[10]
-      value: 13
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[11]
-      value: 177
+      value: 217
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[12]
-      value: 229
+      value: 163
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[13]
-      value: 127
+      value: 71
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[14]
-      value: 85
+      value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 293698681927397089, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: serializedGuid.Array.data[15]
-      value: 119
+      value: 74
       objectReference: {fileID: 0}
     - target: {fileID: 317718936593231555, guid: e14d11f7e9bfdf1459b7539a8434c715, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3183,7 +3187,7 @@ PrefabInstance:
     - target: {fileID: 896365045134617329, guid: 007c9addaa1d7344a81eafabc8bf1a3f, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: b814d8edbd9cd6f4aa29e492178d0951, type: 2}
+      objectReference: {fileID: 23800000, guid: 431141b9b4a01314695fe7a91f068bb0, type: 2}
     - target: {fileID: 1094061066744057904, guid: 007c9addaa1d7344a81eafabc8bf1a3f, type: 3}
       propertyPath: m_RootOrder
       value: 12

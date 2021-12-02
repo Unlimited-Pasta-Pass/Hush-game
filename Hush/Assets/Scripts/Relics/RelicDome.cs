@@ -4,6 +4,7 @@ using Common.Interfaces;
 using Game;
 using Player;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
@@ -108,6 +109,7 @@ namespace Relics
         {
             GetComponent<MeshRenderer>().enabled = visibility;
             GetComponent<Collider>().enabled = visibility;
+            GetComponent<NavMeshObstacle>().carving = visibility;
             healthBar.SetActive(visibility);
         }
 
