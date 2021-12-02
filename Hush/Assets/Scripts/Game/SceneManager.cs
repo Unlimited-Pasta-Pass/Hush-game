@@ -31,7 +31,7 @@ namespace Game
         public void LoadNextScene()
         {
             // ignore scene state reinitialization if main menu 
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex != mainMenuIndex)
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex != Scenes.MainMenu)
             {
                 ReinitializeSceneState();
             }
@@ -39,7 +39,7 @@ namespace Game
             // Done with regular levels & Boss => Endgame
             if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length)
             {
-                LoadEndgame();
+                LoadWinScreen();
             }
             // Done with regular levels = Final Level
             else if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length - 1)
@@ -70,7 +70,7 @@ namespace Game
 
         public void LoadMainMenu()
         {
-            TransitionToScene(mainMenuIndex);
+            TransitionToScene(Scenes.MainMenu);
         }
 
         private void LoadLevel()
@@ -90,16 +90,16 @@ namespace Game
         {
             // Leave before scene transition to save progress
             GameManager.Instance.IncreaseSceneProgress();
-            TransitionToScene(finalSceneIndex);
+            TransitionToScene(Scenes.FinalFloor);
         }
 
-        private void LoadEndgame()
+        private void LoadWinScreen()
         {
             // Leave before scene transition to save progress
             GameManager.Instance.ResetSceneProgress();
             GameManager.Instance.RestorePlayerHealth();
             GameManager.Instance.ResetTemporaryBuffs();
-            TransitionToScene(endgameSceneIndex);
+            TransitionToScene(Scenes.Win);
         }
         
         public void LoadGameOverScene()
@@ -144,7 +144,7 @@ namespace Game
             GameManager.Instance.SetLoadedScene(index);
             
             // Don't save moving to the menu
-            if (index != mainMenuIndex)
+            if (index != Scenes.MainMenu)
             {
                 SaveGameManager.Instance.OnSave();
             }
