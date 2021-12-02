@@ -21,12 +21,10 @@ namespace UI
             {
                 healthSlider.maxValue = 50;
             }
-
-            if (killableObject.CompareTag(Tags.Dome))
+            else if (killableObject.CompareTag(Tags.Dome))
             {
                 healthSlider.maxValue = GameManager.Instance.RelicDomeHitPoints;
             }
-
             else // default
             {
                 healthSlider.maxValue = 100;
