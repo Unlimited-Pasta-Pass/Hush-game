@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
-public class PowerUpSelection : MonoBehaviour
+public class PowerUpSelectionUI: MonoBehaviour
 {
-    private int currentlySelected = 0;
-    [SerializeField] private float speedBoost = 0.5f;
-    [SerializeField] private float damageBoost =  10f;
-    [SerializeField] private float vitalityBoost = 15f;
+    [SerializeField] protected float speedBoost = 0.5f;
+    [SerializeField] protected float damageBoost =  10f;
+    [SerializeField] protected float vitalityBoost = 15f;
+    
     [SerializeField] private GameObject powerBorder;
     [SerializeField] private GameObject speedBorder;
     [SerializeField] private GameObject vitalityBorder;
-
-    public void OnSubmit()
+    
+    protected int CurrentlySelected = 0;
+    
+    public virtual void OnSubmit()
     {
-        switch(currentlySelected)
+        switch(CurrentlySelected)
         {
             case 1:
                 SetupDamageBoost(damageBoost);
@@ -48,7 +50,7 @@ public class PowerUpSelection : MonoBehaviour
                 break;
         }
 
-        currentlySelected = selected;
+        CurrentlySelected = selected;
     }
 
     private void SetupDamageBoost(float boost)
