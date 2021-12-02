@@ -32,7 +32,7 @@ namespace Player
         #endregion
         
         void Start() {
-            damageOverlay = GameObject.Find("Overlay").GetComponent<CanvasGroup>();
+            damageOverlay = FindObjectOfType<CanvasGroup>();
         }
 
         public void TakeDamage(float damage)
@@ -47,12 +47,16 @@ namespace Player
         }
 
         public void FadeIn() {
-            StartCoroutine(FadeCanvasGroup(damageOverlay, damageOverlay.alpha, 1, 0.5f));
-            Invoke(nameof(FadeOut), 0.5f);
+            if (damageOverlay)
+            {
+                StartCoroutine(FadeCanvasGroup(damageOverlay, damageOverlay.alpha, 1, 0.5f));
+                Invoke(nameof(FadeOut), 0.5f);
+            }
         }
 
         public void FadeOut() {
-            StartCoroutine(FadeCanvasGroup(damageOverlay, damageOverlay.alpha, 0, 0.5f));
+            if(damageOverlay)
+                StartCoroutine(FadeCanvasGroup(damageOverlay, damageOverlay.alpha, 0, 0.5f));
         }
 
         public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 1) {
