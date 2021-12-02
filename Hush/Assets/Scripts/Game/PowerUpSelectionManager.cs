@@ -54,8 +54,8 @@ public class PowerUpSelectionManager : MonoBehaviour
 
     private void SetupVitalityBoost(float boost)
     {
-        float currentHp = GameManager.Instance.PlayerMaxHitPoints;
-        float currentMax = GameManager.Instance.PlayerCurrentHitPoints;
+        float currentHp = GameManager.Instance.PlayerCurrentHitPoints; 
+        float currentMax = GameManager.Instance.PlayerMaxHitPoints;
         
         GameManager.Instance.SetPlayerHitPoints(currentHp, boost);
         GameManager.Instance.SetPlayerMaxHitPoints(currentMax, boost);
