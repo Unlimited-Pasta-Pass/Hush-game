@@ -14,6 +14,8 @@ namespace Game
         [Header("New Game Parameters")] [SerializeField]
         private SpellType initialLightSpell = SpellType.FireballSpell;
 
+        [SerializeField] private Scenes firstFloor = Scenes.FloorA;
+
         [SerializeField] private SpellType initialHeavySpell = SpellType.StunSpell;
 
         // private Dictionary<int, int> _randomScenes;
@@ -110,7 +112,7 @@ namespace Game
 
         public void LoadFirstFloor()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.FloorA);
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) firstFloor);
         }
 
         public void LoadTempPowerScene()
@@ -133,8 +135,8 @@ namespace Game
 
             // TEMPORARY VALUE REMOVE
             LoadFirstFloor();
-            GameManager.Instance.SetLoadedScene( Scenes.FloorA);
-
+            GameManager.Instance.SetLoadedScene( firstFloor);
+            
             // Hack to set initial spells
             GameManager.Instance.SetActiveLightSpell(initialLightSpell);
             GameManager.Instance.SetActiveHeavySpell(initialHeavySpell);
