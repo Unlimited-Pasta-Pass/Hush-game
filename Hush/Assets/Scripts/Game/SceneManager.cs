@@ -29,6 +29,11 @@ namespace Game
             LoadDevScene();
             
             GameManager.Instance.SetLoadedScene(1);
+
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu")
+            {
+                SaveGameManager.Instance.OnSave();
+            }
         }
 
         public void LoadScene(int sceneIndex)
@@ -43,6 +48,11 @@ namespace Game
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
             
             GameManager.Instance.SetLoadedScene(sceneIndex);
+
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "MainMenu")
+            {
+                SaveGameManager.Instance.OnSave();
+            }
         }
 
         public void ReloadScene()
