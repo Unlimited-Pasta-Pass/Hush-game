@@ -1,3 +1,4 @@
+using Game.Enums;
 using UnityEngine;
 using Weapon.Enums;
 
@@ -55,7 +56,7 @@ namespace Game
         public void LoadScene(int sceneIndex)
         {
             // ignore scene state reinitialization if main menu 
-            if (sceneIndex != mainMenuIndex)
+            if (sceneIndex != Scenes.MainMenu)
             {
                 ReinitializeSceneState();
             }
@@ -103,12 +104,12 @@ namespace Game
         
         public void LoadGameOverScene()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.GameOver);
         }
         
         public void LoadTempPowerScene()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(5);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.PowerUp);
         }
     
         public void QuitGame()
