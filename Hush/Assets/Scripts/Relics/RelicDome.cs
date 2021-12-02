@@ -109,7 +109,7 @@ namespace Relics
         {
             GetComponent<MeshRenderer>().enabled = visibility;
             GetComponent<Collider>().enabled = visibility;
-            GetComponent<NavMeshObstacle>().carving = false;
+            GetComponent<NavMeshObstacle>().carving = visibility;
             healthBar.SetActive(visibility);
         }
 
