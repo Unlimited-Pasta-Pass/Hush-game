@@ -28,9 +28,9 @@ namespace Game.Models
         public float vitalityBoost;
         
         // Permanent Stat
-        public float damagePermanent;
-        public float speedPermanent;
-        public float vitalityPermanent;
+        public float baseDamagePermanent;
+        public float baseSpeedPermanent;
+        public float baseVitalityPermanent;
 
         // Echolocation
         public float echolocationActivationTime;
@@ -59,12 +59,19 @@ namespace Game.Models
         
         // Scene
         public int currentlyLoadedScene;
+        public int randomSceneSeed;
+        public int sceneProgress;
 
         public GameState()
         {
             // Save
             saveTime = float.MinValue;
 
+            // Permanent Progress
+            baseDamagePermanent = 5f;
+            baseSpeedPermanent = 2f;
+            baseVitalityPermanent = 100f;
+            
             // Player
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
@@ -74,10 +81,6 @@ namespace Game.Models
             speedBoost = 0f;
             vitalityBoost = 0f;
             
-            // Stat Improvements
-            damagePermanent = 0f;
-            speedPermanent = 0f;
-            vitalityPermanent = 0f;
 
             // Echolocation
             echolocationActivationTime = float.MinValue;
@@ -106,6 +109,8 @@ namespace Game.Models
             
             // Scene
             currentlyLoadedScene = 0;
+            randomSceneSeed = 0;
+            sceneProgress = -1;
         }
     }
 }
