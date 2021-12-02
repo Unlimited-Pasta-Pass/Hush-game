@@ -88,7 +88,7 @@ namespace Game
                 // Leave before scene transition to save progress
                 TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
             }
-            
+
 
             // TransitionToScene(RandomScenes[GameManager.Instance.SceneProgress]);
         }
@@ -149,7 +149,7 @@ namespace Game
         private void TransitionToScene(Scenes sceneIndex)
         {
             // TODO Transition between scenes
-            UnityEngine.SceneManagement.SceneManager.LoadScene( (int) sceneIndex);
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) sceneIndex);
 
             GameManager.Instance.SetLoadedScene(sceneIndex);
 
@@ -159,7 +159,7 @@ namespace Game
                 SaveGameManager.Instance.OnSave();
             }
         }
-        
+
         private void ReinitializeSceneState()
         {
             GameManager.Instance.ResetPlayer();

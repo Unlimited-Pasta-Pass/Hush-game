@@ -17,7 +17,5 @@
         {
             SceneManager.Instance.LoadGameOverScene();
         }
-        
-        
     }
 }
