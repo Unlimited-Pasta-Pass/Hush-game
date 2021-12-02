@@ -120,10 +120,5 @@ namespace Game
                     break;
             }
         }
-
-        public void MoveToNextLevel()
-        {
-           SceneManager.Instance.LoadNextScene();
-        }
     }
 }
