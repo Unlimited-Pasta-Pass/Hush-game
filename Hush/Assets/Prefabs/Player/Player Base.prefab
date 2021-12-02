@@ -6779,8 +6779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21e74c90c7e4f7984fa60bc03487dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 552221037835826511}
   deathSceneChangeDelay: 2
+  animator: {fileID: 552221037835826511}
   deathSound: {fileID: 61987279}
   damageSound: {fileID: 1886860495}
 --- !u!114 &9199240927236339795
@@ -6822,8 +6822,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 12.5
   heavyDamage: 25
-  baseDuration: 0.25
-  heavyDuration: 0.4
+  baseDuration: 0.4
+  heavyDuration: 0.75
   projectileDelay: 0.3
   castDelay: 0.1
   heavyCooldown: 10
