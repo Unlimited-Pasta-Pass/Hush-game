@@ -105,11 +105,12 @@ namespace Game
         public void LoadGameOverScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.GameOver);
+            GameManager.Instance.OnRunCompleted();
         }
         
         public void LoadFirstFloor()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.FirstFloor);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(Scenes.FloorA);
         }
 
         public void LoadTempPowerScene()
@@ -129,6 +130,10 @@ namespace Game
         private void StartNewGame()
         {
             // TODO Generate seed & randomize scene order based on seed
+            
+            // TEMPORARY VALUE REMOVE
+            LoadFirstFloor();
+            GameManager.Instance.SetLoadedScene(Scenes.FloorA);
             
             // Hack to set initial spells
             GameManager.Instance.SetActiveLightSpell(initialLightSpell);

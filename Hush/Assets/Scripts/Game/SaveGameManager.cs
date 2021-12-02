@@ -21,7 +21,7 @@ namespace Game
                 {
                     // the currently loaded scene is the a menu
                     // Return the first dungeon floor instead
-                    return Scenes.FirstFloor;
+                    return Scenes.FloorA;
                 }
 
                 return scene;

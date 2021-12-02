@@ -10,9 +10,9 @@
         public static int PermanentPower = 5; // currently just the Demo floor
         
         // The actual dungeon
-        public static int FirstFloor = 6;
-        public static int SecondFloor = 7;
-        public static int ThirdFloor = 8;
+        public static int FloorA = 6;
+        public static int FloorB = 7;
+        public static int FloorC = 8;
         
         // Final floor
         public static int FinalFloor = 9;
