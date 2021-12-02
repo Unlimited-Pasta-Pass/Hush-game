@@ -7,6 +7,7 @@ using Player.Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapon.Enums;
+using Random = UnityEngine.Random;
 
 namespace Weapon
 {
@@ -18,9 +19,11 @@ namespace Weapon
         [SerializeField] private AudioSource heavyHit;
         [SerializeField] private AudioSource lightHit;
         
-        [Header("Damage Parameters")]
-        [SerializeField] private float baseDamage = 5;
-        [SerializeField] private float heavyDamage = 15;
+        // [Header("Damage Parameters")]
+        // [SerializeField] 
+        private float baseDamage;
+        // [SerializeField]
+        private float heavyDamage;
         
         [Header("Animation Parameters")]
         [SerializeField] private float baseDuration = 0.3f;
@@ -45,6 +48,12 @@ namespace Weapon
         private PlayerMovement _player;
 
         private readonly HashSet<GameObject> _attackedObjects = new HashSet<GameObject>();
+
+        private void Start()
+        {
+            baseDamage = GameManager.Instance.PermanentDamage;
+            heavyDamage = baseDamage + 10;
+        }
 
         private void OnEnable()
         {

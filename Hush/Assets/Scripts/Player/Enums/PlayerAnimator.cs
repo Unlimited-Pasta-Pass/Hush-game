@@ -9,6 +9,7 @@ namespace Player.Enums
         public static int HeavyAttack => Animator.StringToHash("HeavyAttack");
         public static int SpellAttack => Animator.StringToHash("SpellAttack");
         public static int SpellSpecialAttack => Animator.StringToHash("SpellSpecialAttack");
+        public static int TakeHit => Animator.StringToHash("TakeHit");
         public static int Dead => Animator.StringToHash("Dead");
         
         public enum Layer

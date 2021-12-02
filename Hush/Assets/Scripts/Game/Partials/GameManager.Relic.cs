@@ -32,6 +32,7 @@ namespace Game
         public void ResetRelic()
         {
             _state.playerHasRelic = false;
+            _state.relicDomeHitPoints = domeHitPoints;
         }
 
         public void DisableDome()

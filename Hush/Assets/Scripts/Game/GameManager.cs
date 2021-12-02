@@ -1,6 +1,7 @@
 using System;
 using Game.Models;
 using UnityEngine;
+using Weapon.Enums;
 
 namespace Game
 {
@@ -36,6 +37,9 @@ namespace Game
         // Game Model
         public void SetGameState(GameState gameState)
         {
+            // Don't move this or the scene will be reset after it's loaded
+            ApplySceneState();
+            
             _state = gameState;
 
             ApplyPlayerState();
