@@ -72,27 +72,35 @@ namespace Game.Models
             baseSpeedPermanent = 2f;
             baseVitalityPermanent = 100f;
             
-            // Player
+            UnsetHP();
+            UnsetBoosts();
+            UnsetSpells();
+            UnsetFloorStats();
+
+            // Scene
+            currentlyLoadedScene = 0;
+        }
+
+        private void UnsetHP()
+        {
+            // HP
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
-            playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
-            isPlayerInvisible = false;
+        }
+        private void UnsetBoosts()
+        {
             damageBoost = 0f;
             speedBoost = 0f;
             vitalityBoost = 0f;
+        }
+        private void UnsetFloorStats()
+        {
+            playerTransform = new SerializableTransform(Vector3.zero, Quaternion.identity);
+            isPlayerInvisible = false;
             
-
             // Echolocation
             echolocationActivationTime = float.MinValue;
             echolocationCooldownTime = 7f;
-
-            // Spell
-            activeHeavySpell = SpellType.None;
-            heavySpellActivationTime = float.MinValue;
-            heavySpellCooldownTime = 10f;
-            activeLightSpell = SpellType.None;
-            lightSpellActivationTime = float.MinValue;
-            lightSpellCooldownTime = 5f;
             
             // Relic
             playerHasRelic = false;
@@ -111,6 +119,29 @@ namespace Game.Models
             currentlyLoadedScene = 0;
             randomSceneSeed = 0;
             sceneProgress = -1;
+        }
+        private void UnsetSpells()
+        {
+            // Spell
+            activeHeavySpell = SpellType.None;
+            heavySpellActivationTime = float.MinValue;
+            heavySpellCooldownTime = 10f;
+            activeLightSpell = SpellType.None;
+            lightSpellActivationTime = float.MinValue;
+            lightSpellCooldownTime = 5f;
+        }
+
+
+        public void OnNextFloor()
+        {
+            UnsetFloorStats();
+        }
+        
+        public void OnPlayerDeath()
+        {
+            UnsetSpells();
+            UnsetFloorStats();
+            UnsetBoosts();
         }
     }
 }
