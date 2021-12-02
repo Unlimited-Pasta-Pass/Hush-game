@@ -8,14 +8,11 @@ namespace Game
     {
         public static SceneManager Instance;
 
-        [Header("Scene Build Indexes")] [SerializeField]
-        private Scenes[] levelSceneIndexes;
+        [Header("Scene Build Indexes")] 
+        [SerializeField] private Scenes[] levelSceneIndexes;
 
-        [Header("New Game Parameters")] [SerializeField]
-        private SpellType initialLightSpell = SpellType.FireballSpell;
-
-        [SerializeField] private Scenes firstFloor = Scenes.FloorA;
-
+        [Header("New Game Parameters")] 
+        [SerializeField] private SpellType initialLightSpell = SpellType.FireballSpell;
         [SerializeField] private SpellType initialHeavySpell = SpellType.StunSpell;
 
         // private Dictionary<int, int> _randomScenes;
@@ -26,6 +23,12 @@ namespace Game
                 Instance = this;
 
             DontDestroyOnLoad(Instance.gameObject);
+        }
+
+        public void NewGame()
+        {
+            GameManager.Instance.ResetGameState();
+            LoadNextScene();
         }
 
         public void LoadNextScene()
@@ -88,9 +91,6 @@ namespace Game
                 // Leave before scene transition to save progress
                 TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
             }
-            
-
-            // TransitionToScene(RandomScenes[GameManager.Instance.SceneProgress]);
         }
 
         private void LoadFinal()
@@ -115,11 +115,6 @@ namespace Game
             GameManager.Instance.OnRunCompleted();
         }
 
-        public void LoadFirstFloor()
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene((int) firstFloor);
-        }
-
         public void LoadTempPowerScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.PowerUp);
@@ -139,7 +134,7 @@ namespace Game
             // TODO Generate seed & randomize scene order based on seed
 
             // TEMPORARY VALUE REMOVE
-            TransitionToScene(firstFloor);
+            TransitionToScene(levelSceneIndexes[0]);
 
             // Hack to set initial spells
             GameManager.Instance.SetActiveLightSpell(initialLightSpell);
@@ -149,7 +144,7 @@ namespace Game
         private void TransitionToScene(Scenes sceneIndex)
         {
             // TODO Transition between scenes
-            UnityEngine.SceneManagement.SceneManager.LoadScene( (int) sceneIndex);
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) sceneIndex);
 
             GameManager.Instance.SetLoadedScene(sceneIndex);
 
@@ -159,7 +154,7 @@ namespace Game
                 SaveGameManager.Instance.OnSave();
             }
         }
-        
+
         private void ReinitializeSceneState()
         {
             GameManager.Instance.ResetPlayer();

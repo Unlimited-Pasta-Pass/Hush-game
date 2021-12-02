@@ -12,12 +12,5 @@
             Instance.ResetSceneProgress();
             SaveGameManager.Instance.OnSave();
         }
-
-        private void LoadGameOver()
-        {
-            SceneManager.Instance.LoadGameOverScene();
-        }
-        
-        
     }
 }

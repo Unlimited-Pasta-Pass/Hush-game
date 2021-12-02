@@ -8,7 +8,7 @@ namespace Game
         public Scenes CurrentlyLoadedScene => _state.currentlyLoadedScene;
 
         public int RandomSceneSeed => _state.randomSceneSeed;
-        
+
         public int SceneProgression => _state.sceneProgress;
 
         public void SetLoadedScene(Scenes currentlyLoadedScene)
@@ -18,7 +18,7 @@ namespace Game
 
         public void GenerateRandomSceneSeed()
         {
-            _state.randomSceneSeed = (int)(Random.value * int.MaxValue);
+            _state.randomSceneSeed = (int) (Random.value * int.MaxValue);
         }
 
         public void IncreaseSceneProgress()
@@ -33,7 +33,7 @@ namespace Game
 
         private void ApplySceneState()
         {
-            SceneManager.Instance.LoadScene( SaveGameManager.Instance.SavedGameScene);
+            SceneManager.Instance.LoadScene(SaveGameManager.Instance.SavedGameScene);
         }
     }
 }
