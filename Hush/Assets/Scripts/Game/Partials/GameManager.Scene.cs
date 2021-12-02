@@ -27,7 +27,7 @@ namespace Game
 
         public void ResetSceneProgress()
         {
-            _state.sceneProgress = 0;
+            _state.sceneProgress = -1;
         }
 
         private void ApplySceneState()
