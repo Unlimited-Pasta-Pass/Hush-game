@@ -6,21 +6,35 @@ namespace Game
     {
         public float PermanentDamage
         {
-            get => _state.damagePermanent;
-            set => _state.damagePermanent = value;
+            get => _state.baseDamagePermanent;
+            private set => _state.baseDamagePermanent = value;
         }
-        
+
+        public void BoostPermanentDamage()
+        {
+            PermanentDamage += 5;
+        }
+
         public float PermanentSpeed
         {
-            get => _state.speedPermanent;
-            set => _state.speedPermanent = value;
+            get => _state.BaseSpeedPermanent;
+            private set => _state.BaseSpeedPermanent = value;
+        }
+
+        public void BoostPermanentSpeed()
+        {
+            PermanentSpeed += 5;
         }
         
         public float PermanentVitality
         {
-            get => _state.vitalityPermanent;
-            set => _state.vitalityPermanent = value;
+            get => _state.BaseVitalityPermanent;
+            private set => _state.BaseVitalityPermanent = value;
         }
-        
+
+        public void BoostPermanentVitality()
+        {
+            PermanentVitality += 10;
+        }
     }
 }

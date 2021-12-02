@@ -28,9 +28,9 @@ namespace Game.Models
         public float vitalityBoost;
         
         // Permanent Stat
-        public float damagePermanent;
-        public float speedPermanent;
-        public float vitalityPermanent;
+        public float baseDamagePermanent;
+        public float BaseSpeedPermanent;
+        public float BaseVitalityPermanent;
 
         // Echolocation
         public float echolocationActivationTime;
@@ -65,6 +65,11 @@ namespace Game.Models
             // Save
             saveTime = float.MinValue;
 
+            // Permanent Progress
+            baseDamagePermanent = 5f;
+            BaseSpeedPermanent = 2f;
+            BaseVitalityPermanent = 100f;
+            
             // Player
             playerCurrentHitPoints = -1f;
             playerMaxHitPoints = -1f;
@@ -74,10 +79,6 @@ namespace Game.Models
             speedBoost = 0f;
             vitalityBoost = 0f;
             
-            // Stat Improvements
-            damagePermanent = 0f;
-            speedPermanent = 0f;
-            vitalityPermanent = 0f;
 
             // Echolocation
             echolocationActivationTime = float.MinValue;
