@@ -117,6 +117,11 @@ namespace Game
             UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.PowerUp);
         }
 
+        public void LoadPermanentPowerScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.PermanentPower);
+        }
+
         public void LoadSpellSelectScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.SpellChoice);

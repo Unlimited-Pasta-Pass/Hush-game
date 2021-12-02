@@ -2,6 +2,7 @@ using System;
 using Common.Enums;
 using Doors.enums;
 using Game;
+using Game.Enums;
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -78,15 +79,22 @@ namespace Doors
 
             openSound.Play();
             anim.SetTrigger(DoorAnimator.Open);
+            
             // TODO: Remove When floor reward Is moved to UI
             Invoke(nameof(LoadNext), 2f);
             interactOverlay.SetActive(false);
         }
 
-        // TODO: Remove When floor reward Is moved to UI
         private void LoadNext()
         {
-            SceneManager.Instance.LoadPowerScene();
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == (int) Scenes.FinalFloor)
+            {
+                SceneManager.Instance.LoadPermanentPowerScene();
+            }
+            else
+            {
+                SceneManager.Instance.LoadPowerScene();
+            }
         }
     }
 }
