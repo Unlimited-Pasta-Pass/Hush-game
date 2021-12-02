@@ -9,10 +9,19 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/MainMenu.unity
     guid: 89b4d4b661a5a914482f838efbe7e8c5
   - enabled: 1
-    path: Assets/Scenes/Dev Scene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Floors/Floor053.unity
+    guid: 55db267034d7acd4098b825eae2ec74f
   - enabled: 1
-    path: Assets/Scenes/Demo.unity
-    guid: 9be4d171b8e5aa241b7b9397612244df
+    path: Assets/Scenes/Floors/Floor241.unity
+    guid: ac7e9a45c0865bf4a82237ca22a02e19
+  - enabled: 1
+    path: Assets/Scenes/Floors/Floor302.unity
+    guid: df35d3df916f9f44a97f659194549362
+  - enabled: 1
+    path: Assets/Scenes/Floors/FinalFloor.unity
+    guid: bf52399c27d1efc40b085574eed0e887
+  - enabled: 1
+    path: Assets/Scenes/Menus/WinGame.unity
+    guid: 3229d9273f9dada45965db3aa5aed807
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 70f0d61102cdd7c4ea8e75b2ec3627f2, type: 2}
