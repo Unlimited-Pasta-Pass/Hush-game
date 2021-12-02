@@ -130,18 +130,5 @@ namespace Game.Models
             lightSpellActivationTime = float.MinValue;
             lightSpellCooldownTime = 5f;
         }
-
-
-        public void OnNextFloor()
-        {
-            UnsetFloorStats();
-        }
-        
-        public void OnPlayerDeath()
-        {
-            UnsetSpells();
-            UnsetFloorStats();
-            UnsetBoosts();
-        }
     }
 }
