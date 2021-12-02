@@ -12,25 +12,27 @@ public class Menus : MonoBehaviour
 
     public void NewGame()
     {
-        GameManager.Instance.NewGame();
+        SceneManager.Instance.NewGame();
     }
-    
+
     public void LoadGame()
     {
         SaveGameManager.Instance.OnLoad();
     }
-    
+
     public void Replay()
     {
         SceneManager.Instance.ReloadScene();
     }
 
-    public void Credits() {
+    public void Credits()
+    {
         // POP-UP FOR CREDITS
         Debug.Log("CREDITS");
     }
-    
-    public void MainMenu() {
+
+    public void MainMenu()
+    {
         SceneManager.Instance.LoadMainMenu();
     }
 

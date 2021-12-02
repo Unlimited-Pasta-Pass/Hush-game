@@ -6782,9 +6782,6 @@ MonoBehaviour:
   animator: {fileID: 552221037835826511}
   deathSound: {fileID: 61987279}
   damageSound: {fileID: 1886860495}
-  _killed:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &9199240927236339795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6817,7 +6814,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5381592743170887637}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
   m_Name: 
