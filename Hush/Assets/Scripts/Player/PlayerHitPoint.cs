@@ -4,7 +4,6 @@ using Player.Enums;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
-using System.Collections.Generic;
 using Common.Enums;
 
 namespace Player
@@ -13,9 +12,11 @@ namespace Player
     {
         #region Parameters
 
-        [Header("Component References")] [SerializeField]
-        private Animator animator;
+        [Header("Parameters")] 
+        [SerializeField] private float deathSceneChangeDelay = 2f;
 
+        [Header("Component References")] 
+        [SerializeField] private Animator animator;
         [SerializeField] private AudioSource deathSound;
         [SerializeField] private AudioSource damageSound;
         private CanvasGroup damageOverlay;
@@ -33,7 +34,7 @@ namespace Player
         public float HitPoints => GameManager.Instance.PlayerCurrentHitPoints;
 
         #endregion
-        
+
         void Start()
         {
             damageOverlay = GameObject.FindWithTag(Tags.DamageOverlay).GetComponent<CanvasGroup>();
@@ -67,14 +68,12 @@ namespace Player
 
         public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 1)
         {
-            float _timeStartedLerping = Time.time;
-            float timeSinceStarted = Time.time - _timeStartedLerping;
-            float percentageComplete = timeSinceStarted / lerpTime;
+            float timeStartedLerping = Time.time;
 
             while (true)
             {
-                timeSinceStarted = Time.time - _timeStartedLerping;
-                percentageComplete = timeSinceStarted / lerpTime;
+                var timeSinceStarted = Time.time - timeStartedLerping;
+                var percentageComplete = timeSinceStarted / lerpTime;
 
                 float currentValue = Mathf.Lerp(start, end, percentageComplete);
 
@@ -99,6 +98,13 @@ namespace Player
 
             animator.SetBool(PlayerAnimator.Dead, true);
             Killed.Invoke();
+            
+            Invoke(nameof(GoToDeathScene), deathSceneChangeDelay);
+        }
+
+        private void GoToDeathScene()
+        {
+            SceneManager.Instance.LoadGameOverScene();
         }
     }
 }
