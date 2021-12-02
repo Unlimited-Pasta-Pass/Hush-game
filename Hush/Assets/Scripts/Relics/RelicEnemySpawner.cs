@@ -18,7 +18,6 @@ namespace Relics
       private void Awake()
       { 
           _player = GameObject.FindWithTag(Tags.Player);
-          Debug.Log(_player);
       }
 
       public void OnRelicAttacked()
