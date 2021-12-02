@@ -3,6 +3,8 @@ using Game;
 using Player.Enums;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Player
 {
@@ -29,22 +31,58 @@ namespace Player
         
         #endregion
         
+        void Start() {
+            damageUI.SetActive(false);
+        }
         public void TakeDamage(float damage)
         {
             animator.SetTrigger(PlayerAnimator.TakeHit);
             damageSound.Play();
+            // DisplayDamageUI();
+            FadeIn();
             
             // If the player's hp is at 0 or lower, they die
             if (!GameManager.Instance.UpdatePlayerHitPoints(-damage))
                 Die();
         }
 
-        public void DisplayDamageUI() {
-            damageUI.SetActive(true);
-            
+        // public void DisplayDamageUI() {
+        //     damageUI.SetActive(true);
+        //     Invoke(nameof(HideDamageUI), 0.5f);
+        // }
+
+        // public void HideDamageUI() {
+        //     damageUI.SetActive(false);
+        // }
+
+        public void FadeIn() {
+            StartCoroutine(FadeCanvasGroup(damageUI.transform.GetChild(0), damageUI.transform.GetChild(0).alpha, 1, 0.5f));
+            Invoke(nameof(FadeOut), 0.5f);
         }
 
+        public void FadeOut() {
+            StartCoroutine(FadeCanvasGroup(damageUI.transform.GetChild(0), damageUI.transform.GetChild(0).alpha, 0, 0.5f));
+        }
 
+        public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 1) {
+            float _timeStartedLerping = Time.time;
+		    float timeSinceStarted = Time.time - _timeStartedLerping;
+		    float percentageComplete = timeSinceStarted / lerpTime;
+
+            while(true) {
+                timeSinceStarted = Time.time - _timeStartedLerping;
+                percentageComplete = timeSinceStarted / lerpTime;
+
+                float currentValue = Mathf.Lerp(start, end, percentageComplete);
+
+                cg.alpha = currentValue;
+
+                if (percentageComplete >= 1) {
+                    break;
+                }
+                yield return new WaitForFixedUpdate();
+            }
+        }
 
         public void Die()
         {
