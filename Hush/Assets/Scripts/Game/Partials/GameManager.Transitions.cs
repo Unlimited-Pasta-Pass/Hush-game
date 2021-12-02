@@ -4,7 +4,13 @@
     {
         public void OnPlayerDeath()
         {
-            CurrentGameState.OnPlayerDeath();
+            ResetTemporaryBuffs();
+            ResetPlayer();
+            RestorePlayerHealth();
+            ResetSceneProgress();
+            ResetRelic();
+            ResetEnemies();
+            ResetKeys();
             SaveGameManager.Instance.OnSave();
         }
     }
