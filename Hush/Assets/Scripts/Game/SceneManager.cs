@@ -11,10 +11,6 @@ namespace Game
         [Header("Scene Build Indexes")] 
         [SerializeField] private Scenes[] levelSceneIndexes;
 
-        [Header("New Game Parameters")] 
-        [SerializeField] private SpellType initialLightSpell = SpellType.FireballSpell;
-        [SerializeField] private SpellType initialHeavySpell = SpellType.StunSpell;
-
         // private Dictionary<int, int> _randomScenes;
 
         private void Awake()
@@ -82,15 +78,16 @@ namespace Game
         {
             if (GameManager.Instance.SceneProgression < 0)
             {
-                StartNewGame();
                 GameManager.Instance.IncreaseSceneProgress();
+                LoadSpellSelectScene();
             }
             else
             {
-                GameManager.Instance.IncreaseSceneProgress();
                 // Leave before scene transition to save progress
+                GameManager.Instance.IncreaseSceneProgress();
                 TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
             }
+            
         }
 
         private void LoadFinal()
@@ -115,9 +112,14 @@ namespace Game
             GameManager.Instance.OnRunCompleted();
         }
 
-        public void LoadTempPowerScene()
+        public void LoadPowerScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.PowerUp);
+        }
+
+        public void LoadSpellSelectScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.SpellChoice);
         }
 
         public void QuitGame()
@@ -127,18 +129,6 @@ namespace Game
 #else
             Application.Quit();
 #endif
-        }
-
-        private void StartNewGame()
-        {
-            // TODO Generate seed & randomize scene order based on seed
-
-            // TEMPORARY VALUE REMOVE
-            TransitionToScene(levelSceneIndexes[0]);
-
-            // Hack to set initial spells
-            GameManager.Instance.SetActiveLightSpell(initialLightSpell);
-            GameManager.Instance.SetActiveHeavySpell(initialHeavySpell);
         }
 
         private void TransitionToScene(Scenes sceneIndex)

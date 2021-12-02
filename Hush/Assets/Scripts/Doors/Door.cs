@@ -86,7 +86,7 @@ namespace Doors
         // TODO: Remove When floor reward Is moved to UI
         private void LoadNext()
         {
-            SceneManager.Instance.LoadTempPowerScene();
+            SceneManager.Instance.LoadPowerScene();
         }
     }
 }
