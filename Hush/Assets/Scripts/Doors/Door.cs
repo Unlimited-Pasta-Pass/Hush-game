@@ -93,7 +93,7 @@ namespace Doors
             }
             else
             {
-                SceneManager.Instance.LoadPowerScene();
+                SceneManager.Instance.LoadTemporaryPowerScene();
             }
         }
     }

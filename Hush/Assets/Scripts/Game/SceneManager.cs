@@ -85,7 +85,6 @@ namespace Game
             {
                 TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
             }
-            
         }
 
         private void LoadFinal()
@@ -97,8 +96,8 @@ namespace Game
         private void LoadWinScreen()
         {
             // Leave before scene transition to save progress
-            GameManager.Instance.RestorePlayerHealth();
             GameManager.Instance.ResetTemporaryBuffs();
+            GameManager.Instance.RestorePlayerHealth();
             
             TransitionToScene(Scenes.Win);
             
@@ -112,7 +111,7 @@ namespace Game
             GameManager.Instance.OnRunCompleted();
         }
 
-        public void LoadPowerScene()
+        public void LoadTemporaryPowerScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.PowerUp);
         }
