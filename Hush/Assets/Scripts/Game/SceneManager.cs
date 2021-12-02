@@ -11,10 +11,6 @@ namespace Game
         [Header("Scene Build Indexes")] [SerializeField]
         private Scenes[] levelSceneIndexes;
 
-        [SerializeField] private int mainMenuIndex;
-        [SerializeField] private int finalSceneIndex;
-        [SerializeField] private int endgameSceneIndex;
-
         [Header("New Game Parameters")] [SerializeField]
         private SpellType initialLightSpell = SpellType.FireballSpell;
 
