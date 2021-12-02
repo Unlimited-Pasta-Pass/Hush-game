@@ -45,22 +45,29 @@ namespace Doors
         {
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
-
-            // show interaction text
-            interactOverlay.SetActive(true);
-
+            
             playerIsClose = true;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (!other.gameObject.CompareTag(Tags.Player))
+                return;
+            
+            // show interaction text
+            if(!GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic)
+                interactOverlay.SetActive(true);
         }
 
         private void OnTriggerExit(Collider other)
         {
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
-
+            
+            playerIsClose = false;
+            
             // hide interaction text
             interactOverlay.SetActive(false);
-
-            playerIsClose = false;
         }
 
         private void OpenDoor(InputAction.CallbackContext context)

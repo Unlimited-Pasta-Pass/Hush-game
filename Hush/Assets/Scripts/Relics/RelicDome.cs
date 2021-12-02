@@ -50,21 +50,28 @@ namespace Relics
             if (!other.gameObject.CompareTag(Tags.Player)) 
                 return;
 
-            // show interaction text
-            interactOverlay.SetActive(true);
-
             playerIsClose = true;
         }
-        
-        private void OnTriggerExit(Collider collider)
+
+        private void OnTriggerStay(Collider other)
         {
-            if (!collider.gameObject.CompareTag(Tags.Player))
+            if (!other.gameObject.CompareTag(Tags.Player)) 
+                return;
+            
+            // show interaction text
+            if(GameManager.Instance.KeysInPossession.Count >= keysNeededToUnlock)
+                interactOverlay.SetActive(true);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (!other.gameObject.CompareTag(Tags.Player))
                 return;
 
+            playerIsClose = false;
+            
             // hide interaction text
             interactOverlay.SetActive(false);
-
-            playerIsClose = false;
         }
     
         public void TakeDamage(float damage)
