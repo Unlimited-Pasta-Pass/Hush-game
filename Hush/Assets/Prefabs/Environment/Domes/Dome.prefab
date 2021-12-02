@@ -4995,7 +4995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactOverlay: {fileID: 9191415903306477465}
-  keysNeededToUnlock: 3
+  keysNeededToUnlock: 1
   explosion: {fileID: 496926752884777774}
   healthBar: {fileID: 4260453333849405844}
   shatterSound: {fileID: 0}
