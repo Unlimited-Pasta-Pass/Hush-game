@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ee6fef5d00e63ee41a374cdbd8fe89af
+guid: 0bd603ae65b91ae46932d63be086f7fc
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -22,11 +22,11 @@ ModelImporter:
       74: -4592842328519117816
     second: CharacterArmature|Punch
   - first:
-      74: -4856542728082765067
-    second: CharacterArmature|RecieveHit
+      74: -1697420543486609912
+    second: CharacterArmature|ReceiveHit
   - first:
-      74: -927689670608257901
-    second: CharacterArmature|RecieveHit_Attacking
+      74: 5371881077895757364
+    second: CharacterArmature|ReceiveHit_Attacking
   - first:
       74: -7580519143377161132
     second: CharacterArmature|Roll
@@ -37,11 +37,17 @@ ModelImporter:
       74: -8950003587403112357
     second: CharacterArmature|Run_Weapon
   - first:
+      74: 131664563287758579
+    second: CharacterArmature|Spell_Attack
+  - first:
       74: -1108164523259347411
     second: CharacterArmature|Sword_Attack
   - first:
       74: 1158634745205866218
     second: CharacterArmature|Sword_AttackFast
+  - first:
+      74: 1466272386734607460
+    second: CharacterArmature|Sword_AttackHeavy
   - first:
       74: -5599002979973759676
     second: CharacterArmature|Walk
@@ -50,12 +56,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Warrior_Sword_Texture
-    second: {fileID: 2100000, guid: dc67ab0c8a4e7fb429775e8ab5181e2e, type: 2}
+    second: {fileID: 2100000, guid: ffa250f813b00e64aba01b06574d3f27, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Warrior_Texture
-    second: {fileID: 2100000, guid: 2153a46f891ff8f4c9e22966ae6b9570, type: 2}
+    second: {fileID: 2100000, guid: 08bfb1c0860b2b947b3c37fe4727dbdf, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -258,8 +264,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: CharacterArmature|RecieveHit
-      takeName: CharacterArmature|RecieveHit
+      name: CharacterArmature|ReceiveHit
+      takeName: CharacterArmature|ReceiveHit
       internalID: 0
       firstFrame: 0
       lastFrame: 15
@@ -287,8 +293,8 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: CharacterArmature|RecieveHit_Attacking
-      takeName: CharacterArmature|RecieveHit_Attacking
+      name: CharacterArmature|ReceiveHit_Attacking
+      takeName: CharacterArmature|ReceiveHit_Attacking
       internalID: 0
       firstFrame: 0
       lastFrame: 15
@@ -358,8 +364,8 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
@@ -387,8 +393,37 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: CharacterArmature|Spell_Attack
+      takeName: CharacterArmature|Spell_Attack
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
@@ -461,6 +496,35 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
+      name: CharacterArmature|Sword_AttackHeavy
+      takeName: CharacterArmature|Sword_AttackHeavy
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 34
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: CharacterArmature|Walk
       takeName: CharacterArmature|Walk
       internalID: 0
@@ -474,10 +538,10 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 1
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -489,10 +553,10 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.5
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -543,7 +607,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.5
+    globalScale: 1
     rootMotionBoneName: Root
     hasTranslationDoF: 0
     hasExtraRoot: 0
