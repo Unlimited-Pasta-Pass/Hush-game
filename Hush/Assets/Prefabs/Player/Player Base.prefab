@@ -6780,6 +6780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 552221037835826511}
+  deathSceneChangeDelay: 2
   deathSound: {fileID: 61987279}
   damageSound: {fileID: 1886860495}
 --- !u!114 &9199240927236339795
