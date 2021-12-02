@@ -12,16 +12,16 @@ namespace Game
 
         public bool HasSavedGame => File.Exists(_path);
         
-        public int SavedGameScene
+        public Scenes SavedGameScene
         {
             get
             {
                 var scene =  OnLoad(false).currentlyLoadedScene;
-                if (scene < 6 )
+                if ((int) scene < 6 )
                 {
                     // the currently loaded scene is the a menu
                     // Return the first dungeon floor instead
-                    return Scenes.FloorA;
+                    return  Scenes.FloorA;
                 }
 
                 return scene;

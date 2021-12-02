@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common.Models;
+using Game.Enums;
 using UnityEngine;
 using Weapon.Enums;
 
@@ -58,7 +59,7 @@ namespace Game.Models
         public Dictionary<Guid, float> enemiesHitPoints;
         
         // Scene
-        public int currentlyLoadedScene;
+        public Scenes currentlyLoadedScene;
         public int randomSceneSeed;
         public int sceneProgress;
 

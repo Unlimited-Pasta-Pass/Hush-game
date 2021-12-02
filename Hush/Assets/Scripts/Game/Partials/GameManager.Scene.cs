@@ -1,16 +1,17 @@
-﻿using Random = UnityEngine.Random;
+﻿using Game.Enums;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
     public partial class GameManager
     {
-        public int CurrentlyLoadedScene => _state.currentlyLoadedScene;
+        public Scenes CurrentlyLoadedScene => _state.currentlyLoadedScene;
 
         public int RandomSceneSeed => _state.randomSceneSeed;
         
         public int SceneProgression => _state.sceneProgress;
 
-        public void SetLoadedScene(int currentlyLoadedScene)
+        public void SetLoadedScene(Scenes currentlyLoadedScene)
         {
             _state.currentlyLoadedScene = currentlyLoadedScene;
         }
@@ -32,7 +33,7 @@ namespace Game
 
         private void ApplySceneState()
         {
-            SceneManager.Instance.LoadScene(SaveGameManager.Instance.SavedGameScene);
+            SceneManager.Instance.LoadScene( SaveGameManager.Instance.SavedGameScene);
         }
     }
 }
