@@ -1501,8 +1501,6 @@ MonoBehaviour:
   heavyAttack: {fileID: 1166744042}
   heavyHit: {fileID: 1634170269}
   lightHit: {fileID: 884170440}
-  baseDamage: 25
-  heavyDamage: 50
   baseDuration: 0.3
   heavyDuration: 0.7
   castDelay: 0.15
@@ -6392,42 +6390,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!65 &4456516276185384711
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4346722727684657705}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.1208037, y: 1, z: 1}
-  m_Center: {x: 0.060402118, y: 0.00000002234027, z: -0.000002299825}
---- !u!114 &2570020898665896641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4346722727684657705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93bdd02eaa4730848a13d16293ee38de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lightAttack: {fileID: 871730103}
-  heavyAttack: {fileID: 1166744042}
-  heavyHit: {fileID: 1634170269}
-  lightHit: {fileID: 884170440}
-  baseDuration: 0.4
-  heavyDuration: 0.6
-  castDelay: 0.15
-  critChance: 0.1
-  critMultiplierLow: 0.5
-  critMultiplierHigh: 0.75
-  playerAnimator: {fileID: 8205350870087033752}
 --- !u!1 &4596746320059545382
 GameObject:
   m_ObjectHideFlags: 0
@@ -6790,7 +6752,7 @@ MonoBehaviour:
   rotationSpeed: 30
   speedChangeRate: 10
   playerHeight: 0.5
-  animator: {fileID: 8205350870087033752}
+  animator: {fileID: 552221037835826511}
   controller: {fileID: 2680335586944316230}
   mainCamera: {fileID: 1005489440315475630}
   footsteps: {fileID: 1238345705}
@@ -7389,3 +7351,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 6070b1377c2920547be98efb1187179c, type: 3}
   m_PrefabInstance: {fileID: 6083940063180532379}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2570020898665896641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bdd02eaa4730848a13d16293ee38de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightAttack: {fileID: 871730103}
+  heavyAttack: {fileID: 1166744042}
+  heavyHit: {fileID: 1634170269}
+  lightHit: {fileID: 884170440}
+  baseDuration: 0.4
+  heavyDuration: 0.6
+  castDelay: 0.15
+  critChance: 0.1
+  critMultiplierLow: 0.5
+  critMultiplierHigh: 0.75
+  playerAnimator: {fileID: 0}
