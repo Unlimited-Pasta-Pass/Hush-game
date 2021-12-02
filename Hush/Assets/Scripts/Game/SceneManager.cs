@@ -37,12 +37,12 @@ namespace Game
 
             // Done with regular levels & Boss => Endgame
             // Num rooms + boss
-            if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length)
+            if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length + 1)
             {
                 LoadWinScreen();
             }
             // Done with regular levels = Final Level
-            else if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length - 1)
+            else if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length)
             {
                 LoadFinal();
             }
