@@ -12,9 +12,10 @@ namespace Doors
     {
         [SerializeField] private GameObject interactOverlay;
         [SerializeField] private AudioSource openSound;
-        
+
         private bool playerIsClose = false;
         private Animator anim;
+
         private bool CanOpenDoor => !GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic &&
                                     InputManager.Instance.interact && playerIsClose;
 
@@ -45,7 +46,7 @@ namespace Doors
         {
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
-            
+
             playerIsClose = true;
         }
 
@@ -53,9 +54,9 @@ namespace Doors
         {
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
-            
+
             // show interaction text
-            if(!GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic)
+            if (!GameManager.Instance.IsPlayerInCombat && GameManager.Instance.PlayerHasRelic)
                 interactOverlay.SetActive(true);
         }
 
@@ -63,9 +64,9 @@ namespace Doors
         {
             if (!other.gameObject.CompareTag(Tags.Player))
                 return;
-            
+
             playerIsClose = false;
-            
+
             // hide interaction text
             interactOverlay.SetActive(false);
         }
@@ -77,13 +78,15 @@ namespace Doors
 
             openSound.Play();
             anim.SetTrigger(DoorAnimator.Open);
+            // TODO: Remove When floor reward Is moved to UI
             Invoke(nameof(LoadNext), 2f);
             interactOverlay.SetActive(false);
         }
 
+        // TODO: Remove When floor reward Is moved to UI
         private void LoadNext()
         {
-            SceneManager.Instance.LoadNextScene();
+            SceneManager.Instance.LoadTempPowerScene();
         }
     }
 }

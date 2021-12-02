@@ -9,6 +9,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/MainMenu.unity
     guid: 89b4d4b661a5a914482f838efbe7e8c5
   - enabled: 1
+    path: Assets/Scenes/Menus/GameWon.unity
+    guid: cb947f2c579d10f40891ebbdf5523b34
+  - enabled: 1
+    path: Assets/Scenes/Menus/GameOver.unity
+    guid: df4e85bfee6dec844a0524701e4a67e6
+  - enabled: 1
+    path: Assets/Scenes/Menus/Spells.unity
+    guid: d2e673f830d37454c81d1d6587d06eb1
+  - enabled: 1
+    path: Assets/Scenes/Menus/Powers.unity
+    guid: 613b9bb98298e09439ccf528e0321431
+  - enabled: 1
+    path: Assets/Scenes/Demo.unity
+    guid: 9be4d171b8e5aa241b7b9397612244df
+  - enabled: 1
+    path: Assets/Scenes/Floors/FinalFloor.unity
+    guid: bf52399c27d1efc40b085574eed0e887
+  - enabled: 1
     path: Assets/Scenes/Floors/Floor053.unity
     guid: 55db267034d7acd4098b825eae2ec74f
   - enabled: 1
@@ -17,11 +35,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Floors/Floor302.unity
     guid: df35d3df916f9f44a97f659194549362
-  - enabled: 1
-    path: Assets/Scenes/Floors/FinalFloor.unity
-    guid: bf52399c27d1efc40b085574eed0e887
-  - enabled: 1
-    path: Assets/Scenes/Menus/WinGame.unity
-    guid: 3229d9273f9dada45965db3aa5aed807
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 70f0d61102cdd7c4ea8e75b2ec3627f2, type: 2}

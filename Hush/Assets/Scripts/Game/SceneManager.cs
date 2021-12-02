@@ -1,3 +1,4 @@
+using Game.Enums;
 using UnityEngine;
 using Weapon.Enums;
 
@@ -7,13 +8,10 @@ namespace Game
     {
         public static SceneManager Instance;
 
-        [Header("Scene Build Indexes")]
-        [SerializeField] private int[] levelSceneIndexes;
-        [SerializeField] private int mainMenuIndex;
-        [SerializeField] private int finalSceneIndex;
-        [SerializeField] private int endgameSceneIndex;
-        
-        [Header("New Game Parameters")]
+        [Header("Scene Build Indexes")] 
+        [SerializeField] private Scenes[] levelSceneIndexes;
+
+        [Header("New Game Parameters")] 
         [SerializeField] private SpellType initialLightSpell = SpellType.FireballSpell;
         [SerializeField] private SpellType initialHeavySpell = SpellType.StunSpell;
 
@@ -23,22 +21,29 @@ namespace Game
         {
             if (Instance == null)
                 Instance = this;
-            
+
             DontDestroyOnLoad(Instance.gameObject);
+        }
+
+        public void NewGame()
+        {
+            GameManager.Instance.ResetGameState();
+            LoadNextScene();
         }
 
         public void LoadNextScene()
         {
             // ignore scene state reinitialization if main menu 
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex != mainMenuIndex)
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex != (int) Scenes.MainMenu)
             {
                 ReinitializeSceneState();
             }
 
             // Done with regular levels & Boss => Endgame
+            // Num rooms + boss
             if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length)
             {
-                LoadEndgame();
+                LoadWinScreen();
             }
             // Done with regular levels = Final Level
             else if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length - 1)
@@ -52,13 +57,14 @@ namespace Game
             }
         }
 
-        public void LoadScene(int sceneIndex)
+        public void LoadScene(Scenes sceneIndex)
         {
             // ignore scene state reinitialization if main menu 
-            if (sceneIndex != mainMenuIndex)
+            if (sceneIndex != Scenes.MainMenu)
             {
                 ReinitializeSceneState();
             }
+
             TransitionToScene(sceneIndex);
         }
 
@@ -69,7 +75,7 @@ namespace Game
 
         public void LoadMainMenu()
         {
-            TransitionToScene(mainMenuIndex);
+            TransitionToScene(Scenes.MainMenu);
         }
 
         private void LoadLevel()
@@ -77,69 +83,84 @@ namespace Game
             if (GameManager.Instance.SceneProgression < 0)
             {
                 StartNewGame();
+                GameManager.Instance.IncreaseSceneProgress();
             }
-            
-            // Leave before scene transition to save progress
-            GameManager.Instance.IncreaseSceneProgress();
-            TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
-            // TransitionToScene(RandomScenes[GameManager.Instance.SceneProgress]);
+            else
+            {
+                GameManager.Instance.IncreaseSceneProgress();
+                // Leave before scene transition to save progress
+                TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
+            }
         }
 
         private void LoadFinal()
         {
             // Leave before scene transition to save progress
             GameManager.Instance.IncreaseSceneProgress();
-            TransitionToScene(finalSceneIndex);
+            TransitionToScene(Scenes.FinalFloor);
         }
 
-        private void LoadEndgame()
+        private void LoadWinScreen()
         {
             // Leave before scene transition to save progress
             GameManager.Instance.ResetSceneProgress();
             GameManager.Instance.RestorePlayerHealth();
             GameManager.Instance.ResetTemporaryBuffs();
-            TransitionToScene(endgameSceneIndex);
+            TransitionToScene(Scenes.Win);
         }
-        
+
+        public void LoadGameOverScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.GameOver);
+            GameManager.Instance.OnRunCompleted();
+        }
+
+        public void LoadTempPowerScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.PowerUp);
+        }
+
         public void QuitGame()
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
-            #else
+#else
             Application.Quit();
-            #endif
+#endif
         }
 
         private void StartNewGame()
         {
             // TODO Generate seed & randomize scene order based on seed
-            
+
+            // TEMPORARY VALUE REMOVE
+            TransitionToScene(levelSceneIndexes[0]);
+
             // Hack to set initial spells
             GameManager.Instance.SetActiveLightSpell(initialLightSpell);
             GameManager.Instance.SetActiveHeavySpell(initialHeavySpell);
         }
 
-        private void TransitionToScene(int index)
+        private void TransitionToScene(Scenes sceneIndex)
         {
             // TODO Transition between scenes
-            
-            UnityEngine.SceneManagement.SceneManager.LoadScene(index);
-            
-            GameManager.Instance.SetLoadedScene(index);
-            
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) sceneIndex);
+
+            GameManager.Instance.SetLoadedScene(sceneIndex);
+
             // Don't save moving to the menu
-            if (index != mainMenuIndex)
+            if (sceneIndex != Scenes.MainMenu)
             {
                 SaveGameManager.Instance.OnSave();
             }
         }
-        
+
         private void ReinitializeSceneState()
         {
             GameManager.Instance.ResetPlayer();
             GameManager.Instance.ResetKeys();
             GameManager.Instance.ResetRelic();
-            GameManager.Instance.ResetEnemies(); 
+            GameManager.Instance.ResetEnemies();
         }
     }
 }
