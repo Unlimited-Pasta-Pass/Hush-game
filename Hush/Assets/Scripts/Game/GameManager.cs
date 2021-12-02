@@ -22,11 +22,6 @@ namespace Game
             DontDestroyOnLoad(Instance.gameObject);
 
             Instance.InitializeValues();
-            
-        #if UNITY_EDITOR
-            SetActiveLightSpell(SpellType.FireballSpell);
-            SetActiveHeavySpell(SpellType.FireballSpell);
-        #endif
         }
 
         public void SetSaveTime(float time)
