@@ -9,16 +9,16 @@ namespace Game
     public partial class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-        
+
         private GameState _state;
-        
+
         public GameState CurrentGameState => _state;
 
         private void Awake()
         {
             if (Instance == null)
                 Instance = this;
-        
+
             DontDestroyOnLoad(Instance.gameObject);
 
             Instance.InitializeValues();
@@ -34,12 +34,17 @@ namespace Game
             _state ??= new GameState();
         }
 
+        public void ResetGameState()
+        {
+            _state = new GameState();
+        }
+        
         // Game Model
         public void SetGameState(GameState gameState)
         {
             // Don't move this or the scene will be reset after it's loaded
             ApplySceneState();
-            
+
             _state = gameState;
 
             ApplyPlayerState();
