@@ -10,7 +10,7 @@ namespace UI
     public class PauseMenuUI : MonoBehaviour
     {
         public GameObject pauseMenuUI;
-        [SerializeField] private GameObject savingFeedbackText;
+        // [SerializeField] private GameObject savingFeedbackText;
     
         private static InputManager Input => InputManager.Instance;
 
@@ -78,10 +78,10 @@ namespace UI
             // Invoke(nameof(HideSavingFeedback), 1f);   
         }
         
-        private void HideSavingFeedback()
-        {
-            Debug.Log("Hide");
-            savingFeedbackText.SetActive(false);
-        }
+        // private void HideSavingFeedback()
+        // {
+        //     Debug.Log("Hide");
+        //     savingFeedbackText.SetActive(false);
+        // }
     }
 }
