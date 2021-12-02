@@ -6821,10 +6821,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDamage: 12.5
   heavyDamage: 25
-  baseDuration: 0.25
-  heavyDuration: 0.4
+  baseDuration: 0.4
+  heavyDuration: 0.75
   projectileDelay: 0.3
-  castDelay: 0.1
+  castDelay: 0.05
   heavyCooldown: 10
   lightCooldown: 6
   heavySpellPrefab: {fileID: 7404962802362526807, guid: 4378b9a7a72b3ad4383bc52044afa951, type: 3}
