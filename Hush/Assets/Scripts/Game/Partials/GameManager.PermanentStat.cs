@@ -10,9 +10,9 @@ namespace Game
             private set => _state.baseDamagePermanent = value;
         }
 
-        public void BoostPermanentDamage()
+        public void BoostPermanentDamage(float damage)
         {
-            PermanentDamage += 5;
+            PermanentDamage += damage;
         }
 
         public float PermanentSpeed
@@ -21,9 +21,9 @@ namespace Game
             private set => _state.baseSpeedPermanent = value;
         }
 
-        public void BoostPermanentSpeed()
+        public void BoostPermanentSpeed(float speed)
         {
-            PermanentSpeed += 5;
+            PermanentSpeed += speed;
         }
         
         public float PermanentVitality
@@ -32,9 +32,9 @@ namespace Game
             private set => _state.baseVitalityPermanent = value;
         }
 
-        public void BoostPermanentVitality()
+        public void BoostPermanentVitality(float health)
         {
-            PermanentVitality += 10;
+            PermanentVitality += health;
         }
     }
 }
