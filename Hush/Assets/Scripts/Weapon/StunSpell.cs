@@ -17,7 +17,8 @@ public class StunSpell : MonoBehaviour, ISpell
         [SerializeField] private Vector3 spellOffset;
         [SerializeField] private float heavySpellDuration = 5f;
         [SerializeField] private float lightSpellDuration = 3f;
-        [SerializeField] private float stunEffectDuration = 2f;
+        [SerializeField] private float lightStunEffectDuration = 1f;
+        [SerializeField] private float heavyStunEffectDuration = 3f;
         
         [SerializeField] private float heavyCooldown = 10f;
         [SerializeField] private float lightCooldown = 6f;
@@ -103,10 +104,10 @@ public class StunSpell : MonoBehaviour, ISpell
             Vector3 pos = transform.position + spellOffset;
             spellClone.transform.position = pos;
             
-            spellClone.GetComponent<StunCollision>().StunEffect(pos, stunLength);
+            spellClone.GetComponent<StunCollision>().StunEffect(pos, stunLength, isHeavy);
             spellClone.GetComponent<ParticleSystem>().Play();
             stunAudio.Play();
            
-            Destroy(spellClone, stunEffectDuration);
+            Destroy(spellClone, isHeavy ? heavyStunEffectDuration : lightStunEffectDuration);
         }
 }

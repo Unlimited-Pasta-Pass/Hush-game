@@ -1563,7 +1563,7 @@ Transform:
   m_GameObject: {fileID: 3810598520285295113}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 40, y: 40, z: 40}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 189628723906580885}
   m_Father: {fileID: 2694598201337503891}
@@ -6487,7 +6487,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: 5.7058e-41}
+  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 2.3157239e-36, w: -0.0000000020345485}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -6780,9 +6780,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7363d992d0452b88fb9b6c7bf0d5a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  revealDistance: 20
-  revealDuration: 5
-  revealDelay: 7
+  revealDistance: 10
+  revealDuration: 3
+  revealDelay: 5
   echolocationSound: {fileID: 1570332456}
   effect: {fileID: 5040104228952544538}
 --- !u!114 &3424695256074168618
@@ -6819,7 +6819,8 @@ MonoBehaviour:
   spellOffset: {x: 0, y: 0.2, z: 0}
   heavySpellDuration: 5
   lightSpellDuration: 4
-  stunEffectDuration: 4
+  lightStunEffectDuration: 1
+  heavyStunEffectDuration: 3
   heavyCooldown: 10
   lightCooldown: 6
   heavySpellPrefab: {fileID: 7914988123797705053, guid: c38086c1e93ed6940bb492e27c5057c6, type: 3}
@@ -6838,7 +6839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a201ca6efa4a094a802771eed96ad8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 12.5
+  baseDamage: 13
   heavyDamage: 25
   baseDuration: 0.4
   heavyDuration: 0.75
@@ -6863,7 +6864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRoot: {fileID: 3294070922577688500}
-  alpha: 0.25
+  alpha: 0.5
   lightDuration: 3
   heavyDuration: 6
   speedBoost: 1

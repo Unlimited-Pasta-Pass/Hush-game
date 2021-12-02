@@ -3,25 +3,21 @@ using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
-public class PowerUpSelectionManager : MonoBehaviour
+public class PowerUpSelectionUI: MonoBehaviour
 {
-    public static PowerUpSelectionManager Instance;
-    private int currentlySelected = 0;
-    [SerializeField] private float speedBoost = 0.5f;
-    [SerializeField] private float damageBoost =  10f;
-    [SerializeField] private float vitalityBoost = 15f;
-
-    private void Awake()
+    [SerializeField] protected float speedBoost = 0.5f;
+    [SerializeField] protected float damageBoost =  10f;
+    [SerializeField] protected float vitalityBoost = 15f;
+    
+    [SerializeField] private GameObject powerBorder;
+    [SerializeField] private GameObject speedBorder;
+    [SerializeField] private GameObject vitalityBorder;
+    
+    protected int CurrentlySelected = 0;
+    
+    public virtual void OnSubmit()
     {
-        if (Instance == null)
-            Instance = this;
-            
-        DontDestroyOnLoad(Instance.gameObject);
-    }
-
-    public void OnSubmit()
-    {
-        switch(currentlySelected)
+        switch(CurrentlySelected)
         {
             case 1:
                 SetupDamageBoost(damageBoost);
@@ -32,14 +28,29 @@ public class PowerUpSelectionManager : MonoBehaviour
             case 3:
                 SetupVitalityBoost(vitalityBoost);
                 break;
-            default: // select nothing
-                break;
         }
     }
 
     public void SetCurrentlySelected(int selected)
     {
-        currentlySelected = selected;
+        powerBorder.SetActive(false);
+        speedBorder.SetActive(false);
+        vitalityBorder.SetActive(false);
+
+        switch(selected)
+        {
+            case 1:
+                powerBorder.SetActive(true);
+                break;
+            case 2:
+                speedBorder.SetActive(true);
+                break;
+            case 3:
+                vitalityBorder.SetActive(true);
+                break;
+        }
+
+        CurrentlySelected = selected;
     }
 
     private void SetupDamageBoost(float boost)

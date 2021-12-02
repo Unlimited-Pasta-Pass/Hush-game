@@ -52,7 +52,7 @@ namespace Weapon
         private void Start()
         {
             baseDamage = GameManager.Instance.PermanentDamage;
-            heavyDamage = baseDamage + 10;
+            heavyDamage = baseDamage + 5;
         }
 
         private void OnEnable()

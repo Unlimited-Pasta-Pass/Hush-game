@@ -11,10 +11,6 @@ namespace Game
         [Header("Scene Build Indexes")] 
         [SerializeField] private Scenes[] levelSceneIndexes;
 
-        [Header("New Game Parameters")] 
-        [SerializeField] private SpellType initialLightSpell = SpellType.FireballSpell;
-        [SerializeField] private SpellType initialHeavySpell = SpellType.StunSpell;
-
         // private Dictionary<int, int> _randomScenes;
 
         private void Awake()
@@ -41,12 +37,12 @@ namespace Game
 
             // Done with regular levels & Boss => Endgame
             // Num rooms + boss
-            if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length)
+            if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length + 1)
             {
                 LoadWinScreen();
             }
             // Done with regular levels = Final Level
-            else if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length - 1)
+            else if (GameManager.Instance.SceneProgression >= levelSceneIndexes.Length)
             {
                 LoadFinal();
             }
@@ -82,13 +78,11 @@ namespace Game
         {
             if (GameManager.Instance.SceneProgression < 0)
             {
-                StartNewGame();
                 GameManager.Instance.IncreaseSceneProgress();
+                LoadSpellSelectScene();
             }
             else
             {
-                GameManager.Instance.IncreaseSceneProgress();
-                // Leave before scene transition to save progress
                 TransitionToScene(levelSceneIndexes[GameManager.Instance.SceneProgression]);
             }
         }
@@ -96,17 +90,19 @@ namespace Game
         private void LoadFinal()
         {
             // Leave before scene transition to save progress
-            GameManager.Instance.IncreaseSceneProgress();
             TransitionToScene(Scenes.FinalFloor);
         }
 
         private void LoadWinScreen()
         {
             // Leave before scene transition to save progress
-            GameManager.Instance.ResetSceneProgress();
-            GameManager.Instance.RestorePlayerHealth();
             GameManager.Instance.ResetTemporaryBuffs();
+            GameManager.Instance.RestorePlayerHealth();
+            
             TransitionToScene(Scenes.Win);
+            
+            // Leave Here
+            GameManager.Instance.ResetSceneProgress();
         }
 
         public void LoadGameOverScene()
@@ -115,9 +111,19 @@ namespace Game
             GameManager.Instance.OnRunCompleted();
         }
 
-        public void LoadTempPowerScene()
+        public void LoadTemporaryPowerScene()
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.PowerUp);
+        }
+
+        public void LoadPermanentPowerScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.PermanentPower);
+        }
+
+        public void LoadSpellSelectScene()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene((int) Scenes.SpellChoice);
         }
 
         public void QuitGame()
@@ -129,24 +135,13 @@ namespace Game
 #endif
         }
 
-        private void StartNewGame()
-        {
-            // TODO Generate seed & randomize scene order based on seed
-
-            // TEMPORARY VALUE REMOVE
-            TransitionToScene(levelSceneIndexes[0]);
-
-            // Hack to set initial spells
-            GameManager.Instance.SetActiveLightSpell(initialLightSpell);
-            GameManager.Instance.SetActiveHeavySpell(initialHeavySpell);
-        }
-
         private void TransitionToScene(Scenes sceneIndex)
         {
             // TODO Transition between scenes
             UnityEngine.SceneManagement.SceneManager.LoadScene((int) sceneIndex);
 
             GameManager.Instance.SetLoadedScene(sceneIndex);
+            GameManager.Instance.IncreaseSceneProgress();
 
             // Don't save moving to the menu
             if (sceneIndex != Scenes.MainMenu)
