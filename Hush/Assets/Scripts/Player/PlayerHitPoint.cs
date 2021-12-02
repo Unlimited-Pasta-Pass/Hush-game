@@ -16,7 +16,7 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private AudioSource deathSound;
         [SerializeField] private AudioSource damageSound;
-        [SerializeField] private GameObject damageUI;
+        [SerializeField] private CanvasGroup damageUI;
 
         private bool deathSoundPlayed = false; // Used to prevent additional death sounds if the player is hit after death
 
@@ -31,14 +31,10 @@ namespace Player
         
         #endregion
         
-        void Start() {
-            damageUI.SetActive(false);
-        }
         public void TakeDamage(float damage)
         {
             animator.SetTrigger(PlayerAnimator.TakeHit);
             damageSound.Play();
-            // DisplayDamageUI();
             FadeIn();
             
             // If the player's hp is at 0 or lower, they die
@@ -46,22 +42,13 @@ namespace Player
                 Die();
         }
 
-        // public void DisplayDamageUI() {
-        //     damageUI.SetActive(true);
-        //     Invoke(nameof(HideDamageUI), 0.5f);
-        // }
-
-        // public void HideDamageUI() {
-        //     damageUI.SetActive(false);
-        // }
-
         public void FadeIn() {
-            StartCoroutine(FadeCanvasGroup(damageUI.transform.GetChild(0), damageUI.transform.GetChild(0).alpha, 1, 0.5f));
+            StartCoroutine(FadeCanvasGroup(damageUI, damageUI.alpha, 1, 0.5f));
             Invoke(nameof(FadeOut), 0.5f);
         }
 
         public void FadeOut() {
-            StartCoroutine(FadeCanvasGroup(damageUI.transform.GetChild(0), damageUI.transform.GetChild(0).alpha, 0, 0.5f));
+            StartCoroutine(FadeCanvasGroup(damageUI, damageUI.alpha, 0, 0.5f));
         }
 
         public IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float lerpTime = 1) {
