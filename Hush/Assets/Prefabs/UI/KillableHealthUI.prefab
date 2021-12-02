@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05595944dad39240bc818fd1d46d695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraOffset: {x: 10, y: 44, z: 0}
+  cameraOffset: {x: 50, y: 44, z: 0}
   killableObject: {fileID: 0}
   healthSlider: {fileID: 2000088377708281590}
 --- !u!1 &2000088376600981320
