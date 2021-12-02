@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Common.Enums;
 using DigitalRuby.PyroParticles;
 using Game;
@@ -20,6 +21,7 @@ namespace Weapon
         
         [SerializeField] private float baseDuration = 0.25f;
         [SerializeField] private float heavyDuration = 0.4f;
+        [SerializeField] private float projectileDelay = 0.2f;
         [SerializeField] private float castDelay = 0.1f;
 
         [SerializeField] private float heavyCooldown = 10f;
@@ -96,17 +98,18 @@ namespace Weapon
         private void LightAttack()
         {
             animator.SetTrigger(PlayerAnimator.SpellAttack);
-            CreateSpellAttack(AttemptCrit(BaseDamage), false);
+            StartCoroutine(CreateSpellAttack(AttemptCrit(BaseDamage), false));
         }
 
         private void HeavyAttack()
         {
             animator.SetTrigger(PlayerAnimator.SpellSpecialAttack);
-            CreateSpellAttack(AttemptCrit(HeavyDamage), true);
+            StartCoroutine(CreateSpellAttack(AttemptCrit(HeavyDamage), true));
         }
 
-        private void CreateSpellAttack(float damage, bool isHeavy)
+        private IEnumerator CreateSpellAttack(float damage, bool isHeavy)
         {
+            yield return new WaitForSeconds(projectileDelay);
             GameObject spellPrefab = isHeavy ? heavySpellPrefab : lightSpellPrefab;
             
             var spellClone = Instantiate(spellPrefab);

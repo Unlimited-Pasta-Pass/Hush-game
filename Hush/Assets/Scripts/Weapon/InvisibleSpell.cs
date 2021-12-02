@@ -69,7 +69,7 @@ namespace Weapon
                 return;
             
             SetInvisibilty(true, true);
-            _player.SetSpeedModifier(speedBoost, true);
+            _player.SetTemporarySpeedModifier(speedBoost, true);
             GameManager.Instance.SetHeavySpellActivationTime(Time.time);
         }
 
@@ -81,7 +81,7 @@ namespace Weapon
         private void EndHeavy()
         {
             SetInvisibilty(false, false);
-            _player.SetSpeedModifier(speedBoost, false);
+            _player.SetTemporarySpeedModifier(speedBoost, false);
         }
 
         private void SetTransparent(bool enabled)

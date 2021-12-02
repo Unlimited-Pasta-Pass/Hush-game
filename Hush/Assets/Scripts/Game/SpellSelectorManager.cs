@@ -9,7 +9,10 @@ namespace Game
     public class SpellSelectorManager : MonoBehaviour
     {
         public static SpellSelectorManager Instance;
-        private GameObject player;
+        private float heavyCooldown;
+        private float lightCooldown;
+        
+        private int currentlySelected = 0;
 
         private void Awake()
         {
@@ -17,8 +20,47 @@ namespace Game
                 Instance = this;
             
             DontDestroyOnLoad(Instance.gameObject);
-            
-            player = GameObject.FindWithTag(Tags.Player);
+        }
+        
+        public void OnSubmitLight()
+        {
+            switch(currentlySelected)
+            {
+                case 1:
+                    SetupLightSpell(SpellType.InvisibleSpell);
+                    break;
+                case 2:
+                    SetupLightSpell(SpellType.FireballSpell);
+                    break;
+                case 3:
+                    SetupLightSpell(SpellType.StunSpell);
+                    break;
+                default: // select nothing
+                    break;
+            }
+        }
+        
+        public void OnSubmitHeavy()
+        {
+            switch(currentlySelected)
+            {
+                case 1:
+                    SetupHeavySpell(SpellType.InvisibleSpell);
+                    break;
+                case 2:
+                    SetupHeavySpell(SpellType.FireballSpell);
+                    break;
+                case 3:
+                    SetupHeavySpell(SpellType.StunSpell);
+                    break;
+                default: // select nothing
+                    break;
+            }
+        }
+        
+        public void SetCurrentlySelected(int selected)
+        {
+            currentlySelected = selected;
         }
 
         public void SetupLightSpell(SpellType chosenSpell)
@@ -27,8 +69,8 @@ namespace Game
                 chosenSpell = SpellType.InvisibleSpell; // default value
             
             GameManager.Instance.SetActiveLightSpell(chosenSpell);
-            ISpell spell = GetSpellComponent(chosenSpell);
-            GameManager.Instance.SetLightSpellCooldownTime(spell.LightCooldown);
+            SetLightCooldown(chosenSpell);
+            GameManager.Instance.SetLightSpellCooldownTime(lightCooldown);
         }
 
         public void SetupHeavySpell(SpellType chosenSpell)
@@ -37,32 +79,46 @@ namespace Game
                 chosenSpell = SpellType.FireballSpell; // default value
             
             GameManager.Instance.SetActiveHeavySpell(chosenSpell);
-            ISpell spell = GetSpellComponent(chosenSpell);
-            GameManager.Instance.SetHeavySpellCooldownTime(spell.HeavyCooldown);
+            SetHeavyCooldown(chosenSpell);
+            GameManager.Instance.SetHeavySpellCooldownTime(heavyCooldown);
         }
 
-        private ISpell GetSpellComponent(SpellType type)
+        private void SetLightCooldown(SpellType type)
         {
-            ISpell spell;
             switch (type)
             {
                 case SpellType.FireballSpell:
-                    spell = player.GetComponent<FireballSpell>();
+                    lightCooldown = GameManager.Instance.FireLightCooldown;
                     break;
                 case SpellType.InvisibleSpell:
-                    spell = player.GetComponent<InvisibleSpell>();
+                    lightCooldown = GameManager.Instance.InvisibleLightCooldown;
                     break;
                 case SpellType.StunSpell:
-                    spell = player.GetComponent<StunSpell>();
+                    lightCooldown = GameManager.Instance.StunLightCooldown;
                     break;
                 default:
-                    spell = null;
+                    lightCooldown = 5f;
                     break;
             }
-
-            return spell;
         }
-    
-    
+
+        private void SetHeavyCooldown(SpellType type)
+        {
+            switch (type)
+            {
+                case SpellType.FireballSpell:
+                    heavyCooldown = GameManager.Instance.FireHeavyCooldown;
+                    break;
+                case SpellType.InvisibleSpell:
+                    heavyCooldown = GameManager.Instance.InvisibleHeavyCooldown;
+                    break;
+                case SpellType.StunSpell:
+                    heavyCooldown = GameManager.Instance.StunHeavyCooldown;
+                    break;
+                default:
+                    heavyCooldown = 10f;
+                    break;
+            }
+        }
     }
 }

@@ -17,7 +17,6 @@ public class Menus : MonoBehaviour
     
     public void LoadGame()
     {
-        SceneManager.Instance.LoadScene(SaveGameManager.Instance.SavedGameScene);
         SaveGameManager.Instance.OnLoad();
     }
     

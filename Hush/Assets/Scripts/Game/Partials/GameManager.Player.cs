@@ -6,18 +6,15 @@ namespace Game
 {
     public partial class GameManager
     {
-        [Header("Player")]
-        [Tooltip("Amount of damage the player can receive before dying")] 
-        [SerializeField] private float playerHitPoints = 100f;
-
         public bool PlayerIsAlive => PlayerCurrentHitPoints > 0f;
 
         public float PlayerCurrentHitPoints
         {
             get
             {
+                // if less than 0, that player HP not initialized, initialize it
                 if (_state.playerCurrentHitPoints < 0)
-                    _state.playerCurrentHitPoints = playerHitPoints;
+                    _state.playerCurrentHitPoints = PermanentVitality;
                 
                 return _state.playerCurrentHitPoints;
             }
@@ -27,8 +24,9 @@ namespace Game
         {
             get
             {
+                // if less than 0, that player HP not initialized, initialize it
                 if (_state.playerMaxHitPoints < 0)
-                    _state.playerMaxHitPoints = playerHitPoints;
+                    _state.playerMaxHitPoints = PermanentVitality;
                 
                 return _state.playerMaxHitPoints;
             }
@@ -100,6 +98,19 @@ namespace Game
         public bool GetIsPlayerInvisible()
         {
             return _state.isPlayerInvisible;
+        }
+
+        public void RestorePlayerHealth()
+        {
+            _state.playerCurrentHitPoints = _state.playerMaxHitPoints;
+        }
+
+        public void ResetTemporaryBuffs()
+        {
+            _state.damageBoost = 0;
+            _state.speedBoost = 0;
+            _state.vitalityBoost = 0;
+            _state.isPlayerInvisible = false;
         }
 
         private void ApplyPlayerState()
