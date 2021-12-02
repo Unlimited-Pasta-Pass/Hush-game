@@ -1,5 +1,6 @@
-﻿using System.IO;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Game.Enums;
 using Game.Models;
 using UnityEngine;
 
@@ -11,8 +12,22 @@ namespace Game
 
         public bool HasSavedGame => File.Exists(_path);
         
-        public int SavedGameScene => OnLoad(false).currentlyLoadedScene;
-        
+        public int SavedGameScene
+        {
+            get
+            {
+                var scene =  OnLoad(false).currentlyLoadedScene;
+                if (scene < 6 )
+                {
+                    // the currently loaded scene is the a menu
+                    // Return the first dungeon floor instead
+                    return Scenes.FirstFloor;
+                }
+
+                return scene;
+            }
+        }
+
         private string _path = "/pasta.save";
         
         private BinaryFormatter _formatter;
