@@ -12,7 +12,7 @@ public class Menus : MonoBehaviour
 
     public void NewGame()
     {
-        GameManager.Instance.NewGame();
+        SceneManager.Instance.NewGame();
     }
 
     public void LoadGame()

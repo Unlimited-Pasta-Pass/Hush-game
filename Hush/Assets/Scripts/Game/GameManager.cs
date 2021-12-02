@@ -34,6 +34,11 @@ namespace Game
             _state ??= new GameState();
         }
 
+        public void ResetGameState()
+        {
+            _state = new GameState();
+        }
+        
         // Game Model
         public void SetGameState(GameState gameState)
         {
@@ -48,12 +53,6 @@ namespace Game
             ApplyRelicState();
             ApplyEcholocationState();
             ApplySpellState();
-        }
-
-        public void NewGame()
-        {
-            _state = new GameState();
-            SceneManager.Instance.LoadNextScene();
         }
     }
 }

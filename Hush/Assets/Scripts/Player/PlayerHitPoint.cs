@@ -26,7 +26,7 @@ namespace Player
 
         #region Public Variables
 
-        [SerializeField] private UnityEvent _killed;
+        private UnityEvent _killed;
         public UnityEvent Killed => _killed ??= new UnityEvent();
 
         public float HitPoints => GameManager.Instance.PlayerCurrentHitPoints;
