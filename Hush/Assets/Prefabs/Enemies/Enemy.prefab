@@ -560,7 +560,7 @@ MonoBehaviour:
   maxAttackRange: 2
   attackRotationOffset: -40
   attackRotationTolerance: 30
-  attackCooldown: 1
+  attackCooldown: 2
   backstabDamageModifier: 2
   runSpeed: 3.5
   searchSpeed: 2.5
