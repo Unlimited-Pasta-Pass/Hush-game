@@ -59,6 +59,8 @@ namespace Game.Models
         
         // Scene
         public int currentlyLoadedScene;
+        public int randomSceneSeed;
+        public int sceneProgress;
 
         public GameState()
         {
@@ -107,6 +109,8 @@ namespace Game.Models
             
             // Scene
             currentlyLoadedScene = 0;
+            randomSceneSeed = 0;
+            sceneProgress = -1;
         }
     }
 }
