@@ -25,12 +25,6 @@ public class Menus : MonoBehaviour
         SceneManager.Instance.ReloadScene();
     }
 
-    public void Credits()
-    {
-        // POP-UP FOR CREDITS
-        Debug.Log("CREDITS");
-    }
-
     public void MainMenu()
     {
         SceneManager.Instance.LoadMainMenu();
